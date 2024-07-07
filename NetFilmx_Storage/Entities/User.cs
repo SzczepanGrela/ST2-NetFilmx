@@ -24,17 +24,17 @@ namespace NetFilmx_Storage.Entities
         [Required]
         [MinLength(3)]
         [MaxLength(50)]
-        public string? Username { get; set; }
+        public string Username { get; set; }
 
 
         [Required]
         [MinLength(3)]
         [MaxLength(100)]
-        public string? Email { get; set; }
+        public string Email { get; set; }
 
         [Required]
         [MaxLength(255)]
-        public string? PasswordHash { get; set; }
+        public string PasswordHash { get; set; }
 
         [Required]
        

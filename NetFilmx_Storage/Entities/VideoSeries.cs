@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NetFilmx_Storage.Entities
 {
-    [Table("SeriesVideos", Schema = "NetFilmx")]
+    [Table("Video_Series", Schema = "NetFilmx")]
     public class VideoSeries : BaseEntity
     {
         protected VideoSeries() { }
@@ -18,13 +18,13 @@ namespace NetFilmx_Storage.Entities
         [Required]
         public int SeriesId { get; set; }
 
-        [ForeignKey("SeriesId")]
+        [ForeignKey("Series_Id")]
         public virtual Series Series { get; set; }
 
         [Required]
         public int VideoId { get; set; }
 
-        [ForeignKey("VideoId")]
+        [ForeignKey("Video_Id")]
         public virtual Video Video { get; set; }
     }
 }
