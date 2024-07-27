@@ -1,6 +1,5 @@
 ﻿using NetFilmx_Storage.Entities;
 using System.Collections.Generic;
-using NetFilmx_Storage.Entities;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 namespace NetFilmx_Storage.Repositories
 {

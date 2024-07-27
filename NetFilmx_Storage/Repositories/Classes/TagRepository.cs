@@ -42,7 +42,7 @@ namespace NetFilmx_Storage.Repositories
 
         public void DeleteTag(int id)
         {
-            Tag tag = _dbSet.Find(id);
+            Tag? tag = _dbSet.Find(id);
             if (tag != null)
             {
                 _dbSet.Remove(tag);

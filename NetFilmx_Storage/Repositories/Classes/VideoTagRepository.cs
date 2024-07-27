@@ -22,6 +22,19 @@ namespace NetFilmx_Storage.Repositories
             return _dbSet.Where(vt => vt.VideoId == videoId).ToList();
         }
 
+
+        public VideoTag GetVideoTagByVideoIdTagId(int videoId, int tagId)
+        {
+            var videoTag = _dbSet.Find(videoId, tagId);
+            if (videoTag == null)
+            {
+                throw new Exception("VideoTag not found");
+            }
+            return videoTag;
+        }
+
+
+
         public void AddVideoTag(VideoTag videoTag)
         {
             _dbSet.Add(videoTag);
@@ -30,7 +43,7 @@ namespace NetFilmx_Storage.Repositories
 
         public void DeleteVideoTag(int id)
         {
-            VideoTag videoTag = _dbSet.Find(id);
+            VideoTag? videoTag = _dbSet.Find(id);
             if (videoTag != null)
             {
                 _dbSet.Remove(videoTag);

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NetFilmx_Storage.Entities;
 namespace NetFilmx_Service.Command.Series.Add
 {
     public sealed class AddSeriesCommandHandler  : ICommandHandler<AddSeriesCommand>
