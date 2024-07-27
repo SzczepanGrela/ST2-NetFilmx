@@ -30,6 +30,10 @@ namespace NetFilmx_Service.Command.VideoCategory.Add
 
             var isExist = _repository.IsVideoCategoryExist(command.Video_Id, command.Category_Id);
 
+            if (isExist)
+            {
+                   return Result.Fail("Connection between this Video and Category already exist");
+            }
 
 
             return Result.Ok();

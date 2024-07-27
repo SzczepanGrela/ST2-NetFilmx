@@ -28,7 +28,7 @@ namespace NetFilmx_Storage.Repositories
             _context.SaveChanges();
         }
 
-        public void RemoveVideoTag(int id)
+        public void DeleteVideoTag(int id)
         {
             VideoTag videoTag = _dbSet.Find(id);
             if (videoTag != null)

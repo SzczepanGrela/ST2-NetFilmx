@@ -15,10 +15,4 @@
     <ProjectReference Include="..\NetFilmx_Web\NetFilmx_Web.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Command\VideoCategory\Delete\" />
-    <Folder Include="Command\VideoSeries\Delete\" />
-    <Folder Include="Command\VideoTag\Delete\" />
-  </ItemGroup>
-
 </Project>
