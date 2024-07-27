@@ -17,7 +17,7 @@ namespace NetFilmx_Storage.Repositories
             _dbSet = context.Set<VideoTag>();
         }
 
-        public List<VideoTag> GetVideoTagsByVideoId(long videoId)
+        public List<VideoTag> GetVideoTagsByVideoId(int videoId)
         {
             return _dbSet.Where(vt => vt.VideoId == videoId).ToList();
         }
@@ -28,7 +28,7 @@ namespace NetFilmx_Storage.Repositories
             _context.SaveChanges();
         }
 
-        public void RemoveVideoTag(long id)
+        public void RemoveVideoTag(int id)
         {
             VideoTag videoTag = _dbSet.Find(id);
             if (videoTag != null)
@@ -36,6 +36,11 @@ namespace NetFilmx_Storage.Repositories
                 _dbSet.Remove(videoTag);
                 _context.SaveChanges();
             }
+        }
+
+        public bool IsVideoTagExist(int video_Id, int tag_Id)
+        {
+           return _dbSet.Any(vt => vt.VideoId == video_Id && vt.TagId == tag_Id);
         }
     }
 }

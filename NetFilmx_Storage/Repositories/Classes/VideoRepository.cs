@@ -22,7 +22,7 @@ namespace NetFilmx_Storage.Repositories
             return _dbSet.ToList();
         }
 
-        public Video GetVideoById(long id)
+        public Video GetVideoById(int id)
         {
             return _dbSet.Find(id);
         }
@@ -40,7 +40,7 @@ namespace NetFilmx_Storage.Repositories
             _context.SaveChanges();
         }
 
-        public void RemoveVideo(long id)
+        public void DeleteVideo(int id)
         {
             Video video = _dbSet.Find(id);
             if (video != null)
@@ -50,7 +50,7 @@ namespace NetFilmx_Storage.Repositories
             }
         }
 
-        public bool IsVideoExist(long videoId)
+        public bool IsVideoExist(int videoId)
         {
             return _dbSet.Any(v => v.Id == videoId);
         }

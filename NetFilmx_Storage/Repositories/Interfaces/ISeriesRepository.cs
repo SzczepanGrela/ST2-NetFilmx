@@ -6,9 +6,13 @@ namespace NetFilmx_Storage.Repositories
     public interface ISeriesRepository
     {
         List<Series> GetSeries();
-        Series GetSeriesById(long id);
+        Series GetSeriesById(int id);
         void AddSeries(Series series);
         void EditSeries(Series series);
-        void RemoveSeries(long id);
+        void DeleteSeries(int id);
+
+        bool IsSeriesExist(string Name);
+
+        
     }
 }

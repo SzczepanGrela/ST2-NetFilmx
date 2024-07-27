@@ -47,7 +47,7 @@ namespace NetFilmx_Service
 
 
 
-        public static Result OK()
+        public static Result Ok()
             => new Result(true, "", Enumerable.Empty<Error>());
     }
 }

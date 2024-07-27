@@ -11,13 +11,14 @@ namespace NetFilmx_Storage.Entities
     {
         protected Series() { }
 
-        public Series(string name, decimal price, string description)
+        public Series(string name, decimal price, string description, DateTime createdAt, DateTime updatedAt)
         {
             Name = name;
             Price = price;
             Description = description;
-            CreatedAt = DateTime.Now;
-            UpdatedAt = DateTime.Now;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+            
         }
 
         [Required]

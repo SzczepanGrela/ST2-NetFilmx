@@ -6,9 +6,11 @@ namespace NetFilmx_Storage.Repositories
     public interface ITagRepository
     {
         List<Tag> GetTags();
-        Tag GetTagById(long id);
+        Tag GetTagById(int id);
         void AddTag(Tag tag);
         void EditTag(Tag tag);
-        void RemoveTag(long id);
+        void DeleteTag(int id);
+       
+        bool IsTagExist(string Name);
     }
 }

@@ -5,12 +5,11 @@ namespace NetFilmx_Storage.Repositories
 {
     public interface IUserRepository
     {
-        List<User> GetUsers();
-        User GetUserById(long id);
+        List<User> GetUserByUsername();
+        User GetUserById(int id);
         void AddUser(User user);
         void EditUser(User user);
-        void RemoveUser(long id);
-        bool IsUserExist(long userId);
+        void DeleteUser(int id);
         bool IsUserExist(string username);
     }
 }

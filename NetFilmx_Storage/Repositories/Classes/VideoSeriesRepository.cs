@@ -17,7 +17,7 @@ namespace NetFilmx_Storage.Repositories
             _dbSet = context.Set<VideoSeries>();
         }
 
-        public List<VideoSeries> GetVideoSeriesBySeriesId(long seriesId)
+        public List<VideoSeries> GetVideoSeriesBySeriesId(int seriesId)
         {
             return _dbSet.Where(vs => vs.SeriesId == seriesId).ToList();
         }
@@ -28,7 +28,7 @@ namespace NetFilmx_Storage.Repositories
             _context.SaveChanges();
         }
 
-        public void RemoveVideoSeries(long id)
+        public void DeleteVideoSeries(int id)
         {
             VideoSeries videoSeries = _dbSet.Find(id);
             if (videoSeries != null)
@@ -36,6 +36,11 @@ namespace NetFilmx_Storage.Repositories
                 _dbSet.Remove(videoSeries);
                 _context.SaveChanges();
             }
+        }
+
+        public bool IsVideoSeriesExist(int video_Id, int series_Id)
+        {
+           return _dbSet.Any(vs => vs.VideoId == video_Id && vs.SeriesId == series_Id);
         }
     }
 }

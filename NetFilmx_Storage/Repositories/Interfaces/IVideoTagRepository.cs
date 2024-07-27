@@ -5,8 +5,10 @@ namespace NetFilmx_Storage.Repositories
 {
     public interface IVideoTagRepository
     {
-        List<VideoTag> GetVideoTagsByVideoId(long videoId);
+        List<VideoTag> GetVideoTagsByVideoId(int video_Id);
         void AddVideoTag(VideoTag videoTag);
-        void RemoveVideoTag(long id);
+        void RemoveVideoTag(int id);
+
+        bool IsVideoTagExist(int video_Id, int tag_Id);
     }
 }

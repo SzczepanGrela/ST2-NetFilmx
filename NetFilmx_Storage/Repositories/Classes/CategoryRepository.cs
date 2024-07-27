@@ -22,7 +22,7 @@ namespace NetFilmx_Storage.Repositories
             return _dbSet.ToList();
         }
 
-        public Category GetCategoryById(long id)
+        public Category GetCategoryById(int id)
         {
             return _dbSet.Find(id);
         }
@@ -40,7 +40,7 @@ namespace NetFilmx_Storage.Repositories
             _context.SaveChanges();
         }
 
-        public void RemoveCategory(long id)
+        public void DeleteCategory(int id)
         {
             Category category = _dbSet.Find(id);
             if (category != null)
@@ -48,6 +48,11 @@ namespace NetFilmx_Storage.Repositories
                 _dbSet.Remove(category);
                 _context.SaveChanges();
             }
+        }
+
+        public bool IsCategoryExist(string name)
+        {
+            return _dbSet.Any(c => c.Name == name);
         }
     }
 }

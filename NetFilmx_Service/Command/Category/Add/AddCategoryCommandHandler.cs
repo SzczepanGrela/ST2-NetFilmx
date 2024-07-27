@@ -1,0 +1,47 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using NetFilmx_Storage.Repositories;
+using NetFilmx_Storage.Entities;
+
+namespace NetFilmx_Service.Command.Category.Add
+{
+    public sealed class AddCategoryCommandHandler : ICommandHandler<AddCategoryCommand>
+    {
+
+        private readonly ICategoryRepository _repository;
+
+        public AddCategoryCommandHandler(ICategoryRepository repository)
+        {
+            _repository = repository;
+        }
+
+        public Result Handle(AddCategoryCommand command)
+        {
+            var validationResult = new AddCategoryCommandValidator().Validate(command);
+            if (!validationResult.IsValid)
+            {
+                return Result.Fail(validationResult);
+            }
+
+            var isExist = _repository.IsCategoryExist(command.Name);
+            if (isExist)
+            {
+                return Result.Fail("Category already exist");
+            }
+
+            var category = new NetFilmx_Storage.Entities.Category(command.Name, command.Description);
+
+            _repository.AddCategory(category);
+
+            return Result.Ok(); 
+
+
+        }
+
+
+
+    }
+}

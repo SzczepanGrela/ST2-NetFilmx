@@ -5,9 +5,11 @@ namespace NetFilmx_Storage.Repositories
 {
     public interface ILikeRepository
     {
-        List<Like> GetLikesByVideoId(long videoId);
-        Like GetLikeById(long id);
+        List<Like> GetLikesByVideoId(int videoId);
+        Like GetLikeById(int id);
         void AddLike(Like like);
-        void RemoveLike(long id);
+        void DeleteLike(int id);
+
+        bool IsLikeExist(int video_Id, int user_Id);
     }
 }

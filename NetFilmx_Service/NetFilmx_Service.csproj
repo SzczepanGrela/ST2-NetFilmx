@@ -11,13 +11,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Command\Comment\" />
-    <Folder Include="Command\Like\" />
-    <Folder Include="Command\Category\" />
-    <Folder Include="Command\Series\" />
-    <Folder Include="Command\Tag\" />
-    <Folder Include="Command\User\" />
-    <Folder Include="Command\Video\" />
+    <ProjectReference Include="..\NetFilmx_Storage\NetFilmx_Storage.csproj" />
+    <ProjectReference Include="..\NetFilmx_Web\NetFilmx_Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Command\VideoCategory\Delete\" />
+    <Folder Include="Command\VideoSeries\Delete\" />
+    <Folder Include="Command\VideoTag\Delete\" />
   </ItemGroup>
 
 </Project>

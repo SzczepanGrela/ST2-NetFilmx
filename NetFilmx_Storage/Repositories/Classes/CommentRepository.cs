@@ -17,12 +17,12 @@ namespace NetFilmx_Storage.Repositories
             _dbSet = context.Set<Comment>();
         }
 
-        public List<Comment> GetCommentsByVideoId(long videoId)
+        public List<Comment> GetCommentsByVideoId(int videoId)
         {
             return _dbSet.Where(c => c.VideoId == videoId).ToList();
         }
 
-        public Comment GetCommentById(long id)
+        public Comment GetCommentById(int id)
         {
             return _dbSet.Find(id);
         }
@@ -40,7 +40,7 @@ namespace NetFilmx_Storage.Repositories
             _context.SaveChanges();
         }
 
-        public void RemoveComment(long id)
+        public void DeleteComment(int id)
         {
             Comment comment = _dbSet.Find(id);
             if (comment != null)

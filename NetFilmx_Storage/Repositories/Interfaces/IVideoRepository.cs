@@ -6,10 +6,12 @@ namespace NetFilmx_Storage.Repositories
     public interface IVideoRepository
     {
         List<Video> GetVideos();
-        Video GetVideoById(long id);
+        Video GetVideoById(int id);
         void AddVideo(Video video);
         void EditVideo(Video video);
-        void RemoveVideo(long id);
-        bool IsVideoExist(long videoId);
+        void DeleteVideo(int id);
+
+        bool IsVideoExist(int id);
+        
     }
 }

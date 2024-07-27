@@ -17,12 +17,12 @@ namespace NetFilmx_Storage.Repositories
             _dbSet = context.Set<Like>();
         }
 
-        public List<Like> GetLikesByVideoId(long videoId)
+        public List<Like> GetLikesByVideoId(int videoId)
         {
             return _dbSet.Where(l => l.VideoId == videoId).ToList();
         }
 
-        public Like GetLikeById(long id)
+        public Like GetLikeById(int id)
         {
             return _dbSet.Find(id);
         }
@@ -33,7 +33,7 @@ namespace NetFilmx_Storage.Repositories
             _context.SaveChanges();
         }
 
-        public void RemoveLike(long id)
+        public void DeleteLike(int id)
         {
             Like like = _dbSet.Find(id);
             if (like != null)
@@ -42,5 +42,12 @@ namespace NetFilmx_Storage.Repositories
                 _context.SaveChanges();
             }
         }
+
+        public bool IsLikeExist(int video_Id, int user_Id)
+        {
+            return _dbSet.Any(l => l.VideoId == video_Id && l.UserId == user_Id);
+        }
+       
+
     }
 }

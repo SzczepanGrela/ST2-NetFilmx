@@ -22,7 +22,7 @@ namespace NetFilmx_Storage.Repositories
             return _dbSet.ToList();
         }
 
-        public Tag GetTagById(long id)
+        public Tag GetTagById(int id)
         {
             return _dbSet.Find(id);
         }
@@ -40,7 +40,7 @@ namespace NetFilmx_Storage.Repositories
             _context.SaveChanges();
         }
 
-        public void RemoveTag(long id)
+        public void DeleteTag(int id)
         {
             Tag tag = _dbSet.Find(id);
             if (tag != null)
@@ -48,6 +48,11 @@ namespace NetFilmx_Storage.Repositories
                 _dbSet.Remove(tag);
                 _context.SaveChanges();
             }
+        }
+
+        public bool IsTagExist(string name)
+        {
+            return _dbSet.Any(c => c.Name == name);
         }
     }
 }

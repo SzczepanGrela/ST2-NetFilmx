@@ -22,7 +22,7 @@ namespace NetFilmx_Storage.Repositories
             return _dbSet.ToList();
         }
 
-        public Series GetSeriesById(long id)
+        public Series GetSeriesById(int id)
         {
             return _dbSet.Find(id);
         }
@@ -40,7 +40,7 @@ namespace NetFilmx_Storage.Repositories
             _context.SaveChanges();
         }
 
-        public void RemoveSeries(long id)
+        public void DeleteSeries(int id)
         {
             Series series = _dbSet.Find(id);
             if (series != null)
@@ -49,5 +49,12 @@ namespace NetFilmx_Storage.Repositories
                 _context.SaveChanges();
             }
         }
+
+        public bool IsSeriesExist(string name)
+        {
+            return _dbSet.Any(c => c.Name == name);
+        }
+
+
     }
 }

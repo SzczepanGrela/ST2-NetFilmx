@@ -8,7 +8,7 @@ namespace NetFilmx_Service.Command
 {
     public interface ICommandHandler<in TCommand> where TCommand : ICommand
     {
-        Task<Result> HandleAsync(TCommand command);
+        Result Handle(TCommand command);
     }
     
 }

@@ -17,12 +17,12 @@ namespace NetFilmx_Storage.Repositories
             _dbSet = context.Set<User>();
         }
 
-        public List<User> GetUsers()
+        public List<User> GetUserByUsername()
         {
             return _dbSet.ToList();
         }
 
-        public User GetUserById(long id)
+        public User GetUserById(int id)
         {
             return _dbSet.Find(id);
         }
@@ -40,7 +40,7 @@ namespace NetFilmx_Storage.Repositories
             _context.SaveChanges();
         }
 
-        public void RemoveUser(long id)
+        public void DeleteUser(int id)
         {
             User user = _dbSet.Find(id);
             if (user != null)
@@ -48,11 +48,6 @@ namespace NetFilmx_Storage.Repositories
                 _dbSet.Remove(user);
                 _context.SaveChanges();
             }
-        }
-
-        public bool IsUserExist(long userId)
-        {
-            return _dbSet.Any(u => u.Id == userId);
         }
 
         public bool IsUserExist(string username)

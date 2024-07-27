@@ -16,13 +16,12 @@ namespace NetFilmx_Storage.Entities
     {
         protected Video() { }
 
-        public Video(string title, string description, SqlMoney price, int category_id, string video_url, string thumbnail_url=null)
+        public Video(string title, string description, SqlMoney price, string video_url, string thumbnail_url=null)
         {
          
             Title = title;
             Description = description;
             Price = price;
-            Category_id = category_id;
             Video_url = video_url;
             Thumbnail_url = thumbnail_url;
             Created_at = DateTime.Now;
@@ -47,9 +46,7 @@ namespace NetFilmx_Storage.Entities
         [Required]
         public SqlMoney Price { get; set; } = 0;
 
-        [Required]
-        public int Category_id { get; set; }
-
+     
 
         [Required]
         [MinLength(3)]
