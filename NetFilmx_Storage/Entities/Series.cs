@@ -7,10 +7,10 @@ using System.Linq;
 
 namespace NetFilmx_Storage.Entities
 {
-    [Table("Series", Schema = "NetFilmx")]
+    [Table("Series", Schema = "NetFilmx_projekt")]
     public class Series : BaseEntity
     {
-        protected Series()
+        internal Series()
         {
             VideoSeries = new List<VideoSeries>();
         }
@@ -31,7 +31,7 @@ namespace NetFilmx_Storage.Entities
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Price { get; set; } = 0;
 
-        [MaxLength(255)]
+        [MaxLength(2000)]
         public string Description { get; set; } = "-";
 
         [Required]

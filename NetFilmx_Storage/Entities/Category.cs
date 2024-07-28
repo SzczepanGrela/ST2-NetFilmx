@@ -5,10 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NetFilmx_Storage.Entities
 {
-    [Table("Categories", Schema = "NetFilmx")]
+    [Table("Categories", Schema = "NetFilmx_projekt")]
     public class Category : BaseEntity
     {
-        protected Category()
+        internal Category()
         {
             VideoCategories = new List<VideoCategory>();
         }
@@ -24,7 +24,7 @@ namespace NetFilmx_Storage.Entities
         [MaxLength(50)]
         public string Name { get; set; }
 
-        [MaxLength(255)]
+        [MaxLength(2000)]
         public string Description { get; set; }
 
         [InverseProperty("Category")]   // InverseProperty allows the other side of

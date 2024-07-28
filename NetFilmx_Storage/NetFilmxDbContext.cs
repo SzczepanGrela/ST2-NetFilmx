@@ -28,6 +28,9 @@ namespace NetFilmx_Storage
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            DataSeeder.SeedData(modelBuilder);
+
         }
     }
 
@@ -35,18 +38,18 @@ namespace NetFilmx_Storage
     {
         public NetFilmxDbContext CreateDbContext(string[] args)
         {
-            
+
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            
+
             var optionsBuilder = new DbContextOptionsBuilder<NetFilmxDbContext>();
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
                 x => x.MigrationsHistoryTable("__EFMigrationsHistory", "NetFilmx"));
 
-            
+
             return new NetFilmxDbContext(optionsBuilder.Options);
         }
     }

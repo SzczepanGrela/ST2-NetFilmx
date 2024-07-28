@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NetFilmx_Storage.Entities
 {
-    [Table("Video_Series", Schema = "NetFilmx")]
+    [Table("Video_Series", Schema = "NetFilmx_projekt")]
     public class VideoSeries : BaseEntity
     {
-        protected VideoSeries() { }
+        internal VideoSeries() { }
 
         public VideoSeries(int seriesId, int videoId)
         {

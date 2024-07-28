@@ -6,10 +6,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NetFilmx_Storage.Entities
 {
-    [Table("Comments", Schema = "NetFilmx")]
+    [Table("Comments", Schema = "NetFilmx_projekt")]
     public class Comment : BaseEntity
     {
-        protected Comment() { }
+        internal Comment() { }
 
         public Comment(int videoId, int userId, string content)
         {

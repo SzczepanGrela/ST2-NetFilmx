@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Storage.Entities
 {
-    [Table("Likes", Schema = "NetFilmx")]
+    [Table("Likes", Schema = "NetFilmx_projekt")]
     public class Like : BaseEntity
     {
-        protected Like() { }
+        internal Like() { }
 
         public Like(int videoId, int userId)
         {

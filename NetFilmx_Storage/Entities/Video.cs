@@ -6,10 +6,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NetFilmx_Storage.Entities
 {
-    [Table("Videos", Schema = "NetFilmx")]
+    [Table("Videos", Schema = "NetFilmx_projekt")]
     public class Video : BaseEntity
     {
-        protected Video()
+        internal Video()
         {
             Likes = new List<Like>();
             Comments = new List<Comment>();
@@ -33,7 +33,7 @@ namespace NetFilmx_Storage.Entities
         [MaxLength(128)]
         public string Title { get; set; }
 
-        [MaxLength(255)]
+        [MaxLength(2000)]
         public string Description { get; set; } = "-";
 
         [Column(TypeName = "decimal(18, 2)")]

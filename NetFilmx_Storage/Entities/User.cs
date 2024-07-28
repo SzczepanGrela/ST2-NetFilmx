@@ -6,10 +6,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NetFilmx_Storage.Entities
 {
-    [Table("Users", Schema = "NetFilmx")]
+    [Table("Users", Schema = "NetFilmx_projekt")]
     public class User : BaseEntity
     {
-        protected User()
+        internal User()
         {
             Comments = new List<Comment>();
             Likes = new List<Like>();
