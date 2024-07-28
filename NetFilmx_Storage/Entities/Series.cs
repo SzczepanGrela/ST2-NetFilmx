@@ -40,6 +40,11 @@ namespace NetFilmx_Storage.Entities
         [Required]
         public DateTime UpdatedAt { get; set; }
 
+        [InverseProperty("Series")]
         public ICollection<VideoSeries> VideoSeries { get; set; }
+
+        [NotMapped]
+        public IEnumerable<Video> Videos => VideoSeries.Select(vs => vs.Video);
+
     }
 }

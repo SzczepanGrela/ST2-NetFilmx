@@ -25,5 +25,8 @@ namespace NetFilmx_Storage.Entities
 
         [InverseProperty("Tag")]
         public ICollection<VideoTag> VideoTags { get; set; }
+
+        [NotMapped]
+        public IEnumerable<Video> Videos => VideoTags.Select(vt => vt.Video);
     }
 }
