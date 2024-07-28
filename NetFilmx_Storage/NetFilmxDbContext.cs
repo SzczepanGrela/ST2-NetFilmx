@@ -35,18 +35,18 @@ namespace NetFilmx_Storage
     {
         public NetFilmxDbContext CreateDbContext(string[] args)
         {
-            // Build configuration
+            
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            // Create DbContextOptionsBuilder and configure it
+            
             var optionsBuilder = new DbContextOptionsBuilder<NetFilmxDbContext>();
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
                 x => x.MigrationsHistoryTable("__EFMigrationsHistory", "NetFilmx"));
 
-            // Create and return DbContext instance
+            
             return new NetFilmxDbContext(optionsBuilder.Options);
         }
     }
