@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace NetFilmx_Storage.Entities
 {
@@ -16,23 +17,22 @@ namespace NetFilmx_Storage.Entities
 
         public Series(string name, decimal price, string description, DateTime createdAt, DateTime updatedAt) : this()
         {
-            Name = name;
+            Name = name ?? throw new ArgumentNullException(nameof(name));
             Price = price;
             Description = description;
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
-
         }
 
         [Required]
         [MaxLength(128)]
         public string Name { get; set; }
 
-        [Required]
-        public decimal Price { get; set; }
+        [Column(TypeName = "decimal(18, 2)")]
+        public decimal Price { get; set; } = 0;
 
         [MaxLength(255)]
-        public string Description { get; set; }
+        public string Description { get; set; } = "-";
 
         [Required]
         public DateTime CreatedAt { get; set; }
@@ -45,6 +45,5 @@ namespace NetFilmx_Storage.Entities
 
         [NotMapped]
         public IEnumerable<Video> Videos => VideoSeries.Select(vs => vs.Video);
-
     }
 }

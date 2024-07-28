@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.SqlTypes;
 
 namespace NetFilmx_Storage.Entities
 {
@@ -19,7 +18,7 @@ namespace NetFilmx_Storage.Entities
             VideoSeries = new List<VideoSeries>();
         }
 
-        public Video(string title, string description, SqlMoney price, string videoUrl, string? thumbnailUrl = null) : this()
+        public Video(string title, string description, decimal price, string videoUrl, string? thumbnailUrl = null) : this()
         {
             Title = title ?? throw new ArgumentNullException(nameof(title));
             Description = description;
@@ -34,10 +33,11 @@ namespace NetFilmx_Storage.Entities
         [MaxLength(128)]
         public string Title { get; set; }
 
+        [MaxLength(255)]
         public string Description { get; set; } = "-";
 
-        [Required]
-        public SqlMoney Price { get; set; } = 0;
+        [Column(TypeName = "decimal(18, 2)")]
+        public decimal Price { get; set; } = 0;
 
         [Required]
         [MinLength(3)]

@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NetFilmx_Storage\NetFilmx_Storage.csproj" />
-    <ProjectReference Include="..\NetFilmx_Web\NetFilmx_Web.csproj" />
   </ItemGroup>
 
 </Project>

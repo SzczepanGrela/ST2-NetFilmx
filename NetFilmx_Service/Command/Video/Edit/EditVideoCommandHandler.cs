@@ -34,8 +34,8 @@ namespace NetFilmx_Service.Command.Video.Edit
             video.Price = command.Price;
             video.Title = command.Title;
             video.Description = command.Description;
-            video.Video_url = command.Video_url;
-            video.Thumbnail_url = command.Thumbnail_url;
+            video.VideoUrl = command.Video_url;
+            video.ThumbnailUrl = command.Thumbnail_url;
 
             _repository.EditVideo(video);
             return Result.Ok();
