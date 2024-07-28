@@ -1,11 +1,8 @@
 ﻿using NetFilmx_Storage.Common;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NetFilmx_Storage.Entities
 {
@@ -18,26 +15,27 @@ namespace NetFilmx_Storage.Entities
         {
             VideoId = videoId;
             UserId = userId;
-            Content = content;
+            Content = content ?? throw new ArgumentNullException(nameof(content));
             CreatedAt = DateTime.Now;
             UpdatedAt = DateTime.Now;
         }
 
-
         [Required]
         public int VideoId { get; set; }
 
-        [ForeignKey("VideoId")]
+        [ForeignKey(nameof(VideoId))]
+        [InverseProperty("Comments")]
         public virtual Video Video { get; set; }
 
         [Required]
         public int UserId { get; set; }
 
-        [ForeignKey("UserId")]
+        [ForeignKey(nameof(UserId))]
+        [InverseProperty("Comments")]
         public virtual User User { get; set; }
 
         [Required]
-        public string? Content { get; set; }
+        public string Content { get; set; }
 
         [Required]
         public DateTime CreatedAt { get; set; }

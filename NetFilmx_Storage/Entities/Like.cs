@@ -26,13 +26,15 @@ namespace NetFilmx_Storage.Entities
         public int VideoId { get; set; }
 
 
-        [ForeignKey("VideoId")]
+        [ForeignKey(nameof(VideoId))]
+        [InverseProperty("Likes")]
         public virtual Video Video { get; set; }
 
         [Required]
         public int UserId { get; set; }
 
-        [ForeignKey("UserId")]
+        [ForeignKey(nameof(UserId))]
+        [InverseProperty("Likes")]
         public virtual User User { get; set; }
 
         [Required]

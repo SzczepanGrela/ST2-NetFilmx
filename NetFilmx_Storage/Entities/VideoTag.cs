@@ -18,13 +18,16 @@ namespace NetFilmx_Storage.Entities
         [Required]
         public int VideoId { get; set; }
 
-        [ForeignKey("Video_Id")]
+        [ForeignKey(nameof(VideoId))]
+        [InverseProperty("VideoTags")]
         public virtual Video Video { get; set; }
+
 
         [Required]
         public int TagId { get; set; }
 
-        [ForeignKey("Tag_Id")]
+        [ForeignKey(nameof(TagId))]
+        [InverseProperty("VideoTags")]
         public virtual Tag Tag { get; set; }
     }
 }

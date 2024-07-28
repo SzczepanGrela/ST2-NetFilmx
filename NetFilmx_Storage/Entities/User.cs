@@ -9,9 +9,14 @@ namespace NetFilmx_Storage.Entities
     [Table("Users", Schema = "NetFilmx")]
     public class User : BaseEntity
     {
-        protected User() { }
+        protected User() 
+        {
+            Comments = new List<Comment>();
+            Likes = new List<Like>();
+        
+        }
 
-        public User(string username, string email, string password)
+        public User(string username, string email, string password) : this()
         {
             Username = username;
             Email = email;
@@ -34,15 +39,22 @@ namespace NetFilmx_Storage.Entities
 
         [Required]
         [MaxLength(255)]
+
         public string PasswordHash { get; set; }
 
         [Required]
-       
        
         public DateTime CreatedAt { get; set; }
 
         [Required]
         public DateTime UpdatedAt { get; set; }
+
+        [InverseProperty("User")]
+        public virtual ICollection<Comment> Comments { get; set; }
+
+        [InverseProperty("User")]
+        public virtual ICollection<Like> Likes { get; set; }
+
 
         public void SetPassword(string password)
         {

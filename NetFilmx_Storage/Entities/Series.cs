@@ -9,16 +9,19 @@ namespace NetFilmx_Storage.Entities
     [Table("Series", Schema = "NetFilmx")]
     public class Series : BaseEntity
     {
-        protected Series() { }
+        protected Series()
+        {
+            VideoSeries = new List<VideoSeries>();
+        }
 
-        public Series(string name, decimal price, string description, DateTime createdAt, DateTime updatedAt)
+        public Series(string name, decimal price, string description, DateTime createdAt, DateTime updatedAt) : this()
         {
             Name = name;
             Price = price;
             Description = description;
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
-            
+
         }
 
         [Required]
@@ -37,6 +40,6 @@ namespace NetFilmx_Storage.Entities
         [Required]
         public DateTime UpdatedAt { get; set; }
 
-        public ICollection<VideoSeries> SeriesVideos { get; set; }
+        public ICollection<VideoSeries> VideoSeries { get; set; }
     }
 }

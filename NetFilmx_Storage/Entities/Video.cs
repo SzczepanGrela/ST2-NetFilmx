@@ -4,81 +4,69 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlTypes;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetFilmx_Storage.Entities
 {
-
     [Table("Videos", Schema = "NetFilmx")]
     public class Video : BaseEntity
     {
-        protected Video() { }
-
-        public Video(string title, string description, SqlMoney price, string video_url, string thumbnail_url=null)
+        protected Video()
         {
-         
-            Title = title;
-            Description = description;
-            Price = price;
-            Video_url = video_url;
-            Thumbnail_url = thumbnail_url;
-            Created_at = DateTime.Now;
-            Updated_at = DateTime.Now;
-
+            Likes = new List<Like>();
+            Comments = new List<Comment>();
+            VideoCategories = new List<VideoCategory>();
+            VideoTags = new List<VideoTag>();
+            VideoSeries = new List<VideoSeries>();
         }
 
-
+        public Video(string title, string description, SqlMoney price, string videoUrl, string? thumbnailUrl = null) : this()
+        {
+            Title = title ?? throw new ArgumentNullException(nameof(title));
+            Description = description;
+            Price = price;
+            VideoUrl = videoUrl ?? throw new ArgumentNullException(nameof(videoUrl));
+            ThumbnailUrl = thumbnailUrl;
+            CreatedAt = DateTime.Now;
+            UpdatedAt = DateTime.Now;
+        }
 
         [Required]
-        [MinLength(3)]
         [MaxLength(128)]
-        public string? Title { get; set; }
+        public string Title { get; set; }
 
-        
-
-        [Required]
-        [MinLength(3)]
-        public string? Description { get; set; } = null;
-
+        public string Description { get; set; } = "-";
 
         [Required]
         public SqlMoney Price { get; set; } = 0;
 
-     
-
         [Required]
         [MinLength(3)]
-        public string? Video_url { get; set; }
+        public string VideoUrl { get; set; }
 
-        
         [MinLength(3)]
-        public string? Thumbnail_url { get; set; }
+        public string? ThumbnailUrl { get; set; }
 
-       
         public int Views { get; set; } = 0;
 
-       
-        public DateTime Created_at { get; set; } = DateTime.Now;
+        [Required]
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        
-        public DateTime Updated_at { get; set; } = DateTime.Now;
+        [Required]
+        public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
-        public ICollection<Like> Likes { get; set; }
+        [InverseProperty("Video")]
+        public virtual ICollection<Like> Likes { get; set; }
 
-        public ICollection<Comment> Comments{ get; set; }
+        [InverseProperty("Video")]
+        public virtual ICollection<Comment> Comments { get; set; }
 
-        public ICollection<VideoCategory> VideoCategories { get; set; }
+        [InverseProperty("Video")]
+        public virtual ICollection<VideoCategory> VideoCategories { get; set; }
 
-        public ICollection<VideoTag> VideoTags { get; set; }
+        [InverseProperty("Video")]
+        public virtual ICollection<VideoTag> VideoTags { get; set; }
 
-        public ICollection<VideoSeries> SeriesVideos { get; set; }
-
-
-
-
-
-
+        [InverseProperty("Video")]
+        public virtual ICollection<VideoSeries> VideoSeries { get; set; }
     }
 }

@@ -8,17 +8,22 @@ namespace NetFilmx_Storage.Entities
     [Table("Tags", Schema = "NetFilmx")]
     public class Tag : BaseEntity
     {
-        protected Tag() { }
+        protected Tag() 
+        {
+            VideoTags = new List<VideoTag>();
+        }
 
-        public Tag(string name)
+        public Tag(string name) : this()
         {
             Name = name;
         }
 
         [Required]
         [MaxLength(50)]
+        [MinLength(1)]
         public string Name { get; set; }
 
+        [InverseProperty("Tag")]
         public ICollection<VideoTag> VideoTags { get; set; }
     }
 }
