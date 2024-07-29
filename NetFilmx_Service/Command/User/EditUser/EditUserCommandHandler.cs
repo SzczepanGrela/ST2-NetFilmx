@@ -16,18 +16,18 @@ namespace NetFilmx_Service.Command.User.EditUser
             _repository = repository;
         }
 
-        public Result Handle(EditUserCommand command)
+        public CResult Handle(EditUserCommand command)
         {
             var validation = new EditUserCommandValidator().Validate(command);
             if(!validation.IsValid)
             {
-                return Result.Fail(validation.Errors.ToString());
+                return CResult.Fail(validation.Errors.ToString());
             }   
 
             var user = _repository.GetUserById(command.Id);
             if (user == null)
             {
-                return Result.Fail("User not found");
+                return CResult.Fail("User not found");
             }
 
 
@@ -38,7 +38,7 @@ namespace NetFilmx_Service.Command.User.EditUser
 
             _repository.EditUser(user);
 
-            return Result.Ok();
+            return CResult.Ok();
         }
 
     }

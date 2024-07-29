@@ -18,18 +18,18 @@ namespace NetFilmx_Service.Command.Comment.Delete
         }
 
 
-        public Result Handle(DeleteCommentCommand command)
+        public CResult Handle(DeleteCommentCommand command)
         {
             var comment = _repository.GetCommentById(command.Id);
 
             if(comment == null)
             {
-                return Result.Fail("Comment does not exist.");
+                return CResult.Fail("Comment does not exist.");
             }
 
             _repository.DeleteComment(command.Id);
 
-            return Result.Ok();
+            return CResult.Ok();
 
         }
 

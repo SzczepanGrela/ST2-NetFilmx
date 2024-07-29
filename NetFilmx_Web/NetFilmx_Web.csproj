@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -9,6 +9,19 @@
   <ItemGroup>
     <ProjectReference Include="..\NetFilmx_Service\NetFilmx_Service.csproj" />
     <ProjectReference Include="..\NetFilmx_Storage\NetFilmx_Storage.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Category\" />
+    <Folder Include="Views\Comment\" />
+    <Folder Include="Views\User\" />
+    <Folder Include="Views\Series\" />
+    <Folder Include="Views\Tag\" />
+    <Folder Include="Views\Video\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.3" />
   </ItemGroup>
 
 </Project>

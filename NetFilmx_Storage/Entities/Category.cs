@@ -10,7 +10,7 @@ namespace NetFilmx_Storage.Entities
     {
         internal Category()
         {
-            VideoCategories = new List<VideoCategory>();
+            Videos= new List<Video>();
         }
 
         public Category(string name, string description) : this()
@@ -27,12 +27,10 @@ namespace NetFilmx_Storage.Entities
         [MaxLength(2000)]
         public string Description { get; set; }
 
-        [InverseProperty("Category")]   // InverseProperty allows the other side of
-                                        // the relationship to be defined in the dependent entity.
-        public virtual ICollection<VideoCategory> VideoCategories { get; set; }
+         
+        public virtual ICollection<Video> Videos { get; set; }
 
-        [NotMapped] // NotMapped attribute to exclude a property from the database.
-        public IEnumerable<Video> Videos => VideoCategories.Select(vc => vc.Video);
+       
 
     }
 }

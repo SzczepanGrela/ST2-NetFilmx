@@ -17,18 +17,18 @@ namespace NetFilmx_Service.Command.Video.Edit
         }
 
 
-        public Result Handle(EditVideoCommand command)
+        public CResult Handle(EditVideoCommand command)
         {
             var validation = new EditVideoCommandValidator().Validate(command);
             if (!validation.IsValid)
             {
-                return Result.Fail(validation);
+                return CResult.Fail(validation);
             }
 
             var video = _repository.GetVideoById(command.Id);
             if (video==null)
             {
-                return Result.Fail("Video not found");
+                return CResult.Fail("Video not found");
             }
 
             video.Price = command.Price;
@@ -38,7 +38,7 @@ namespace NetFilmx_Service.Command.Video.Edit
             video.ThumbnailUrl = command.Thumbnail_url;
 
             _repository.EditVideo(video);
-            return Result.Ok();
+            return CResult.Ok();
         }
 
      

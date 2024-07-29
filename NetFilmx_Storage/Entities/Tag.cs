@@ -10,7 +10,7 @@ namespace NetFilmx_Storage.Entities
     {
         internal Tag() 
         {
-            VideoTags = new List<VideoTag>();
+            Videos = new List<Video>();
         }
 
         public Tag(string name) : this()
@@ -23,10 +23,9 @@ namespace NetFilmx_Storage.Entities
         [MinLength(1)]
         public string Name { get; set; }
 
-        [InverseProperty("Tag")]
-        public ICollection<VideoTag> VideoTags { get; set; }
+        
+        public virtual ICollection<Video> Videos { get; set; }
 
-        [NotMapped]
-        public IEnumerable<Video> Videos => VideoTags.Select(vt => vt.Video);
+       
     }
 }

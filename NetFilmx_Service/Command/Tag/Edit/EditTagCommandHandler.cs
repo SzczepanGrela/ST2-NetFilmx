@@ -16,27 +16,27 @@ namespace NetFilmx_Service.Command.Tag.Edit
             _repository = repository;
         }
 
-        public Result Handle(EditTagCommand command)
+        public CResult Handle(EditTagCommand command)
         {
             var validationResult = new EditTagCommandValidator().Validate(command);
 
             if (!validationResult.IsValid)
             {
-                return Result.Fail(validationResult);
+                return CResult.Fail(validationResult);
             }
 
             var tag = _repository.GetTagById(command.Id);
 
             if (tag == null)
             {
-                return Result.Fail("Tag not found");
+                return CResult.Fail("Tag not found");
             }
 
             tag.Name = command.Name;           
 
             _repository.EditTag(tag);
 
-            return Result.Ok();
+            return CResult.Ok();
         }
     }
 }

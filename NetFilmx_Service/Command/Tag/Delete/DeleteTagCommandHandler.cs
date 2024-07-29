@@ -17,18 +17,18 @@ namespace NetFilmx_Service.Command.Tag.Delete
             _repository = repository;
         }
 
-        public Result Handle(DeleteTagCommand command)
+        public CResult Handle(DeleteTagCommand command)
         {
            var tag = _repository.GetTagById(command.Id);
 
             if(tag == null)
             {
-                return Result.Fail("Tag does not exist.");
+                return CResult.Fail("Tag does not exist.");
             }
 
             _repository.DeleteTag(command.Id);
 
-            return Result.Ok();
+            return CResult.Ok();
 
         }
     }

@@ -23,6 +23,33 @@ namespace NetFilmx_Web.Controllers
             return View();
         }
 
+        public IActionResult Videos()
+        {
+            return View();
+        }
+
+        public IActionResult Categories()
+        {
+            return View();
+        }
+        public IActionResult Comments()
+        {
+            return View();
+        }
+        public IActionResult Users()
+        {
+            return View();
+        }
+        public IActionResult Series()
+        {
+            return View();
+        }
+        public IActionResult Tags()
+        {
+            return View();
+        }
+     
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

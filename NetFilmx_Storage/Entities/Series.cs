@@ -12,7 +12,7 @@ namespace NetFilmx_Storage.Entities
     {
         internal Series()
         {
-            VideoSeries = new List<VideoSeries>();
+            Videos = new List<Video>();
         }
 
         public Series(string name, decimal price, string description, DateTime createdAt, DateTime updatedAt) : this()
@@ -40,10 +40,9 @@ namespace NetFilmx_Storage.Entities
         [Required]
         public DateTime UpdatedAt { get; set; }
 
-        [InverseProperty("Series")]
-        public ICollection<VideoSeries> VideoSeries { get; set; }
+       
+        public virtual ICollection<Video> Videos { get; set; }
 
-        [NotMapped]
-        public IEnumerable<Video> Videos => VideoSeries.Select(vs => vs.Video);
+        
     }
 }

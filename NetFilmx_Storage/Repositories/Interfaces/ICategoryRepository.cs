@@ -5,8 +5,12 @@ namespace NetFilmx_Storage.Repositories
 {
     public interface ICategoryRepository
     {
-        List<Category> GetCategories();
+        List<Category> GetAllCategories();
+
         Category GetCategoryById(int id);
+
+        
+
         void AddCategory(Category category);
         void EditCategory(Category category);
         void DeleteCategory(int id);

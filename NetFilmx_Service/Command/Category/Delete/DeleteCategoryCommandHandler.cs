@@ -17,17 +17,17 @@ namespace NetFilmx_Service.Command.Category.Delete
             _repository = repository;
         }
 
-        public Result Handle(DeleteCategoryCommand command)
+        public CResult Handle(DeleteCategoryCommand command)
         {
             var category = _repository.GetCategoryById(command.Id);
             if (category == null)
             {
-                return Result.Fail("Category not found");
+                return CResult.Fail("Category not found");
             }
 
             _repository.DeleteCategory(command.Id);
 
-            return Result.Ok();
+            return CResult.Ok();
         }
 
 

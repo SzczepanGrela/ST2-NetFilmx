@@ -16,25 +16,25 @@ namespace NetFilmx_Service.Command.Tag.Add
             _repository = repository;
         }
 
-        public Result Handle(AddTagCommand command)
+        public CResult Handle(AddTagCommand command)
         {
             var validationResult = new AddTagCommandValidator().Validate(command);
             if (!validationResult.IsValid)
             {
-                return Result.Fail(validationResult);
+                return CResult.Fail(validationResult);
             }
 
             var isExist = _repository.IsTagExist(command.Name);
             if (isExist)
             {
-                return Result.Fail("Tag already exist");
+                return CResult.Fail("Tag already exist");
             }
 
             var tag = new NetFilmx_Storage.Entities.Tag(command.Name);
 
             _repository.AddTag(tag);
 
-            return Result.Ok(); 
+            return CResult.Ok(); 
         }
 
 

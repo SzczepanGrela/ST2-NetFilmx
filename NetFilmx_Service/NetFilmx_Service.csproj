@@ -14,4 +14,12 @@
     <ProjectReference Include="..\NetFilmx_Storage\NetFilmx_Storage.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Command\Category\AddVideoToCategory\" />
+    <Folder Include="Command\Comment\Add\" />
+    <Folder Include="Command\Comment\Edit\" />
+    <Folder Include="Command\Series\AddVideoToSeries\" />
+    <Folder Include="Command\Tag\AddVideoToTag\" />
+  </ItemGroup>
+
 </Project>

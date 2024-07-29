@@ -49,10 +49,10 @@ namespace NetFilmx_Storage.Entities
         [Required]
         public DateTime UpdatedAt { get; set; }
 
-        [InverseProperty("User")]
+        [InverseProperty(nameof(User))]
         public virtual ICollection<Comment> Comments { get; set; }
 
-        [InverseProperty("User")]
+        [InverseProperty(nameof(User))]
         public virtual ICollection<Like> Likes { get; set; }
 
         [NotMapped]

@@ -1,10 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NetFilmx_Storage.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetFilmx_Storage
 {
@@ -115,7 +111,6 @@ namespace NetFilmx_Storage
                 }
             };
 
-
             var categories = new[]
             {
                 new Category { Id = 1, Name = "Zwierzęta", Description = "Podziwiaj niesamowity świat natury" },
@@ -127,19 +122,19 @@ namespace NetFilmx_Storage
             {
                 new Tag { Id = 1, Name = "Zwierzęta" },
                 new Tag { Id = 2, Name = "Koty" },
-                new Tag { Id = 3, Name = "Rozrywka"},
-                new Tag { Id = 4, Name = "Zabawne"},
-                new Tag { Id = 5, Name = "Edukacyjne"},
-                new Tag { Id = 6, Name = "Rozwój"},
-                new Tag { Id = 7, Name = "Programowanie"},
-                new Tag { Id = 8, Name = "Lockpicking"},
+                new Tag { Id = 3, Name = "Rozrywka" },
+                new Tag { Id = 4, Name = "Zabawne" },
+                new Tag { Id = 5, Name = "Edukacyjne" },
+                new Tag { Id = 6, Name = "Rozwój" },
+                new Tag { Id = 7, Name = "Programowanie" },
+                new Tag { Id = 8, Name = "Lockpicking" },
             };
 
             var series = new[]
             {
                 new Series { Id = 1, Name = "Pakiet wszystkich startowych filmów", Price = 149.99m, Description = "Kup zestaw oryginalnych 9 filmów dostępnych na platformie", CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
                 new Series { Id = 2, Name = "Pakiet świata zwierząt", Price = 49.99m, Description = "Zestaw zawierający 6 filmów poświęconych zwierzętom", CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
-                new Series { Id = 3, Name = "Pakiet rozwoju", Price = 59.99m, Description = "Zestaw zawierający 3 filmy edukacyjne", CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },  
+                new Series { Id = 3, Name = "Pakiet rozwoju", Price = 59.99m, Description = "Zestaw zawierający 3 filmy edukacyjne", CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
                 new Series { Id = 4, Name = "Pakiet promocyjny", Price = 19.99m, Description = "Zestaw zawierający 3 filmy promocyjne, po jednym z każdej kategorii", CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now }
             };
 
@@ -161,76 +156,6 @@ namespace NetFilmx_Storage
                 new Like { Id = 2, VideoId = 2, UserId = 2, CreatedAt = DateTime.Now }
             };
 
-            var videoCategories = new[]
-            {
-                new VideoCategory { Id = 1, VideoId = 1, CategoryId = 1 },
-                new VideoCategory { Id = 2, VideoId = 2, CategoryId = 1 },
-                new VideoCategory { Id = 3, VideoId = 3, CategoryId = 1 },
-                new VideoCategory { Id = 4, VideoId = 1, CategoryId = 3 },
-                new VideoCategory { Id = 5, VideoId = 2, CategoryId = 3 },
-                new VideoCategory { Id = 6, VideoId = 3, CategoryId = 3 },
-                new VideoCategory { Id = 7, VideoId = 4, CategoryId = 1 },
-                new VideoCategory { Id = 8, VideoId = 4, CategoryId = 3 },
-                new VideoCategory { Id = 9, VideoId = 5, CategoryId = 1 },
-                new VideoCategory { Id = 10, VideoId = 5, CategoryId = 3 },
-                new VideoCategory { Id = 11, VideoId = 6, CategoryId = 1 },
-                new VideoCategory { Id = 12, VideoId = 6, CategoryId = 3 },
-                new VideoCategory { Id = 13, VideoId = 7, CategoryId = 2 },
-                new VideoCategory { Id = 14, VideoId = 8, CategoryId = 2 },
-                new VideoCategory { Id = 15, VideoId = 9, CategoryId = 2 },
-                new VideoCategory { Id = 16, VideoId = 8, CategoryId = 3 }
-            };
-
-            var videoTags = new[]
-            {
-                new VideoTag { Id = 1, VideoId = 1, TagId = 1 },
-                new VideoTag { Id = 2, VideoId = 1, TagId = 5 },
-                new VideoTag { Id = 3, VideoId = 2, TagId = 1 },
-                new VideoTag { Id = 4, VideoId = 2, TagId = 5 },
-                new VideoTag { Id = 5, VideoId = 3, TagId = 1 },
-                new VideoTag { Id = 6, VideoId = 3, TagId = 5 },
-                new VideoTag { Id = 7, VideoId = 4, TagId = 2 },
-                new VideoTag { Id = 8, VideoId = 4, TagId = 4 },
-                new VideoTag { Id = 9, VideoId = 5, TagId = 2 },
-                new VideoTag { Id = 10, VideoId = 5, TagId = 4 },
-                new VideoTag { Id = 11, VideoId = 6, TagId = 2 },
-                new VideoTag { Id = 12, VideoId = 6, TagId = 4 },
-                new VideoTag { Id = 13, VideoId = 6, TagId = 1 },
-                new VideoTag { Id = 14, VideoId = 5, TagId = 1 },
-                new VideoTag { Id = 15, VideoId = 4, TagId = 1 },
-                new VideoTag { Id = 16, VideoId = 7, TagId = 7 },
-                new VideoTag { Id = 17, VideoId = 8, TagId = 8 },
-                new VideoTag { Id = 18, VideoId = 9, TagId = 6 },
-                new VideoTag { Id = 19, VideoId = 9, TagId = 7 },
-                new VideoTag { Id = 20, VideoId = 7, TagId = 6 }
-            };
-
-            var videoSeries = new[]
-            {
-                new VideoSeries { Id = 1, VideoId = 1, SeriesId = 1 },
-                new VideoSeries { Id = 2, VideoId = 2, SeriesId = 1 },
-                new VideoSeries { Id = 3, VideoId = 3, SeriesId = 1 },
-                new VideoSeries { Id = 4, VideoId = 4, SeriesId = 1 },
-                new VideoSeries { Id = 5, VideoId = 5, SeriesId = 1 },
-                new VideoSeries { Id = 6, VideoId = 6, SeriesId = 1 },
-                new VideoSeries { Id = 7, VideoId = 7, SeriesId = 4 },
-                new VideoSeries { Id = 8, VideoId = 8, SeriesId = 4 },
-                new VideoSeries { Id = 9, VideoId = 9, SeriesId = 4 },
-                new VideoSeries { Id = 10, VideoId = 1, SeriesId = 2 },
-                new VideoSeries { Id = 11, VideoId = 2, SeriesId = 2 },
-                new VideoSeries { Id = 12, VideoId = 3, SeriesId = 2 },
-                new VideoSeries { Id = 13, VideoId = 4, SeriesId = 2 },
-                new VideoSeries { Id = 14, VideoId = 5, SeriesId = 2 },
-                new VideoSeries { Id = 15, VideoId = 6, SeriesId = 2 },
-                new VideoSeries { Id = 16, VideoId = 7, SeriesId = 3 },
-                new VideoSeries { Id = 17, VideoId = 8, SeriesId = 3 },
-                new VideoSeries { Id = 18, VideoId = 9, SeriesId = 3 },
-                new VideoSeries { Id = 19, VideoId = 1, SeriesId = 4 },
-                new VideoSeries { Id = 20, VideoId = 4, SeriesId = 4 },
-                new VideoSeries { Id = 21, VideoId = 7, SeriesId = 4 },
-
-            };
-
             modelBuilder.Entity<Video>().HasData(videos);
             modelBuilder.Entity<Category>().HasData(categories);
             modelBuilder.Entity<Tag>().HasData(tags);
@@ -238,10 +163,82 @@ namespace NetFilmx_Storage
             modelBuilder.Entity<User>().HasData(users);
             modelBuilder.Entity<Comment>().HasData(comments);
             modelBuilder.Entity<Like>().HasData(likes);
-            modelBuilder.Entity<VideoCategory>().HasData(videoCategories);
-            modelBuilder.Entity<VideoTag>().HasData(videoTags);
-            modelBuilder.Entity<VideoSeries>().HasData(videoSeries);
+
+            // Many-to-many relationships
+            modelBuilder.Entity<Video>()
+                .HasMany(v => v.Categories)
+                .WithMany(c => c.Videos)
+                .UsingEntity(j => j.HasData(
+                    new { VideosId = 1, CategoriesId = 1 },
+                    new { VideosId = 2, CategoriesId = 1 },
+                    new { VideosId = 3, CategoriesId = 1 },
+                    new { VideosId = 1, CategoriesId = 3 },
+                    new { VideosId = 2, CategoriesId = 3 },
+                    new { VideosId = 3, CategoriesId = 3 },
+                    new { VideosId = 4, CategoriesId = 1 },
+                    new { VideosId = 4, CategoriesId = 3 },
+                    new { VideosId = 5, CategoriesId = 1 },
+                    new { VideosId = 5, CategoriesId = 3 },
+                    new { VideosId = 6, CategoriesId = 1 },
+                    new { VideosId = 6, CategoriesId = 3 },
+                    new { VideosId = 7, CategoriesId = 2 },
+                    new { VideosId = 8, CategoriesId = 2 },
+                    new { VideosId = 9, CategoriesId = 2 },
+                    new { VideosId = 8, CategoriesId = 3 }
+                ));
+
+            modelBuilder.Entity<Video>()
+                .HasMany(v => v.Tags)
+                .WithMany(t => t.Videos)
+                .UsingEntity(j => j.HasData(
+                    new { VideosId = 1, TagsId = 1 },
+                    new { VideosId = 1, TagsId = 5 },
+                    new { VideosId = 2, TagsId = 1 },
+                    new { VideosId = 2, TagsId = 5 },
+                    new { VideosId = 3, TagsId = 1 },
+                    new { VideosId = 3, TagsId = 5 },
+                    new { VideosId = 4, TagsId = 2 },
+                    new { VideosId = 4, TagsId = 4 },
+                    new { VideosId = 5, TagsId = 2 },
+                    new { VideosId = 5, TagsId = 4 },
+                    new { VideosId = 6, TagsId = 2 },
+                    new { VideosId = 6, TagsId = 4 },
+                    new { VideosId = 6, TagsId = 1 },
+                    new { VideosId = 5, TagsId = 1 },
+                    new { VideosId = 4, TagsId = 1 },
+                    new { VideosId = 7, TagsId = 7 },
+                    new { VideosId = 8, TagsId = 8 },
+                    new { VideosId = 9, TagsId = 6 },
+                    new { VideosId = 9, TagsId = 7 },
+                    new { VideosId = 7, TagsId = 6 }
+                ));
+
+            modelBuilder.Entity<Video>()
+                .HasMany(v => v.Series)
+                .WithMany(s => s.Videos)
+                .UsingEntity(j => j.HasData(
+                    new { VideosId = 1, SeriesId = 1 },
+                    new { VideosId = 2, SeriesId = 1 },
+                    new { VideosId = 3, SeriesId = 1 },
+                    new { VideosId = 4, SeriesId = 1 },
+                    new { VideosId = 5, SeriesId = 1 },
+                    new { VideosId = 6, SeriesId = 1 },
+                    new { VideosId = 7, SeriesId = 4 },
+                    new { VideosId = 8, SeriesId = 4 },
+                    new { VideosId = 9, SeriesId = 4 },
+                    new { VideosId = 1, SeriesId = 2 },
+                    new { VideosId = 2, SeriesId = 2 },
+                    new { VideosId = 3, SeriesId = 2 },
+                    new { VideosId = 4, SeriesId = 2 },
+                    new { VideosId = 5, SeriesId = 2 },
+                    new { VideosId = 6, SeriesId = 2 },
+                    new { VideosId = 7, SeriesId = 3 },
+                    new { VideosId = 8, SeriesId = 3 },
+                    new { VideosId = 9, SeriesId = 3 },
+                    new { VideosId = 1, SeriesId = 4 },
+                    new { VideosId = 4, SeriesId = 4 },
+                    new { VideosId = 7, SeriesId = 4 }
+                ));
         }
     }
 }
-

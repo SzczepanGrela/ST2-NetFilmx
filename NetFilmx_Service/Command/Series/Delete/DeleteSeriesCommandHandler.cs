@@ -18,18 +18,18 @@ namespace NetFilmx_Service.Command.Series.Delete
         }
 
 
-        public Result Handle(DeleteSeriesCommand command)
+        public CResult Handle(DeleteSeriesCommand command)
         {
             var move = _repository.GetSeriesById(command.Id);
 
             if (move == null)
             {
-                return Result.Fail("Series does not exist.");
+                return CResult.Fail("Series does not exist.");
             }
 
             _repository.DeleteSeries(command.Id);
 
-            return Result.Ok();
+            return CResult.Ok();
         }
 
 

@@ -10,7 +10,7 @@ namespace NetFilmx_Service.Command.Category.Add
     {
 
         public string Name { get; set; }
-        public string? Description { get; set; }
+        public string? Description { get; set; } = "-";
        
     }
 }

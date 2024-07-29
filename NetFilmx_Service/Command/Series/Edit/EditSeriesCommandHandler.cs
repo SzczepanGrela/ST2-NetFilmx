@@ -16,20 +16,20 @@ namespace NetFilmx_Service.Command.Series.Edit
             _repository = repository;
         }
 
-        public Result Handle(EditSeriesCommand command)
+        public CResult Handle(EditSeriesCommand command)
         {
 
             var validation = new EditSeriesCommandValidator().Validate(command);
 
             if(!validation.IsValid)
             {
-                return Result.Fail(validation);
+                return CResult.Fail(validation);
             }
 
             var series = _repository.GetSeriesById(command.Id);
             if(series == null) 
             {
-                return Result.Fail("Series does not exist.");
+                return CResult.Fail("Series does not exist.");
             }
 
             series.Name = command.Name;
@@ -40,7 +40,7 @@ namespace NetFilmx_Service.Command.Series.Edit
             _repository.EditSeries(series);
 
 
-            return Result.Ok();
+            return CResult.Ok();
         }
 
 

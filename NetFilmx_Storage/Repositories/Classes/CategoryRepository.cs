@@ -17,7 +17,9 @@ namespace NetFilmx_Storage.Repositories
            
         }
 
-        public List<Category> GetCategories()
+
+
+        public List<Category> GetAllCategories()
         {
             return _context.Categories.ToList();
         }
@@ -27,6 +29,9 @@ namespace NetFilmx_Storage.Repositories
             Category? category = _context.Categories.Find(id);
             return category == null ? throw new DataException("Category not found") : category;
         }
+
+
+       
 
         public void AddCategory(Category category)
         {

@@ -13,9 +13,9 @@ namespace NetFilmx_Storage.Entities
         {
             Likes = new List<Like>();
             Comments = new List<Comment>();
-            VideoCategories = new List<VideoCategory>();
-            VideoTags = new List<VideoTag>();
-            VideoSeries = new List<VideoSeries>();
+            Categories = new List<Category>();
+            Tags = new List<Tag>();
+            Series = new List<Series>();
         }
 
         public Video(string title, string description, decimal price, string videoUrl, string? thumbnailUrl = null) : this()
@@ -54,19 +54,19 @@ namespace NetFilmx_Storage.Entities
         [Required]
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
-        [InverseProperty("Video")]
+        
         public virtual ICollection<Like> Likes { get; set; }
 
-        [InverseProperty("Video")]
+        
         public virtual ICollection<Comment> Comments { get; set; }
 
-        [InverseProperty("Video")]
-        public virtual ICollection<VideoCategory> VideoCategories { get; set; }
+        
+        public virtual ICollection<Category> Categories { get; set; }
 
-        [InverseProperty("Video")]
-        public virtual ICollection<VideoTag> VideoTags { get; set; }
+        
+        public virtual ICollection<Tag> Tags { get; set; }
 
-        [InverseProperty("Video")]
-        public virtual ICollection<VideoSeries> VideoSeries { get; set; }
+        
+        public virtual ICollection<Series> Series { get; set; }
     }
 }

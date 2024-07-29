@@ -16,18 +16,18 @@ namespace NetFilmx_Service.Command.User.RegisterUser
             _repository = repository;
         }
 
-        public Result Handle(RegisterUserCommand command)
+        public CResult Handle(RegisterUserCommand command)
         {
             var validation = new RegisterUserCommandValidator().Validate(command);
             if(!validation.IsValid)
             {
-                return Result.Fail(validation.Errors.ToString());
+                return CResult.Fail(validation.Errors.ToString());
             }
 
             var isExist = _repository.GetUserByUsername().FirstOrDefault(x => x.Username == command.Username);
             if (isExist != null)
             {
-                return Result.Fail("User already exists");
+                return CResult.Fail("User already exists");
             }
 
 
@@ -36,7 +36,7 @@ namespace NetFilmx_Service.Command.User.RegisterUser
 
             _repository.AddUser(user);
 
-            return Result.Ok();
+            return CResult.Ok();
         }
 
 

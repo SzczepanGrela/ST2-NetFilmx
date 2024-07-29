@@ -16,17 +16,17 @@ namespace NetFilmx_Service.Command.User.DeleteUser
             _repository = repository;
         }
 
-        public Result Handle(DeleteUserCommand command)
+        public CResult Handle(DeleteUserCommand command)
         {
             var user = _repository.GetUserById(command.Id);
             if (user == null)
             {
-                return Result.Fail("User not found");
+                return CResult.Fail("User not found");
             }
 
             _repository.DeleteUser(command.Id);
 
-            return Result.Ok();
+            return CResult.Ok();
         }
 
 

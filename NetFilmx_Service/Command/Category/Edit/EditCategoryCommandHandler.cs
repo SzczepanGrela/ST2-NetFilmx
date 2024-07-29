@@ -18,20 +18,20 @@ namespace NetFilmx_Service.Command.Category.Edit
             _repository = repository;
         }
 
-        public Result Handle(EditCategoryCommand command)
+        public CResult Handle(EditCategoryCommand command)
         {
             var validationResult = new EditCategoryCommandValidator().Validate(command);
 
             if (!validationResult.IsValid)
             {
-                return Result.Fail(validationResult);
+                return CResult.Fail(validationResult);
             }
 
             var category = _repository.GetCategoryById(command.Id);
 
             if (category == null)
             {
-                return Result.Fail("Category not found");
+                return CResult.Fail("Category not found");
             }
 
             category.Name = command.Name;
@@ -39,7 +39,7 @@ namespace NetFilmx_Service.Command.Category.Edit
 
             _repository.EditCategory(category);
 
-            return Result.Ok();
+            return CResult.Ok();
         }
 
     }

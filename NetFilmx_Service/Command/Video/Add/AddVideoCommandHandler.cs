@@ -16,12 +16,12 @@ namespace NetFilmx_Service.Command.Video.Add
             _repository = repository;
         }
 
-        public Result Handle(AddVideoCommand command)
+        public CResult Handle(AddVideoCommand command)
         {
             var validation = new AddVideoCommandValidator().Validate(command);
             if(!validation.IsValid)
             {
-                return Result.Fail(validation);
+                return CResult.Fail(validation);
             }
 
            // var isExist = _repository.IsVideoExist();
@@ -32,7 +32,7 @@ namespace NetFilmx_Service.Command.Video.Add
 
             _repository.AddVideo(video);
 
-            return Result.Ok();
+            return CResult.Ok();
 
 
         }

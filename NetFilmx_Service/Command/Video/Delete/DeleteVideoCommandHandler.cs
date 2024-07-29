@@ -18,17 +18,17 @@ namespace NetFilmx_Service.Command.Video.Delete
         }
 
 
-        public Result Handle(DeleteVideoCommand command)
+        public CResult Handle(DeleteVideoCommand command)
         {
             var video = _repository.GetVideoById(command.Id);
             if(video == null)
             {
-                return Result.Fail("Video not found");
+                return CResult.Fail("Video not found");
             }
 
             _repository.DeleteVideo(command.Id);
 
-            return Result.Ok();
+            return CResult.Ok();
         }
 
     }

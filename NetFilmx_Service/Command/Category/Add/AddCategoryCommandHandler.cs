@@ -18,25 +18,25 @@ namespace NetFilmx_Service.Command.Category.Add
             _repository = repository;
         }
 
-        public Result Handle(AddCategoryCommand command)
+        public CResult Handle(AddCategoryCommand command)
         {
             var validationResult = new AddCategoryCommandValidator().Validate(command);
             if (!validationResult.IsValid)
             {
-                return Result.Fail(validationResult);
+                return CResult.Fail(validationResult);
             }
 
             var isExist = _repository.IsCategoryExist(command.Name);
             if (isExist)
             {
-                return Result.Fail("Category already exist");
+                return CResult.Fail("Category already exist");
             }
 
             var category = new NetFilmx_Storage.Entities.Category(command.Name, command.Description);
 
             _repository.AddCategory(category);
 
-            return Result.Ok(); 
+            return CResult.Ok(); 
 
 
         }
