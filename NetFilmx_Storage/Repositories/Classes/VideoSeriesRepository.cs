@@ -1,59 +1,49 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NetFilmx_Storage.Entities;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 
 namespace NetFilmx_Storage.Repositories
 {
     public class VideoSeriesRepository : IVideoSeriesRepository
     {
-        private readonly DbContext _context;
-        private readonly DbSet<VideoSeries> _dbSet;
+        private readonly NetFilmxDbContext _context;
 
-        public VideoSeriesRepository(DbContext context)
+        public VideoSeriesRepository(NetFilmxDbContext context)
         {
             _context = context;
-            _dbSet = context.Set<VideoSeries>();
         }
 
         public List<VideoSeries> GetVideoSeriesBySeriesId(int seriesId)
         {
-            return _dbSet.Where(vs => vs.SeriesId == seriesId).ToList();
+            return _context.VideoSeries.Where(vs => vs.SeriesId == seriesId).ToList();
         }
-
 
         public VideoSeries GetVideoSeriesByVideoIdSeriesId(int videoId, int seriesId)
         {
-            var videoSeries = _dbSet.Find(videoId, seriesId);
-            if (videoSeries == null)
-            {
-                throw new Exception("VideoSeries not found");
-            }
-            return videoSeries;
+            VideoSeries? videoSeries = _context.VideoSeries.Find(videoId, seriesId);
+            return videoSeries == null ? throw new Exception("VideoSeries not found") : videoSeries;
         }
-
-
 
         public void AddVideoSeries(VideoSeries videoSeries)
         {
-            _dbSet.Add(videoSeries);
+            _context.VideoSeries.Add(videoSeries);
             _context.SaveChanges();
         }
 
         public void DeleteVideoSeries(int id)
         {
-            VideoSeries? videoSeries = _dbSet.Find(id);
+            VideoSeries? videoSeries = _context.VideoSeries.Find(id);
             if (videoSeries != null)
             {
-                _dbSet.Remove(videoSeries);
+                _context.VideoSeries.Remove(videoSeries);
                 _context.SaveChanges();
             }
         }
 
-        public bool IsVideoSeriesExist(int video_Id, int series_Id)
+        public bool IsVideoSeriesExist(int videoId, int seriesId)
         {
-           return _dbSet.Any(vs => vs.VideoId == video_Id && vs.SeriesId == series_Id);
+            return _context.VideoSeries.Any(vs => vs.VideoId == videoId && vs.SeriesId == seriesId);
         }
     }
 }

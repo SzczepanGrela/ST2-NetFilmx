@@ -1,58 +1,57 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NetFilmx_Storage.Entities;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 
 namespace NetFilmx_Storage.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly DbContext _context;
-        private readonly DbSet<User> _dbSet;
+        private readonly NetFilmxDbContext _context;
 
-        public UserRepository(DbContext context)
+        public UserRepository(NetFilmxDbContext context)
         {
             _context = context;
-            _dbSet = context.Set<User>();
         }
 
         public List<User> GetUserByUsername()
         {
-            return _dbSet.ToList();
+            return _context.Users.ToList();
         }
 
         public User GetUserById(int id)
         {
-            return _dbSet.Find(id);
+            User? user = _context.Users.Find(id);
+
+            return user == null ? throw new Exception("User not found") : user;
         }
 
         public void AddUser(User user)
         {
-            _dbSet.Add(user);
+            _context.Users.Add(user);
             _context.SaveChanges();
         }
 
         public void EditUser(User user)
         {
-            _dbSet.Attach(user);
+            _context.Users.Attach(user);
             _context.Entry(user).State = EntityState.Modified;
             _context.SaveChanges();
         }
 
         public void DeleteUser(int id)
         {
-            User user = _dbSet.Find(id);
+            User? user = _context.Users.Find(id);
             if (user != null)
             {
-                _dbSet.Remove(user);
+                _context.Users.Remove(user);
                 _context.SaveChanges();
             }
         }
 
         public bool IsUserExist(string username)
         {
-            return _dbSet.Any(u => u.Username == username);
+            return _context.Users.Any(u => u.Username == username);
         }
     }
 }

@@ -1,59 +1,49 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NetFilmx_Storage.Entities;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 
 namespace NetFilmx_Storage.Repositories
 {
     public class VideoTagRepository : IVideoTagRepository
     {
-        private readonly DbContext _context;
-        private readonly DbSet<VideoTag> _dbSet;
+        private readonly NetFilmxDbContext _context;
 
-        public VideoTagRepository(DbContext context)
+        public VideoTagRepository(NetFilmxDbContext context)
         {
             _context = context;
-            _dbSet = context.Set<VideoTag>();
         }
 
         public List<VideoTag> GetVideoTagsByVideoId(int videoId)
         {
-            return _dbSet.Where(vt => vt.VideoId == videoId).ToList();
+            return _context.VideoTags.Where(vt => vt.VideoId == videoId).ToList();
         }
-
 
         public VideoTag GetVideoTagByVideoIdTagId(int videoId, int tagId)
         {
-            var videoTag = _dbSet.Find(videoId, tagId);
-            if (videoTag == null)
-            {
-                throw new Exception("VideoTag not found");
-            }
-            return videoTag;
+            VideoTag? videoTag = _context.VideoTags.Find(videoId, tagId);
+            return videoTag == null ? throw new Exception("VideoTag not found") : videoTag;
         }
-
-
 
         public void AddVideoTag(VideoTag videoTag)
         {
-            _dbSet.Add(videoTag);
+            _context.VideoTags.Add(videoTag);
             _context.SaveChanges();
         }
 
         public void DeleteVideoTag(int id)
         {
-            VideoTag? videoTag = _dbSet.Find(id);
+            VideoTag? videoTag = _context.VideoTags.Find(id);
             if (videoTag != null)
             {
-                _dbSet.Remove(videoTag);
+                _context.VideoTags.Remove(videoTag);
                 _context.SaveChanges();
             }
         }
 
-        public bool IsVideoTagExist(int video_Id, int tag_Id)
+        public bool IsVideoTagExist(int videoId, int tagId)
         {
-           return _dbSet.Any(vt => vt.VideoId == video_Id && vt.TagId == tag_Id);
+            return _context.VideoTags.Any(vt => vt.VideoId == videoId && vt.TagId == tagId);
         }
     }
 }

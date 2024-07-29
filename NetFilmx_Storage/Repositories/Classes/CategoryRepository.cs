@@ -8,51 +8,52 @@ namespace NetFilmx_Storage.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
-        private readonly DbContext _context;
-        private readonly DbSet<Category> _dbSet;
+        private readonly NetFilmxDbContext _context;
+        
 
-        public CategoryRepository(DbContext context)
+        public CategoryRepository(NetFilmxDbContext context)
         {
             _context = context;
-            _dbSet = context.Set<Category>();
+           
         }
 
         public List<Category> GetCategories()
         {
-            return _dbSet.ToList();
+            return _context.Categories.ToList();
         }
 
         public Category GetCategoryById(int id)
         {
-            return _dbSet.Find(id);
+            Category? category = _context.Categories.Find(id);
+            return category == null ? throw new DataException("Category not found") : category;
         }
 
         public void AddCategory(Category category)
         {
-            _dbSet.Add(category);
+            _context.Categories.Add(category);
             _context.SaveChanges();
         }
 
         public void EditCategory(Category category)
         {
-            _dbSet.Attach(category);
+            _context.Categories.Attach(category);
             _context.Entry(category).State = EntityState.Modified;
             _context.SaveChanges();
         }
 
         public void DeleteCategory(int id)
         {
-            Category category = _dbSet.Find(id);
+            Category? category = _context.Categories.Find(id);
             if (category != null)
             {
-                _dbSet.Remove(category);
+                _context.Categories.Remove(category);
                 _context.SaveChanges();
             }
         }
 
         public bool IsCategoryExist(string name)
         {
-            return _dbSet.Any(c => c.Name == name);
+            return _context.Categories.Any(c => c.Name == name);
         }
     }
 }

@@ -1,60 +1,49 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NetFilmx_Storage.Entities;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 
 namespace NetFilmx_Storage.Repositories
 {
     public class VideoCategoryRepository : IVideoCategoryRepository
     {
-        private readonly DbContext _context;
-        private readonly DbSet<VideoCategory> _dbSet;
+        private readonly NetFilmxDbContext _context;
 
-        public VideoCategoryRepository(DbContext context)
+        public VideoCategoryRepository(NetFilmxDbContext context)
         {
             _context = context;
-            _dbSet = context.Set<VideoCategory>();
         }
 
         public List<VideoCategory> GetVideoCategoriesByVideoId(int videoId)
         {
-            return _dbSet.Where(vc => vc.VideoId == videoId).ToList();
+            return _context.VideoCategories.Where(vc => vc.VideoId == videoId).ToList();
         }
 
         public VideoCategory GetVideoCategoryByVideoIdCategoryId(int videoId, int categoryId)
         {
-            var videoCategory = _dbSet.Find(videoId, categoryId);
-            if (videoCategory == null)
-            {
-                throw new Exception("VideoCategory not found");
-            }
-            return videoCategory;
+            VideoCategory? videoCategory = _context.VideoCategories.Find(videoId, categoryId);
+            return videoCategory == null ? throw new Exception("VideoCategory not found") : videoCategory;
         }
-
 
         public void AddVideoCategory(VideoCategory videoCategory)
         {
-            _dbSet.Add(videoCategory);
+            _context.VideoCategories.Add(videoCategory);
             _context.SaveChanges();
         }
 
         public void DeleteVideoCategory(int id)
         {
-            VideoCategory? videoCategory = _dbSet.Find(id);
+            VideoCategory? videoCategory = _context.VideoCategories.Find(id);
             if (videoCategory != null)
             {
-                _dbSet.Remove(videoCategory);
+                _context.VideoCategories.Remove(videoCategory);
                 _context.SaveChanges();
             }
-       
         }
 
         public bool IsVideoCategoryExist(int videoId, int categoryId)
         {
-            return _dbSet.Any(vc => vc.VideoId == videoId && vc.CategoryId == categoryId);
+            return _context.VideoCategories.Any(vc => vc.VideoId == videoId && vc.CategoryId == categoryId);
         }
-
-
     }
 }

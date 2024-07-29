@@ -1,58 +1,56 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NetFilmx_Storage.Entities;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 
 namespace NetFilmx_Storage.Repositories
 {
     public class TagRepository : ITagRepository
     {
-        private readonly DbContext _context;
-        private readonly DbSet<Tag> _dbSet;
+        private readonly NetFilmxDbContext _context;
 
-        public TagRepository(DbContext context)
+        public TagRepository(NetFilmxDbContext context)
         {
             _context = context;
-            _dbSet = context.Set<Tag>();
         }
 
         public List<Tag> GetTags()
         {
-            return _dbSet.ToList();
+            return _context.Tags.ToList();
         }
 
         public Tag GetTagById(int id)
         {
-            return _dbSet.Find(id);
+            Tag? tag = _context.Tags.Find(id);
+            return tag == null ? throw new Exception("Tag not found") : tag;
         }
 
         public void AddTag(Tag tag)
         {
-            _dbSet.Add(tag);
+            _context.Tags.Add(tag);
             _context.SaveChanges();
         }
 
         public void EditTag(Tag tag)
         {
-            _dbSet.Attach(tag);
+            _context.Tags.Attach(tag);
             _context.Entry(tag).State = EntityState.Modified;
             _context.SaveChanges();
         }
 
         public void DeleteTag(int id)
         {
-            Tag? tag = _dbSet.Find(id);
+            Tag? tag = _context.Tags.Find(id);
             if (tag != null)
             {
-                _dbSet.Remove(tag);
+                _context.Tags.Remove(tag);
                 _context.SaveChanges();
             }
         }
 
         public bool IsTagExist(string name)
         {
-            return _dbSet.Any(c => c.Name == name);
+            return _context.Tags.Any(c => c.Name == name);
         }
     }
 }

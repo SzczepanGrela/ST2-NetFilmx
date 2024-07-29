@@ -1,51 +1,49 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NetFilmx_Storage.Entities;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 
 namespace NetFilmx_Storage.Repositories
 {
     public class CommentRepository : ICommentRepository
     {
-        private readonly DbContext _context;
-        private readonly DbSet<Comment> _dbSet;
+        private readonly NetFilmxDbContext _context;
 
-        public CommentRepository(DbContext context)
+        public CommentRepository(NetFilmxDbContext context)
         {
             _context = context;
-            _dbSet = context.Set<Comment>();
         }
 
         public List<Comment> GetCommentsByVideoId(int videoId)
         {
-            return _dbSet.Where(c => c.VideoId == videoId).ToList();
+            return _context.Comments.Where(c => c.VideoId == videoId).ToList();
         }
 
         public Comment GetCommentById(int id)
         {
-            return _dbSet.Find(id);
+            Comment? comment = _context.Comments.Find(id);
+            return comment == null ? throw new Exception("Comment not found") : comment;
         }
 
         public void AddComment(Comment comment)
         {
-            _dbSet.Add(comment);
+            _context.Comments.Add(comment);
             _context.SaveChanges();
         }
 
         public void EditComment(Comment comment)
         {
-            _dbSet.Attach(comment);
+            _context.Comments.Attach(comment);
             _context.Entry(comment).State = EntityState.Modified;
             _context.SaveChanges();
         }
 
         public void DeleteComment(int id)
         {
-            Comment comment = _dbSet.Find(id);
+            Comment? comment = _context.Comments.Find(id);
             if (comment != null)
             {
-                _dbSet.Remove(comment);
+                _context.Comments.Remove(comment);
                 _context.SaveChanges();
             }
         }

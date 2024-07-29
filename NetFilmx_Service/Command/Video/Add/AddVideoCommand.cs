@@ -11,7 +11,7 @@ namespace NetFilmx_Service.Command.Video.Add
 
         public string Title { get;}
 
-        public string? Description { get;}
+        public string Description { get;}= "-";
 
         public decimal Price { get;}
 

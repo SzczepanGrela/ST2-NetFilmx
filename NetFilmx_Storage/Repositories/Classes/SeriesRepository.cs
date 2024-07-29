@@ -1,60 +1,56 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NetFilmx_Storage.Entities;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 
 namespace NetFilmx_Storage.Repositories
 {
     public class SeriesRepository : ISeriesRepository
     {
-        private readonly DbContext _context;
-        private readonly DbSet<Series> _dbSet;
+        private readonly NetFilmxDbContext _context;
 
-        public SeriesRepository(DbContext context)
+        public SeriesRepository(NetFilmxDbContext context)
         {
             _context = context;
-            _dbSet = context.Set<Series>();
         }
 
-        public List<Series> GetSeries()
+        public List<Series> GetAllSeries()
         {
-            return _dbSet.ToList();
+            return _context.Series.ToList();
         }
 
         public Series GetSeriesById(int id)
         {
-            return _dbSet.Find(id);
+            Series? series = _context.Series.Find(id);
+            return series == null ? throw new Exception("Series not found") : series;
         }
 
         public void AddSeries(Series series)
         {
-            _dbSet.Add(series);
+            _context.Series.Add(series);
             _context.SaveChanges();
         }
 
         public void EditSeries(Series series)
         {
-            _dbSet.Attach(series);
+            _context.Series.Attach(series);
             _context.Entry(series).State = EntityState.Modified;
             _context.SaveChanges();
         }
 
         public void DeleteSeries(int id)
         {
-            Series series = _dbSet.Find(id);
+            Series? series = _context.Series.Find(id);
             if (series != null)
             {
-                _dbSet.Remove(series);
+                _context.Series.Remove(series);
                 _context.SaveChanges();
             }
         }
 
         public bool IsSeriesExist(string name)
         {
-            return _dbSet.Any(c => c.Name == name);
+            return _context.Series.Any(c => c.Name == name);
         }
-
-
     }
 }
