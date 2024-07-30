@@ -29,12 +29,13 @@ namespace NetFilmx_Service.Command.Tag.Delete
             try
             {
                 _repository.DeleteTag(command.Id);
+                return CResult.Ok();
             }
             catch (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
-            return CResult.Ok();
+            
 
         }
     }

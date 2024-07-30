@@ -25,15 +25,15 @@ namespace NetFilmx_Service.Command.User.Delete
 
             try
             {
-
                 _repository.DeleteUser(command.Id);
+                return CResult.Ok();
             }
             catch (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
 
-            return CResult.Ok();
+            
         }
 
 

@@ -39,12 +39,15 @@ namespace NetFilmx_Service.Command.User.Edit
                 user.UpdatedAt = DateTime.Now;
 
                 _repository.UpdateUser(user);
-            }catch(Exception ex)
+
+                return CResult.Ok();
+            }
+            catch(Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
 
-            return CResult.Ok();
+            
         }
 
     }

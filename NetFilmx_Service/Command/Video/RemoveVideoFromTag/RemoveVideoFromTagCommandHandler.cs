@@ -26,12 +26,13 @@ namespace NetFilmx_Service.Command.Video.RemoveVideoFromTag
             try
             {
                 _repository.RemoveVideoFromTag(command.VideoId, command.TagId);
+                return CResult.Ok();
             }
             catch (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
-            return CResult.Ok();
+            
         }
 
 

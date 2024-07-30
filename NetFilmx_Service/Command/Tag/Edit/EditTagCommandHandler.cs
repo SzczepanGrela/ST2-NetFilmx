@@ -34,16 +34,18 @@ namespace NetFilmx_Service.Command.Tag.Edit
             try
             {
                 var tag = _repository.GetTagById(command.Id);
-
                 tag.Name = command.Name;
 
                 _repository.UpdateTag(tag);
-            }catch (Exception ex)
+
+                return CResult.Ok();
+            }
+            catch (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
 
-            return CResult.Ok();
+            
         }
     }
 }

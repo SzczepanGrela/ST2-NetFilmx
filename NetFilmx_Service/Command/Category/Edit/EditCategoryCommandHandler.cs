@@ -35,14 +35,13 @@ namespace NetFilmx_Service.Command.Category.Edit
                 category.Description = command.Description;
 
                 _repository.UpdateCategory(category);
+                return CResult.Ok();
             }
             catch (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
 
-
-            return CResult.Ok();
         }
 
     }

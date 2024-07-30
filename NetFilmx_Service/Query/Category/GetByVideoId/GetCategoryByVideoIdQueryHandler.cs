@@ -27,12 +27,13 @@ namespace NetFilmx_Service.Query.Category.GetByVideoId
             {
                 var categories = _repository.GetCategoriesByVideoId(query.VideoId);
                 categoriesDto = _mapper.Map<List<TDto>>(categories);
+                return QResult<List<TDto>>.Ok(categoriesDto);
             }
             catch (Exception ex)
             {
                 return QResult<List<TDto>>.Fail(ex.Message);
             }
-            return QResult<List<TDto>>.Ok(categoriesDto);
+            
         }
     }
 }

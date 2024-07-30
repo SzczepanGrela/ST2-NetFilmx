@@ -26,18 +26,13 @@ namespace NetFilmx_Service.Command.Video.AddVideoToCategory
             try
             {            
                 _repository.AddVideoToCategory(command.CategoryId, command.VideoId);
-
+                return CResult.Ok();
             }
             catch
             (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
-
-            return CResult.Ok();
         }
-
-
-
     }
 }

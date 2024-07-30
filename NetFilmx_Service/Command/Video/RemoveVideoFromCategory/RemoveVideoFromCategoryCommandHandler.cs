@@ -27,12 +27,13 @@ namespace NetFilmx_Service.Command.Video.RemoveVideoFromCategory
             try
             {
                 _repository.RemoveVideoFromCategory(command.VideoId, command.CategoryId);
+                return CResult.Ok();
             }
             catch (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
-            return CResult.Ok();
+            
         }
 
 

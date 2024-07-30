@@ -24,19 +24,17 @@ namespace NetFilmx_Service.Command.Series.Delete
             {
                 return CResult.Fail("Command is null");
             }
-
             try
             {
                 _repository.DeleteSeries(command.Id);
+                return CResult.Ok();
             }
             catch (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
-            return CResult.Ok();
+            
         }
-
-
 
     }
 }

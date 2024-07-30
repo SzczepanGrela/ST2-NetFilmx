@@ -32,18 +32,14 @@ namespace NetFilmx_Service.Command.Category.Add
             try
             {
                 _repository.AddCategory(category);
+                return CResult.Ok();
             }
             catch (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
 
-            return CResult.Ok();
-
-
         }
-
-
 
     }
 }

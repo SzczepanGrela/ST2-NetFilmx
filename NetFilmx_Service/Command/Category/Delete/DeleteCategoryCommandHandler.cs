@@ -27,12 +27,13 @@ namespace NetFilmx_Service.Command.Category.Delete
             try
             {
                 _repository.DeleteCategory(command.Id);
+                return CResult.Ok();
             }
             catch (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
-            return CResult.Ok();
+            
         }
 
 

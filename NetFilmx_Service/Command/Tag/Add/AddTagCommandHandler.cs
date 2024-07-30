@@ -34,13 +34,14 @@ namespace NetFilmx_Service.Command.Tag.Add
             try
             {
                 _repository.AddTag(tag);
+                return CResult.Ok();
             }
             catch (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
 
-            return CResult.Ok();
+            
         }
 
 

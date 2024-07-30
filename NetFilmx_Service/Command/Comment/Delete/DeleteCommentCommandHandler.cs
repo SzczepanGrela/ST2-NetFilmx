@@ -28,12 +28,14 @@ namespace NetFilmx_Service.Command.Comment.Delete
             try
             {
                 _repository.DeleteComment(command.Id);
+
+                return CResult.Ok();
             }
             catch (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
-            return CResult.Ok();
+            
 
         }
 

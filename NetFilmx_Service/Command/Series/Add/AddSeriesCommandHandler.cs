@@ -34,15 +34,14 @@ namespace NetFilmx_Service.Command.Series.Add
             try
             {
                 _repository.AddSeries(series);
+                return CResult.Ok();
 
             }
             catch (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
-            return CResult.Ok();
         }
-
 
     }
 }

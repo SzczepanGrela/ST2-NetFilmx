@@ -30,12 +30,13 @@ namespace NetFilmx_Service.Query.Category.GetAll
             try
             {
                 categoriesDto = _mapper.Map<List<TDto>>(categories);
+                return QResult<List<TDto>>.Ok(categoriesDto);
             }
             catch (Exception ex)
             {
                 return QResult<List<TDto>>.Fail(ex.Message);
             }
-            return QResult<List<TDto>>.Ok(categoriesDto);
+            
         }
     }
 }

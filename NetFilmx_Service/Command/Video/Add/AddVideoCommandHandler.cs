@@ -35,12 +35,13 @@ namespace NetFilmx_Service.Command.Video.Add
             try
             {
                 _repository.AddVideo(video);
+                return CResult.Ok();
             }
             catch (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
-            return CResult.Ok();
+            
 
 
         }

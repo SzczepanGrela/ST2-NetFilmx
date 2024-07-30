@@ -37,18 +37,13 @@ namespace NetFilmx_Service.Command.Comment.Edit
                 comment.Content = command.Content;
                 comment.UpdatedAt = DateTime.Now;
 
-
                 _repository.UpdateComment(comment);
+                return CResult.Ok();
             }
             catch (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
-
-            return CResult.Ok();
-
         }
-
-
     }
 }

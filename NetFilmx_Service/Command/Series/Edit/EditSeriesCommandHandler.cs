@@ -29,7 +29,6 @@ namespace NetFilmx_Service.Command.Series.Edit
             {
                 return CResult.Fail(validation);
             }
-
             try
             {
                 var series = _repository.GetSeriesById(command.Id);         
@@ -40,16 +39,15 @@ namespace NetFilmx_Service.Command.Series.Edit
                 series.Description = command.Description;
 
                 _repository.UpdateSeries(series);
+
+                return CResult.Ok();
             }
             catch (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
-
-            return CResult.Ok();
+ 
         }
-
-
 
     }
 

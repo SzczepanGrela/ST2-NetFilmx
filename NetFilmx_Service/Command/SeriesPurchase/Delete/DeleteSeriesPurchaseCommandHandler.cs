@@ -22,17 +22,15 @@ namespace NetFilmx_Service.Command.SeriesPurchase.Delete
             {
                 throw new ArgumentNullException(nameof(command));
             }
-
             try
             {
                 _repository.DeleteSeriesPurchase(command.Id);
+                return CResult.Ok();
             }
             catch (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
-
-            return CResult.Ok();
 
         }
     }

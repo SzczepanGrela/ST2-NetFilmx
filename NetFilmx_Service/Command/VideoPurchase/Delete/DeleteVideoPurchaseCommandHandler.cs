@@ -26,13 +26,14 @@ namespace NetFilmx_Service.Command.VideoPurchase.Delete
             try
             {
                 _repository.DeleteVideoPurchase(command.Id);
+                return CResult.Ok();
             }
             catch (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
 
-            return CResult.Ok();
+            
         }
 
     }

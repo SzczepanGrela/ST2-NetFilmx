@@ -27,13 +27,14 @@ namespace NetFilmx_Service.Command.VideoPurchase.Add
             try
             {
                 _videoPurchaseRepository.AddVideoPurchase(videoPurchase);
+                return CResult.Ok();
             }
             catch (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
 
-            return CResult.Ok();
+            
 
         }
 

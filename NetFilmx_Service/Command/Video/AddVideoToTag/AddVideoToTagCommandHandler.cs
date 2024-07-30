@@ -22,17 +22,17 @@ namespace NetFilmx_Service.Command.Video.AddVideoToTag
             {
                 return CResult.Fail("Command is null");
             }
-
             try
             {
                 _repository.AddVideoToTag(command.VideoId, command.TagId);
+                return CResult.Ok();
             }
             catch (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
 
-            return CResult.Ok();
+            
         }
 
     }

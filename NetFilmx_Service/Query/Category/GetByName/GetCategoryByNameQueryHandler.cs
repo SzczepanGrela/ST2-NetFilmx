@@ -30,12 +30,13 @@ namespace NetFilmx_Service.Query.Category.GetByName
             try
             {
                 categoryDto = _mapper.Map<TDto>(category);
+                return QResult<TDto>.Ok(categoryDto);
             }
             catch (Exception ex)
             {
                 return QResult<TDto>.Fail(ex.Message);
             }
-            return QResult<TDto>.Ok(categoryDto);
+            
         }
     }
 }

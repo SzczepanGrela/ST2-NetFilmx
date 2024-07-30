@@ -27,13 +27,13 @@ namespace NetFilmx_Service.Command.SeriesPurchase.Add
             try
             {
                 _repository.AddSeriesPurchase(seriesPurchase);
-            }catch(Exception ex)
+
+                return CResult.Ok();
+            }
+            catch(Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
-
-            return CResult.Ok();
-
 
         }
 

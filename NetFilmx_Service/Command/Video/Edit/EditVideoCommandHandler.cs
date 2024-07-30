@@ -41,12 +41,13 @@ namespace NetFilmx_Service.Command.Video.Edit
                 video.ThumbnailUrl = command.Thumbnail_url;
 
                 _repository.UpdateVideo(video);
+                return CResult.Ok();
             }
             catch (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
-            return CResult.Ok();
+            
         }
 
 
