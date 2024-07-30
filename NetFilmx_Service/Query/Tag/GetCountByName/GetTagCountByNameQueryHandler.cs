@@ -1,0 +1,32 @@
+﻿using NetFilmx_Storage.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace NetFilmx_Service.Query.Tag.GetCountByName
+{
+    public sealed class GetTagCountByNameQueryHandler : IQueryHandler<GetTagCountByNameQuery, QResult<int>>
+    {
+        private readonly ITagRepository _repository;
+
+        public GetTagCountByNameQueryHandler(ITagRepository repository)
+        {
+            _repository = repository;
+        }
+
+        public QResult<int> Handle(GetTagCountByNameQuery query)
+        {
+            try
+            {
+                int count = _repository.GetTagCountByName(query.TagName);
+                return QResult<int>.Ok(count);
+            }
+            catch (Exception ex)
+            {
+                return QResult<int>.Fail(ex.Message);
+            }
+        }
+    }
+}
