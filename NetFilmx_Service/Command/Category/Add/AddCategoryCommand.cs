@@ -9,8 +9,8 @@ namespace NetFilmx_Service.Command.Category.Add
     public sealed class AddCategoryCommand : ICommand
     {
 
-        public string Name { get; set; }
-        public string? Description { get; set; } = "-";
+        public string Name { get;} = "default name";
+        public string? Description { get;} = "-";
        
     }
 }

@@ -9,10 +9,6 @@ namespace NetFilmx_Service.Command.Series.Delete
     public sealed class DeleteSeriesCommand : ICommand
     {
 
-        public DeleteSeriesCommand(int id)
-        {
-            Id = id;
-        }
 
         public int Id { get;}
 

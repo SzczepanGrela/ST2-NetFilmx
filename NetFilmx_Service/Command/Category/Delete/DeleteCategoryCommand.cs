@@ -9,10 +9,6 @@ namespace NetFilmx_Service.Command.Category.Delete
     public sealed class DeleteCategoryCommand : ICommand
     {
 
-        public DeleteCategoryCommand(int id)
-        {
-            Id = id;
-        }
 
         public int Id { get;}
 

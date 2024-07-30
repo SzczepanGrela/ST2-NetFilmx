@@ -18,25 +18,31 @@ namespace NetFilmx_Service.Command.User.EditUser
 
         public CResult Handle(EditUserCommand command)
         {
+
+            if (command == null)
+            {
+                return CResult.Fail("Command is null");
+            }
+
             var validation = new EditUserCommandValidator().Validate(command);
             if(!validation.IsValid)
             {
                 return CResult.Fail(validation.Errors.ToString());
-            }   
-
-            var user = _repository.GetUserById(command.Id);
-            if (user == null)
-            {
-                return CResult.Fail("User not found");
             }
+            try
+            {
+                var user = _repository.GetUserById(command.Id);
+               
+                user.Email = command.Email;
+                user.Username = command.Username;
+                user.SetPassword(command.Password);
+                user.UpdatedAt = DateTime.Now;
 
-
-            user.Email = command.Email;
-            user.Username = command.Username;
-            user.SetPassword(command.Password);
-            user.UpdatedAt = DateTime.Now;
-
-            _repository.UpdateUser(user);
+                _repository.UpdateUser(user);
+            }catch(Exception ex)
+            {
+                return CResult.Fail(ex.Message);
+            }
 
             return CResult.Ok();
         }

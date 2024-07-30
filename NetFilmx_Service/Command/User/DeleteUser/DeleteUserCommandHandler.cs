@@ -18,13 +18,19 @@ namespace NetFilmx_Service.Command.User.DeleteUser
 
         public CResult Handle(DeleteUserCommand command)
         {
-            var user = _repository.GetUserById(command.Id);
-            if (user == null)
+            if(command == null)
             {
-                return CResult.Fail("User not found");
+                return CResult.Fail("Command is null");
             }
 
-            _repository.DeleteUser(command.Id);
+            try
+            {
+                
+                _repository.DeleteUser(command.Id);
+            }catch(Exception ex)
+            {
+                return CResult.Fail(ex.Message);
+            }
 
             return CResult.Ok();
         }

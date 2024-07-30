@@ -15,13 +15,13 @@ namespace NetFilmx_Storage.Entities
             SeriesPurchases = new List<SeriesPurchase>();
         }
 
-        public Series(string name, decimal price, string description, DateTime createdAt, DateTime updatedAt) : this()
+        public Series(string name, decimal price, string description) : this()
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Price = price;
             Description = description;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
+            CreatedAt = DateTime.Now;
+            UpdatedAt = DateTime.Now;
         }
 
         [Required]

@@ -8,15 +8,11 @@ namespace NetFilmx_Service.Command.Series.Add
 {
     public sealed class AddSeriesCommand : ICommand
     {
-        public string Name { get; set; }
+        public string Name { get; }
 
-        public string? Description { get; set; }
+        public string? Description { get; }
 
-        public decimal Price { get; set; }
-
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-
-        public DateTime UpdatedAt { get; set; } = DateTime.Now;
+        public decimal Price { get; }
 
 
     }

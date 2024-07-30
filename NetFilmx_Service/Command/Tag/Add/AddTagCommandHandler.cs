@@ -18,23 +18,29 @@ namespace NetFilmx_Service.Command.Tag.Add
 
         public CResult Handle(AddTagCommand command)
         {
+            if (command == null)
+            {
+                return CResult.Fail("Command is null");
+            }
+
             var validationResult = new AddTagCommandValidator().Validate(command);
             if (!validationResult.IsValid)
             {
                 return CResult.Fail(validationResult);
             }
 
-            var isExist = _repository.IsTagExist(command.Name);
-            if (isExist)
-            {
-                return CResult.Fail("Tag already exist");
-            }
-
             var tag = new NetFilmx_Storage.Entities.Tag(command.Name);
 
-            _repository.AddTag(tag);
+            try
+            {
+                _repository.AddTag(tag);
+            }
+            catch (Exception ex)
+            {
+                return CResult.Fail(ex.Message);
+            }
 
-            return CResult.Ok(); 
+            return CResult.Ok();
         }
 
 

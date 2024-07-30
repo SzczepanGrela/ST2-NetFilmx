@@ -19,29 +19,38 @@ namespace NetFilmx_Service.Command.Video.Edit
 
         public CResult Handle(EditVideoCommand command)
         {
+            if (command == null)
+            {
+                return CResult.Fail("Command is null");
+            }
+
             var validation = new EditVideoCommandValidator().Validate(command);
             if (!validation.IsValid)
             {
                 return CResult.Fail(validation);
             }
-
-            var video = _repository.GetVideoById(command.Id);
-            if (video==null)
+            try
             {
-                return CResult.Fail("Video not found");
+                var video = _repository.GetVideoById(command.Id);
+
+
+                video.Price = command.Price;
+                video.Title = command.Title;
+                video.Description = command.Description;
+                video.VideoUrl = command.Video_url;
+                video.ThumbnailUrl = command.Thumbnail_url;
+
+                _repository.UpdateVideo(video);
             }
-
-            video.Price = command.Price;
-            video.Title = command.Title;
-            video.Description = command.Description;
-            video.VideoUrl = command.Video_url;
-            video.ThumbnailUrl = command.Thumbnail_url;
-
-            _repository.UpdateVideo(video);
+            catch (Exception ex)
+            {
+                return CResult.Fail(ex.Message);
+            }
             return CResult.Ok();
         }
 
-     
+
+
     }
-    
+
 }

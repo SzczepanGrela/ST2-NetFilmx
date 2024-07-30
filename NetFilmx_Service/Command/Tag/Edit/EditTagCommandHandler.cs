@@ -18,6 +18,12 @@ namespace NetFilmx_Service.Command.Tag.Edit
 
         public CResult Handle(EditTagCommand command)
         {
+            if (command == null)
+            {
+                return CResult.Fail("Command is null");
+            }
+            
+
             var validationResult = new EditTagCommandValidator().Validate(command);
 
             if (!validationResult.IsValid)
@@ -25,16 +31,17 @@ namespace NetFilmx_Service.Command.Tag.Edit
                 return CResult.Fail(validationResult);
             }
 
-            var tag = _repository.GetTagById(command.Id);
-
-            if (tag == null)
+            try
             {
-                return CResult.Fail("Tag not found");
+                var tag = _repository.GetTagById(command.Id);
+
+                tag.Name = command.Name;
+
+                _repository.UpdateTag(tag);
+            }catch (Exception ex)
+            {
+                return CResult.Fail(ex.Message);
             }
-
-            tag.Name = command.Name;           
-
-            _repository.UpdateTag(tag);
 
             return CResult.Ok();
         }

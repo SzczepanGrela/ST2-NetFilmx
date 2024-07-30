@@ -12,7 +12,7 @@ namespace NetFilmx_Service.Command.Category.Edit
     {
 
         public int maxNameLength { get; } = AddCategoryCommandValidator.maxNameLength;
-        int maxDescriptionLength { get; } = AddCategoryCommandValidator.maxDescriptionLength;
+        public int maxDescriptionLength { get; } = AddCategoryCommandValidator.maxDescriptionLength;
 
         public EditCategoryCommandValidator()
         {

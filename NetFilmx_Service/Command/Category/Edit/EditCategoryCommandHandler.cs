@@ -27,17 +27,20 @@ namespace NetFilmx_Service.Command.Category.Edit
                 return CResult.Fail(validationResult);
             }
 
-            var category = _repository.GetCategoryById(command.Id);
-
-            if (category == null)
+            try
             {
-                return CResult.Fail("Category not found");
+                var category = _repository.GetCategoryById(command.Id);
+
+                category.Name = command.Name;
+                category.Description = command.Description;
+
+                _repository.UpdateCategory(category);
+            }
+            catch (Exception ex)
+            {
+                return CResult.Fail(ex.Message);
             }
 
-            category.Name = command.Name;
-            category.Description = command.Description ?? "-";
-
-            _repository.UpdateCategory(category);
 
             return CResult.Ok();
         }

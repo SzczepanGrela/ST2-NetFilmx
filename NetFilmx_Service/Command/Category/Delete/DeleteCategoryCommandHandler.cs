@@ -19,14 +19,19 @@ namespace NetFilmx_Service.Command.Category.Delete
 
         public CResult Handle(DeleteCategoryCommand command)
         {
-            var category = _repository.GetCategoryById(command.Id);
-            if (category == null)
+            if (command == null)
             {
-                return CResult.Fail("Category not found");
+                return CResult.Fail("Command is null");
             }
 
-            _repository.DeleteCategory(command.Id);
-
+            try
+            {
+                _repository.DeleteCategory(command.Id);
+            }
+            catch (Exception ex)
+            {
+                return CResult.Fail(ex.Message);
+            }
             return CResult.Ok();
         }
 

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace NetFilmx_Service.Command.Series.Add
 {
-    public sealed class AddSeriesCommandHandler  : ICommandHandler<AddSeriesCommand>
+    public sealed class AddSeriesCommandHandler : ICommandHandler<AddSeriesCommand>
     {
 
         private readonly ISeriesRepository _repository;
@@ -19,23 +19,27 @@ namespace NetFilmx_Service.Command.Series.Add
 
         public CResult Handle(AddSeriesCommand command)
         {
+            if (command == null)
+            {
+                return CResult.Fail("Command is null");
+            }
             var validationResult = new AddSeriesCommandValidator().Validate(command);
+
             if (!validationResult.IsValid)
             {
                 return CResult.Fail(validationResult);
             }
 
-            var isExist = _repository.IsSeriesExist(command.Name);
-
-            if (isExist)
+            var series = new NetFilmx_Storage.Entities.Series(command.Name, command.Price, command.Description);
+            try
             {
-                return CResult.Fail("Series already exist");
+                _repository.AddSeries(series);
+
             }
-
-            var series = new NetFilmx_Storage.Entities.Series(command.Name, command.Price, command.Description, DateTime.Now, DateTime.Now);
-
-            _repository.AddSeries(series);
-
+            catch (Exception ex)
+            {
+                return CResult.Fail(ex.Message);
+            }
             return CResult.Ok();
         }
 

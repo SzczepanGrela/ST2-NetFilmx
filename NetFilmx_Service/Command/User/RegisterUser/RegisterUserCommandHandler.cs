@@ -18,23 +18,28 @@ namespace NetFilmx_Service.Command.User.RegisterUser
 
         public CResult Handle(RegisterUserCommand command)
         {
+            if(command == null)
+            {
+                return CResult.Fail("Command is null");
+            }
+
             var validation = new RegisterUserCommandValidator().Validate(command);
             if(!validation.IsValid)
             {
                 return CResult.Fail(validation.Errors.ToString());
             }
 
-            var isExist = _repository.IsUserExist(command.Username);
-            if (isExist != null)
+            try
             {
-                return CResult.Fail("User already exists");
+
+                var user = new NetFilmx_Storage.Entities.User(command.Username, command.Email, command.Password);
+
+
+                _repository.AddUser(user);
+            } catch(Exception ex)
+            {
+                return CResult.Fail(ex.Message);
             }
-
-
-            var user = new NetFilmx_Storage.Entities.User(command.Username, command.Email, command.Password);
-
-
-            _repository.AddUser(user);
 
             return CResult.Ok();
         }

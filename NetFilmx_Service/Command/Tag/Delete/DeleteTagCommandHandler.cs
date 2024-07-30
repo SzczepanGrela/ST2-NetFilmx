@@ -10,6 +10,7 @@ namespace NetFilmx_Service.Command.Tag.Delete
     internal class DeleteTagCommandHandler : ICommandHandler<DeleteTagCommand>
     {
 
+
         private readonly ITagRepository _repository;
 
         public DeleteTagCommandHandler(ITagRepository repository)
@@ -19,15 +20,20 @@ namespace NetFilmx_Service.Command.Tag.Delete
 
         public CResult Handle(DeleteTagCommand command)
         {
-           var tag = _repository.GetTagById(command.Id);
 
-            if(tag == null)
+            if (command == null)
             {
-                return CResult.Fail("Tag does not exist.");
+                return CResult.Fail("Command is null");
             }
-
-            _repository.DeleteTag(command.Id);
-
+          
+            try
+            {
+                _repository.DeleteTag(command.Id);
+            }
+            catch (Exception ex)
+            {
+                return CResult.Fail(ex.Message);
+            }
             return CResult.Ok();
 
         }

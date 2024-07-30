@@ -18,27 +18,33 @@ namespace NetFilmx_Service.Command.Series.Edit
 
         public CResult Handle(EditSeriesCommand command)
         {
+            if (command == null)
+            {
+                return CResult.Fail("Command is null");
+            }
 
             var validation = new EditSeriesCommandValidator().Validate(command);
 
-            if(!validation.IsValid)
+            if (!validation.IsValid)
             {
                 return CResult.Fail(validation);
             }
 
-            var series = _repository.GetSeriesById(command.Id);
-            if(series == null) 
+            try
             {
-                return CResult.Fail("Series does not exist.");
+                var series = _repository.GetSeriesById(command.Id);         
+
+                series.Name = command.Name;
+                series.Price = command.Price;
+                series.UpdatedAt = DateTime.Now;
+                series.Description = command.Description;
+
+                _repository.UpdateSeries(series);
             }
-
-            series.Name = command.Name;
-            series.Price = command.Price;
-            series.UpdatedAt = DateTime.Now;
-            series.Description = command.Description;
-
-            _repository.UpdateSeries(series);
-
+            catch (Exception ex)
+            {
+                return CResult.Fail(ex.Message);
+            }
 
             return CResult.Ok();
         }
@@ -46,5 +52,5 @@ namespace NetFilmx_Service.Command.Series.Edit
 
 
     }
-    
+
 }

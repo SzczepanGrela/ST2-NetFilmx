@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Command.Series.Delete
 {
-    public sealed class DeleteSeriesCommandHandler
+    public sealed class DeleteSeriesCommandHandler : ICommandHandler<DeleteSeriesCommand>
     {
         private readonly ISeriesRepository _repository;
 
@@ -20,15 +20,19 @@ namespace NetFilmx_Service.Command.Series.Delete
 
         public CResult Handle(DeleteSeriesCommand command)
         {
-            var move = _repository.GetSeriesById(command.Id);
-
-            if (move == null)
+            if (command == null)
             {
-                return CResult.Fail("Series does not exist.");
+                return CResult.Fail("Command is null");
             }
 
-            _repository.DeleteSeries(command.Id);
-
+            try
+            {
+                _repository.DeleteSeries(command.Id);
+            }
+            catch (Exception ex)
+            {
+                return CResult.Fail(ex.Message);
+            }
             return CResult.Ok();
         }
 

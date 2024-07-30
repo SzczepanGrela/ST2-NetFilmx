@@ -18,20 +18,28 @@ namespace NetFilmx_Service.Command.Video.Add
 
         public CResult Handle(AddVideoCommand command)
         {
+            if (command == null)
+            {
+                return CResult.Fail("Command is null");
+            }
+
             var validation = new AddVideoCommandValidator().Validate(command);
-            if(!validation.IsValid)
+            if (!validation.IsValid)
             {
                 return CResult.Fail(validation);
             }
 
-           // var isExist = _repository.IsVideoExist();
-           // I don't check if video exists, because we can have multiple videos with exact title
-
 
             var video = new NetFilmx_Storage.Entities.Video(command.Title, command.Description, command.Price, command.Video_url, command.Thumbnail_url);
 
-            _repository.AddVideo(video);
-
+            try
+            {
+                _repository.AddVideo(video);
+            }
+            catch (Exception ex)
+            {
+                return CResult.Fail(ex.Message);
+            }
             return CResult.Ok();
 
 

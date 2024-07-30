@@ -26,17 +26,19 @@ namespace NetFilmx_Service.Command.Category.Add
                 return CResult.Fail(validationResult);
             }
 
-            var isExist = _repository.IsCategoryExist(command.Name);
-            if (isExist)
-            {
-                return CResult.Fail("Category already exist");
-            }
-
+        
             var category = new NetFilmx_Storage.Entities.Category(command.Name, command.Description);
 
-            _repository.AddCategory(category);
+            try
+            {
+                _repository.AddCategory(category);
+            }
+            catch (Exception ex)
+            {
+                return CResult.Fail(ex.Message);
+            }
 
-            return CResult.Ok(); 
+            return CResult.Ok();
 
 
         }

@@ -10,10 +10,10 @@ namespace NetFilmx_Service.Command.Category.Edit
     public sealed class EditCategoryCommand : ICommand
     {
 
-        public string Name { get; set; }
-        public string? Description { get; set; }
+        public string Name { get;}
+        public string? Description { get;}
 
-        public int Id { get; set; }
+        public int Id { get;}
 
 
     }
