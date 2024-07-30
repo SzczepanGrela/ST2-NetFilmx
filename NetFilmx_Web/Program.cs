@@ -1,9 +1,12 @@
 using Microsoft.EntityFrameworkCore;
+using NetFilmx_Service.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddAutoMapper(typeof(CategoryMappingProfile));
 
 
 

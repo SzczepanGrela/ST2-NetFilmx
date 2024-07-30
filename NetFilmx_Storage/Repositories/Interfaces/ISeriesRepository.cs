@@ -19,6 +19,10 @@ namespace NetFilmx_Storage.Repositories
         bool IsSeriesExist(string seriesName);
         bool IsSeriesExist(int seriesId);
 
+
+        int GetSeriesCountById(int seriesId);
+        int GetSeriesCountByName(string seriesName);
+
         
     }
 }

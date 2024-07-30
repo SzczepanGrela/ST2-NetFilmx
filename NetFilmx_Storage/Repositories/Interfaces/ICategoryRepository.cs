@@ -18,5 +18,8 @@ namespace NetFilmx_Storage.Repositories
         
         bool IsCategoryExist(string categoryName);
         bool IsCategoryExist(int categoryId);
+
+        int GetCategoryCountById(int categoryId);
+        int GetCategoryCountByName(string categoryName);
     }
 }

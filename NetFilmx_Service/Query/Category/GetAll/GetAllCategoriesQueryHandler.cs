@@ -10,31 +10,10 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Category.GetAll
 {
-    public sealed class GetAllCategoriesQueryHandler : IQueryHandler<GetAllCategoriesQuery, QResult<CategoryDto>>
+    public sealed class GetAllCategoriesQueryHandler //: IQueryHandler<GetAllCategoriesQuery, QResult<CategoryListDto>>
     {
 
-        private readonly ICategoryRepository _categoryRepository;
-
-        private readonly IAdHocMapper _mapper;
-
-        public GetAllCategoriesQueryHandler(ICategoryRepository categoryRepository)
-        {
-            _categoryRepository = categoryRepository;
-        }
-
-
-        public QResult<CategoryDto> Handle(GetAllCategoriesQuery query)
-        {
-
-            List<CategoryDto> categories = new List<CategoryDto>();
-
-            var result = _categoryRepository.GetAllCategories();
-
-
-
-            throw new Exception("Not implemented yet");
-        }
-
+      
 
     }
 }

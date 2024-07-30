@@ -94,5 +94,20 @@ namespace NetFilmx_Storage.Repositories
         {
             return _context.Tags.Any(c => c.Id == tagId);
         }
+
+
+        public int GetTagCountById(int tagId)
+        {
+            return _context.Tags.Include(t => t.Videos).Where(t => t.Id == tagId).SelectMany(t => t.Videos).Count();
+        }
+
+        public int GetTagCountByName(string tagName)
+        {
+            return _context.Tags.Include(t => t.Videos).Where(t => t.Name == tagName).SelectMany(t => t.Videos).Count();
+        }
+
+
+
+
     }
 }

@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Dtos.Category
 {
-    internal class CategoryMapper : IMapper<CategoryDto>
+    public class CategoryListDto
     {
+        public CategoryListDto(string name)
+        {
+            Name = name;
+        }
+
+        public string Name { get; }
+
     }
 }

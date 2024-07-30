@@ -99,5 +99,19 @@ namespace NetFilmx_Storage.Repositories
         {
             return _context.Series.Any(c => c.Id == seriesId);
         }
+
+        public int GetSeriesCountById(int seriesId)
+        {
+            return _context.Series.Include(c => c.Videos).Where(s => s.Id == seriesId).SelectMany(s => s.Videos).Count();
+        }
+
+        public int GetSeriesCountByName(string seriesName)
+        {
+            return _context.Series.Include(c => c.Videos).Where(s => s.Name == seriesName).SelectMany(s => s.Videos).Count();
+        }
+
+
+
+
     }
 }

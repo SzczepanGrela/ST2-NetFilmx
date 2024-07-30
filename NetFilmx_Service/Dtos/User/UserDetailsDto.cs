@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Dtos.User
 {
-    public class UserDto
+    public class UserDetailsDto
     {
 
 
-        public UserDto(int id, string username, string email, DateTime createdAt, DateTime updatedAt)
+        public UserDetailsDto(int id, string username, string email, DateTime createdAt, DateTime updatedAt)
         {
             Id = id;
             Username = username;

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Dtos.Comment
 {
-    public class CommentDto
+    public class CommentDetailsDto
     {
-        public CommentDto(int id, int videoId, int userId, string content, DateTime createdAt, DateTime updatedAt)
+        public CommentDetailsDto(int id, int videoId, int userId, string content, DateTime createdAt, DateTime updatedAt)
         {
             Id = id;
             VideoId = videoId;
@@ -24,7 +24,7 @@ namespace NetFilmx_Service.Dtos.Comment
 
         public int UserId { get; }
 
-        public string Content { get; } = string.Empty;
+        public string Content { get; } 
 
         public DateTime CreatedAt { get; }
 

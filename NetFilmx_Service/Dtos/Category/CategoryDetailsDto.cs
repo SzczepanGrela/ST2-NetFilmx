@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Dtos.Category
 {
-    public class CategoryDto
+    public class CategoryDetailsDto
     {
 
-        public CategoryDto(int id, string name, string description)
+        public CategoryDetailsDto(int id, string name, string description)
         {
             Id = id;
             Name = name;

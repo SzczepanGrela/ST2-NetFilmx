@@ -4,23 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Dtos.Tag
+namespace NetFilmx_Service.Dtos.Comment
 {
-    public class TagDto
+    public class CommentEditDto
     {
 
-
-        public TagDto(int id, string name)
+        public CommentEditDto(int id, string content)
         {
-            Name = name;
             Id = id;
-
+            Content = content;
         }
 
-
-        public string Name { get; }
-
         public int Id { get; }
-
+        public string Content { get; }
     }
 }

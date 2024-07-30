@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Dtos.Series
 {
-    public class SeriesDto
+    public class SeriesDetailsDto
     {
 
-        public SeriesDto(int id, string name, string description, decimal priced, DateTime createdAt, DateTime updatedAt)
+        public SeriesDetailsDto(int id, string name, string description, decimal price, DateTime createdAt, DateTime updatedAt)
         {
             Id = id;
             Name = name;
             Description = description;
-            Priced = priced;
+            Price = price;
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
         }
@@ -25,7 +25,7 @@ namespace NetFilmx_Service.Dtos.Series
 
         public string Description { get; }
 
-        public decimal Priced { get; }
+        public decimal Price { get; }
 
         public DateTime CreatedAt { get; }
 

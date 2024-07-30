@@ -17,5 +17,8 @@ namespace NetFilmx_Storage.Repositories
        
         bool IsTagExist(int tagId);
         bool IsTagExist(string tagName);
+
+        int GetTagCountById(int tagId);
+        int GetTagCountByName(string tagName);
     }
 }

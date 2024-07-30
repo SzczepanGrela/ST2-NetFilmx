@@ -8,7 +8,7 @@ namespace NetFilmx_Service.Dtos.Like
 {
     public class LikeDto
     {
-
+        // not sure if ill use it, but made just in case
         public LikeDto(int id, int videoId, int userId, DateTime createdAt)
         {
             Id = id;
