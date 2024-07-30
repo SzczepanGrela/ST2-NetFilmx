@@ -19,11 +19,31 @@ namespace NetFilmx_Storage.Repositories
             return _context.Series.ToList();
         }
 
-        public Series GetSeriesById(int id)
+        public List<Series> GetSeriesByVideoId(int videoId)
         {
-            Series? series = _context.Series.Find(id);
+            return _context.Videos.Where(v => v.Id == videoId).SelectMany(v => v.Series).ToList();
+
+        }
+
+        public List<Series> GetBoughtSeriesByUserId(int userId)
+        {
+            return _context.Series.Include(s => s.SeriesPurchases).Where(s => s.SeriesPurchases.Any(p => p.UserId == userId)).ToList();
+        }
+
+
+
+        public Series GetSeriesById(int seriesId)
+        {
+            Series? series = _context.Series.Find(seriesId);
             return series == null ? throw new Exception("Series not found") : series;
         }
+
+        public Series GetSeriesByName(string seriesName)
+        {
+            Series? series = _context.Series.FirstOrDefault(c => c.Name == seriesName);
+            return series == null ? throw new Exception("Series not found") : series;
+        }
+
 
         public void AddSeries(Series series)
         {
@@ -31,16 +51,16 @@ namespace NetFilmx_Storage.Repositories
             _context.SaveChanges();
         }
 
-        public void EditSeries(Series series)
+        public void UpdateSeries(Series series)
         {
             _context.Series.Attach(series);
             _context.Entry(series).State = EntityState.Modified;
             _context.SaveChanges();
         }
 
-        public void DeleteSeries(int id)
+        public void DeleteSeries(int seriesId)
         {
-            Series? series = _context.Series.Find(id);
+            Series? series = _context.Series.Find(seriesId);
             if (series != null)
             {
                 _context.Series.Remove(series);
@@ -48,9 +68,14 @@ namespace NetFilmx_Storage.Repositories
             }
         }
 
-        public bool IsSeriesExist(string name)
+        public bool IsSeriesExist(string seriesName)
         {
-            return _context.Series.Any(c => c.Name == name);
+            return _context.Series.Any(c => c.Name == seriesName);
+        }
+
+        public bool IsSeriesExist(int seriesId)
+        {
+            return _context.Series.Any(c => c.Id == seriesId);
         }
     }
 }

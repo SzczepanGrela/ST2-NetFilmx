@@ -34,7 +34,7 @@ namespace NetFilmx_Service.Command.Tag.Edit
 
             tag.Name = command.Name;           
 
-            _repository.EditTag(tag);
+            _repository.UpdateTag(tag);
 
             return CResult.Ok();
         }

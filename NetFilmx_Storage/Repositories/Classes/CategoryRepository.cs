@@ -17,16 +17,29 @@ namespace NetFilmx_Storage.Repositories
            
         }
 
-
-
         public List<Category> GetAllCategories()
         {
             return _context.Categories.ToList();
         }
 
-        public Category GetCategoryById(int id)
+        public List<Category> GetCategoriesByVideoId(int videoId)
         {
-            Category? category = _context.Categories.Find(id);
+           var videos = _context.Videos.Where(v => v.Id == videoId).Include(v => v.Categories).ToList();
+            return videos.SelectMany(v => v.Categories).ToList();
+
+        }
+
+        public Category GetCategoryByName(string categoryName)
+        {
+            Category? category = _context.Categories.FirstOrDefault(c => c.Name == categoryName);
+            return category == null ? throw new DataException("Category not found") : category;
+        }
+        
+
+
+        public Category GetCategoryById(int categoryId)
+        {
+            Category? category = _context.Categories.Find(categoryId);
             return category == null ? throw new DataException("Category not found") : category;
         }
 
@@ -39,16 +52,16 @@ namespace NetFilmx_Storage.Repositories
             _context.SaveChanges();
         }
 
-        public void EditCategory(Category category)
+        public void UpdateCategory(Category category)
         {
             _context.Categories.Attach(category);
             _context.Entry(category).State = EntityState.Modified;
             _context.SaveChanges();
         }
 
-        public void DeleteCategory(int id)
+        public void DeleteCategory(int categoryId)
         {
-            Category? category = _context.Categories.Find(id);
+            Category? category = _context.Categories.Find(categoryId);
             if (category != null)
             {
                 _context.Categories.Remove(category);
@@ -56,9 +69,14 @@ namespace NetFilmx_Storage.Repositories
             }
         }
 
-        public bool IsCategoryExist(string name)
+        public bool IsCategoryExist(string categoryName)
         {
-            return _context.Categories.Any(c => c.Name == name);
+            return _context.Categories.Any(c => c.Name == categoryName);
+        }
+
+        public bool IsCategoryExist(int categoryId)
+        {
+            return _context.Categories.Any(c => c.Id == categoryId);
         }
     }
 }

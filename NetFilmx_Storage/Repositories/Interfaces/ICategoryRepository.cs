@@ -6,15 +6,17 @@ namespace NetFilmx_Storage.Repositories
     public interface ICategoryRepository
     {
         List<Category> GetAllCategories();
+        List<Category> GetCategoriesByVideoId(int videoId);
 
-        Category GetCategoryById(int id);
+        Category GetCategoryById(int categoryId);
+        Category GetCategoryByName(string categoryName);
 
-        
-
+      
         void AddCategory(Category category);
-        void EditCategory(Category category);
-        void DeleteCategory(int id);
-
-        bool IsCategoryExist(string Name);
+        void UpdateCategory(Category category);
+        void DeleteCategory(int categoryId);
+        
+        bool IsCategoryExist(string categoryName);
+        bool IsCategoryExist(int categoryId);
     }
 }

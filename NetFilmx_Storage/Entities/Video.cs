@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NetFilmx_Storage.Entities
 {
-    [Table("Videos", Schema = "NetFilmx_noweEntities")]
+    [Table("Videos", Schema = "NetFilmx_dodaneZakupy")]
     public class Video : BaseEntity
     {
         internal Video()
@@ -16,6 +16,7 @@ namespace NetFilmx_Storage.Entities
             Categories = new List<Category>();
             Tags = new List<Tag>();
             Series = new List<Series>();
+            VideoPurchases = new List<VideoPurchase>();
         }
 
         public Video(string title, string description, decimal price, string videoUrl, string? thumbnailUrl = null) : this()
@@ -54,19 +55,28 @@ namespace NetFilmx_Storage.Entities
         [Required]
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
-        
+
+        [InverseProperty(nameof(Like.Video))]
         public virtual ICollection<Like> Likes { get; set; }
 
-        
+
+        [InverseProperty(nameof(Comment.Video))]
         public virtual ICollection<Comment> Comments { get; set; }
 
-        
+
+        [InverseProperty(nameof(Category.Videos))]
         public virtual ICollection<Category> Categories { get; set; }
 
-        
+
+        [InverseProperty(nameof(Tag.Videos))]
         public virtual ICollection<Tag> Tags { get; set; }
 
-        
+
+        [InverseProperty(nameof(Entities.Series.Videos))]
         public virtual ICollection<Series> Series { get; set; }
+
+
+        [InverseProperty(nameof(VideoPurchase.Video))]
+        public virtual ICollection<VideoPurchase> VideoPurchases { get; set; }
     }
 }

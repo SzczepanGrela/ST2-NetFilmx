@@ -5,10 +5,14 @@ namespace NetFilmx_Storage.Repositories
 {
     public interface ICommentRepository
     {
+        List<Comment> GetAllComments();
         List<Comment> GetCommentsByVideoId(int videoId);
-        Comment GetCommentById(int id);
+        List<Comment> GetCommentsByUserId(int userId);
+        Comment GetCommentById(int commentId);
         void AddComment(Comment comment);
-        void EditComment(Comment comment);
-        void DeleteComment(int id);
+        void UpdateComment(Comment comment);
+        void DeleteComment(int commentId);
+
+        bool IsCommentExist(int commentId);
     }
 }

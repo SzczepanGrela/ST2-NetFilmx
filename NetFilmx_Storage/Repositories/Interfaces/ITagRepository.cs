@@ -5,12 +5,17 @@ namespace NetFilmx_Storage.Repositories
 {
     public interface ITagRepository
     {
-        List<Tag> GetTags();
-        Tag GetTagById(int id);
+        List<Tag> GetAllTags();
+        List<Tag> GetTagsByVideoId(int videoId);
+
+        Tag GetTagById(int tagId);
+        Tag GetTagByName(string tagName);
+
         void AddTag(Tag tag);
-        void EditTag(Tag tag);
-        void DeleteTag(int id);
+        void UpdateTag(Tag tag);
+        void DeleteTag(int tagId);
        
-        bool IsTagExist(string Name);
+        bool IsTagExist(int tagId);
+        bool IsTagExist(string tagName);
     }
 }

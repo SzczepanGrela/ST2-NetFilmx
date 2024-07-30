@@ -37,7 +37,7 @@ namespace NetFilmx_Service.Command.Video.Edit
             video.VideoUrl = command.Video_url;
             video.ThumbnailUrl = command.Thumbnail_url;
 
-            _repository.EditVideo(video);
+            _repository.UpdateVideo(video);
             return CResult.Ok();
         }
 

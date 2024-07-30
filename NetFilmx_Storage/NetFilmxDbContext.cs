@@ -19,12 +19,16 @@ namespace NetFilmx_Storage
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Like> Likes { get; set; }
         public DbSet<Series> Series { get; set; }
+        public DbSet<VideoPurchase> VideoPurchases { get; set; }
+        public DbSet<SeriesPurchase> SeriesPurchases { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             // Many-to-Many relationships
+
+
             modelBuilder.Entity<Video>()
                 .HasMany(v => v.Tags)
                 .WithMany(t => t.Videos)
@@ -72,6 +76,29 @@ namespace NetFilmx_Storage
                 .HasOne(c => c.User)
                 .WithMany(u => u.Comments)
                 .HasForeignKey(c => c.UserId);
+
+            modelBuilder.Entity<VideoPurchase>()
+                .HasOne(uvp => uvp.User)
+                .WithMany(u => u.VideoPurchases)
+                .HasForeignKey(uvp => uvp.UserId);
+
+            modelBuilder.Entity<VideoPurchase>()
+                .HasOne(uvp => uvp.Video)
+                .WithMany(v => v.VideoPurchases)
+                .HasForeignKey(uvp => uvp.VideoId);
+
+
+            modelBuilder.Entity<SeriesPurchase>()
+                .HasOne(usp => usp.User)
+                .WithMany(u => u.SeriesPurchases)
+                .HasForeignKey(usp => usp.UserId);
+
+            modelBuilder.Entity<SeriesPurchase>()
+                .HasOne(usp => usp.Series)
+                .WithMany(s => s.SeriesPurchases)
+                .HasForeignKey(usp => usp.SeriesId);
+
+
 
             DataSeeder.SeedData(modelBuilder);
         }

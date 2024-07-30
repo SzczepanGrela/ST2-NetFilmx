@@ -141,7 +141,8 @@ namespace NetFilmx_Storage
             var users = new[]
             {
                 new User { Id = 1, Username = "User1", Email = "user1@example.com", PasswordHash = BCrypt.Net.BCrypt.HashPassword("User1"), CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
-                new User { Id = 2, Username = "User2", Email = "user2@example.com", PasswordHash = BCrypt.Net.BCrypt.HashPassword("User2"), CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now }
+                new User { Id = 2, Username = "User2", Email = "user2@example.com", PasswordHash = BCrypt.Net.BCrypt.HashPassword("User2"), CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                new User { Id = 3, Username = "User3", Email = "user3@example.com", PasswordHash = BCrypt.Net.BCrypt.HashPassword("User3"), CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
             };
 
             var comments = new[]
@@ -155,6 +156,24 @@ namespace NetFilmx_Storage
                 new Like { Id = 1, VideoId = 1, UserId = 1, CreatedAt = DateTime.Now },
                 new Like { Id = 2, VideoId = 2, UserId = 2, CreatedAt = DateTime.Now }
             };
+
+            var VideoPurchases = new[]
+            {
+            new VideoPurchase { Id = 1, UserId = 2, VideoId = 4, PurchaseDate = DateTime.Now },
+            new VideoPurchase { Id = 2, UserId = 3, VideoId = 5, PurchaseDate = DateTime.Now },
+            };
+
+            var SeriesPurchases = new[]
+            {
+            new SeriesPurchase { Id = 1, UserId = 1, SeriesId = 1, PurchaseDate = DateTime.Now },
+            new SeriesPurchase { Id = 2, UserId = 1, SeriesId = 2, PurchaseDate = DateTime.Now },
+            new SeriesPurchase { Id = 3, UserId = 1, SeriesId = 3, PurchaseDate = DateTime.Now },
+            new SeriesPurchase { Id = 4, UserId = 1, SeriesId = 4, PurchaseDate = DateTime.Now },
+            new SeriesPurchase { Id = 5, UserId = 2, SeriesId = 2, PurchaseDate = DateTime.Now }
+            };
+
+
+
 
             var videoTags = new[]
             {
@@ -229,6 +248,8 @@ namespace NetFilmx_Storage
             modelBuilder.Entity<User>().HasData(users);
             modelBuilder.Entity<Comment>().HasData(comments);
             modelBuilder.Entity<Like>().HasData(likes);
+            modelBuilder.Entity<VideoPurchase>().HasData(VideoPurchases);
+            modelBuilder.Entity<SeriesPurchase>().HasData(SeriesPurchases);
             modelBuilder.Entity("VideoTag").HasData(videoTags);
             modelBuilder.Entity("VideoCategory").HasData(videoCategories);
             modelBuilder.Entity("VideoSeries").HasData(videoSeries);

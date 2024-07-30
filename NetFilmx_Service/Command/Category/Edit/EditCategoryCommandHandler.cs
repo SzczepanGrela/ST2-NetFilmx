@@ -37,7 +37,7 @@ namespace NetFilmx_Service.Command.Category.Edit
             category.Name = command.Name;
             category.Description = command.Description ?? "-";
 
-            _repository.EditCategory(category);
+            _repository.UpdateCategory(category);
 
             return CResult.Ok();
         }

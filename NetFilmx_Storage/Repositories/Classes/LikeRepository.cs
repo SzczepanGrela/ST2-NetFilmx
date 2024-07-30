@@ -25,6 +25,13 @@ namespace NetFilmx_Storage.Repositories
             return like == null ? throw new Exception("Like not found") : like;
         }
 
+
+        public int GetLikesCountByVideoId(int videoId)
+        {
+            return _context.Likes.Count(l => l.VideoId == videoId);
+        }
+
+
         public void AddLike(Like like)
         {
             _context.Likes.Add(like);

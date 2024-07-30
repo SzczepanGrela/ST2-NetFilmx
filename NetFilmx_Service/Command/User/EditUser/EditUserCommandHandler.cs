@@ -36,7 +36,7 @@ namespace NetFilmx_Service.Command.User.EditUser
             user.SetPassword(command.Password);
             user.UpdatedAt = DateTime.Now;
 
-            _repository.EditUser(user);
+            _repository.UpdateUser(user);
 
             return CResult.Ok();
         }

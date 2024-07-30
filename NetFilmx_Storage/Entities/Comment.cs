@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NetFilmx_Storage.Entities
 {
-    [Table("Comments", Schema = "NetFilmx_noweEntities")]
+    [Table("Comments", Schema = "NetFilmx_dodaneZakupy")]
     public class Comment : BaseEntity
     {
         internal Comment() { }

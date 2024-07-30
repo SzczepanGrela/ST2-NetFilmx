@@ -37,7 +37,7 @@ namespace NetFilmx_Service.Command.Series.Edit
             series.UpdatedAt = DateTime.Now;
             series.Description = command.Description;
 
-            _repository.EditSeries(series);
+            _repository.UpdateSeries(series);
 
 
             return CResult.Ok();

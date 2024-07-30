@@ -14,9 +14,19 @@ namespace NetFilmx_Storage.Repositories
             _context = context;
         }
 
+        public List<Comment> GetAllComments()
+        {
+            return _context.Comments.ToList();
+        }
+
         public List<Comment> GetCommentsByVideoId(int videoId)
         {
             return _context.Comments.Where(c => c.VideoId == videoId).ToList();
+        }
+        
+        public List<Comment> GetCommentsByUserId(int userId)
+        {
+            return _context.Comments.Where(c => c.UserId == userId).ToList();
         }
 
         public Comment GetCommentById(int id)
@@ -31,7 +41,7 @@ namespace NetFilmx_Storage.Repositories
             _context.SaveChanges();
         }
 
-        public void EditComment(Comment comment)
+        public void UpdateComment(Comment comment)
         {
             _context.Comments.Attach(comment);
             _context.Entry(comment).State = EntityState.Modified;
@@ -46,6 +56,11 @@ namespace NetFilmx_Storage.Repositories
                 _context.Comments.Remove(comment);
                 _context.SaveChanges();
             }
+        }
+
+        public bool IsCommentExist(int commentId)
+        {
+            return _context.Comments.Any(c => c.Id == commentId);
         }
     }
 }

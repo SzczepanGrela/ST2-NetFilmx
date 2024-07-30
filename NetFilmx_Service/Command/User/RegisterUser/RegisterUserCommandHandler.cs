@@ -24,7 +24,7 @@ namespace NetFilmx_Service.Command.User.RegisterUser
                 return CResult.Fail(validation.Errors.ToString());
             }
 
-            var isExist = _repository.GetUserByUsername().FirstOrDefault(x => x.Username == command.Username);
+            var isExist = _repository.IsUserExist(command.Username);
             if (isExist != null)
             {
                 return CResult.Fail("User already exists");

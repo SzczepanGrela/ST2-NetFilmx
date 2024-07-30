@@ -3,16 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 
 namespace NetFilmx_Storage.Entities
 {
-    [Table("Series", Schema = "NetFilmx_noweEntities")]
+    [Table("Series", Schema = "NetFilmx_dodaneZakupy")]
     public class Series : BaseEntity
     {
         internal Series()
         {
             Videos = new List<Video>();
+            SeriesPurchases = new List<SeriesPurchase>();
         }
 
         public Series(string name, decimal price, string description, DateTime createdAt, DateTime updatedAt) : this()
@@ -40,9 +40,12 @@ namespace NetFilmx_Storage.Entities
         [Required]
         public DateTime UpdatedAt { get; set; }
 
-       
+        
+        [InverseProperty(nameof(Video.Series))]
         public virtual ICollection<Video> Videos { get; set; }
 
-        
+
+        [InverseProperty(nameof(SeriesPurchase.Series))]
+        public virtual ICollection<SeriesPurchase> SeriesPurchases { get; set; }
     }
 }
