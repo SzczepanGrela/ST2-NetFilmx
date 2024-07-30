@@ -19,7 +19,6 @@ namespace NetFilmx_Service.Command.Video.Add
 
         public string? Thumbnail_url { get;}
 
-        public int Views { get; } = 0;
 
 
     }

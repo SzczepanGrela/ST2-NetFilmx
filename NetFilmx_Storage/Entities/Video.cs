@@ -1,4 +1,5 @@
-﻿using NetFilmx_Storage.Common;
+﻿using Microsoft.Identity.Client;
+using NetFilmx_Storage.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -35,9 +36,11 @@ namespace NetFilmx_Storage.Entities
         public string Title { get; set; }
 
         [MaxLength(2000)]
-        public string Description { get; set; } = "-";
+        public string? Description { get; set; }
 
+        [Required]
         [Column(TypeName = "decimal(18, 2)")]
+        [Range(0, 10001)]
         public decimal Price { get; set; } = 0;
 
         [Required]
@@ -45,8 +48,10 @@ namespace NetFilmx_Storage.Entities
         public string VideoUrl { get; set; }
 
         [MinLength(3)]
-        public string? ThumbnailUrl { get; set; }
+        [Required]
+        public string ThumbnailUrl { get; set; } = "www.example.img";
 
+        [Required]
         public int Views { get; set; } = 0;
 
         [Required]

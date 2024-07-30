@@ -4,11 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Command.User.EditUser
+namespace NetFilmx_Service.Dtos.User
 {
-    public sealed class EditUserCommand : ICommand
+    public class UserAddDto
     {
-        public int Id { get; }
+        public UserAddDto(string username, string email, string password)
+        {
+            Username = username;
+            Email = email;
+            Password = password;
+        }
+
         public string Username { get; }
 
         public string Email { get; }

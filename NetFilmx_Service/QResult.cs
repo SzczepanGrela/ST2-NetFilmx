@@ -9,7 +9,7 @@
 
         public T Data { get; }
 
-        public static QResult<T> Success(T data)
+        public static QResult<T> Ok(T data)
             => new QResult<T>(true, "", Enumerable.Empty<Error>(), data);
 
         public static QResult<T> Fail(string message, IEnumerable<Error> errors = null)

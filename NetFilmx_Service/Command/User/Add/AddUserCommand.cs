@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Command.User.RegisterUser
+namespace NetFilmx_Service.Command.User.Add
 {
-    public sealed class RegisterUserCommand : ICommand
+    public sealed class AddUserCommand : ICommand
     {
        
 

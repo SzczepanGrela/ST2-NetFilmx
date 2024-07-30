@@ -1,29 +1,28 @@
 ﻿using FluentValidation;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NetFilmx_Service.Command.User.RegisterUser;
 
-namespace NetFilmx_Service.Command.User.EditUser
+namespace NetFilmx_Service.Command.User.Add
 {
-    public sealed class EditUserCommandValidator : AbstractValidator<EditUserCommand>
+    public sealed class AddUserCommandValidator : AbstractValidator<AddUserCommand>
     {
-        public static int maxUsernameLength { get; } = RegisterUserCommandValidator.maxUsernameLength;
+        public static int maxUsernameLength { get; } = 50;
 
-        public static int minUsernameLength { get; } = RegisterUserCommandValidator.minUsernameLength;
+        public static int minUsernameLength { get; } = 3;
 
-        public static int maxEmailLength { get; } = RegisterUserCommandValidator.maxEmailLength;
+        public static int maxEmailLength { get; } = 50;
 
-        public static int minEmailLength { get; } = RegisterUserCommandValidator.minEmailLength;
+        public static int minEmailLength { get; } = 5;
 
-        public static int maxPasswordLength { get; } = RegisterUserCommandValidator.maxPasswordLength;
+        public static int maxPasswordLength { get; } = 50;
 
-        public static int minPasswordLength { get; } = RegisterUserCommandValidator.minPasswordLength;
+        public static int minPasswordLength { get; } = 5;
 
-
-        public EditUserCommandValidator()
+        public AddUserCommandValidator()
         {
             RuleFor(x => x.Username).NotEmpty().WithMessage("Username is required").MaximumLength(maxUsernameLength).
                 WithMessage($"Username must be less than {maxUsernameLength} characters").MinimumLength(minUsernameLength).WithMessage($"Username must be more than {minUsernameLength} characters");
@@ -34,5 +33,6 @@ namespace NetFilmx_Service.Command.User.EditUser
             RuleFor(x => x.Password).NotEmpty().WithMessage("Password is required").MaximumLength(maxPasswordLength).WithMessage($"Password must be less than {maxPasswordLength} characters").
                 MinimumLength(minPasswordLength).WithMessage($"Password must be more than {minPasswordLength} characters");
         }
+
     }
 }

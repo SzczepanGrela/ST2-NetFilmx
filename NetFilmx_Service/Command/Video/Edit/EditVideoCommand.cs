@@ -19,9 +19,6 @@ namespace NetFilmx_Service.Command.Video.Edit
 
         public string? Thumbnail_url { get; }
 
-       
-
-
 
     }
 }

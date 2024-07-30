@@ -13,7 +13,7 @@ namespace NetFilmx_Storage.Entities
             Videos= new List<Video>();
         }
 
-        public Category(string name, string description) : this()
+        public Category(string name, string? description) : this()
         {
             Name = name;
             Description = description;
@@ -25,7 +25,8 @@ namespace NetFilmx_Storage.Entities
         public string Name { get; set; }
 
         [MaxLength(2000)]
-        public string Description { get; set; }
+        
+        public string? Description { get; set; }
 
          
         public virtual ICollection<Video> Videos { get; set; }

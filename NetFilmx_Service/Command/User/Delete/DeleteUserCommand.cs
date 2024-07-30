@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Command.User.DeleteUser
+namespace NetFilmx_Service.Command.User.Delete
 {
     public sealed class DeleteUserCommand : ICommand
     {

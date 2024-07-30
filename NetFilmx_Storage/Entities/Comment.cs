@@ -24,17 +24,18 @@ namespace NetFilmx_Storage.Entities
         public int VideoId { get; set; }
 
         [ForeignKey(nameof(VideoId))]
-        [InverseProperty("Comments")]
+        [InverseProperty(nameof(Video.Comments))]
         public virtual Video Video { get; set; }
 
         [Required]
         public int UserId { get; set; }
 
         [ForeignKey(nameof(UserId))]
-        [InverseProperty("Comments")]
+        [InverseProperty(nameof(User.Comments))]
         public virtual User User { get; set; }
 
         [Required]
+        [MaxLength(500)]
         public string Content { get; set; }
 
         [Required]

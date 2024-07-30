@@ -15,7 +15,7 @@ namespace NetFilmx_Storage.Entities
             SeriesPurchases = new List<SeriesPurchase>();
         }
 
-        public Series(string name, decimal price, string description) : this()
+        public Series(string name, decimal price, string? description) : this()
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Price = price;
@@ -28,11 +28,14 @@ namespace NetFilmx_Storage.Entities
         [MaxLength(128)]
         public string Name { get; set; }
 
+        [Required]
         [Column(TypeName = "decimal(18, 2)")]
+        [Range(0, 10001)]
         public decimal Price { get; set; } = 0;
 
         [MaxLength(2000)]
-        public string Description { get; set; } = "-";
+        
+        public string? Description { get; set; } 
 
         [Required]
         public DateTime CreatedAt { get; set; }

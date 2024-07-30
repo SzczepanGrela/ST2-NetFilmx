@@ -1,29 +1,30 @@
-﻿using NetFilmx_Storage.Repositories;
+﻿using NetFilmx_Service.Command.User.Add;
+using NetFilmx_Storage.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Command.User.RegisterUser
+namespace NetFilmx_Service.Command.User.RegisterUser.Add
 {
-    public sealed class RegisterUserCommandHandler : ICommandHandler<RegisterUserCommand>
+    public sealed class AddUserCommandHandler : ICommandHandler<AddUserCommand>
     {
         private readonly IUserRepository _repository;
 
-        public RegisterUserCommandHandler(IUserRepository repository)
+        public AddUserCommandHandler(IUserRepository repository)
         {
             _repository = repository;
         }
 
-        public CResult Handle(RegisterUserCommand command)
+        public CResult Handle(AddUserCommand command)
         {
             if(command == null)
             {
                 return CResult.Fail("Command is null");
             }
 
-            var validation = new RegisterUserCommandValidator().Validate(command);
+            var validation = new AddUserCommandValidator().Validate(command);
             if(!validation.IsValid)
             {
                 return CResult.Fail(validation.Errors.ToString());

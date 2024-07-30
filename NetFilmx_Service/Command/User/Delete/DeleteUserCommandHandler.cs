@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Command.User.DeleteUser
+namespace NetFilmx_Service.Command.User.Delete
 {
     public sealed class DeleteUserCommandHandler : ICommandHandler<DeleteUserCommand>
     {
@@ -18,16 +18,17 @@ namespace NetFilmx_Service.Command.User.DeleteUser
 
         public CResult Handle(DeleteUserCommand command)
         {
-            if(command == null)
+            if (command == null)
             {
                 return CResult.Fail("Command is null");
             }
 
             try
             {
-                
+
                 _repository.DeleteUser(command.Id);
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }

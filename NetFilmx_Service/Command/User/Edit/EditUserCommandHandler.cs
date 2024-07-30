@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Command.User.EditUser
+namespace NetFilmx_Service.Command.User.Edit
 {
     public sealed class EditUserCommandHandler : ICommandHandler<EditUserCommand>
     {
