@@ -20,42 +20,39 @@ namespace NetFilmx_Storage
         public DbSet<Like> Likes { get; set; }
         public DbSet<Series> Series { get; set; }
 
-        // OnConfiguring method removed,, configuration handeld by factory
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-
-            // Many to Many relationships
-
+            // Many-to-Many relationships
             modelBuilder.Entity<Video>()
                 .HasMany(v => v.Tags)
                 .WithMany(t => t.Videos)
                 .UsingEntity<Dictionary<string, object>>(
                     "VideoTag",
                     j => j.HasOne<Tag>().WithMany().HasForeignKey("TagId"),
-                    j => j.HasOne<Video>().WithMany().HasForeignKey("VideoId"));
-            
+                    j => j.HasOne<Video>().WithMany().HasForeignKey("VideoId"),
+                    j => j.HasKey("TagId", "VideoId"));
+
             modelBuilder.Entity<Video>()
                 .HasMany(v => v.Categories)
                 .WithMany(c => c.Videos)
                 .UsingEntity<Dictionary<string, object>>(
                     "VideoCategory",
                     j => j.HasOne<Category>().WithMany().HasForeignKey("CategoryId"),
-                    j => j.HasOne<Video>().WithMany().HasForeignKey("VideoId"));
+                    j => j.HasOne<Video>().WithMany().HasForeignKey("VideoId"),
+                    j => j.HasKey("CategoryId", "VideoId"));
 
             modelBuilder.Entity<Video>()
-               .HasMany(v => v.Series)
-               .WithMany(s => s.Videos)
-               .UsingEntity<Dictionary<string, object>>(
-                   "VideoSeries",
-                   j => j.HasOne<Series>().WithMany().HasForeignKey("SeriesId"),
-                   j => j.HasOne<Video>().WithMany().HasForeignKey("VideoId"));
+                .HasMany(v => v.Series)
+                .WithMany(s => s.Videos)
+                .UsingEntity<Dictionary<string, object>>(
+                    "VideoSeries",
+                    j => j.HasOne<Series>().WithMany().HasForeignKey("SeriesId"),
+                    j => j.HasOne<Video>().WithMany().HasForeignKey("VideoId"),
+                    j => j.HasKey("SeriesId", "VideoId"));
 
-
-            // One to Many relationships
-            
+            // One-to-Many relationships
             modelBuilder.Entity<Like>()
                 .HasOne(l => l.Video)
                 .WithMany(v => v.Likes)
@@ -76,9 +73,7 @@ namespace NetFilmx_Storage
                 .WithMany(u => u.Comments)
                 .HasForeignKey(c => c.UserId);
 
-
             DataSeeder.SeedData(modelBuilder);
-
         }
     }
 
@@ -86,17 +81,14 @@ namespace NetFilmx_Storage
     {
         public NetFilmxDbContext CreateDbContext(string[] args)
         {
-
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-
             var optionsBuilder = new DbContextOptionsBuilder<NetFilmxDbContext>();
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
                 x => x.MigrationsHistoryTable("__EFMigrationsHistory", "NetFilmx"));
-
 
             return new NetFilmxDbContext(optionsBuilder.Options);
         }

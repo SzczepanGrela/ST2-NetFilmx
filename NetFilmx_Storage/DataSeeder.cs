@@ -8,13 +8,40 @@ namespace NetFilmx_Storage
     {
         public static void SeedData(ModelBuilder modelBuilder)
         {
+            var categories = new[]
+            {
+                new Category { Id = 1, Name = "Zwierzęta", Description = "Podziwiaj niesamowity świat natury" },
+                new Category { Id = 2, Name = "Rozwój", Description = "Filmy edukacyjne" },
+                new Category { Id = 3, Name = "Rozrywka", Description = "Zabawne i edukacyjne filmy" },
+            };
+
+            var tags = new[]
+            {
+                new Tag { Id = 1, Name = "Zwierzęta" },
+                new Tag { Id = 2, Name = "Koty" },
+                new Tag { Id = 3, Name = "Rozrywka" },
+                new Tag { Id = 4, Name = "Zabawne" },
+                new Tag { Id = 5, Name = "Edukacyjne" },
+                new Tag { Id = 6, Name = "Rozwój" },
+                new Tag { Id = 7, Name = "Programowanie" },
+                new Tag { Id = 8, Name = "Lockpicking" },
+            };
+
+            var series = new[]
+            {
+                new Series { Id = 1, Name = "Pakiet wszystkich startowych filmów", Price = 149.99m, Description = "Kup zestaw oryginalnych 9 filmów dostępnych na platformie", CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                new Series { Id = 2, Name = "Pakiet świata zwierząt", Price = 49.99m, Description = "Zestaw zawierający 6 filmów poświęconych zwierzętom", CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                new Series { Id = 3, Name = "Pakiet rozwoju", Price = 59.99m, Description = "Zestaw zawierający 3 filmy edukacyjne", CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
+                new Series { Id = 4, Name = "Pakiet promocyjny", Price = 19.99m, Description = "Zestaw zawierający 3 filmy promocyjne, po jednym z każdej kategorii", CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now }
+            };
+
             var videos = new[]
             {
                 new Video
                 {
                     Id = 1,
                     Title = "Amazing Scene of Wild Animals In 4K",
-                    Description = "Discover amazing wildlife and relax! In this nature film you will see the most incredible and stunning wild animals and birds! These are some of them: Lion, Cheetah, Southern Giraffe, Tawny Eagle, Hippopotamus, African Elephant, Tiger, Zebra, Gorilla, Vulture, Bull, Deer, Monkey, Rhino, Panda, Red Panda, Bear and more. Hope you enjoy this scene with the most incredible wild animals captured on 4K ULTRA HD footage. This scenic relaxation film shows scenes of one of the most amazing landscapes in the wild world.",
+                    Description = "Discover amazing wildlife and relax! ...",
                     Price = 9.99m,
                     VideoUrl = "https://www.youtube.com/watch?v=5kozt0uDa4c",
                     ThumbnailUrl = "https://i.ytimg.com/vi/5kozt0uDa4c/hqdefault.jpg",
@@ -25,7 +52,7 @@ namespace NetFilmx_Storage
                 {
                     Id = 2,
                     Title = "Ultimate Wild Animals Collection in 8K ULTRA HD",
-                    Description = "Ultimate Wild Animals Collection in 8K ULTRA HD / 8K TV\r\nHigh Quality Animals from the World Video In Exceptional 8K HDR 60FPS Quality For Your 8K resolution device.\r\nYou can watch this collection of Ultimate Wild Animals Collection in 8K ULTRA HD / 8K TV in your TV For The Living Room, Office 365, Lounge, Waiting Room Business, Spa at home, Spa music, Showroom , Restaurant Music and much more.",
+                    Description = "Ultimate Wild Animals Collection in 8K ULTRA HD ...",
                     Price = 4.99m,
                     VideoUrl = "https://www.youtube.com/watch?v=Zv11L-ZfrSg",
                     ThumbnailUrl = "https://i.ytimg.com/vi/Zv11L-ZfrSg/hqdefault.jpg",
@@ -36,7 +63,7 @@ namespace NetFilmx_Storage
                 {
                     Id = 3,
                     Title = "Baby Animals 4K - Amazing World Of Young Animals",
-                    Description = "Sit back and relax while enjoying this scenic film captures the marvelous and amazing world of cute baby animals. In this relaxation film you will find a beautiful collection of wild young babies around the world including lion cubs, bear cubs, baby elephant, baby giraffe, baby rhino and hippo, polar bear cubs, baby fox, deer, monkey and many more.",
+                    Description = "Sit back and relax while enjoying this scenic film ...",
                     Price = 6.99m,
                     VideoUrl = "https://www.youtube.com/watch?v=oRDRfikj2z8",
                     ThumbnailUrl = "https://i.ytimg.com/vi/oRDRfikj2z8/hqdefault.jpg",
@@ -47,7 +74,7 @@ namespace NetFilmx_Storage
                 {
                     Id = 4,
                     Title = "20 Minutes of Adorable Kittens",
-                    Description = "Cute, cuddly, and utterly chaotic! These adorable kittens are jumping in the dog-pile in this collection of cute and hilarious kitty clips!",
+                    Description = "Cute, cuddly, and utterly chaotic! ...",
                     Price = 14.99m,
                     VideoUrl = "https://www.youtube.com/watch?v=y0sF5xhGreA",
                     ThumbnailUrl = "https://i.ytimg.com/vi/y0sF5xhGreA/hqdefault.jpg",
@@ -69,7 +96,7 @@ namespace NetFilmx_Storage
                 {
                     Id = 6,
                     Title = "Cute and Funny Cat Videos to Keep You Smiling!",
-                    Description = "Hoomans! Rufus here! Cats are my best frens! I made this brand new compilation for you of my favorite Cat, Kittens and even newborn kittens pets and animals! This video is so cute! Rufus approved!",
+                    Description = "Hoomans! Rufus here! ...",
                     Price = 12.99m,
                     VideoUrl = "https://www.youtube.com/watch?v=tpiyEe_CqB4",
                     ThumbnailUrl = "https://i.ytimg.com/vi/tpiyEe_CqB4/hqdefault.jpg",
@@ -102,40 +129,13 @@ namespace NetFilmx_Storage
                 {
                     Id = 9,
                     Title = "The Unity Tutorial For Complete Beginners",
-                    Description = "Unity is an amazingly powerful game engine - but it can be hard to learn. Especially if you find tutorials hard to follow and prefer to learn by doing",
+                    Description = "Unity is an amazingly powerful game engine - but it can be hard to learn ...",
                     Price = 12.99m,
                     VideoUrl = "https://www.youtube.com/watch?v=XtQMytORBmM",
                     ThumbnailUrl = "https://i.ytimg.com/vi/XtQMytORBmM/hqdefault.jpg",
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now
                 }
-            };
-
-            var categories = new[]
-            {
-                new Category { Id = 1, Name = "Zwierzęta", Description = "Podziwiaj niesamowity świat natury" },
-                new Category { Id = 2, Name = "Rozwój", Description = "Filmy edukacyjne" },
-                new Category { Id = 3, Name = "Rozrywka", Description = "Zabawne i edukacyjne filmy" },
-            };
-
-            var tags = new[]
-            {
-                new Tag { Id = 1, Name = "Zwierzęta" },
-                new Tag { Id = 2, Name = "Koty" },
-                new Tag { Id = 3, Name = "Rozrywka" },
-                new Tag { Id = 4, Name = "Zabawne" },
-                new Tag { Id = 5, Name = "Edukacyjne" },
-                new Tag { Id = 6, Name = "Rozwój" },
-                new Tag { Id = 7, Name = "Programowanie" },
-                new Tag { Id = 8, Name = "Lockpicking" },
-            };
-
-            var series = new[]
-            {
-                new Series { Id = 1, Name = "Pakiet wszystkich startowych filmów", Price = 149.99m, Description = "Kup zestaw oryginalnych 9 filmów dostępnych na platformie", CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
-                new Series { Id = 2, Name = "Pakiet świata zwierząt", Price = 49.99m, Description = "Zestaw zawierający 6 filmów poświęconych zwierzętom", CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
-                new Series { Id = 3, Name = "Pakiet rozwoju", Price = 59.99m, Description = "Zestaw zawierający 3 filmy edukacyjne", CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now },
-                new Series { Id = 4, Name = "Pakiet promocyjny", Price = 19.99m, Description = "Zestaw zawierający 3 filmy promocyjne, po jednym z każdej kategorii", CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now }
             };
 
             var users = new[]
@@ -156,6 +156,72 @@ namespace NetFilmx_Storage
                 new Like { Id = 2, VideoId = 2, UserId = 2, CreatedAt = DateTime.Now }
             };
 
+            var videoTags = new[]
+            {
+                new { VideoId = 1, TagId = 1 },
+                new { VideoId = 1, TagId = 5 },
+                new { VideoId = 2, TagId = 1 },
+                new { VideoId = 2, TagId = 5 },
+                new { VideoId = 3, TagId = 1 },
+                new { VideoId = 3, TagId = 5 },
+                new { VideoId = 4, TagId = 2 },
+                new { VideoId = 4, TagId = 4 },
+                new { VideoId = 5, TagId = 2 },
+                new { VideoId = 5, TagId = 4 },
+                new { VideoId = 6, TagId = 2 },
+                new { VideoId = 6, TagId = 4 },
+                new { VideoId = 6, TagId = 1 },
+                new { VideoId = 5, TagId = 1 },
+                new { VideoId = 4, TagId = 1 },
+                new { VideoId = 7, TagId = 7 },
+                new { VideoId = 8, TagId = 8 },
+                new { VideoId = 9, TagId = 6 },
+                new { VideoId = 9, TagId = 7 },
+                new { VideoId = 7, TagId = 6 }
+            };
+
+            var videoCategories = new[]
+            {
+                new { VideoId = 1, CategoryId = 1 },
+                new { VideoId = 1, CategoryId = 3 },
+                new { VideoId = 2, CategoryId = 1 },
+                new { VideoId = 2, CategoryId = 3 },
+                new { VideoId = 3, CategoryId = 1 },
+                new { VideoId = 3, CategoryId = 3 },
+                new { VideoId = 4, CategoryId = 1 },
+                new { VideoId = 4, CategoryId = 3 },
+                new { VideoId = 5, CategoryId = 1 },
+                new { VideoId = 5, CategoryId = 3 },
+                new { VideoId = 6, CategoryId = 1 },
+                new { VideoId = 6, CategoryId = 3 },
+                new { VideoId = 7, CategoryId = 2 },
+                new { VideoId = 8, CategoryId = 2 },
+                new { VideoId = 8, CategoryId = 3 },
+                new { VideoId = 9, CategoryId = 2 }
+            };
+
+            var videoSeries = new[]
+            {
+                new { VideoId = 1, SeriesId = 1 },
+                new { VideoId = 2, SeriesId = 1 },
+                new { VideoId = 3, SeriesId = 1 },
+                new { VideoId = 4, SeriesId = 1 },
+                new { VideoId = 5, SeriesId = 1 },
+                new { VideoId = 6, SeriesId = 1 },
+                new { VideoId = 1, SeriesId = 2 },
+                new { VideoId = 2, SeriesId = 2 },
+                new { VideoId = 3, SeriesId = 2 },
+                new { VideoId = 4, SeriesId = 2 },
+                new { VideoId = 5, SeriesId = 2 },
+                new { VideoId = 6, SeriesId = 2 },
+                new { VideoId = 7, SeriesId = 3 },
+                new { VideoId = 8, SeriesId = 3 },
+                new { VideoId = 9, SeriesId = 3 },
+                new { VideoId = 7, SeriesId = 4 },
+                new { VideoId = 8, SeriesId = 4 },
+                new { VideoId = 9, SeriesId = 4 }
+            };
+
             modelBuilder.Entity<Video>().HasData(videos);
             modelBuilder.Entity<Category>().HasData(categories);
             modelBuilder.Entity<Tag>().HasData(tags);
@@ -163,82 +229,9 @@ namespace NetFilmx_Storage
             modelBuilder.Entity<User>().HasData(users);
             modelBuilder.Entity<Comment>().HasData(comments);
             modelBuilder.Entity<Like>().HasData(likes);
-
-            // Many-to-many relationships
-            modelBuilder.Entity<Video>()
-                .HasMany(v => v.Categories)
-                .WithMany(c => c.Videos)
-                .UsingEntity(j => j.HasData(
-                    new { VideosId = 1, CategoriesId = 1 },
-                    new { VideosId = 2, CategoriesId = 1 },
-                    new { VideosId = 3, CategoriesId = 1 },
-                    new { VideosId = 1, CategoriesId = 3 },
-                    new { VideosId = 2, CategoriesId = 3 },
-                    new { VideosId = 3, CategoriesId = 3 },
-                    new { VideosId = 4, CategoriesId = 1 },
-                    new { VideosId = 4, CategoriesId = 3 },
-                    new { VideosId = 5, CategoriesId = 1 },
-                    new { VideosId = 5, CategoriesId = 3 },
-                    new { VideosId = 6, CategoriesId = 1 },
-                    new { VideosId = 6, CategoriesId = 3 },
-                    new { VideosId = 7, CategoriesId = 2 },
-                    new { VideosId = 8, CategoriesId = 2 },
-                    new { VideosId = 9, CategoriesId = 2 },
-                    new { VideosId = 8, CategoriesId = 3 }
-                ));
-
-            modelBuilder.Entity<Video>()
-                .HasMany(v => v.Tags)
-                .WithMany(t => t.Videos)
-                .UsingEntity(j => j.HasData(
-                    new { VideosId = 1, TagsId = 1 },
-                    new { VideosId = 1, TagsId = 5 },
-                    new { VideosId = 2, TagsId = 1 },
-                    new { VideosId = 2, TagsId = 5 },
-                    new { VideosId = 3, TagsId = 1 },
-                    new { VideosId = 3, TagsId = 5 },
-                    new { VideosId = 4, TagsId = 2 },
-                    new { VideosId = 4, TagsId = 4 },
-                    new { VideosId = 5, TagsId = 2 },
-                    new { VideosId = 5, TagsId = 4 },
-                    new { VideosId = 6, TagsId = 2 },
-                    new { VideosId = 6, TagsId = 4 },
-                    new { VideosId = 6, TagsId = 1 },
-                    new { VideosId = 5, TagsId = 1 },
-                    new { VideosId = 4, TagsId = 1 },
-                    new { VideosId = 7, TagsId = 7 },
-                    new { VideosId = 8, TagsId = 8 },
-                    new { VideosId = 9, TagsId = 6 },
-                    new { VideosId = 9, TagsId = 7 },
-                    new { VideosId = 7, TagsId = 6 }
-                ));
-
-            modelBuilder.Entity<Video>()
-                .HasMany(v => v.Series)
-                .WithMany(s => s.Videos)
-                .UsingEntity(j => j.HasData(
-                    new { VideosId = 1, SeriesId = 1 },
-                    new { VideosId = 2, SeriesId = 1 },
-                    new { VideosId = 3, SeriesId = 1 },
-                    new { VideosId = 4, SeriesId = 1 },
-                    new { VideosId = 5, SeriesId = 1 },
-                    new { VideosId = 6, SeriesId = 1 },
-                    new { VideosId = 7, SeriesId = 4 },
-                    new { VideosId = 8, SeriesId = 4 },
-                    new { VideosId = 9, SeriesId = 4 },
-                    new { VideosId = 1, SeriesId = 2 },
-                    new { VideosId = 2, SeriesId = 2 },
-                    new { VideosId = 3, SeriesId = 2 },
-                    new { VideosId = 4, SeriesId = 2 },
-                    new { VideosId = 5, SeriesId = 2 },
-                    new { VideosId = 6, SeriesId = 2 },
-                    new { VideosId = 7, SeriesId = 3 },
-                    new { VideosId = 8, SeriesId = 3 },
-                    new { VideosId = 9, SeriesId = 3 },
-                    new { VideosId = 1, SeriesId = 4 },
-                    new { VideosId = 4, SeriesId = 4 },
-                    new { VideosId = 7, SeriesId = 4 }
-                ));
+            modelBuilder.Entity("VideoTag").HasData(videoTags);
+            modelBuilder.Entity("VideoCategory").HasData(videoCategories);
+            modelBuilder.Entity("VideoSeries").HasData(videoSeries);
         }
     }
 }

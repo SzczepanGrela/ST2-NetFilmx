@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace NetFilmx_Storage.Entities
 {
-    [Table("Series", Schema = "NetFilmx_projekt")]
+    [Table("Series", Schema = "NetFilmx_noweEntities")]
     public class Series : BaseEntity
     {
         internal Series()

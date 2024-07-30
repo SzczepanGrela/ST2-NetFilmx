@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NetFilmx_Storage.Entities
 {
-    [Table("Users", Schema = "NetFilmx_projekt")]
+    [Table("Users", Schema = "NetFilmx_noweEntities")]
     public class User : BaseEntity
     {
         internal User()

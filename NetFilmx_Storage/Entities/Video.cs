@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NetFilmx_Storage.Entities
 {
-    [Table("Videos", Schema = "NetFilmx_projekt")]
+    [Table("Videos", Schema = "NetFilmx_noweEntities")]
     public class Video : BaseEntity
     {
         internal Video()

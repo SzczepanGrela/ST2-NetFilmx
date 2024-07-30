@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Storage.Entities
 {
-    [Table("Likes", Schema = "NetFilmx_projekt")]
+    [Table("Likes", Schema = "NetFilmx_noweEntities")]
     public class Like : BaseEntity
     {
         internal Like() { }
