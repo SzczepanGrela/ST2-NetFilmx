@@ -11,27 +11,6 @@ namespace NetFilmx_Storage.Repositories
     {
         private readonly NetFilmxDbContext _context;
 
-        public void AddVideoPurchase(VideoPurchase videoPurchase)
-        {
-            _context.VideoPurchases.Add(videoPurchase);
-            _context.SaveChanges();
-        }
-
-        public void DeleteVideoPurchase(int videoPurchaseId)
-        {
-            _context.VideoPurchases.Remove(GetVideoPurchaseById(videoPurchaseId));
-            _context.SaveChanges();
-        }
-
-        public List<VideoPurchase> GetAllVideoPurchases()
-        {
-            return _context.VideoPurchases.ToList();
-        }
-
-        public VideoPurchase GetVideoPurchaseById(int videoPurchaseId)
-        {
-            return _context.VideoPurchases.Find(videoPurchaseId) ?? throw new Exception("Video purchase not found");
-        }
 
         public List<VideoPurchase> GetVideoPurchasesByUserId(int userId)
         {
@@ -43,8 +22,30 @@ namespace NetFilmx_Storage.Repositories
             return _context.VideoPurchases.Where(vp => vp.VideoId == videoId).ToList();
         }
 
+        public List<VideoPurchase> GetAllVideoPurchases()
+        {
+            return _context.VideoPurchases.ToList();
+        }
+
+    
+        public VideoPurchase GetVideoPurchaseById(int videoPurchaseId)
+        {
+            var videoPurchase = _context.VideoPurchases.Find(videoPurchaseId);
+            return videoPurchase == null ? throw new Exception("Video purchase not found") : videoPurchase;
+        }
+
+
+
         public bool IsVideoPurchaseExist(int userId, int videoId)
         {
+            if(!_context.Users.Any(u => u.Id == userId))
+            {
+                throw new Exception("User not found");
+            }
+            if(!_context.Videos.Any(v => v.Id == videoId))
+            {
+                throw new Exception("Video not found");
+            }
             return _context.VideoPurchases.Any(vp => vp.UserId == userId && vp.VideoId == videoId);
         }
 
@@ -55,10 +56,50 @@ namespace NetFilmx_Storage.Repositories
 
         public void UpdateVideoPurchase(VideoPurchase videoPurchase)
         {
+            if (videoPurchase == null)
+            {
+                throw new ArgumentNullException(nameof(videoPurchase), "Video purchase cannot be null");
+            }
+
+            if (!IsVideoPurchaseExist(videoPurchase.Id))
+            {
+                throw new Exception("Video purchase not found");
+            }
+
             _context.VideoPurchases.Attach(videoPurchase);
             _context.Entry(videoPurchase).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _context.SaveChanges();
         }
+
+
+        public void AddVideoPurchase(VideoPurchase videoPurchase)
+        {
+            if (videoPurchase == null)
+            {
+                throw new ArgumentNullException(nameof(videoPurchase), "Video purchase cannot be null");
+            }
+
+            if (IsVideoPurchaseExist(videoPurchase.UserId, videoPurchase.VideoId))
+            {
+                throw new InvalidOperationException("The video purchase already exists");
+            }
+
+            _context.VideoPurchases.Add(videoPurchase);
+            _context.SaveChanges();
+        }
+
+        public void DeleteVideoPurchase(int videoPurchaseId)
+        {
+            var videoPurchase = GetVideoPurchaseById(videoPurchaseId);
+            if (videoPurchase == null)
+            {
+                throw new Exception("Video purchase not found");
+            }
+
+            _context.VideoPurchases.Remove(videoPurchase);
+            _context.SaveChanges();
+        }
+
     }
 
 }

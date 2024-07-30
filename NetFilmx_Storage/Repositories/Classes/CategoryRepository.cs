@@ -24,14 +24,17 @@ namespace NetFilmx_Storage.Repositories
 
         public List<Category> GetCategoriesByVideoId(int videoId)
         {
-           var videos = _context.Videos.Where(v => v.Id == videoId).Include(v => v.Categories).ToList();
-            return videos.SelectMany(v => v.Categories).ToList();
+           if(!_context.Videos.Any(v => v.Id == videoId))
+            {
+                throw new DataException("Video not found");
+            }
+            return _context.Videos.Where(v => v.Id == videoId).SelectMany(v => v.Categories).ToList();
 
         }
 
         public Category GetCategoryByName(string categoryName)
         {
-            Category? category = _context.Categories.FirstOrDefault(c => c.Name == categoryName);
+            var category = _context.Categories.FirstOrDefault(c => c.Name == categoryName);
             return category == null ? throw new DataException("Category not found") : category;
         }
         
@@ -39,7 +42,7 @@ namespace NetFilmx_Storage.Repositories
 
         public Category GetCategoryById(int categoryId)
         {
-            Category? category = _context.Categories.Find(categoryId);
+            var category = _context.Categories.Find(categoryId);
             return category == null ? throw new DataException("Category not found") : category;
         }
 
@@ -48,12 +51,28 @@ namespace NetFilmx_Storage.Repositories
 
         public void AddCategory(Category category)
         {
+            if (category == null)
+            {
+                throw new ArgumentNullException(nameof(category), "Category cannot be null");
+            }
+            if (IsCategoryExist(category.Name))
+            {
+                throw new InvalidOperationException("A category with this name already exists");
+            }
             _context.Categories.Add(category);
             _context.SaveChanges();
         }
 
         public void UpdateCategory(Category category)
         {
+            if (category == null)
+            {
+                throw new ArgumentNullException(nameof(category), "Category cannot be null");
+            }
+            if (!IsCategoryExist(category.Id))
+            {
+                throw new DataException("Category not found");
+            }
             _context.Categories.Attach(category);
             _context.Entry(category).State = EntityState.Modified;
             _context.SaveChanges();
@@ -61,12 +80,13 @@ namespace NetFilmx_Storage.Repositories
 
         public void DeleteCategory(int categoryId)
         {
-            Category? category = _context.Categories.Find(categoryId);
-            if (category != null)
+            var category = _context.Categories.Find(categoryId);
+            if (category == null)
             {
-                _context.Categories.Remove(category);
-                _context.SaveChanges();
+                throw new DataException("Category not found");
             }
+            _context.Categories.Remove(category);
+            _context.SaveChanges();
         }
 
         public bool IsCategoryExist(string categoryName)

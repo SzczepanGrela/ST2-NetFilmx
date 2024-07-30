@@ -21,28 +21,52 @@ namespace NetFilmx_Storage.Repositories
 
         public List<Comment> GetCommentsByVideoId(int videoId)
         {
+            if(!_context.Videos.Any(v => v.Id == videoId))
+            {
+                throw new Exception("Video not found");
+            }
             return _context.Comments.Where(c => c.VideoId == videoId).ToList();
         }
         
         public List<Comment> GetCommentsByUserId(int userId)
         {
+            if(!_context.Users.Any(u => u.Id == userId))
+            {
+                throw new Exception("User not found");
+            }
             return _context.Comments.Where(c => c.UserId == userId).ToList();
         }
 
         public Comment GetCommentById(int id)
         {
-            Comment? comment = _context.Comments.Find(id);
-            return comment == null ? throw new Exception("Comment not found") : comment;
+            var comment = _context.Comments.Find(id);
+            if (comment == null)
+            {
+                throw new Exception("Comment not found");
+            }
+            return comment;
         }
 
         public void AddComment(Comment comment)
         {
+            if (comment == null)
+            {
+                throw new ArgumentNullException(nameof(comment), "Comment cannot be null");
+            }
             _context.Comments.Add(comment);
             _context.SaveChanges();
         }
 
         public void UpdateComment(Comment comment)
         {
+            if (comment == null)
+            {
+                throw new ArgumentNullException(nameof(comment), "Comment cannot be null");
+            }
+            if (!IsCommentExist(comment.Id))
+            {
+                throw new Exception("Comment not found");
+            }
             _context.Comments.Attach(comment);
             _context.Entry(comment).State = EntityState.Modified;
             _context.SaveChanges();
@@ -50,12 +74,13 @@ namespace NetFilmx_Storage.Repositories
 
         public void DeleteComment(int id)
         {
-            Comment? comment = _context.Comments.Find(id);
-            if (comment != null)
+            var comment = GetCommentById(id);
+            if (comment == null)
             {
-                _context.Comments.Remove(comment);
-                _context.SaveChanges();
+                throw new Exception("Comment not found");
             }
+            _context.Comments.Remove(comment);
+            _context.SaveChanges();
         }
 
         public bool IsCommentExist(int commentId)

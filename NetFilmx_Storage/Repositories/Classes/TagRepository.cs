@@ -26,25 +26,49 @@ namespace NetFilmx_Storage.Repositories
 
         public Tag GetTagById(int tagId)
         {
-            Tag? tag = _context.Tags.Find(tagId);
-            return tag == null ? throw new Exception("Tag not found") : tag;
+            var tag = _context.Tags.Find(tagId);
+            if (tag == null)
+            {
+                throw new Exception("Tag not found");
+            }
+            return tag;
         }
 
         public Tag GetTagByName(string tagName)
         {
-            Tag? tag = _context.Tags.FirstOrDefault(t => t.Name == tagName);
-            return tag == null ? throw new Exception("Tag not found") : tag;
+            var tag = _context.Tags.FirstOrDefault(t => t.Name == tagName);
+            if (tag == null)
+            {
+                throw new Exception("Tag not found");
+            }
+            return tag;
         }
 
 
         public void AddTag(Tag tag)
         {
+            if (tag == null)
+            {
+                throw new ArgumentNullException(nameof(tag), "Tag cannot be null");
+            }
+            if (IsTagExist(tag.Name))
+            {
+                throw new InvalidOperationException("A tag with this name already exists");
+            }
             _context.Tags.Add(tag);
             _context.SaveChanges();
         }
 
         public void UpdateTag(Tag tag)
         {
+            if (tag == null)
+            {
+                throw new ArgumentNullException(nameof(tag), "Tag cannot be null");
+            }
+            if (!IsTagExist(tag.Id))
+            {
+                throw new Exception("Tag not found");
+            }
             _context.Tags.Attach(tag);
             _context.Entry(tag).State = EntityState.Modified;
             _context.SaveChanges();
@@ -52,12 +76,13 @@ namespace NetFilmx_Storage.Repositories
 
         public void DeleteTag(int tagId)
         {
-            Tag? tag = _context.Tags.Find(tagId);
-            if (tag != null)
+            var tag = _context.Tags.Find(tagId);
+            if (tag == null)
             {
-                _context.Tags.Remove(tag);
-                _context.SaveChanges();
+                throw new Exception("Tag not found");
             }
+            _context.Tags.Remove(tag);
+            _context.SaveChanges();
         }
 
         public bool IsTagExist(string tagName)
