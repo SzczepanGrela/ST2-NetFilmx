@@ -9,5 +9,6 @@ namespace NetFilmx_Service.Query.Tag.GetAll
     public sealed class GetAllTagsQuery : IQuery
     {
         
+        public GetAllTagsQuery() { }
     }
 }

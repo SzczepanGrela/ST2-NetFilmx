@@ -8,6 +8,7 @@ namespace NetFilmx_Service.Query.Series.GetAll
 {
     public sealed class GetAllSeriesQuery : IQuery
     {
+        public GetAllSeriesQuery() { }
 
     }
 }

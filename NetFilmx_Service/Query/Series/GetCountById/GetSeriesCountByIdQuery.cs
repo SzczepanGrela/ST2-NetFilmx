@@ -8,6 +8,10 @@ namespace NetFilmx_Service.Query.Series.GetCountById
 {
     public sealed class GetSeriesCountByIdQuery : IQuery
     {
+        public GetSeriesCountByIdQuery(int seriesId)
+        {
+            SeriesId = seriesId;
+        }
         public int SeriesId { get; }
 
     }

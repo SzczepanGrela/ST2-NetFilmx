@@ -8,6 +8,10 @@ namespace NetFilmx_Service.Query.User.GetByCommentId
 {
     public sealed class GetUserByCommentIdQuery : IQuery
     {
+        public GetUserByCommentIdQuery(int commentId)
+        {
+            CommentId = commentId;
+        }
         public int CommentId { get; }
 
     }

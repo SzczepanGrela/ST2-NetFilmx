@@ -8,6 +8,10 @@ namespace NetFilmx_Service.Query.SeriesPurchase.GetBySeriesId
 {
     public sealed class GetSeriesPurchasesBySeriesIdQuery : IQuery
     {
+        public GetSeriesPurchasesBySeriesIdQuery(int seriesId)
+        {
+            SeriesId = seriesId;
+        }
         public int SeriesId { get; }
 
     }

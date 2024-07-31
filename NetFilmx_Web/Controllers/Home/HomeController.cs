@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using NetFilmx_Web.Models;
 using System.Diagnostics;
 
-namespace NetFilmx_Web.Controllers
+namespace NetFilmx_Web.Controllers.Home
 {
     public class HomeController : Controller
     {
@@ -48,7 +48,7 @@ namespace NetFilmx_Web.Controllers
         {
             return View();
         }
-     
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

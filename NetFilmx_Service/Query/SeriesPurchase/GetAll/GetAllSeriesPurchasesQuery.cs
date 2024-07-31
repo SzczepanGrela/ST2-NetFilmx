@@ -8,6 +8,7 @@ namespace NetFilmx_Service.Query.SeriesPurchase.GetAll
 {
     public sealed class GetAllSeriesPurchasesQuery : IQuery
     {
+        public GetAllSeriesPurchasesQuery() { }
         
     }
 }

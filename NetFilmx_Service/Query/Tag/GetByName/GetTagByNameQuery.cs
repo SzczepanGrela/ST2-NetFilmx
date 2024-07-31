@@ -8,6 +8,10 @@ namespace NetFilmx_Service.Query.Tag.GetByName
 {
     public sealed class GetTagByNameQuery : IQuery
     {
+        public GetTagByNameQuery(string tagName)
+        {
+            TagName = tagName;
+        }
         public string TagName { get; }
 
     }

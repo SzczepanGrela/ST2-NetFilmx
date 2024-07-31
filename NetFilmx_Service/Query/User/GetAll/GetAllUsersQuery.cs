@@ -9,5 +9,6 @@ namespace NetFilmx_Service.Query.User.GetAll
     public sealed class GetAllUsersQuery : IQuery
     {
        
+        public GetAllUsersQuery() { }
     }
 }

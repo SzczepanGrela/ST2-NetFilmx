@@ -8,6 +8,10 @@ namespace NetFilmx_Service.Query.Series.GetByName
 {
     public sealed class GetSeriesByNameQuery : IQuery
     {
+        public GetSeriesByNameQuery(string seriesName)
+        {
+            SeriesName = seriesName;
+        }
         public string SeriesName { get; }
     }
 }

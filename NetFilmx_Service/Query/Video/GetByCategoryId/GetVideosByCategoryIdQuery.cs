@@ -8,6 +8,10 @@ namespace NetFilmx_Service.Query.Video.GetByCategoryId
 {
     public sealed class GetVideosByCategoryIdQuery : IQuery
     {
+        public GetVideosByCategoryIdQuery(int categoryId)
+        {
+            CategoryId = categoryId;
+        }
         public int CategoryId { get; }
 
       

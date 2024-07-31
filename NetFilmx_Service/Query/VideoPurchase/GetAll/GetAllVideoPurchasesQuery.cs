@@ -8,5 +8,6 @@ namespace NetFilmx_Service.Query.VideoPurchase.GetAll
 {
     public sealed class GetAllVideoPurchasesQuery : IQuery
     {
+        public GetAllVideoPurchasesQuery() { }
     }
 }

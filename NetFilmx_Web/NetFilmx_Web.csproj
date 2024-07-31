@@ -12,6 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\Comment\" />
+    <Folder Include="Controllers\User\" />
+    <Folder Include="Controllers\Tag\" />
+    <Folder Include="Controllers\Series\" />
+    <Folder Include="Controllers\Video\" />
     <Folder Include="Views\Category\" />
     <Folder Include="Views\Comment\" />
     <Folder Include="Views\User\" />
@@ -22,6 +27,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="MediatR" Version="12.4.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.3" />
   </ItemGroup>
 

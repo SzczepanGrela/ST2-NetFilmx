@@ -8,6 +8,11 @@ namespace NetFilmx_Service.Query.Video.GetByExclTagId
 {
     public sealed class GetVideosByExcludedTagIdQuery : IQuery
     {
+
+        public GetVideosByExcludedTagIdQuery(int tagId)
+        {
+            TagId = tagId;
+        }
         public int TagId { get; }
 
     }

@@ -8,5 +8,6 @@ namespace NetFilmx_Service.Query.Comment.GetAll
 {
     public sealed class GetAllCommentsQuery : IQuery
     {
+        public GetAllCommentsQuery() { }
     }
 }

@@ -8,6 +8,10 @@ namespace NetFilmx_Service.Query.Category.GetByName
 {
    public sealed class GetCategoryByNameQuery : IQuery
     {
+        public GetCategoryByNameQuery(string name)
+        {
+            Name = name;
+        }
         public string Name { get; }
 
 

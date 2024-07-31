@@ -8,6 +8,12 @@ namespace NetFilmx_Service.Query.Video.GetByUserId
 {
     public sealed class GetVideosByUserIdQuery : IQuery
     {
+
+        public GetVideosByUserIdQuery(int userId)
+        {
+            UserId = userId;
+        }
+
         public int UserId { get; }
 
 

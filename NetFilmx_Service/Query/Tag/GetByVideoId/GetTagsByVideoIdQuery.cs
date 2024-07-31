@@ -8,6 +8,10 @@ namespace NetFilmx_Service.Query.Tag.GetByVideoId
 {
     public sealed class GetTagsByVideoIdQuery : IQuery
     {
+        public GetTagsByVideoIdQuery(int videoId)
+        {
+            VideoId = videoId;
+        }
         public int VideoId { get; }
 
     }

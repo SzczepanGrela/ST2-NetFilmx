@@ -8,6 +8,11 @@ namespace NetFilmx_Service.Query.Video.GetByExclSeriesId
 {
     public sealed class GetVideosByExcludedSeriesQuery : IQuery
     {
+
+        public GetVideosByExcludedSeriesQuery(int seriesId)
+        {
+            SeriesId = seriesId;
+        }
         public int SeriesId { get; }
     }
 }

@@ -8,6 +8,10 @@ namespace NetFilmx_Service.Query.Category.GetCountById
 {
     public sealed class GetCategoryCountByIdQuery : IQuery
     {
+        public GetCategoryCountByIdQuery(int categoryId)
+        {
+            CategoryId = categoryId;
+        }
         public int CategoryId { get; }
     }
 }

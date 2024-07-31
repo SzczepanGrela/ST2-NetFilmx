@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using NetFilmx_Service.Mappings;
 using NetFilmx_Storage.Entities;
 using System.Reflection;
+using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,8 @@ builder.Services.AddAutoMapper(typeof(TagMappingProfile));
 builder.Services.AddAutoMapper(typeof(SeriesMappingProfile));
 builder.Services.AddAutoMapper(typeof(UserMappingProfile));
 builder.Services.AddAutoMapper(typeof(CommentMappingProfile));
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 
 
 var app = builder.Build();

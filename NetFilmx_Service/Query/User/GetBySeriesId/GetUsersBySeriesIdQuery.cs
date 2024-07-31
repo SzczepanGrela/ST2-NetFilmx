@@ -8,6 +8,10 @@ namespace NetFilmx_Service.Query.User.GetBySeriesId
 {
     public sealed class GetUsersBySeriesIdQuery : IQuery
     {
+        public GetUsersBySeriesIdQuery(int seriesId)
+        {
+            SeriesId = seriesId;
+        }
         public int SeriesId { get; }
 
    

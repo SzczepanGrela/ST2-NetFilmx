@@ -8,6 +8,7 @@ namespace NetFilmx_Service.Query.Video.GetAll
 {
     public sealed class GetAllVideosQuery : IQuery
     {
-       
+        
+        public GetAllVideosQuery() { }
     }
 }
