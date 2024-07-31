@@ -1,13 +1,11 @@
 ﻿using NetFilmx_Storage.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Category.GetCountById
 {
-    public sealed class GetCategoryCountByIdQueryHandler : IQueryHandler<GetCategoryCountByIdQuery, QResult<int>>
+    public sealed class GetCategoryCountByIdQueryHandler : IQueryHandler<GetCategoryCountByIdQuery, int>
     {
         private readonly ICategoryRepository _repository;
 
@@ -16,11 +14,11 @@ namespace NetFilmx_Service.Query.Category.GetCountById
             _repository = repository;
         }
 
-        public QResult<int> Handle(GetCategoryCountByIdQuery query)
+        public async Task<QResult<int>> Handle(GetCategoryCountByIdQuery query, CancellationToken cancellationToken)
         {
             try
             {
-                int count = _repository.GetCategoryCountById(query.CategoryId);
+                int count = await _repository.GetCategoryCountByIdAsync(query.CategoryId);
                 return QResult<int>.Ok(count);
             }
             catch (Exception ex)

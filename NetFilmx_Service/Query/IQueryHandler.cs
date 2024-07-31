@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 
 namespace NetFilmx_Service.Query
 {
-    public interface IQueryHandler<in TQuery, TResult> where TQuery : IQuery
+    public interface IQueryHandler<in TQuery, TResult> where TQuery : IQuery<TResult>
     {
-        TResult Handle(TQuery query);
+        Task<QResult<TResult>> Handle(TQuery query, CancellationToken cancellationToken);
     }
-
 }

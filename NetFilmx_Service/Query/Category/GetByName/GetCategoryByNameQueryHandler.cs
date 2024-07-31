@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Category.GetByName
 {
-    public sealed class GetCategoryByNameQueryHandler<TDto> : IQueryHandler<GetCategoryByNameQuery, QResult<TDto>>
+    public sealed class GetCategoryByNameQueryHandler<TDto> : IQueryHandler<GetCategoryByNameQuery<TDto>, TDto>
     {
         private readonly ICategoryRepository _repository;
         private readonly IMapper _mapper;
@@ -19,9 +19,9 @@ namespace NetFilmx_Service.Query.Category.GetByName
             _mapper = mapper;
         }
 
-        public QResult<TDto> Handle(GetCategoryByNameQuery query)
+        public async Task<QResult<TDto>> Handle(GetCategoryByNameQuery<TDto> query, CancellationToken cancellationToken)
         {
-            var category = _repository.GetCategoryByName(query.Name);
+            var category = await _repository.GetCategoryByNameAsync(query.Name);
             if (category == null)
             {
                 return QResult<TDto>.Fail("Category not found");

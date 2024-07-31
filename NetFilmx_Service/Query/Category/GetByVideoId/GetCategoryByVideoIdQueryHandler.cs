@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Category.GetByVideoId
 {
-    public sealed class GetCategoryByVideoIdQueryHandler<TDto> : IQueryHandler<GetCategoryByVideoIdQuery, QResult<List<TDto>>>
+    public sealed class GetCategoryByVideoIdQueryHandler<TDto> : IQueryHandler<GetCategoryByVideoIdQuery<TDto>, List<TDto>>
     {
         private readonly ICategoryRepository _repository;
         private readonly IMapper _mapper;
@@ -19,13 +19,12 @@ namespace NetFilmx_Service.Query.Category.GetByVideoId
             _mapper = mapper;
         }
 
-        public QResult<List<TDto>> Handle(GetCategoryByVideoIdQuery query)
+        public async Task<QResult<List<TDto>>> Handle(GetCategoryByVideoIdQuery<TDto> query, CancellationToken cancellationToken)
         {
-            
             List<TDto> categoriesDto;
             try
             {
-                var categories = _repository.GetCategoriesByVideoId(query.VideoId);
+                var categories = await _repository.GetCategoriesByVideoIdAsync(query.VideoId);
                 categoriesDto = _mapper.Map<List<TDto>>(categories);
                 return QResult<List<TDto>>.Ok(categoriesDto);
             }
@@ -33,7 +32,6 @@ namespace NetFilmx_Service.Query.Category.GetByVideoId
             {
                 return QResult<List<TDto>>.Fail(ex.Message);
             }
-            
         }
     }
 }

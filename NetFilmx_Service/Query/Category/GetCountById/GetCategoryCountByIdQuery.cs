@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Category.GetCountById
 {
-    public sealed class GetCategoryCountByIdQuery<TDto> : IQuery<TDto>
+    public sealed class GetCategoryCountByIdQuery: IQuery<int>
     {
         public GetCategoryCountByIdQuery(int categoryId)
         {
