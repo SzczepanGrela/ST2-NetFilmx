@@ -8,8 +8,8 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace NetFilmx_Service.Query
 {
-    public interface IQueryHandler<in TQuery, TResult> where TQuery : IQuery<TResult> 
+    public interface IQueryHandler<in TQuery, wantedType> where TQuery : IQuery<wantedType> 
     {
-        Task<QResult<TResult>> Handle(TQuery query, CancellationToken cancellationToken);
+        Task<QResult<wantedType>> Handle(TQuery query, CancellationToken cancellationToken);
     }
 }

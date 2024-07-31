@@ -8,7 +8,10 @@ namespace NetFilmx_Service.Command
 {
     public interface ICommandHandler<in TCommand> where TCommand : ICommand
     {
-        CResult Handle(TCommand command);
+      
+
+        Task<CResult> Handle(TCommand command, CancellationToken cancellationToken);
+
     }
-    
+
 }
