@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using NetFilmx_Storage.Entities;
 
 namespace NetFilmx_Storage.Repositories
@@ -12,92 +13,93 @@ namespace NetFilmx_Storage.Repositories
         private readonly NetFilmxDbContext _context;
 
 
-        public List<VideoPurchase> GetVideoPurchasesByUserId(int userId)
+        public VideoPurchaseRepository(NetFilmxDbContext context)
         {
-            return _context.VideoPurchases.Where(vp => vp.UserId == userId).ToList();
+            _context = context;
         }
 
-        public List<VideoPurchase> GetVideoPurchasesByVideoId(int videoId)
+        public async Task<List<VideoPurchase>> GetVideoPurchasesByUserIdAsync(int userId)
         {
-            return _context.VideoPurchases.Where(vp => vp.VideoId == videoId).ToList();
+            return await _context.VideoPurchases.Where(vp => vp.UserId == userId).ToListAsync();
         }
 
-        public List<VideoPurchase> GetAllVideoPurchases()
+        public async Task<List<VideoPurchase>> GetVideoPurchasesByVideoIdAsync(int videoId)
         {
-            return _context.VideoPurchases.ToList();
+            return await _context.VideoPurchases.Where(vp => vp.VideoId == videoId).ToListAsync();
         }
 
-    
-        public VideoPurchase GetVideoPurchaseById(int videoPurchaseId)
+        public async Task<List<VideoPurchase>> GetAllVideoPurchasesAsync()
         {
-            var videoPurchase = _context.VideoPurchases.Find(videoPurchaseId);
-            return videoPurchase == null ? throw new Exception("Video purchase not found") : videoPurchase;
+            return await _context.VideoPurchases.ToListAsync();
         }
 
-
-
-        public bool IsVideoPurchaseExist(int userId, int videoId)
+        public async Task<VideoPurchase> GetVideoPurchaseByIdAsync(int videoPurchaseId)
         {
-            if(!_context.Users.Any(u => u.Id == userId))
+            var videoPurchase = await _context.VideoPurchases.FindAsync(videoPurchaseId);
+            return videoPurchase ?? throw new Exception("Video purchase not found");
+        }
+
+        public async Task<bool> IsVideoPurchaseExistAsync(int userId, int videoId)
+        {
+            if (!await _context.Users.AnyAsync(u => u.Id == userId))
             {
                 throw new Exception("User not found");
             }
-            if(!_context.Videos.Any(v => v.Id == videoId))
+            if (!await _context.Videos.AnyAsync(v => v.Id == videoId))
             {
                 throw new Exception("Video not found");
             }
-            return _context.VideoPurchases.Any(vp => vp.UserId == userId && vp.VideoId == videoId);
+            return await _context.VideoPurchases.AnyAsync(vp => vp.UserId == userId && vp.VideoId == videoId);
         }
 
-        public bool IsVideoPurchaseExist(int videoPurchaseId)
+        public async Task<bool> IsVideoPurchaseExistAsync(int videoPurchaseId)
         {
-            return _context.VideoPurchases.Any(vp => vp.Id == videoPurchaseId);
+            return await _context.VideoPurchases.AnyAsync(vp => vp.Id == videoPurchaseId);
         }
 
-        public void UpdateVideoPurchase(VideoPurchase videoPurchase)
+        public async Task UpdateVideoPurchaseAsync(VideoPurchase videoPurchase)
         {
             if (videoPurchase == null)
             {
                 throw new ArgumentNullException(nameof(videoPurchase), "Video purchase cannot be null");
             }
 
-            if (!IsVideoPurchaseExist(videoPurchase.Id))
+            if (!await IsVideoPurchaseExistAsync(videoPurchase.Id))
             {
                 throw new Exception("Video purchase not found");
             }
 
             _context.VideoPurchases.Attach(videoPurchase);
-            _context.Entry(videoPurchase).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            _context.SaveChanges();
+            _context.Entry(videoPurchase).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
         }
 
-
-        public void AddVideoPurchase(VideoPurchase videoPurchase)
+        public async Task AddVideoPurchaseAsync(VideoPurchase videoPurchase)
         {
             if (videoPurchase == null)
             {
                 throw new ArgumentNullException(nameof(videoPurchase), "Video purchase cannot be null");
             }
 
-            if (IsVideoPurchaseExist(videoPurchase.UserId, videoPurchase.VideoId))
+            if (await IsVideoPurchaseExistAsync(videoPurchase.UserId, videoPurchase.VideoId))
             {
                 throw new InvalidOperationException("The video purchase already exists");
             }
 
-            _context.VideoPurchases.Add(videoPurchase);
-            _context.SaveChanges();
+            await _context.VideoPurchases.AddAsync(videoPurchase);
+            await _context.SaveChangesAsync();
         }
 
-        public void DeleteVideoPurchase(int videoPurchaseId)
+        public async Task DeleteVideoPurchaseAsync(int videoPurchaseId)
         {
-            var videoPurchase = GetVideoPurchaseById(videoPurchaseId);
+            var videoPurchase = await GetVideoPurchaseByIdAsync(videoPurchaseId);
             if (videoPurchase == null)
             {
                 throw new Exception("Video purchase not found");
             }
 
             _context.VideoPurchases.Remove(videoPurchase);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
     }

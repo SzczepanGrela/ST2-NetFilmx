@@ -17,97 +17,90 @@ namespace NetFilmx_Storage.Repositories
            
         }
 
-        public List<Category> GetAllCategories()
+        public async Task<List<Category>> GetAllCategoriesAsync()
         {
-            return _context.Categories.ToList();
+            return await _context.Categories.ToListAsync();
         }
 
-        public List<Category> GetCategoriesByVideoId(int videoId)
+        public async Task<List<Category>> GetCategoriesByVideoIdAsync(int videoId)
         {
-           if(!_context.Videos.Any(v => v.Id == videoId))
+            if (!await _context.Videos.AnyAsync(v => v.Id == videoId))
             {
                 throw new DataException("Video not found");
             }
-            return _context.Videos.Where(v => v.Id == videoId).SelectMany(v => v.Categories).ToList();
-
+            return await _context.Videos.Where(v => v.Id == videoId).SelectMany(v => v.Categories).ToListAsync();
         }
 
-        public Category GetCategoryByName(string categoryName)
+        public async Task<Category> GetCategoryByNameAsync(string categoryName)
         {
-            var category = _context.Categories.FirstOrDefault(c => c.Name == categoryName);
-            return category == null ? throw new DataException("Category not found") : category;
+            var category = await _context.Categories.FirstOrDefaultAsync(c => c.Name == categoryName);
+            return category ?? throw new DataException("Category not found");
         }
-        
 
-
-        public Category GetCategoryById(int categoryId)
+        public async Task<Category> GetCategoryByIdAsync(int categoryId)
         {
-            var category = _context.Categories.Find(categoryId);
-            return category == null ? throw new DataException("Category not found") : category;
+            var category = await _context.Categories.FindAsync(categoryId);
+            return category ?? throw new DataException("Category not found");
         }
 
-
-       
-
-        public void AddCategory(Category category)
+        public async Task AddCategoryAsync(Category category)
         {
             if (category == null)
             {
                 throw new ArgumentNullException(nameof(category), "Category cannot be null");
             }
-            if (IsCategoryExist(category.Name))
+            if (await IsCategoryExistAsync(category.Name))
             {
                 throw new InvalidOperationException("A category with this name already exists");
             }
-            _context.Categories.Add(category);
-            _context.SaveChanges();
+            await _context.Categories.AddAsync(category);
+            await _context.SaveChangesAsync();
         }
 
-        public void UpdateCategory(Category category)
+        public async Task UpdateCategoryAsync(Category category)
         {
             if (category == null)
             {
                 throw new ArgumentNullException(nameof(category), "Category cannot be null");
             }
-            if (!IsCategoryExist(category.Id))
+            if (!await IsCategoryExistAsync(category.Id))
             {
                 throw new DataException("Category not found");
             }
             _context.Categories.Attach(category);
             _context.Entry(category).State = EntityState.Modified;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void DeleteCategory(int categoryId)
+        public async Task DeleteCategoryAsync(int categoryId)
         {
-            var category = _context.Categories.Find(categoryId);
+            var category = await _context.Categories.FindAsync(categoryId);
             if (category == null)
             {
                 throw new DataException("Category not found");
             }
             _context.Categories.Remove(category);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public bool IsCategoryExist(string categoryName)
+        public async Task<bool> IsCategoryExistAsync(string categoryName)
         {
-            return _context.Categories.Any(c => c.Name == categoryName);
+            return await _context.Categories.AnyAsync(c => c.Name == categoryName);
         }
 
-        public bool IsCategoryExist(int categoryId)
+        public async Task<bool> IsCategoryExistAsync(int categoryId)
         {
-            return _context.Categories.Any(c => c.Id == categoryId);
+            return await _context.Categories.AnyAsync(c => c.Id == categoryId);
         }
 
-
-        public int GetCategoryCountById(int categoryId)
+        public async Task<int> GetCategoryCountByIdAsync(int categoryId)
         {
-            return _context.Categories.Include(c => c.Videos).Where(c => c.Id == categoryId).SelectMany(c => c.Videos).Count();
+            return await _context.Categories.Include(c => c.Videos).Where(c => c.Id == categoryId).SelectMany(c => c.Videos).CountAsync();
         }
 
-        public int GetCategoryCountByName(string categoryName)
+        public async Task<int> GetCategoryCountByNameAsync(string categoryName)
         {
-            return _context.Categories.Include(c => c.Videos).Where(c => c.Name == categoryName).SelectMany(c => c.Videos).Count();
+            return await _context.Categories.Include(c => c.Videos).Where(c => c.Name == categoryName).SelectMany(c => c.Videos).CountAsync();
         }
 
 

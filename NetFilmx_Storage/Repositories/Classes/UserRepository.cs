@@ -14,131 +14,121 @@ namespace NetFilmx_Storage.Repositories
             _context = context;
         }
 
-        public List<User> GetAllUsers()
+        public async Task<List<User>> GetAllUsersAsync()
         {
-            return _context.Users.ToList();
+            return await _context.Users.ToListAsync();
         }
 
-
-        public List<User> GetUsersByVideoId(int videoId)
+        public async Task<List<User>> GetUsersByVideoIdAsync(int videoId)
         {
-            return _context.Users.Include(u => u.VideoPurchases).Where(u => u.VideoPurchases.Any(vp => vp.VideoId == videoId)).ToList();
+            return await _context.Users.Include(u => u.VideoPurchases).Where(u => u.VideoPurchases.Any(vp => vp.VideoId == videoId)).ToListAsync();
         }
 
-        public List<User> GetUsersBySeriesId(int seriesId)
+        public async Task<List<User>> GetUsersBySeriesIdAsync(int seriesId)
         {
-            return _context.Users.Include(u => u.SeriesPurchases).Where(u => u.SeriesPurchases.Any(sp => sp.SeriesId == seriesId)).ToList();
+            return await _context.Users.Include(u => u.SeriesPurchases).Where(u => u.SeriesPurchases.Any(sp => sp.SeriesId == seriesId)).ToListAsync();
         }
 
-        public User GetUserById(int userId)
+        public async Task<User> GetUserByIdAsync(int userId)
         {
-            var user = _context.Users.Find(userId);
-            if (user == null)
-            {
-                throw new Exception("User not found");
-            }
-            return user;
+            var user = await _context.Users.FindAsync(userId);
+            return user ?? throw new Exception("User not found");
         }
 
-        public User GetUserByUsername(string username)
+        public async Task<User> GetUserByUsernameAsync(string username)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Username == username);
-            if (user == null)
-            {
-                throw new Exception("User not found");
-            }
-            return user;
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            return user ?? throw new Exception("User not found");
         }
 
-        public User GetUserByCommentId(int commentId)
+        public async Task<User> GetUserByCommentIdAsync(int commentId)
         {
-            var comment = _context.Comments.Find(commentId);
+            var comment = await _context.Comments.FindAsync(commentId);
             if (comment == null)
             {
                 throw new Exception("Comment not found");
             }
-            return GetUserById(comment.UserId);
+            return await GetUserByIdAsync(comment.UserId);
         }
 
-        public User GetUserByLikeId(int likeId)
+        public async Task<User> GetUserByLikeIdAsync(int likeId)
         {
-            var like = _context.Likes.Find(likeId);
+            var like = await _context.Likes.FindAsync(likeId);
             if (like == null)
             {
                 throw new Exception("Like not found");
             }
-            return GetUserById(like.UserId);
+            return await GetUserByIdAsync(like.UserId);
         }
 
-        public User GetUserByVideoPurchaseId(int videoPurchaseId)
+        public async Task<User> GetUserByVideoPurchaseIdAsync(int videoPurchaseId)
         {
-            var videoPurchase = _context.VideoPurchases.Find(videoPurchaseId);
+            var videoPurchase = await _context.VideoPurchases.FindAsync(videoPurchaseId);
             if (videoPurchase == null)
             {
                 throw new Exception("Video purchase not found");
             }
-            return GetUserById(videoPurchase.UserId);
+            return await GetUserByIdAsync(videoPurchase.UserId);
         }
 
-        public User GetUserBySeriesPurchaseId(int seriesPurchaseId)
+        public async Task<User> GetUserBySeriesPurchaseIdAsync(int seriesPurchaseId)
         {
-            var seriesPurchase = _context.SeriesPurchases.Find(seriesPurchaseId);
+            var seriesPurchase = await _context.SeriesPurchases.FindAsync(seriesPurchaseId);
             if (seriesPurchase == null)
             {
                 throw new Exception("Series purchase not found");
             }
-            return GetUserById(seriesPurchase.UserId);
+            return await GetUserByIdAsync(seriesPurchase.UserId);
         }
 
-
-        public void AddUser(User user)
+        public async Task AddUserAsync(User user)
         {
             if (user == null)
             {
                 throw new ArgumentNullException(nameof(user), "User cannot be null");
             }
-            if (IsUserExist(user.Username))
+            if (await IsUserExistAsync(user.Username))
             {
                 throw new InvalidOperationException("A user with this username already exists");
             }
-            _context.Users.Add(user);
-            _context.SaveChanges();
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
         }
 
-        public void UpdateUser(User user)
+        public async Task UpdateUserAsync(User user)
         {
             if (user == null)
             {
                 throw new ArgumentNullException(nameof(user), "User cannot be null");
             }
-            if (!IsUserExist(user.Id))
+            if (!await IsUserExistAsync(user.Id))
             {
                 throw new Exception("User not found");
             }
             _context.Users.Attach(user);
             _context.Entry(user).State = EntityState.Modified;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void DeleteUser(int userId)
+        public async Task DeleteUserAsync(int userId)
         {
-            var user = _context.Users.Find(userId);
+            var user = await _context.Users.FindAsync(userId);
             if (user == null)
             {
                 throw new Exception("User not found");
             }
             _context.Users.Remove(user);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public bool IsUserExist(string username)
+        public async Task<bool> IsUserExistAsync(string username)
         {
-            return _context.Users.Any(u => u.Username == username);
+            return await _context.Users.AnyAsync(u => u.Username == username);
         }
 
-        public bool IsUserExist(int userId)
+        public async Task<bool> IsUserExistAsync(int userId)
         {
-            return _context.Users.Any(u => u.Id == userId);
+            return await _context.Users.AnyAsync(u => u.Id == userId);
         }
     }
 }

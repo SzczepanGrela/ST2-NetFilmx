@@ -5,22 +5,22 @@ namespace NetFilmx_Storage.Repositories
 {
     public interface IUserRepository
     {
-        List<User> GetAllUsers();
-        List<User> GetUsersByVideoId(int videoId);
-        List<User> GetUsersBySeriesId(int seriesId);
+        Task<List<User>> GetAllUsersAsync();
+        Task<List<User>> GetUsersByVideoIdAsync(int videoId);
+        Task<List<User>> GetUsersBySeriesIdAsync(int seriesId);
 
-        User GetUserByUsername(string username);
-        User GetUserById(int userId);
-        User GetUserByCommentId(int commentId);
-        User GetUserByLikeId(int likeId);
-        User GetUserByVideoPurchaseId(int videoPurchaseId);
-        User GetUserBySeriesPurchaseId(int seriesPurchaseId);
+        Task<User> GetUserByUsernameAsync(string username);
+        Task<User> GetUserByIdAsync(int userId);
+        Task<User> GetUserByCommentIdAsync(int commentId);
+        Task<User> GetUserByLikeIdAsync(int likeId);
+        Task<User> GetUserByVideoPurchaseIdAsync(int videoPurchaseId);
+        Task<User> GetUserBySeriesPurchaseIdAsync(int seriesPurchaseId);
 
-        void AddUser(User user);
-        void UpdateUser(User user);
-        void DeleteUser(int userId);
+        Task AddUserAsync(User user);
+        Task UpdateUserAsync(User user);
+        Task DeleteUserAsync(int userId);
 
-        bool IsUserExist(string username);
-        bool IsUserExist(int userId);
+        Task<bool> IsUserExistAsync(string username);
+        Task<bool> IsUserExistAsync(int userId);
     }
 }

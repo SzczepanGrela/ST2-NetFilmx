@@ -5,24 +5,23 @@ namespace NetFilmx_Storage.Repositories
 {
     public interface ISeriesRepository
     {
-        List<Series> GetAllSeries();
-        List<Series> GetSeriesByVideoId(int videoId);
-        List<Series> GetBoughtSeriesByUserId(int userId);
-       
-        Series GetSeriesById(int seriesId);
-        Series GetSeriesByName(string seriesName);
-       
-        void AddSeries(Series series);
-        void UpdateSeries(Series series);
-        void DeleteSeries(int seriesId);
+        Task<List<Series>> GetAllSeriesAsync();
+        Task<List<Series>> GetSeriesByVideoIdAsync(int videoId);
+        Task<List<Series>> GetBoughtSeriesByUserIdAsync(int userId);
 
-        bool IsSeriesExist(string seriesName);
-        bool IsSeriesExist(int seriesId);
+        Task<Series> GetSeriesByIdAsync(int seriesId);
+        Task<Series> GetSeriesByNameAsync(string seriesName);
+
+        Task AddSeriesAsync(Series series);
+        Task UpdateSeriesAsync(Series series);
+        Task DeleteSeriesAsync(int seriesId);
+
+        Task<bool> IsSeriesExistAsync(string seriesName);
+        Task<bool> IsSeriesExistAsync(int seriesId);
+
+        Task<int> GetSeriesCountByIdAsync(int seriesId);
+        Task<int> GetSeriesCountByNameAsync(string seriesName);
 
 
-        int GetSeriesCountById(int seriesId);
-        int GetSeriesCountByName(string seriesName);
-
-        
     }
 }

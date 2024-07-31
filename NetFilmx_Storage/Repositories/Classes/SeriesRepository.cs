@@ -14,100 +14,100 @@ namespace NetFilmx_Storage.Repositories
             _context = context;
         }
 
-        public List<Series> GetAllSeries()
+        public async Task<List<Series>> GetAllSeriesAsync()
         {
-            return _context.Series.ToList();
+            return await _context.Series.ToListAsync();
         }
 
-        public List<Series> GetSeriesByVideoId(int videoId)
+        public async Task<List<Series>> GetSeriesByVideoIdAsync(int videoId)
         {
-            if(!_context.Videos.Any(v => v.Id == videoId))
+            if (!await _context.Videos.AnyAsync(v => v.Id == videoId))
             {
                 throw new Exception("Video not found");
             }
 
-            return _context.Videos.Where(v => v.Id == videoId).SelectMany(v => v.Series).ToList();
-
+            return await _context.Videos.Where(v => v.Id == videoId).SelectMany(v => v.Series).ToListAsync();
         }
 
-        public List<Series> GetBoughtSeriesByUserId(int userId)
+        public async Task<List<Series>> GetBoughtSeriesByUserIdAsync(int userId)
         {
-            if(!_context.Users.Any(u => u.Id == userId))
+            if (!await _context.Users.AnyAsync(u => u.Id == userId))
             {
                 throw new Exception("User not found");
             }
-            return _context.Series.Include(s => s.SeriesPurchases).Where(s => s.SeriesPurchases.Any(p => p.UserId == userId)).ToList();
+            return await _context.Series.Include(s => s.SeriesPurchases).Where(s => s.SeriesPurchases.Any(p => p.UserId == userId)).ToListAsync();
         }
 
-
-
-        public Series GetSeriesById(int seriesId)
+        public async Task<Series> GetSeriesByIdAsync(int seriesId)
         {
-            var series = _context.Series.Find(seriesId);
-            return series == null ? throw new Exception("Series not found") : series;
+            var series = await _context.Series.FindAsync(seriesId);
+            return series ?? throw new Exception("Series not found");
         }
 
-        public Series GetSeriesByName(string seriesName)
+        public async Task<Series> GetSeriesByNameAsync(string seriesName)
         {
-            var series = _context.Series.FirstOrDefault(c => c.Name == seriesName);
-            return series == null ? throw new Exception("Series not found") : series;
+            var series = await _context.Series.FirstOrDefaultAsync(c => c.Name == seriesName);
+            return series ?? throw new Exception("Series not found");
         }
 
-
-        public void AddSeries(Series series)
+        public async Task AddSeriesAsync(Series series)
         {
             if (series == null)
             {
                 throw new ArgumentNullException(nameof(series), "Series cannot be null");
             }
-            if (IsSeriesExist(series.Name))
+            if (await IsSeriesExistAsync(series.Name))
             {
                 throw new InvalidOperationException("A series with this name already exists");
             }
-            _context.Series.Add(series);
-            _context.SaveChanges();
+            await _context.Series.AddAsync(series);
+            await _context.SaveChangesAsync();
         }
 
-        public void UpdateSeries(Series series)
+        public async Task UpdateSeriesAsync(Series series)
         {
             if (series == null)
             {
                 throw new ArgumentNullException(nameof(series), "Series cannot be null");
             }
-            if (!IsSeriesExist(series.Id))
+            if (!await IsSeriesExistAsync(series.Id))
             {
                 throw new Exception("Series not found");
             }
             _context.Series.Attach(series);
             _context.Entry(series).State = EntityState.Modified;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void DeleteSeries(int seriesId)
+        public async Task DeleteSeriesAsync(int seriesId)
         {
-            var series = _context.Series.Find(seriesId) ?? throw new Exception("Series not found");
+            var series = await _context.Series.FindAsync(seriesId);
+            if (series == null)
+            {
+                throw new Exception("Series not found");
+            }
             _context.Series.Remove(series);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public bool IsSeriesExist(string seriesName)
+        public async Task<bool> IsSeriesExistAsync(string seriesName)
         {
-            return _context.Series.Any(c => c.Name == seriesName);
+            return await _context.Series.AnyAsync(c => c.Name == seriesName);
         }
 
-        public bool IsSeriesExist(int seriesId)
+        public async Task<bool> IsSeriesExistAsync(int seriesId)
         {
-            return _context.Series.Any(c => c.Id == seriesId);
+            return await _context.Series.AnyAsync(c => c.Id == seriesId);
         }
 
-        public int GetSeriesCountById(int seriesId)
+        public async Task<int> GetSeriesCountByIdAsync(int seriesId)
         {
-            return _context.Series.Include(c => c.Videos).Where(s => s.Id == seriesId).SelectMany(s => s.Videos).Count();
+            return await _context.Series.Include(c => c.Videos).Where(s => s.Id == seriesId).SelectMany(s => s.Videos).CountAsync();
         }
 
-        public int GetSeriesCountByName(string seriesName)
+        public async Task<int> GetSeriesCountByNameAsync(string seriesName)
         {
-            return _context.Series.Include(c => c.Videos).Where(s => s.Name == seriesName).SelectMany(s => s.Videos).Count();
+            return await _context.Series.Include(c => c.Videos).Where(s => s.Name == seriesName).SelectMany(s => s.Videos).CountAsync();
         }
 
 

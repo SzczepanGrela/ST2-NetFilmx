@@ -14,78 +14,74 @@ namespace NetFilmx_Storage.Repositories
             _context = context;
         }
 
-        public List<Comment> GetAllComments()
+        public async Task<List<Comment>> GetAllCommentsAsync()
         {
-            return _context.Comments.ToList();
+            return await _context.Comments.ToListAsync();
         }
 
-        public List<Comment> GetCommentsByVideoId(int videoId)
+        public async Task<List<Comment>> GetCommentsByVideoIdAsync(int videoId)
         {
-            if(!_context.Videos.Any(v => v.Id == videoId))
+            if (!await _context.Videos.AnyAsync(v => v.Id == videoId))
             {
                 throw new Exception("Video not found");
             }
-            return _context.Comments.Where(c => c.VideoId == videoId).ToList();
+            return await _context.Comments.Where(c => c.VideoId == videoId).ToListAsync();
         }
-        
-        public List<Comment> GetCommentsByUserId(int userId)
+
+        public async Task<List<Comment>> GetCommentsByUserIdAsync(int userId)
         {
-            if(!_context.Users.Any(u => u.Id == userId))
+            if (!await _context.Users.AnyAsync(u => u.Id == userId))
             {
                 throw new Exception("User not found");
             }
-            return _context.Comments.Where(c => c.UserId == userId).ToList();
+            return await _context.Comments.Where(c => c.UserId == userId).ToListAsync();
         }
 
-        public Comment GetCommentById(int id)
+        public async Task<Comment> GetCommentByIdAsync(int id)
         {
-            var comment = _context.Comments.Find(id);
-            if (comment == null)
-            {
-                throw new Exception("Comment not found");
-            }
-            return comment;
+            var comment = await _context.Comments.FindAsync(id);
+            return comment ?? throw new Exception("Comment not found");
         }
 
-        public void AddComment(Comment comment)
+        public async Task AddCommentAsync(Comment comment)
         {
             if (comment == null)
             {
                 throw new ArgumentNullException(nameof(comment), "Comment cannot be null");
             }
-            _context.Comments.Add(comment);
-            _context.SaveChanges();
+            await _context.Comments.AddAsync(comment);
+            await _context.SaveChangesAsync();
         }
 
-        public void UpdateComment(Comment comment)
+        public async Task UpdateCommentAsync(Comment comment)
         {
             if (comment == null)
             {
                 throw new ArgumentNullException(nameof(comment), "Comment cannot be null");
             }
-            if (!IsCommentExist(comment.Id))
+            if (!await IsCommentExistAsync(comment.Id))
             {
                 throw new Exception("Comment not found");
             }
             _context.Comments.Attach(comment);
             _context.Entry(comment).State = EntityState.Modified;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void DeleteComment(int id)
+        public async Task DeleteCommentAsync(int id)
         {
-            var comment = GetCommentById(id);
+            var comment = await GetCommentByIdAsync(id);
             if (comment == null)
             {
                 throw new Exception("Comment not found");
             }
             _context.Comments.Remove(comment);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public bool IsCommentExist(int commentId)
+        public async Task<bool> IsCommentExistAsync(int commentId)
         {
-            return _context.Comments.Any(c => c.Id == commentId);
+            return await _context.Comments.AnyAsync(c => c.Id == commentId);
         }
     }
 }

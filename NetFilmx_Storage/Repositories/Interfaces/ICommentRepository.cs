@@ -5,14 +5,14 @@ namespace NetFilmx_Storage.Repositories
 {
     public interface ICommentRepository
     {
-        List<Comment> GetAllComments();
-        List<Comment> GetCommentsByVideoId(int videoId);
-        List<Comment> GetCommentsByUserId(int userId);
-        Comment GetCommentById(int commentId);
-        void AddComment(Comment comment);
-        void UpdateComment(Comment comment);
-        void DeleteComment(int commentId);
+        Task<List<Comment>> GetAllCommentsAsync();
+        Task<List<Comment>> GetCommentsByVideoIdAsync(int videoId);
+        Task<List<Comment>> GetCommentsByUserIdAsync(int userId);
+        Task<Comment> GetCommentByIdAsync(int commentId);
+        Task AddCommentAsync(Comment comment);
+        Task UpdateCommentAsync(Comment comment);
+        Task DeleteCommentAsync(int commentId);
 
-        bool IsCommentExist(int commentId);
+        Task<bool> IsCommentExistAsync(int commentId);
     }
 }

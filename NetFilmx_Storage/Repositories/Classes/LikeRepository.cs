@@ -14,82 +14,60 @@ namespace NetFilmx_Storage.Repositories
             _context = context;
         }
 
-        public List<Like> GetLikesByVideoId(int videoId)
+        public async Task<int> GetLikesCountByVideoIdAsync(int videoId)
         {
-            var video = _context.Videos.Find(videoId);
+            var video = await _context.Videos.FindAsync(videoId);
             if (video == null)
             {
                 throw new Exception("Video not found");
             }
-            return _context.Likes.Where(l => l.VideoId == videoId).ToList();
+            return await _context.Likes.CountAsync(l => l.VideoId == videoId);
         }
 
-        public Like GetLikeById(int id)
-        {
-            var like = _context.Likes.Find(id);
-            if (like == null)
-            {
-                throw new Exception("Like not found");
-            }
-            return like;
-        }
-
-
-        public int GetLikesCountByVideoId(int videoId)
-        {
-            var video = _context.Videos.Find(videoId);
-            if (video == null)
-            {
-                throw new Exception("Video not found");
-            }
-            return _context.Likes.Count(l => l.VideoId == videoId);
-        }
-
-
-        public void AddLike(Like like)
+        public async Task AddLikeAsync(Like like)
         {
             if (like == null)
             {
                 throw new ArgumentNullException(nameof(like), "Like cannot be null");
             }
-            if (IsLikeExist(like.VideoId, like.UserId))
+            if (await IsLikeExistAsync(like.VideoId, like.UserId))
             {
                 throw new InvalidOperationException("The like already exists");
             }
-            if (!_context.Videos.Any(v => v.Id == like.VideoId))
+            if (!await _context.Videos.AnyAsync(v => v.Id == like.VideoId))
             {
                 throw new Exception("Video not found");
             }
-            if (!_context.Users.Any(u => u.Id == like.UserId))
+            if (!await _context.Users.AnyAsync(u => u.Id == like.UserId))
             {
                 throw new Exception("User not found");
             }
-            _context.Likes.Add(like);
-            _context.SaveChanges();
+            await _context.Likes.AddAsync(like);
+            await _context.SaveChangesAsync();
         }
 
-        public void DeleteLike(int id)
+        public async Task DeleteLikeAsync(int id)
         {
-            var like = GetLikeById(id);
+            var like = await GetLikeByIdAsync(id);
             if (like == null)
             {
                 throw new Exception("Like not found");
             }
             _context.Likes.Remove(like);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public bool IsLikeExist(int video_Id, int user_Id)
+        public async Task<bool> IsLikeExistAsync(int video_Id, int user_Id)
         {
-            if(!_context.Videos.Any(v => v.Id == video_Id))
+            if (!await _context.Videos.AnyAsync(v => v.Id == video_Id))
             {
                 throw new Exception("Video not found");
             }
-            if (!_context.Users.Any(u => u.Id == user_Id))
+            if (!await _context.Users.AnyAsync(u => u.Id == user_Id))
             {
                 throw new Exception("User not found");
             }
-            return _context.Likes.Any(l => l.VideoId == video_Id && l.UserId == user_Id);
+            return await _context.Likes.AnyAsync(l => l.VideoId == video_Id && l.UserId == user_Id);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MediatR;
 using NetFilmx_Storage.Repositories;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,10 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Category.GetById
 {
-    public sealed class GetCategoryByIdQueryHandler<TDto> : IQueryHandler<GetCategoryByIdQuery, QResult<TDto>>
+    public sealed class GetCategoryByIdQueryHandler<TDto> : IRequestHandler<GetCategoryByIdQuery<TDto>, QResult<TDto>>
     {
         private readonly ICategoryRepository _repository;
         private readonly IMapper _mapper;
-        
 
         public GetCategoryByIdQueryHandler(ICategoryRepository repository, IMapper mapper)
         {
@@ -20,13 +20,14 @@ namespace NetFilmx_Service.Query.Category.GetById
             _mapper = mapper;
         }
 
-        public QResult<TDto> Handle(GetCategoryByIdQuery query)
+        public async Task<QResult<TDto>> Handle(GetCategoryByIdQuery<TDto> query, CancellationToken cancellationToken)
         {
-            var category = _repository.GetCategoryById(query.Id);
+            var category = await _repository.GetCategoryById(query.Id);
             if (category == null)
             {
                 return QResult<TDto>.Fail("Category not found");
             }
+
             TDto categoryDto;
             try
             {
@@ -37,7 +38,6 @@ namespace NetFilmx_Service.Query.Category.GetById
             {
                 return QResult<TDto>.Fail(ex.Message);
             }
-            
         }
     }
 }

@@ -42,11 +42,15 @@ namespace NetFilmx_Web.Controllers.Category
 
         public async Task<IActionResult> Edit(int id)
         {
-            var category = await _mediator.Send(new GetCategoryByIdQuery { Id = id });
-            if (category == null)
+            var query = new GetCategoryByIdQuery(id);
+            var result = await _mediator.Send(query);
+
+            if (!result.IsSuccess)
             {
                 return View("Error");
             }
+
+            var category = result.Value;
 
             var model = new EditCategoryCommand
             {

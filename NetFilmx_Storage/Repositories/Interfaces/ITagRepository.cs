@@ -5,20 +5,20 @@ namespace NetFilmx_Storage.Repositories
 {
     public interface ITagRepository
     {
-        List<Tag> GetAllTags();
-        List<Tag> GetTagsByVideoId(int videoId);
+        Task<List<Tag>> GetAllTagsAsync();
+        Task<List<Tag>> GetTagsByVideoIdAsync(int videoId);
 
-        Tag GetTagById(int tagId);
-        Tag GetTagByName(string tagName);
+        Task<Tag> GetTagByIdAsync(int tagId);
+        Task<Tag> GetTagByNameAsync(string tagName);
 
-        void AddTag(Tag tag);
-        void UpdateTag(Tag tag);
-        void DeleteTag(int tagId);
-       
-        bool IsTagExist(int tagId);
-        bool IsTagExist(string tagName);
+        Task AddTagAsync(Tag tag);
+        Task UpdateTagAsync(Tag tag);
+        Task DeleteTagAsync(int tagId);
 
-        int GetTagCountById(int tagId);
-        int GetTagCountByName(string tagName);
+        Task<bool> IsTagExistAsync(int tagId);
+        Task<bool> IsTagExistAsync(string tagName);
+
+        Task<int> GetTagCountByIdAsync(int tagId);
+        Task<int> GetTagCountByNameAsync(string tagName);
     }
 }

@@ -5,21 +5,20 @@ namespace NetFilmx_Storage.Repositories
 {
     public interface ICategoryRepository
     {
-        List<Category> GetAllCategories();
-        List<Category> GetCategoriesByVideoId(int videoId);
+        Task<List<Category>> GetAllCategoriesAsync();
+        Task<List<Category>> GetCategoriesByVideoIdAsync(int videoId);
 
-        Category GetCategoryById(int categoryId);
-        Category GetCategoryByName(string categoryName);
+        Task<Category> GetCategoryByIdAsync(int categoryId);
+        Task<Category> GetCategoryByNameAsync(string categoryName);
 
-      
-        void AddCategory(Category category);
-        void UpdateCategory(Category category);
-        void DeleteCategory(int categoryId);
-        
-        bool IsCategoryExist(string categoryName);
-        bool IsCategoryExist(int categoryId);
+        Task AddCategoryAsync(Category category);
+        Task UpdateCategoryAsync(Category category);
+        Task DeleteCategoryAsync(int categoryId);
 
-        int GetCategoryCountById(int categoryId);
-        int GetCategoryCountByName(string categoryName);
+        Task<bool> IsCategoryExistAsync(string categoryName);
+        Task<bool> IsCategoryExistAsync(int categoryId);
+
+        Task<int> GetCategoryCountByIdAsync(int categoryId);
+        Task<int> GetCategoryCountByNameAsync(string categoryName);
     }
 }

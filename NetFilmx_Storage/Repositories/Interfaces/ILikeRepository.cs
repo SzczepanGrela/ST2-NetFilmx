@@ -5,9 +5,9 @@ namespace NetFilmx_Storage.Repositories
 {
     public interface ILikeRepository
     {
-        int GetLikesCountByVideoId(int videoId);
-        void AddLike(Like like);
-        void DeleteLike(int likeId);
-        bool IsLikeExist(int video_Id, int user_Id);
+        Task<int> GetLikesCountByVideoIdAsync(int videoId);
+        Task AddLikeAsync(Like like);
+        Task DeleteLikeAsync(int likeId);
+        Task<bool> IsLikeExistAsync(int video_Id, int user_Id);
     }
 }

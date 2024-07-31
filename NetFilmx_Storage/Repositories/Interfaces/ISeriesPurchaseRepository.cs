@@ -10,18 +10,19 @@ namespace NetFilmx_Storage.Repositories
     public interface ISeriesPurchaseRepository
     {
 
-        List<SeriesPurchase> GetAllSeriesPurchases();
-        List<SeriesPurchase> GetSeriesPurchasesByUserId(int userId);
-        List<SeriesPurchase> GetSeriesPurchasesBySeriesId(int seriesId);
 
-        SeriesPurchase GetSeriesPurchaseById(int seriesPurchaseId);
+        Task<List<SeriesPurchase>> GetAllSeriesPurchasesAsync();
+        Task<List<SeriesPurchase>> GetSeriesPurchasesByUserIdAsync(int userId);
+        Task<List<SeriesPurchase>> GetSeriesPurchasesBySeriesIdAsync(int seriesId);
 
-        void AddSeriesPurchase(SeriesPurchase seriesPurchase);
-        void UpdateSeriesPurchase(SeriesPurchase seriesPurchase);
-        void DeleteSeriesPurchase(int seriesPurchaseId);
+        Task<SeriesPurchase> GetSeriesPurchaseByIdAsync(int seriesPurchaseId);
 
-        bool IsSeriesPurchaseExist(int seriesPurchaseId);
-        bool IsSeriesPurchaseExist(int userId, int seriesId);
+        Task AddSeriesPurchaseAsync(SeriesPurchase seriesPurchase);
+        Task UpdateSeriesPurchaseAsync(SeriesPurchase seriesPurchase);
+        Task DeleteSeriesPurchaseAsync(int seriesPurchaseId);
+
+        Task<bool> IsSeriesPurchaseExistAsync(int seriesPurchaseId);
+        Task<bool> IsSeriesPurchaseExistAsync(int userId, int seriesId);
 
 
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using NetFilmx_Storage.Entities;
 
 namespace NetFilmx_Storage.Repositories
@@ -12,98 +13,98 @@ namespace NetFilmx_Storage.Repositories
 
         private readonly NetFilmxDbContext _context;
 
-        public void AddSeriesPurchase(SeriesPurchase seriesPurchase)
+        public SeriesPurchaseRepository(NetFilmxDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task AddSeriesPurchaseAsync(SeriesPurchase seriesPurchase)
         {
             if (seriesPurchase == null)
             {
                 throw new ArgumentNullException(nameof(seriesPurchase), "Series purchase cannot be null");
             }
-            if (IsSeriesPurchaseExist(seriesPurchase.UserId, seriesPurchase.SeriesId))
+            if (await IsSeriesPurchaseExistAsync(seriesPurchase.UserId, seriesPurchase.SeriesId))
             {
                 throw new InvalidOperationException("The series purchase already exists");
             }
-            _context.SeriesPurchases.Add(seriesPurchase);
-            _context.SaveChanges();
+            await _context.SeriesPurchases.AddAsync(seriesPurchase);
+            await _context.SaveChangesAsync();
         }
 
-        public void DeleteSeriesPurchase(int seriesPurchaseId)
+        public async Task DeleteSeriesPurchaseAsync(int seriesPurchaseId)
         {
-            var seriesPurchase = GetSeriesPurchaseById(seriesPurchaseId);
+            var seriesPurchase = await GetSeriesPurchaseByIdAsync(seriesPurchaseId);
             if (seriesPurchase == null)
             {
                 throw new Exception("Series purchase not found");
             }
             _context.SeriesPurchases.Remove(seriesPurchase);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public List<SeriesPurchase> GetAllSeriesPurchases()
+        public async Task<List<SeriesPurchase>> GetAllSeriesPurchasesAsync()
         {
-            return _context.SeriesPurchases.ToList();
+            return await _context.SeriesPurchases.ToListAsync();
         }
 
-        public SeriesPurchase GetSeriesPurchaseById(int seriesPurchaseId)
+        public async Task<SeriesPurchase> GetSeriesPurchaseByIdAsync(int seriesPurchaseId)
         {
-            var seriesPurchase = _context.SeriesPurchases.Find(seriesPurchaseId);
-            if (seriesPurchase == null)
-            {
-                throw new Exception("Series purchase not found");
-            }
-            return seriesPurchase;
+            var seriesPurchase = await _context.SeriesPurchases.FindAsync(seriesPurchaseId);
+            return seriesPurchase ?? throw new Exception("Series purchase not found");
         }
 
-        public List<SeriesPurchase> GetSeriesPurchasesBySeriesId(int seriesId)
+        public async Task<List<SeriesPurchase>> GetSeriesPurchasesBySeriesIdAsync(int seriesId)
         {
-            var series = _context.Series.Find(seriesId);
+            var series = await _context.Series.FindAsync(seriesId);
             if (series == null)
             {
                 throw new Exception("Series not found");
             }
-            return _context.SeriesPurchases.Where(sp => sp.SeriesId == seriesId).ToList();
+            return await _context.SeriesPurchases.Where(sp => sp.SeriesId == seriesId).ToListAsync();
         }
 
-        public List<SeriesPurchase> GetSeriesPurchasesByUserId(int userId)
+        public async Task<List<SeriesPurchase>> GetSeriesPurchasesByUserIdAsync(int userId)
         {
-            var user = _context.Users.Find(userId);
+            var user = await _context.Users.FindAsync(userId);
             if (user == null)
             {
                 throw new Exception("User not found");
             }
-            return _context.SeriesPurchases.Where(sp => sp.UserId == userId).ToList();
+            return await _context.SeriesPurchases.Where(sp => sp.UserId == userId).ToListAsync();
         }
 
-        public bool IsSeriesPurchaseExist(int userId, int seriesId)
+        public async Task<bool> IsSeriesPurchaseExistAsync(int userId, int seriesId)
         {
-            if (!_context.Users.Any(u => u.Id == userId))
+            if (!await _context.Users.AnyAsync(u => u.Id == userId))
             {
                 throw new Exception("User not found");
             }
-            if (!_context.Series.Any(s => s.Id == seriesId))
+            if (!await _context.Series.AnyAsync(s => s.Id == seriesId))
             {
                 throw new Exception("Series not found");
             }
-            return _context.SeriesPurchases.Any(sp => sp.UserId == userId && sp.SeriesId == seriesId);
+            return await _context.SeriesPurchases.AnyAsync(sp => sp.UserId == userId && sp.SeriesId == seriesId);
         }
 
-        public bool IsSeriesPurchaseExist(int seriesPurchaseId)
+        public async Task<bool> IsSeriesPurchaseExistAsync(int seriesPurchaseId)
         {
-           return _context.SeriesPurchases.Any(sp => sp.Id == seriesPurchaseId);
+            return await _context.SeriesPurchases.AnyAsync(sp => sp.Id == seriesPurchaseId);
         }
 
-        public void UpdateSeriesPurchase(SeriesPurchase seriesPurchase)
+        public async Task UpdateSeriesPurchaseAsync(SeriesPurchase seriesPurchase)
         {
             if (seriesPurchase == null)
             {
                 throw new ArgumentNullException(nameof(seriesPurchase), "Series purchase cannot be null");
             }
-            if (!IsSeriesPurchaseExist(seriesPurchase.Id))
+            if (!await IsSeriesPurchaseExistAsync(seriesPurchase.Id))
             {
                 throw new Exception("Series purchase not found");
             }
             _context.SeriesPurchases.Attach(seriesPurchase);
-            _context.Entry(seriesPurchase).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            _context.SaveChanges();
-
+            _context.Entry(seriesPurchase).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
         }
     }
 
