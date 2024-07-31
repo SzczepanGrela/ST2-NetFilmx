@@ -17,7 +17,7 @@ namespace NetFilmx_Service.Command.Category.Delete
             _repository = repository;
         }
 
-        public CResult Handle(DeleteCategoryCommand command)
+        public async Task<CResult> Handle(DeleteCategoryCommand command, CancellationToken cancellationToken)
         {
             if (command == null)
             {

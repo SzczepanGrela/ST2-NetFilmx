@@ -16,7 +16,7 @@ namespace NetFilmx_Service.Command.VideoPurchase.Delete
             _repository = repository;
         }
 
-        public CResult Handle(DeleteVideoPurchaseCommand command)
+        public async Task<CResult> Handle(DeleteVideoPurchaseCommand command, CancellationToken cancellationToken)
         {
             if (command == null)
             {

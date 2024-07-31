@@ -16,7 +16,7 @@ namespace NetFilmx_Service.Command.Video.RemoveVideoFromTag
             _repository = videoRepository;
         }
 
-        public CResult Handle(RemoveVideoFromTagCommand command)
+        public async Task<CResult> Handle(RemoveVideoFromTagCommand command, CancellationToken cancellationToken)
         {
             if (command == null)
             {

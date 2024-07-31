@@ -17,7 +17,7 @@ namespace NetFilmx_Service.Command.Comment.Edit
         }
 
 
-        public CResult Handle(EditCommentCommand command)
+        public async Task<CResult> Handle(EditCommentCommand command, CancellationToken cancellationToken)
         {
             if (command == null)
             {

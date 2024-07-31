@@ -16,7 +16,7 @@ namespace NetFilmx_Service.Command.Video.Add
             _repository = repository;
         }
 
-        public CResult Handle(AddVideoCommand command)
+        public async Task<CResult> Handle(AddVideoCommand command, CancellationToken cancellationToken)
         {
             if (command == null)
             {

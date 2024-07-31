@@ -17,7 +17,7 @@ namespace NetFilmx_Service.Command.Video.AddVideoToSeries
         }
 
 
-        public CResult Handle(AddVideoToSeriesCommand command)
+        public async Task<CResult> Handle(AddVideoToSeriesCommand command, CancellationToken cancellationToken)
         {
             if (command == null)
             {

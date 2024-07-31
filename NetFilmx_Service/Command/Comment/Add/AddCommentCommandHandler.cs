@@ -17,7 +17,7 @@ namespace NetFilmx_Service.Command.Comment.Add
         }
 
 
-        public CResult Handle(AddCommentCommand command)
+        public async Task<CResult> Handle(AddCommentCommand command, CancellationToken cancellationToken)
         {
             if (command == null)
             {

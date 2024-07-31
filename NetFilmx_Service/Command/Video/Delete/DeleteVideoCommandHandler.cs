@@ -18,7 +18,7 @@ namespace NetFilmx_Service.Command.Video.Delete
         }
 
 
-        public CResult Handle(DeleteVideoCommand command)
+        public async Task<CResult> Handle(DeleteVideoCommand command, CancellationToken cancellationToken)
         {
             if(command == null)
             {

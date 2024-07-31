@@ -18,7 +18,7 @@ namespace NetFilmx_Service.Command.Video.RemoveVideoFromSeries
         }
 
 
-        public CResult Handle(RemoveVideoFromSeriesCommand command)
+        public async Task<CResult> Handle(RemoveVideoFromSeriesCommand command, CancellationToken cancellationToken)
         {
             if(command == null)
             {

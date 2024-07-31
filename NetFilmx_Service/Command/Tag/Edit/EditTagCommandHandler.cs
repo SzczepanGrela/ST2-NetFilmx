@@ -16,7 +16,7 @@ namespace NetFilmx_Service.Command.Tag.Edit
             _repository = repository;
         }
 
-        public CResult Handle(EditTagCommand command)
+        public async Task<CResult> Handle(EditTagCommand command)
         {
             if (command == null)
             {

@@ -18,7 +18,7 @@ namespace NetFilmx_Service.Command.Comment.Delete
         }
 
 
-        public CResult Handle(DeleteCommentCommand command)
+        public async Task<CResult> Handle(DeleteCommentCommand command)
         {
             if (command == null)
             {

@@ -18,7 +18,7 @@ namespace NetFilmx_Service.Command.Category.Add
             _repository = repository;
         }
 
-        public CResult Handle(AddCategoryCommand command)
+        public async Task<CResult> Handle(AddCategoryCommand command, CancellationToken cancellationToken)
         {
             var validationResult = new AddCategoryCommandValidator().Validate(command);
             if (!validationResult.IsValid)

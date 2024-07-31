@@ -16,7 +16,7 @@ namespace NetFilmx_Service.Command.VideoPurchase.Add
             _videoPurchaseRepository = videoPurchaseRepository;
         }
 
-        public CResult Handle(AddVideoPurchaseCommand command)
+        public async Task<CResult> Handle(AddVideoPurchaseCommand command, CancellationToken cancellationToken)
         {
             if (command == null)
             {

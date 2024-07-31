@@ -16,7 +16,7 @@ namespace NetFilmx_Service.Command.SeriesPurchase.Add
             _repository = repository;
         }
 
-        public CResult Handle(AddSeriesPurchaseCommand command)
+        public async Task<CResult> Handle(AddSeriesPurchaseCommand command, CancellationToken cancellationToken)
         {
             if (command == null)
             {

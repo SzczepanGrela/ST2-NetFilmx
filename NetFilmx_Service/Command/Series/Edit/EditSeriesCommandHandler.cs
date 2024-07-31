@@ -16,7 +16,7 @@ namespace NetFilmx_Service.Command.Series.Edit
             _repository = repository;
         }
 
-        public CResult Handle(EditSeriesCommand command)
+        public async Task<CResult> Handle(EditSeriesCommand command, CancellationToken cancellationToken)
         {
             if (command == null)
             {

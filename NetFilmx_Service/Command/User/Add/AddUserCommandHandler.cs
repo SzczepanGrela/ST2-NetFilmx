@@ -17,7 +17,7 @@ namespace NetFilmx_Service.Command.User.RegisterUser.Add
             _repository = repository;
         }
 
-        public CResult Handle(AddUserCommand command)
+        public async Task<CResult> Handle(AddUserCommand command, CancellationToken cancellationToken)
         {
             if(command == null)
             {

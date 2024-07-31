@@ -18,7 +18,7 @@ namespace NetFilmx_Service.Command.Category.Edit
             _repository = repository;
         }
 
-        public CResult Handle(EditCategoryCommand command)
+        public async Task<CResult> Handle(EditCategoryCommand command)
         {
             var validationResult = new EditCategoryCommandValidator().Validate(command);
 

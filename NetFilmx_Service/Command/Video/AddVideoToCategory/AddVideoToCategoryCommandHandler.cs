@@ -17,7 +17,7 @@ namespace NetFilmx_Service.Command.Video.AddVideoToCategory
             _repository = repository;
         }
 
-        public CResult Handle(AddVideoToCategoryCommand command)
+        public async Task<CResult> Handle(AddVideoToCategoryCommand command, CancellationToken cancellationToken)
         {
             if (command == null)
             {

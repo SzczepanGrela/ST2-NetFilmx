@@ -18,7 +18,7 @@ namespace NetFilmx_Service.Command.Tag.Delete
             _repository = repository;
         }
 
-        public CResult Handle(DeleteTagCommand command)
+        public async Task<CResult> Handle(DeleteTagCommand command, CancellationToken cancellationToken)
         {
 
             if (command == null)

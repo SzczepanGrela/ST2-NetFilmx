@@ -16,7 +16,7 @@ namespace NetFilmx_Service.Command.User.Delete
             _repository = repository;
         }
 
-        public CResult Handle(DeleteUserCommand command)
+        public async Task<CResult> Handle(DeleteUserCommand command, CancellationToken cancellationToken)
         {
             if (command == null)
             {

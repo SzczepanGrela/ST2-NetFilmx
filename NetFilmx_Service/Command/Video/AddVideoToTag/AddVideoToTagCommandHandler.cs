@@ -16,7 +16,7 @@ namespace NetFilmx_Service.Command.Video.AddVideoToTag
             _repository = videoRepository;
         }
 
-        public CResult Handle(AddVideoToTagCommand command)
+        public async Task<CResult> Handle(AddVideoToTagCommand command, CancellationToken cancellationToken)
         {
             if (command == null)
             {

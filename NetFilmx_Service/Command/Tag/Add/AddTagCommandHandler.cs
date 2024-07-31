@@ -16,7 +16,7 @@ namespace NetFilmx_Service.Command.Tag.Add
             _repository = repository;
         }
 
-        public CResult Handle(AddTagCommand command)
+        public async Task<CResult> Handle(AddTagCommand command, CancellationToken cancellationToken)
         {
             if (command == null)
             {

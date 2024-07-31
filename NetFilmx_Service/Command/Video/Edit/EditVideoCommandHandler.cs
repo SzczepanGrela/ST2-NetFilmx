@@ -17,7 +17,7 @@ namespace NetFilmx_Service.Command.Video.Edit
         }
 
 
-        public CResult Handle(EditVideoCommand command)
+        public async Task<CResult> Handle(EditVideoCommand command, CancellationToken cancellationToken)
         {
             if (command == null)
             {

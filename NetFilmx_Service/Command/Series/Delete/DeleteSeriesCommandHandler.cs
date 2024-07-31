@@ -18,7 +18,7 @@ namespace NetFilmx_Service.Command.Series.Delete
         }
 
 
-        public CResult Handle(DeleteSeriesCommand command)
+        public async Task<CResult> Handle(DeleteSeriesCommand command, CancellationToken cancellationToken)
         {
             if (command == null)
             {
