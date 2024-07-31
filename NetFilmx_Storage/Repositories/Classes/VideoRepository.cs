@@ -21,7 +21,7 @@ namespace NetFilmx_Storage.Repositories
 
         public List<Video> GetVideosByCategoryId(int categoryId)
         {
-            if(!_context.Categories.Any(c => c.Id == categoryId))
+            if (!_context.Categories.Any(c => c.Id == categoryId))
             {
                 throw new Exception("Category not found");
             }
@@ -30,7 +30,7 @@ namespace NetFilmx_Storage.Repositories
 
         public List<Video> GetVideosByTagId(int tagId)
         {
-            if(!_context.Tags.Any(t => t.Id == tagId))
+            if (!_context.Tags.Any(t => t.Id == tagId))
             {
                 throw new Exception("Tag not found");
             }
@@ -39,7 +39,7 @@ namespace NetFilmx_Storage.Repositories
 
         public List<Video> GetVideosBySeriesId(int seriesId)
         {
-            if(!_context.Series.Any(s => s.Id == seriesId))
+            if (!_context.Series.Any(s => s.Id == seriesId))
             {
                 throw new Exception("Series not found");
             }
@@ -48,7 +48,7 @@ namespace NetFilmx_Storage.Repositories
 
         public List<Video> GetVideosByUserId(int userId)
         {
-            if(!_context.Users.Any(u => u.Id == userId))
+            if (!_context.Users.Any(u => u.Id == userId))
             {
                 throw new Exception("User not found");
             }
@@ -57,7 +57,7 @@ namespace NetFilmx_Storage.Repositories
 
         public Video GetVideoByVideoPurchaseId(int videoPurchaseId)
         {
-            if(!_context.VideoPurchases.Any(vp => vp.Id == videoPurchaseId))
+            if (!_context.VideoPurchases.Any(vp => vp.Id == videoPurchaseId))
             {
                 throw new Exception("Video purchase not found");
             }
@@ -67,7 +67,7 @@ namespace NetFilmx_Storage.Repositories
 
         public Video GetVideoByCommentId(int commentId)
         {
-            if(!_context.Comments.Any(c => c.Id == commentId))
+            if (!_context.Comments.Any(c => c.Id == commentId))
             {
                 throw new Exception("Comment not found");
             }
@@ -77,7 +77,7 @@ namespace NetFilmx_Storage.Repositories
 
         public Video GetVideoByLikeId(int likeId)
         {
-            if(!_context.Likes.Any(l => l.Id == likeId))
+            if (!_context.Likes.Any(l => l.Id == likeId))
             {
                 throw new Exception("Like not found");
             }
@@ -106,7 +106,7 @@ namespace NetFilmx_Storage.Repositories
         public void UpdateVideo(Video video)
         {
 
-            if(video == null)
+            if (video == null)
             {
                 throw new ArgumentNullException(nameof(video), "Video cannot be null");
             }
@@ -289,11 +289,11 @@ namespace NetFilmx_Storage.Repositories
 
         public bool IsVideoExistInTag(int tagId, int videoId)
         {
-            if(!_context.Tags.Any(t => t.Id == tagId))
+            if (!_context.Tags.Any(t => t.Id == tagId))
             {
                 throw new Exception("Tag not found");
             }
-            if(!_context.Videos.Any(v => v.Id == videoId))
+            if (!_context.Videos.Any(v => v.Id == videoId))
             {
                 throw new Exception("Video not found");
             }
@@ -302,11 +302,11 @@ namespace NetFilmx_Storage.Repositories
 
         public bool IsVideoExistInSeries(int seriesId, int videoId)
         {
-            if(!_context.Series.Any(s => s.Id == seriesId))
+            if (!_context.Series.Any(s => s.Id == seriesId))
             {
                 throw new Exception("Series not found");
             }
-            if(!_context.Videos.Any(v => v.Id == videoId))
+            if (!_context.Videos.Any(v => v.Id == videoId))
             {
                 throw new Exception("Video not found");
             }
@@ -315,15 +315,46 @@ namespace NetFilmx_Storage.Repositories
 
         public bool IsVideoExistInCategory(int categoryId, int videoId)
         {
-            if(!_context.Categories.Any(c => c.Id == categoryId))
+            if (!_context.Categories.Any(c => c.Id == categoryId))
             {
                 throw new Exception("Category not found");
             }
-            if(!_context.Videos.Any(v => v.Id == videoId))
+            if (!_context.Videos.Any(v => v.Id == videoId))
             {
                 throw new Exception("Video not found");
             }
             return _context.Categories.Include(c => c.Videos).Any(c => c.Id == categoryId && c.Videos.Any(v => v.Id == videoId));
+        }
+
+
+        public List<Video> GetVideosByExcludedSeriesId(int excludedSeriesId)
+        {
+            if (!_context.Series.Any(s => s.Id == excludedSeriesId))
+            {
+                throw new Exception("Series not found");
+            }
+            return _context.Videos.Include(v => v.Series)
+                                  .Where(v => !v.Series.Any(s => s.Id == excludedSeriesId)).ToList();
+        }
+
+        public List<Video> GetVideosByExcludedCategoryId(int excludedCategoryId)
+        {
+            if (!_context.Categories.Any(c => c.Id == excludedCategoryId))
+            {
+                throw new Exception("Category not found");
+            }
+            return _context.Videos.Include(v => v.Categories)
+                                  .Where(v => !v.Categories.Any(c => c.Id == excludedCategoryId)).ToList();
+        }
+
+        public List<Video> GetVideosByExcludedTagId(int excludedTagId)
+        {
+            if (!_context.Tags.Any(t => t.Id == excludedTagId))
+            {
+                throw new Exception("Tag not found");
+            }
+            return _context.Videos.Include(v => v.Tags)
+                                  .Where(v => !v.Tags.Any(t => t.Id == excludedTagId)).ToList();
         }
 
     }

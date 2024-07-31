@@ -11,6 +11,11 @@ namespace NetFilmx_Storage.Repositories
         List<Video> GetVideosByTagId(int tagId);
         List<Video> GetVideosByUserId(int userId);
 
+        
+        List<Video>GetVideosByExcludedCategoryId(int categoryId);
+        List<Video>GetVideosByExcludedSeriesId(int seriesId);
+        List<Video>GetVideosByExcludedTagId(int tagId);
+
         Video GetVideoById(int videoId);
         Video GetVideoByVideoPurchaseId (int videoPurchaseId);
         Video GetVideoByCommentId (int commentId);

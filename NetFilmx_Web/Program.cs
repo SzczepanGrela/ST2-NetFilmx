@@ -1,13 +1,22 @@
 using Microsoft.EntityFrameworkCore;
 using NetFilmx_Service.Mappings;
+using NetFilmx_Storage.Entities;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddAutoMapper(typeof(CategoryMappingProfile));
 
+//builder.Services.AddAutoMapper(typeof(Program));
+
+builder.Services.AddAutoMapper(typeof(CategoryMappingProfile));
+builder.Services.AddAutoMapper(typeof(VideoMappingProfile));
+builder.Services.AddAutoMapper(typeof(TagMappingProfile));
+builder.Services.AddAutoMapper(typeof(SeriesMappingProfile));
+builder.Services.AddAutoMapper(typeof(UserMappingProfile));
+builder.Services.AddAutoMapper(typeof(CommentMappingProfile));
 
 
 var app = builder.Build();
