@@ -25,7 +25,7 @@ namespace NetFilmx_Service.Command.Video.AddVideoToCategory
             }
             try
             {            
-                _repository.AddVideoToCategory(command.CategoryId, command.VideoId);
+                _repository.AddVideoToCategoryAsync(command.CategoryId, command.VideoId);
                 return CResult.Ok();
             }
             catch

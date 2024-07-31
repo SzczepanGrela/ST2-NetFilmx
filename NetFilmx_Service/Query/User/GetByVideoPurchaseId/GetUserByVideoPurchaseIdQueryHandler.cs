@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.User.GetByVideoPurchaseId
 {
-    public sealed class GetUserByVideoPurchaseIdQueryHandler<TDto> : IQueryHandler<GetUserByVideoPurchaseIdQuery, QResult<TDto>>
+    public sealed class GetUserByVideoPurchaseIdQueryHandler<TDto> : IQueryHandler<GetUserByVideoPurchaseIdQuery<TDto>, TDto>
     {
         private readonly IUserRepository _repository;
         private readonly IMapper _mapper;
@@ -19,9 +19,9 @@ namespace NetFilmx_Service.Query.User.GetByVideoPurchaseId
             _mapper = mapper;
         }
 
-        public QResult<TDto> Handle(GetUserByVideoPurchaseIdQuery query)
+        public  async Task<QResult<TDto>> Handle(GetUserByVideoPurchaseIdQuery<TDto> query, CancellationToken cancellationToken)
         {
-            var user = _repository.GetUserByVideoPurchaseId(query.VideoPurchaseId);
+            var user = await  _repository.GetUserByVideoPurchaseIdAsync(query.VideoPurchaseId);
             if (user == null)
             {
                 return QResult<TDto>.Fail("User not found");

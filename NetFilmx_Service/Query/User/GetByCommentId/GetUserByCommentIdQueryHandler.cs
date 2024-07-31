@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.User.GetByCommentId
 {
-    public sealed class GetUserByCommentIdQueryHandler<TDto> : IQueryHandler<GetUserByCommentIdQuery, QResult<TDto>>
+    public sealed class GetUserByCommentIdQueryHandler<TDto> : IQueryHandler<GetUserByCommentIdQuery<TDto>, TDto>
     {
         private readonly IUserRepository _repository;
         private readonly IMapper _mapper;
@@ -19,9 +19,9 @@ namespace NetFilmx_Service.Query.User.GetByCommentId
             _mapper = mapper;
         }
 
-        public QResult<TDto> Handle(GetUserByCommentIdQuery query)
+        public async Task<QResult<TDto>> Handle(GetUserByCommentIdQuery<TDto> query, CancellationToken cancellationToken)
         {
-            var user = _repository.GetUserByCommentId(query.CommentId);
+            var user = await _repository.GetUserByCommentIdAsync(query.CommentId);
             if (user == null)
             {
                 return QResult<TDto>.Fail("User not found");

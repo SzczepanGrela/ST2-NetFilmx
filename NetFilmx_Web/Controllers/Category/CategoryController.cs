@@ -1,4 +1,4 @@
-﻿using MediatR;
+﻿/*using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NetFilmx_Service.Command.Category.Add;
 using NetFilmx_Service.Command.Category.Delete;
@@ -91,3 +91,4 @@ namespace NetFilmx_Web.Controllers.Category
         }
     }
 }
+*/

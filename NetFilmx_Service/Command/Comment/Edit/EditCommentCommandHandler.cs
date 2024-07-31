@@ -32,12 +32,14 @@ namespace NetFilmx_Service.Command.Comment.Edit
 
             try
             {
-                var comment = _repository.GetCommentById(command.Id);
+                var task = _repository.GetCommentByIdAsync(command.Id);
+
+                var comment = task.Result;
 
                 comment.Content = command.Content;
                 comment.UpdatedAt = DateTime.Now;
 
-                _repository.UpdateComment(comment);
+                _repository.UpdateCommentAsync(comment);
                 return CResult.Ok();
             }
             catch (Exception ex)

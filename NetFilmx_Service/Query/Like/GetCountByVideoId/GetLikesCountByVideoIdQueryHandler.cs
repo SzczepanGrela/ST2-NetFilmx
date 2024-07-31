@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Like.GetCountByVideoId
 {
-    public sealed class GetLikesCountByVideoIdQueryHandler : IQueryHandler<GetLikesCountByVideoIdQuery, QResult<int>>
+    public sealed class GetLikesCountByVideoIdQueryHandler : IQueryHandler<GetLikesCountByVideoIdQuery, int >
     {
         private readonly ILikeRepository _repository;
 
@@ -16,11 +16,11 @@ namespace NetFilmx_Service.Query.Like.GetCountByVideoId
             _repository = repository;
         }
 
-        public QResult<int> Handle(GetLikesCountByVideoIdQuery query)
+        public async Task<QResult<int>> Handle(GetLikesCountByVideoIdQuery query, CancellationToken cancellationToken)
         {
             try
             {
-                int count = _repository.GetLikesCountByVideoId(query.VideoId);
+                int count = await _repository.GetLikesCountByVideoIdAsync(query.VideoId);
                 return QResult<int>.Ok(count);
             }
             catch (Exception ex)

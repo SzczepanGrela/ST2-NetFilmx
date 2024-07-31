@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Tag.GetById
 {
-    public sealed class GetTagByIdQueryHandler<TDto> : IQueryHandler<GetTagByIdQuery, QResult<TDto>>
+    public sealed class GetTagByIdQueryHandler<TDto> : IQueryHandler<GetTagByIdQuery<TDto>, TDto>
     {
         private readonly ITagRepository _repository;
         private readonly IMapper _mapper;
@@ -19,9 +19,9 @@ namespace NetFilmx_Service.Query.Tag.GetById
             _mapper = mapper;
         }
 
-        public QResult<TDto> Handle(GetTagByIdQuery query)
+        public async Task<QResult<TDto>> Handle(GetTagByIdQuery<TDto> query, CancellationToken cancellationToken)
         {
-            var tag = _repository.GetTagById(query.TagId);
+            var tag =  await _repository.GetTagByIdAsync(query.TagId);
             if (tag == null)
             {
                 return QResult<TDto>.Fail("Tag not found");

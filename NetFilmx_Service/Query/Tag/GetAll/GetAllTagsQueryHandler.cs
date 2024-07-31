@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Tag.GetAll
 {
-    public sealed class GetAllTagsQueryHandler<TDto> : IQueryHandler<GetAllTagsQuery, QResult<List<TDto>>>
+    public sealed class GetAllTagsQueryHandler<TDto> : IQueryHandler<GetAllTagsQuery<TDto>, List<TDto>>
     {
         private readonly ITagRepository _repository;
         private readonly IMapper _mapper;
@@ -19,13 +19,13 @@ namespace NetFilmx_Service.Query.Tag.GetAll
             _mapper = mapper;
         }
 
-        public QResult<List<TDto>> Handle(GetAllTagsQuery query)
+        public async Task<QResult<List<TDto>>> Handle(GetAllTagsQuery<TDto> query, CancellationToken cancellationToken)
         {
             
             List<TDto> tagsDto;
             try
             {
-                var tags = _repository.GetAllTags();
+                var tags = await _repository.GetAllTagsAsync();
                 tagsDto = _mapper.Map<List<TDto>>(tags);
                 return QResult<List<TDto>>.Ok(tagsDto);
             }

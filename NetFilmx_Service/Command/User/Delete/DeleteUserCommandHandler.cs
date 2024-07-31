@@ -25,7 +25,7 @@ namespace NetFilmx_Service.Command.User.Delete
 
             try
             {
-                _repository.DeleteUser(command.Id);
+                _repository.DeleteUserAsync(command.Id);
                 return CResult.Ok();
             }
             catch (Exception ex)

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Video.GetByExclSeriesId
 {
-    public sealed class GetVideosByExcludedSeriesQueryHandler<TDto> : IQueryHandler<GetVideosByExcludedSeriesQuery, QResult<List<TDto>>>
+    public sealed class GetVideosByExcludedSeriesQueryHandler<TDto> : IQueryHandler<GetVideosByExcludedSeriesQuery<TDto>, List<TDto>>
     {
         private readonly IVideoRepository _repository;
         private readonly IMapper _mapper;
@@ -19,12 +19,12 @@ namespace NetFilmx_Service.Query.Video.GetByExclSeriesId
             _mapper = mapper;
         }
 
-        public QResult<List<TDto>> Handle(GetVideosByExcludedSeriesQuery query)
+        public async Task<QResult<List<TDto>>> Handle(GetVideosByExcludedSeriesQuery<TDto> query, CancellationToken cancellationToken)
         {
             List<TDto> videosDto;
             try
             {
-                var videos = _repository.GetVideosByExcludedSeriesId(query.SeriesId);
+                var videos = await _repository.GetVideosByExcludedSeriesIdAsync(query.SeriesId);
                 videosDto = _mapper.Map<List<TDto>>(videos);
                 return QResult<List<TDto>>.Ok(videosDto);
             }

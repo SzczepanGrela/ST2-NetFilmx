@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.User.GetAll
 {
-    public sealed class GetAllUsersQueryHandler<TDto> : IQueryHandler<GetAllUsersQuery, QResult<List<TDto>>>
+    public sealed class GetAllUsersQueryHandler<TDto> : IQueryHandler<GetAllUsersQuery<TDto>, List<TDto>>
     {
         private readonly IUserRepository _repository;
         private readonly IMapper _mapper;
@@ -19,14 +19,14 @@ namespace NetFilmx_Service.Query.User.GetAll
             _mapper = mapper;
         }
 
-        public QResult<List<TDto>> Handle(GetAllUsersQuery query)
+        public async Task<QResult<List<TDto>>> Handle(GetAllUsersQuery<TDto> query, CancellationToken cancellationToken)
         {
             
           
             List<TDto> usersDto;
             try
             {
-                var users = _repository.GetAllUsers();
+                var users = await _repository.GetAllUsersAsync();
                 usersDto = _mapper.Map<List<TDto>>(users);
                 return QResult<List<TDto>>.Ok(usersDto);
             }

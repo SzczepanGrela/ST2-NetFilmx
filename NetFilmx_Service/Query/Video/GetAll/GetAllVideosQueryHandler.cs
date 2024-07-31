@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Video.GetAll
 {
-    public sealed class GetAllVideosQueryHandler<TDto> : IQueryHandler<GetAllVideosQuery, QResult<List<TDto>>>
+    public sealed class GetAllVideosQueryHandler<TDto> : IQueryHandler<GetAllVideosQuery<TDto>, List<TDto>>
     {
         private readonly IVideoRepository _repository;
         private readonly IMapper _mapper;
@@ -19,14 +19,14 @@ namespace NetFilmx_Service.Query.Video.GetAll
             _mapper = mapper;
         }
 
-        public QResult<List<TDto>> Handle(GetAllVideosQuery query)
+        public async Task<QResult<List<TDto>>> Handle(GetAllVideosQuery<TDto> query, CancellationToken cancellationToken)
         {
             
             
             List<TDto> videosDto;
             try
             {
-                var videos = _repository.GetAllVideos();
+                var videos = await _repository.GetAllVideosAsync();
                 videosDto = _mapper.Map<List<TDto>>(videos);
                 return QResult<List<TDto>>.Ok(videosDto);
             }

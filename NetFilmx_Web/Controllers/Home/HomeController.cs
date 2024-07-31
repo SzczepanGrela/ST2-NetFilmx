@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+/*using Microsoft.AspNetCore.Mvc;
 using NetFilmx_Web.Models;
 using System.Diagnostics;
 
@@ -57,3 +57,4 @@ namespace NetFilmx_Web.Controllers.Home
         }
     }
 }
+*/

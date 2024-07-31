@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Video.GetByCategoryId
 {
-    public sealed class GetVideosByCategoryIdQueryHandler<TDto> : IQueryHandler<GetVideosByCategoryIdQuery, QResult<List<TDto>>>
+    public sealed class GetVideosByCategoryIdQueryHandler<TDto> : IQueryHandler<GetVideosByCategoryIdQuery<TDto>,List<TDto>>
     {
         private readonly IVideoRepository _repository;
         private readonly IMapper _mapper;
@@ -19,13 +19,13 @@ namespace NetFilmx_Service.Query.Video.GetByCategoryId
             _mapper = mapper;
         }
 
-        public QResult<List<TDto>> Handle(GetVideosByCategoryIdQuery query)
+        public async Task<QResult<List<TDto>>> Handle(GetVideosByCategoryIdQuery<TDto> query, CancellationToken cancellationToken)
         {
             
             List<TDto> videosDto;
             try
             {
-                var videos = _repository.GetVideosByCategoryId(query.CategoryId);
+                var videos = await _repository.GetVideosByCategoryIdAsync(query.CategoryId);
                 videosDto = _mapper.Map<List<TDto>>(videos);
                 return QResult<List<TDto>>.Ok(videosDto);
             }

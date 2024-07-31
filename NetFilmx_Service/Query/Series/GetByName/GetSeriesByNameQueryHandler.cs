@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Series.GetByName
 {
-    public sealed class GetSeriesByNameQueryHandler<TDto> : IQueryHandler<GetSeriesByNameQuery, QResult<TDto>>
+    public sealed class GetSeriesByNameQueryHandler<TDto> : IQueryHandler<GetSeriesByNameQuery<TDto>, TDto>
     {
         private readonly ISeriesRepository _repository;
         private readonly IMapper _mapper;
@@ -19,9 +19,9 @@ namespace NetFilmx_Service.Query.Series.GetByName
             _mapper = mapper;
         }
 
-        public QResult<TDto> Handle(GetSeriesByNameQuery query)
+        public async Task<QResult<TDto>> Handle(GetSeriesByNameQuery<TDto> query, CancellationToken cancellationToken)
         {
-            var series = _repository.GetSeriesByName(query.SeriesName);
+            var series = await _repository.GetSeriesByNameAsync(query.SeriesName);
             if (series == null)
             {
                 return QResult<TDto>.Fail("Series not found");

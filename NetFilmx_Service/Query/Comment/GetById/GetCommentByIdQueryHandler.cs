@@ -1,14 +1,13 @@
 ﻿using AutoMapper;
 using NetFilmx_Storage.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Query.Comment.GetById
 {
-    public sealed class GetCommentByIdQueryHandler<TDto> : IQueryHandler<GetCommentByIdQuery, QResult<TDto>>
+    public sealed class GetCommentByIdQueryHandler<TDto> : IQueryHandler<GetCommentByIdQuery<TDto>, TDto>
     {
         private readonly ICommentRepository _repository;
         private readonly IMapper _mapper;
@@ -19,24 +18,23 @@ namespace NetFilmx_Service.Query.Comment.GetById
             _mapper = mapper;
         }
 
-        public QResult<TDto> Handle(GetCommentByIdQuery query)
+        public async Task<QResult<TDto>> Handle(GetCommentByIdQuery<TDto> query, CancellationToken cancellationToken)
         {
-            var comment = _repository.GetCommentById(query.CommentId);
-            if (comment == null)
-            {
-                return QResult<TDto>.Fail("Comment not found");
-            }
-            TDto commentDto;
             try
             {
-                commentDto = _mapper.Map<TDto>(comment);
+                var comment = await _repository.GetCommentByIdAsync(query.CommentId); 
+                if (comment == null)
+                {
+                    return QResult<TDto>.Fail("Comment not found");
+                }
+
+                var commentDto = _mapper.Map<TDto>(comment);
                 return QResult<TDto>.Ok(commentDto);
             }
             catch (Exception ex)
             {
                 return QResult<TDto>.Fail(ex.Message);
             }
-            
         }
     }
 }

@@ -31,14 +31,16 @@ namespace NetFilmx_Service.Command.User.Edit
             }
             try
             {
-                var user = _repository.GetUserById(command.Id);
+                var task = _repository.GetUserByIdAsync(command.Id);
+
+                var user = task.Result;
                
                 user.Email = command.Email;
                 user.Username = command.Username;
                 user.SetPassword(command.Password);
                 user.UpdatedAt = DateTime.Now;
 
-                _repository.UpdateUser(user);
+                _repository.UpdateUserAsync(user);
 
                 return CResult.Ok();
             }

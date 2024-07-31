@@ -31,8 +31,9 @@ namespace NetFilmx_Service.Command.Video.Edit
             }
             try
             {
-                var video = _repository.GetVideoById(command.Id);
+                var task = _repository.GetVideoByIdAsync(command.Id);
 
+                var video = task.Result;
 
                 video.Price = command.Price;
                 video.Title = command.Title;
@@ -40,7 +41,7 @@ namespace NetFilmx_Service.Command.Video.Edit
                 video.VideoUrl = command.Video_url;
                 video.ThumbnailUrl = command.Thumbnail_url;
 
-                _repository.UpdateVideo(video);
+                _repository.UpdateVideoAsync(video);
                 return CResult.Ok();
             }
             catch (Exception ex)

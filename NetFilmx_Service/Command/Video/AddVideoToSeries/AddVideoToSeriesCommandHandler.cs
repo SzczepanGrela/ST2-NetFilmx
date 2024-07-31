@@ -26,7 +26,7 @@ namespace NetFilmx_Service.Command.Video.AddVideoToSeries
 
             try
             {
-                _repository.AddVideoToSeries(command.VideoId, command.SeriesId);
+                _repository.AddVideoToSeriesAsync(command.VideoId, command.SeriesId);
                 return CResult.Ok();
             }
             catch (Exception ex)

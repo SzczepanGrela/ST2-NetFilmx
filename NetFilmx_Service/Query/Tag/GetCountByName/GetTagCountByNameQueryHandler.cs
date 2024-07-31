@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Tag.GetCountByName
 {
-    public sealed class GetTagCountByNameQueryHandler : IQueryHandler<GetTagCountByNameQuery, QResult<int>>
+    public sealed class GetTagCountByNameQueryHandler : IQueryHandler<GetTagCountByNameQuery, int>
     {
         private readonly ITagRepository _repository;
 
@@ -16,11 +16,11 @@ namespace NetFilmx_Service.Query.Tag.GetCountByName
             _repository = repository;
         }
 
-        public QResult<int> Handle(GetTagCountByNameQuery query)
+        public async Task<QResult<int>> Handle(GetTagCountByNameQuery query, CancellationToken cancellationToken)
         {
             try
             {
-                int count = _repository.GetTagCountByName(query.TagName);
+                int count = await _repository.GetTagCountByNameAsync(query.TagName);
                 return QResult<int>.Ok(count);
             }
             catch (Exception ex)

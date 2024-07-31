@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.VideoPurchase.GetByUserId
 {
-    public sealed class GetVideoPurchasesByUserIdQuery<TDto> : IQuery<TDto>
+    public sealed class GetVideoPurchasesByUserIdQuery<TDto> : IQuery<List<TDto>>
     {
 
         public GetVideoPurchasesByUserIdQuery(int userId)

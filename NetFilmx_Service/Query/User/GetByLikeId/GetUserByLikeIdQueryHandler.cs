@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.User.GetByLikeId
 {
-    public sealed class GetUserByLikeIdQueryHandler<TDto> : IQueryHandler<GetUserByLikeIdQuery, QResult<TDto>>
+    public sealed class GetUserByLikeIdQueryHandler<TDto> : IQueryHandler<GetUserByLikeIdQuery<TDto>, TDto>
     {
         private readonly IUserRepository _repository;
         private readonly IMapper _mapper;
@@ -19,9 +19,9 @@ namespace NetFilmx_Service.Query.User.GetByLikeId
             _mapper = mapper;
         }
 
-        public QResult<TDto> Handle(GetUserByLikeIdQuery query)
+        public async Task<QResult<TDto>> Handle(GetUserByLikeIdQuery<TDto> query, CancellationToken cancellationToken)
         {
-            var user = _repository.GetUserByLikeId(query.LikeId);
+            var user = await _repository.GetUserByLikeIdAsync(query.LikeId);
             if (user == null)
             {
                 return QResult<TDto>.Fail("User not found");

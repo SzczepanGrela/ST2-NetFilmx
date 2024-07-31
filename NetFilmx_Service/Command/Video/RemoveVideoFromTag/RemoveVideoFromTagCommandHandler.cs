@@ -25,7 +25,7 @@ namespace NetFilmx_Service.Command.Video.RemoveVideoFromTag
 
             try
             {
-                _repository.RemoveVideoFromTag(command.VideoId, command.TagId);
+                _repository.RemoveVideoFromTagAsync(command.VideoId, command.TagId);
                 return CResult.Ok();
             }
             catch (Exception ex)

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Video.GetByCommentId
 {
-    public sealed class GetVideoByCommentIdQueryHandler<TDto> : IQueryHandler<GetVideoByCommentIdQuery, QResult<TDto>>
+    public sealed class GetVideoByCommentIdQueryHandler<TDto> : IQueryHandler<GetVideoByCommentIdQuery<TDto>, TDto>
     {
         private readonly IVideoRepository _repository;
         private readonly IMapper _mapper;
@@ -19,9 +19,9 @@ namespace NetFilmx_Service.Query.Video.GetByCommentId
             _mapper = mapper;
         }
 
-        public QResult<TDto> Handle(GetVideoByCommentIdQuery query)
+        public async Task<QResult<TDto>> Handle(GetVideoByCommentIdQuery<TDto> query, CancellationToken cancellationToken)
         {
-            var video = _repository.GetVideoByCommentId(query.CommentId);
+            var video = await _repository.GetVideoByCommentIdAsync(query.CommentId);
             if (video == null)
             {
                 return QResult<TDto>.Fail("Video not found");

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Tag.GetCountByName
 {
-    public sealed class GetTagCountByNameQuery<TDto> : IQuery<TDto>
+    public sealed class GetTagCountByNameQuery: IQuery<int>
     {
         public GetTagCountByNameQuery(string tagName)
         {

@@ -28,7 +28,7 @@ namespace NetFilmx_Service.Command.Tag.Delete
           
             try
             {
-                _repository.DeleteTag(command.Id);
+                _repository.DeleteTagAsync(command.Id);
                 return CResult.Ok();
             }
             catch (Exception ex)

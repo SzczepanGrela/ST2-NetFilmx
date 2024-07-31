@@ -27,7 +27,7 @@ namespace NetFilmx_Service.Command.Video.RemoveVideoFromSeries
 
             try
             {
-                _repository.RemoveVideoFromSeries(command.VideoId, command.SeriesId);
+                _repository.RemoveVideoFromSeriesAsync(command.VideoId, command.SeriesId);
                 return CResult.Ok();
             }
             catch (Exception ex)

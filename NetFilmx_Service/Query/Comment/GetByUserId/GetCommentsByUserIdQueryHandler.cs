@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Comment.GetByUserId
 {
-    public sealed class GetCommentsByUserIdQueryHandler<TDto> : IQueryHandler<GetCommentsByUserIdQuery, QResult<List<TDto>>>
+    public sealed class GetCommentsByUserIdQueryHandler<TDto> : IQueryHandler<GetCommentsByUserIdQuery<TDto>, List<TDto>>
     {
         private readonly ICommentRepository _repository;
         private readonly IMapper _mapper;
@@ -19,13 +19,13 @@ namespace NetFilmx_Service.Query.Comment.GetByUserId
             _mapper = mapper;
         }
 
-        public QResult<List<TDto>> Handle(GetCommentsByUserIdQuery query)
+        public async Task<QResult<List<TDto>>> Handle(GetCommentsByUserIdQuery<TDto> query, CancellationToken cancellationToken)
         {
             
             List<TDto> commentsDto;
             try
             {
-                var comments = _repository.GetCommentsByUserId(query.UserId);
+                var comments = await _repository.GetCommentsByUserIdAsync(query.UserId);
                 commentsDto = _mapper.Map<List<TDto>>(comments);
                 return QResult<List<TDto>>.Ok(commentsDto);
             }

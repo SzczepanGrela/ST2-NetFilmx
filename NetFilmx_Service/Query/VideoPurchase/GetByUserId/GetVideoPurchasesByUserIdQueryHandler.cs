@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.VideoPurchase.GetByUserId
 {
-    public sealed class GetVideoPurchasesByUserIdQueryHandler<TDto> : IQueryHandler<GetVideoPurchasesByUserIdQuery, QResult<List<TDto>>>
+    public sealed class GetVideoPurchasesByUserIdQueryHandler<TDto> : IQueryHandler<GetVideoPurchasesByUserIdQuery<TDto>, List<TDto>>
     {
         private readonly IVideoPurchaseRepository _repository;
         private readonly IMapper _mapper;
@@ -19,13 +19,13 @@ namespace NetFilmx_Service.Query.VideoPurchase.GetByUserId
             _mapper = mapper;
         }
 
-        public QResult<List<TDto>> Handle(GetVideoPurchasesByUserIdQuery query)
+        public async Task<QResult<List<TDto>>> Handle(GetVideoPurchasesByUserIdQuery<TDto> query, CancellationToken cancellationToken)
         {
           
             List<TDto> videoPurchasesDto;
             try
             {
-                var videoPurchases = _repository.GetVideoPurchasesByUserId(query.UserId);
+                var videoPurchases = await _repository.GetVideoPurchasesByUserIdAsync(query.UserId);
 
                 videoPurchasesDto = _mapper.Map<List<TDto>>(videoPurchases);
                 return QResult<List<TDto>>.Ok(videoPurchasesDto);

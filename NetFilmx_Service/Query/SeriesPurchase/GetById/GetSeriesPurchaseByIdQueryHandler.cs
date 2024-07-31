@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.SeriesPurchase.GetById
 {
-    public sealed class GetSeriesPurchaseByIdQueryHandler<TDto> : IQueryHandler<GetSeriesPurchaseByIdQuery, QResult<TDto>>
+    public sealed class GetSeriesPurchaseByIdQueryHandler<TDto> : IQueryHandler<GetSeriesPurchaseByIdQuery<TDto>, TDto>
     {
         private readonly ISeriesPurchaseRepository _repository;
         private readonly IMapper _mapper;
@@ -19,9 +19,9 @@ namespace NetFilmx_Service.Query.SeriesPurchase.GetById
             _mapper = mapper;
         }
 
-        public QResult<TDto> Handle(GetSeriesPurchaseByIdQuery query)
+        public async Task<QResult<TDto>> Handle(GetSeriesPurchaseByIdQuery<TDto> query, CancellationToken cancellationToken)
         {
-            var seriesPurchase = _repository.GetSeriesPurchaseById(query.SeriesPurchaseId);
+            var seriesPurchase = await _repository.GetSeriesPurchaseByIdAsync(query.SeriesPurchaseId);
             if (seriesPurchase == null)
             {
                 return QResult<TDto>.Fail("Series purchase not found");

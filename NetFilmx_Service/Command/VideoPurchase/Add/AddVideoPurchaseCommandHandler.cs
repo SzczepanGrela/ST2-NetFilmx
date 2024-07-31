@@ -26,7 +26,7 @@ namespace NetFilmx_Service.Command.VideoPurchase.Add
             var videoPurchase = new NetFilmx_Storage.Entities.VideoPurchase(command.UserId, command.VideoId);
             try
             {
-                _videoPurchaseRepository.AddVideoPurchase(videoPurchase);
+                _videoPurchaseRepository.AddVideoPurchaseAsync(videoPurchase);
                 return CResult.Ok();
             }
             catch (Exception ex)

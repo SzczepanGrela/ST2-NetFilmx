@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Comment.GetByVideoId
 {
-    public sealed class GetCommentsByVideoIdQuery<TDto> : IQuery<TDto>
+    public sealed class GetCommentsByVideoIdQuery<TDto> : IQuery<List<TDto>>
     {
         public GetCommentsByVideoIdQuery(int videoId)
         {

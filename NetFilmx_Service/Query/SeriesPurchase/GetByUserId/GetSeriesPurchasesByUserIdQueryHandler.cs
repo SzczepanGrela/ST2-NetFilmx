@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.SeriesPurchase.GetByUserId
 {
-    public sealed class GetSeriesPurchasesByUserIdQueryHandler<TDto> : IQueryHandler<GetSeriesPurchasesByUserIdQuery, QResult<List<TDto>>>
+    public sealed class GetSeriesPurchasesByUserIdQueryHandler<TDto> : IQueryHandler<GetSeriesPurchasesByUserIdQuery<TDto>, List<TDto>>
     {
         private readonly ISeriesPurchaseRepository _repository;
         private readonly IMapper _mapper;
@@ -19,13 +19,13 @@ namespace NetFilmx_Service.Query.SeriesPurchase.GetByUserId
             _mapper = mapper;
         }
 
-        public QResult<List<TDto>> Handle(GetSeriesPurchasesByUserIdQuery query)
+        public async Task<QResult<List<TDto>>> Handle(GetSeriesPurchasesByUserIdQuery<TDto> query, CancellationToken cancellationToken)
         {
             
             List<TDto> seriesPurchasesDto;
             try
             {
-                var seriesPurchases = _repository.GetSeriesPurchasesByUserId(query.UserId);
+                var seriesPurchases = await _repository.GetSeriesPurchasesByUserIdAsync(query.UserId);
                 seriesPurchasesDto = _mapper.Map<List<TDto>>(seriesPurchases);
                 return QResult<List<TDto>>.Ok(seriesPurchasesDto);
             }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.User.GetByUsername
 {
-    public sealed class GetUserByUsernameQueryHandler<TDto> : IQueryHandler<GetUserByUsernameQuery, QResult<TDto>>
+    public sealed class GetUserByUsernameQueryHandler<TDto> : IQueryHandler<GetUserByUsernameQuery<TDto>, TDto>
     {
         private readonly IUserRepository _repository;
         private readonly IMapper _mapper;
@@ -19,9 +19,9 @@ namespace NetFilmx_Service.Query.User.GetByUsername
             _mapper = mapper;
         }
 
-        public QResult<TDto> Handle(GetUserByUsernameQuery query)
+        public async Task<QResult<TDto>> Handle(GetUserByUsernameQuery<TDto> query, CancellationToken cancellationToken)
         {
-            var user = _repository.GetUserByUsername(query.Username);
+            var user = await _repository.GetUserByUsernameAsync(query.Username);
             if (user == null)
             {
                 return QResult<TDto>.Fail("User not found");

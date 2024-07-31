@@ -26,7 +26,7 @@ namespace NetFilmx_Service.Command.Series.Delete
             }
             try
             {
-                _repository.DeleteSeries(command.Id);
+                _repository.DeleteSeriesAsync(command.Id);
                 return CResult.Ok();
             }
             catch (Exception ex)
