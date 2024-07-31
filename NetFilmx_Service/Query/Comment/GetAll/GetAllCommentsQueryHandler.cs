@@ -1,13 +1,16 @@
 ﻿using AutoMapper;
+using NetFilmx_Service.Dtos.Comment;
 using NetFilmx_Storage.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Query.Comment.GetAll
 {
-    public sealed class GetAllCommentsQueryHandler<TDto>: IQueryHandler<GetAllCommentsQuery<TDto>, List<TDto>>
+    public sealed class GetAllCommentsQueryHandler<TDto>: IRequestHandler<GetAllCommentsQuery<TDto>, QResult<List<TDto>>>
+        where TDto : ICommentDto
     {
         private readonly ICommentRepository _repository;
         private readonly IMapper _mapper;

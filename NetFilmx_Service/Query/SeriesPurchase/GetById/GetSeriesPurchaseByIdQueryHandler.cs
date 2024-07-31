@@ -5,10 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
+using NetFilmx_Service.Dtos.Series;
 
 namespace NetFilmx_Service.Query.SeriesPurchase.GetById
 {
-    public sealed class GetSeriesPurchaseByIdQueryHandler<TDto> : IQueryHandler<GetSeriesPurchaseByIdQuery<TDto>, TDto>
+    public sealed class GetSeriesPurchaseByIdQueryHandler<TDto> : IRequestHandler<GetSeriesPurchaseByIdQuery<TDto>, QResult<TDto>>
+    where TDto : ISeriesDto
     {
         private readonly ISeriesPurchaseRepository _repository;
         private readonly IMapper _mapper;

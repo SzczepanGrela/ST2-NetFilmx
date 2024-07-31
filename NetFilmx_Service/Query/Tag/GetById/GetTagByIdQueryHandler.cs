@@ -1,14 +1,17 @@
 ﻿using AutoMapper;
+using NetFilmx_Service.Dtos.Tag;
 using NetFilmx_Storage.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Query.Tag.GetById
 {
-    public sealed class GetTagByIdQueryHandler<TDto> : IQueryHandler<GetTagByIdQuery<TDto>, TDto>
+    public sealed class GetTagByIdQueryHandler<TDto> : IRequestHandler<GetTagByIdQuery<TDto>, QResult<TDto>>
+        where TDto : ITagDto
     {
         private readonly ITagRepository _repository;
         private readonly IMapper _mapper;

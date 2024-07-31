@@ -5,10 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
+using NetFilmx_Service.Dtos.User;
 
 namespace NetFilmx_Service.Query.User.GetById
 {
-    public sealed class GetUserByIdQueryHandler<TDto> : IQueryHandler<GetUserByIdQuery<TDto>, TDto>
+    public sealed class GetUserByIdQueryHandler<TDto> : IRequestHandler<GetUserByIdQuery<TDto>, QResult<TDto>>
+        where TDto : IUserDto
     {
         private readonly IUserRepository _repository;
         private readonly IMapper _mapper;

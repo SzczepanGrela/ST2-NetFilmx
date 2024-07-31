@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Dtos.Category
 {
-    public class CategoryEditDto
+    public class CategoryEditDto : ICategoryDto
     {
 
         public CategoryEditDto(string name, string description, int id)

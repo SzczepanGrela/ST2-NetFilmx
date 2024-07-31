@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Dtos.User
 {
-    public class UserDetailsDto
+    public class UserDetailsDto : IUserDto
     {
 
 

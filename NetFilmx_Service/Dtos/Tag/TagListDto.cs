@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Dtos.Tag
 {
-    public class TagListDto
+    public class TagListDto : ITagDto
     {
         TagListDto( string name, int id)
         {

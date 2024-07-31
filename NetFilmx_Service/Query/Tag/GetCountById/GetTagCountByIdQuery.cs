@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Tag.GetCountById
 {
-    public sealed class GetTagCountByIdQuery: IQuery<int>
+    public sealed class GetTagCountByIdQuery: IRequest<QResult<int>>
     {
         public GetTagCountByIdQuery(int tagId)
         {

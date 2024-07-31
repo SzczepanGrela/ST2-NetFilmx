@@ -1,13 +1,16 @@
-﻿using NetFilmx_Storage.Repositories;
+﻿using NetFilmx_Service.Dtos.Like;
+using NetFilmx_Storage.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Query.Like.GetCountByVideoId
 {
-    public sealed class GetLikesCountByVideoIdQueryHandler : IQueryHandler<GetLikesCountByVideoIdQuery, int >
+    public sealed class GetLikesCountByVideoIdQueryHandler : IRequestHandler<GetLikesCountByVideoIdQuery, QResult<int> >
+      
     {
         private readonly ILikeRepository _repository;
 

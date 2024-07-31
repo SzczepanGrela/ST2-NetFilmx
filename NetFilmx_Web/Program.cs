@@ -3,11 +3,19 @@ using NetFilmx_Service.Mappings;
 using NetFilmx_Storage.Entities;
 using System.Reflection;
 using MediatR;
+using NetFilmx_Service.Query.Category.GetAll;
+using NetFilmx_Web.Extensions;
+using NetFilmx_Storage;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+
+
+builder.Services.AddNetFilmxServices();
 
 
 //builder.Services.AddAutoMapper(typeof(Program));
@@ -19,8 +27,16 @@ builder.Services.AddAutoMapper(typeof(SeriesMappingProfile));
 builder.Services.AddAutoMapper(typeof(UserMappingProfile));
 builder.Services.AddAutoMapper(typeof(CommentMappingProfile));
 
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 
+
+
+builder.Services.AddDbContext<NetFilmxDbContext>();
+
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
+    Assembly.GetExecutingAssembly(),
+    typeof(GetAllCategoriesQueryHandler<>).Assembly  // Register handlers from srrvice layer
+));
 
 var app = builder.Build();
 

@@ -5,10 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
+using NetFilmx_Service.Dtos.Tag;
+using NetFilmx_Service.Dtos.User;
 
 namespace NetFilmx_Service.Query.User.GetAll
 {
-    public sealed class GetAllUsersQueryHandler<TDto> : IQueryHandler<GetAllUsersQuery<TDto>, List<TDto>>
+    public sealed class GetAllUsersQueryHandler<TDto> : IRequestHandler<GetAllUsersQuery<TDto>, QResult<List<TDto>>>
+        where TDto : IUserDto
     {
         private readonly IUserRepository _repository;
         private readonly IMapper _mapper;

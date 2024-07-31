@@ -6,9 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using MediatR;
+using NetFilmx_Service.Dtos.Video;
+
 namespace NetFilmx_Service.Query.Video.GetByExclCategoryId
 {
-    public sealed class GetVideosByExcludedCategoryQueryHandler<TDto> : IQueryHandler<GetVideosByExcludedCategoryQuery<TDto>, List<TDto>>
+    public sealed class GetVideosByExcludedCategoryQueryHandler<TDto> : IRequestHandler<GetVideosByExcludedCategoryQuery<TDto>, QResult<List<TDto>>>
+            where TDto : IVideoDto
     {
         private readonly IVideoRepository _repository;
         private readonly IMapper _mapper;

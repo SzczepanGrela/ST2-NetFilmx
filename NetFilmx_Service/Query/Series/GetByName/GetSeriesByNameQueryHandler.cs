@@ -1,14 +1,17 @@
 ﻿using AutoMapper;
+using NetFilmx_Service.Dtos.Series;
 using NetFilmx_Storage.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Query.Series.GetByName
 {
-    public sealed class GetSeriesByNameQueryHandler<TDto> : IQueryHandler<GetSeriesByNameQuery<TDto>, TDto>
+    public sealed class GetSeriesByNameQueryHandler<TDto> : IRequestHandler<GetSeriesByNameQuery<TDto>, QResult<TDto>>
+         where TDto : ISeriesDto
     {
         private readonly ISeriesRepository _repository;
         private readonly IMapper _mapper;

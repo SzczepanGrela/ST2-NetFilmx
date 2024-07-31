@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Dtos.Comment
 {
-    public class CommentDetailsDto
+    public class CommentDetailsDto : ICommentDto
     {
         public CommentDetailsDto(int id, int videoId, int userId, string content, DateTime createdAt, DateTime updatedAt)
         {

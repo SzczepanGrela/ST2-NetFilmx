@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Query.Series.GetCountById
 {
-    public sealed class GetSeriesCountByIdQueryHandler : IQueryHandler<GetSeriesCountByIdQuery, int>
+    public sealed class GetSeriesCountByIdQueryHandler : IRequestHandler<GetSeriesCountByIdQuery, QResult<int>>
+
     {
         private readonly ISeriesRepository _repository;
 

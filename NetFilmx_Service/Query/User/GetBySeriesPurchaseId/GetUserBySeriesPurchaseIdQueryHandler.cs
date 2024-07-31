@@ -1,14 +1,17 @@
 ﻿using AutoMapper;
+using NetFilmx_Service.Dtos.User;
 using NetFilmx_Storage.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Query.User.GetBySeriesPurchaseId
 {
-    public sealed class GetUserBySeriesPurchaseIdQueryHandler<TDto> : IQueryHandler<GetUserBySeriesPurchaseIdQuery<TDto>, TDto>
+    public sealed class GetUserBySeriesPurchaseIdQueryHandler<TDto> : IRequestHandler<GetUserBySeriesPurchaseIdQuery<TDto>, QResult<TDto>>
+        where TDto : IUserDto
     {
         private readonly IUserRepository _repository;
         private readonly IMapper _mapper;

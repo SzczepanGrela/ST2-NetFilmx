@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\NetFilmx_Service\NetFilmx_Service.csproj" />
     <ProjectReference Include="..\NetFilmx_Storage\NetFilmx_Storage.csproj" />
   </ItemGroup>
@@ -17,6 +21,10 @@
     <Folder Include="Views\Series\" />
     <Folder Include="Views\Tag\" />
     <Folder Include="Views\Video\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="appsettings.json" />
   </ItemGroup>
 
   <ItemGroup>

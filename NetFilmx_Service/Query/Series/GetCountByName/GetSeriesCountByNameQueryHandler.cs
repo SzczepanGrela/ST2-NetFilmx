@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Query.Series.GetCountByName
 {
-    public sealed class GetSeriesCountByNameQueryHandler : IQueryHandler<GetSeriesCountByNameQuery, int>
+    public sealed class GetSeriesCountByNameQueryHandler : IRequestHandler<GetSeriesCountByNameQuery, QResult<int>>
     {
         private readonly ISeriesRepository _repository;
 

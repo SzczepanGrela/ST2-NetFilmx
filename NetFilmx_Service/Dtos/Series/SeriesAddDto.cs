@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Dtos.Series
 {
-    public class SeriesAddDto
+    public class SeriesAddDto : ISeriesDto
     {
 
         public SeriesAddDto(string name, string description, decimal price)

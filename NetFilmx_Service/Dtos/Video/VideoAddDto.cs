@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Dtos.Video
 {
-    public class VideoAddDto
+    public class VideoAddDto : IVideoDto
     {
 
         public VideoAddDto(string title, decimal price, string video_url, string? thumbnail_url, string? description)

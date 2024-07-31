@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Query.Video.GetByVideoPurchaseId
 {
-    public sealed class GetVideoByVideoPurchaseIdQuery<TDto> : IQuery<TDto>
+    public sealed class GetVideoByVideoPurchaseIdQuery<TDto> : IRequest<QResult<TDto>>
     {
 
         public GetVideoByVideoPurchaseIdQuery(int videoPurchaseId)

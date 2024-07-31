@@ -28,13 +28,15 @@ namespace NetFilmx_Web.Controllers.Category
         {
             var query = new GetAllCategoriesQuery<CategoryListDto>();
             var result = await _mediator.Send(query);
-            return View(result);
+            var dtos = result.Data;
+            return View(dtos);
         }
 
-        public async Task<IActionResult> Details(string name)
+        public async Task<IActionResult> Details(int id)
         {
-            var query = new GetCategoryByNameQuery<CategoryDetailsDto>(name);
+            var query = new GetCategoryByIdQuery<CategoryDetailsDto>(id);
             var result = await _mediator.Send(query);
+            var dtos = result.Data;
             return View(result);
         }
 

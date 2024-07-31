@@ -4,10 +4,12 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using NetFilmx_Service.Dtos.Comment;
 
 namespace NetFilmx_Service.Query.Comment.GetById
 {
-    public sealed class GetCommentByIdQueryHandler<TDto> : IQueryHandler<GetCommentByIdQuery<TDto>, TDto>
+    public sealed class GetCommentByIdQueryHandler<TDto> : IRequestHandler<GetCommentByIdQuery<TDto>, QResult<TDto>>
+        where TDto : ICommentDto
     {
         private readonly ICommentRepository _repository;
         private readonly IMapper _mapper;

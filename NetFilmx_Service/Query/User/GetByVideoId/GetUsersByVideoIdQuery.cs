@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.User.GetByVideoId
 {
-    public sealed class GetUsersByVideoIdQuery<TDto> : IQuery<List<TDto>>
+    public sealed class GetUsersByVideoIdQuery<TDto> : IRequest<QResult<List<TDto>>>  
     {
         public GetUsersByVideoIdQuery(int videoId)
         {

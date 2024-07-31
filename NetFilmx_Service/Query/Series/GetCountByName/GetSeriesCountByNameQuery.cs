@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Series.GetCountByName
 {
-    public sealed class GetSeriesCountByNameQuery : IQuery<int>
+    public sealed class GetSeriesCountByNameQuery : IRequest<QResult<int>>
     {
         public GetSeriesCountByNameQuery(string seriesName)
         {

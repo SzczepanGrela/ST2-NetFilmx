@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.User.GetAll
 {
-    public sealed class GetAllUsersQuery<TDto> : IQuery<List<TDto>>
+    public sealed class GetAllUsersQuery<TDto> : IRequest<QResult<List<TDto>>>  
     {
        
         public GetAllUsersQuery() { }

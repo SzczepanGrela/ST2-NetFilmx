@@ -5,10 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
+using NetFilmx_Service.Dtos.Series;
 
 namespace NetFilmx_Service.Query.SeriesPurchase.GetByUserId
 {
-    public sealed class GetSeriesPurchasesByUserIdQueryHandler<TDto> : IQueryHandler<GetSeriesPurchasesByUserIdQuery<TDto>, List<TDto>>
+    public sealed class GetSeriesPurchasesByUserIdQueryHandler<TDto> : IRequestHandler<GetSeriesPurchasesByUserIdQuery<TDto>, QResult<List<TDto>>>
+            where TDto : ISeriesDto
     {
         private readonly ISeriesPurchaseRepository _repository;
         private readonly IMapper _mapper;
@@ -21,7 +24,7 @@ namespace NetFilmx_Service.Query.SeriesPurchase.GetByUserId
 
         public async Task<QResult<List<TDto>>> Handle(GetSeriesPurchasesByUserIdQuery<TDto> query, CancellationToken cancellationToken)
         {
-            
+
             List<TDto> seriesPurchasesDto;
             try
             {
@@ -33,7 +36,7 @@ namespace NetFilmx_Service.Query.SeriesPurchase.GetByUserId
             {
                 return QResult<List<TDto>>.Fail(ex.Message);
             }
-            
+
         }
     }
 }

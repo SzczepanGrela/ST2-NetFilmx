@@ -5,10 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
+using NetFilmx_Service.Dtos.User;
+using NetFilmx_Service.Dtos.Video;
 
 namespace NetFilmx_Service.Query.Video.GetAll
 {
-    public sealed class GetAllVideosQueryHandler<TDto> : IQueryHandler<GetAllVideosQuery<TDto>, List<TDto>>
+    public sealed class GetAllVideosQueryHandler<TDto> : IRequestHandler<GetAllVideosQuery<TDto>, QResult<List<TDto>>>
+        where TDto : IVideoDto
     {
         private readonly IVideoRepository _repository;
         private readonly IMapper _mapper;

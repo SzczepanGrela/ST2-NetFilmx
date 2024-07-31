@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using NetFilmx_Service.Dtos.Category;
 using NetFilmx_Storage.Repositories;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Category.GetById
 {
-    public sealed class GetCategoryByIdQueryHandler<TDto> : IQueryHandler<GetCategoryByIdQuery<TDto>, TDto>
+    public sealed class GetCategoryByIdQueryHandler<TDto> : IRequestHandler<GetCategoryByIdQuery<TDto>, QResult<TDto>>
+        where TDto : ICategoryDto
     {
         private readonly ICategoryRepository _repository;
         private readonly IMapper _mapper;

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Query.Tag.GetCountByName
 {
-    public sealed class GetTagCountByNameQuery: IQuery<int>
+    public sealed class GetTagCountByNameQuery: IRequest<QResult<int>>
     {
         public GetTagCountByNameQuery(string tagName)
         {

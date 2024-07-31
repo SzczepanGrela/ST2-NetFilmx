@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Tag.GetByName
 {
-    public sealed class GetTagByNameQuery<TDto> : IQuery<TDto>
+    public sealed class GetTagByNameQuery<TDto> : IRequest<QResult<TDto>>
     {
         public GetTagByNameQuery(string tagName)
         {

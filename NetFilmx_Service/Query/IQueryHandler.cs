@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,3 +13,4 @@ namespace NetFilmx_Service.Query
         Task<QResult<wantedType>> Handle(TQuery query, CancellationToken cancellationToken);
     }
 }
+*/

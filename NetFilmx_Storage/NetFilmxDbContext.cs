@@ -10,6 +10,7 @@ namespace NetFilmx_Storage
     {
         public NetFilmxDbContext(DbContextOptions<NetFilmxDbContext> options) : base(options)
         {
+            
         }
 
         public DbSet<Video> Videos { get; set; }
@@ -100,8 +101,25 @@ namespace NetFilmx_Storage
 
 
 
-            DataSeeder.SeedData(modelBuilder);
+           // DataSeeder.SeedData(modelBuilder);
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                var configuration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json")
+                    .Build();
+
+                optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
+                    x => x.MigrationsHistoryTable("__EFMigrationsHistory", "NetFilmx"));
+            }
+        }
+
+
+
     }
 
     public class NetFilmxDbContextFactory : IDesignTimeDbContextFactory<NetFilmxDbContext>

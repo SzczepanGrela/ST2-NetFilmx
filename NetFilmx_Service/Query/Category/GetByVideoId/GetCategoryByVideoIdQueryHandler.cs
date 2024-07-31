@@ -1,14 +1,18 @@
 ﻿using AutoMapper;
+using MediatR;
+using NetFilmx_Service.Dtos.Category;
 using NetFilmx_Storage.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Query.Category.GetByVideoId
 {
-    public sealed class GetCategoryByVideoIdQueryHandler<TDto> : IQueryHandler<GetCategoryByVideoIdQuery<TDto>, List<TDto>>
+    public sealed class GetCategoryByVideoIdQueryHandler<TDto> : IRequestHandler<GetCategoryByVideoIdQuery<TDto>, QResult<List<TDto>>>
+        where TDto : ICategoryDto
     {
         private readonly ICategoryRepository _repository;
         private readonly IMapper _mapper;

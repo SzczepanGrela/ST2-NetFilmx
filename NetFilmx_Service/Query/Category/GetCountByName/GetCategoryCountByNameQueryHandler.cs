@@ -2,10 +2,12 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Query.Category.GetCountByName
 {
-    public sealed class GetCategoryCountByNameQueryHandler : IQueryHandler<GetCategoryCountByNameQuery, int>
+    public sealed class GetCategoryCountByNameQueryHandler : IRequestHandler<GetCategoryCountByNameQuery, QResult<int>>
+        
     {
         private readonly ICategoryRepository _repository;
 

@@ -1,14 +1,17 @@
 ﻿using AutoMapper;
+using NetFilmx_Service.Dtos.Video;
 using NetFilmx_Storage.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Query.Video.GetByExclTagId
 {
-    public sealed class GetVideosByExcludedTagIdQueryHandler<TDto> : IQueryHandler<GetVideosByExcludedTagIdQuery<TDto>,List<TDto>>
+    public sealed class GetVideosByExcludedTagIdQueryHandler<TDto> : IRequestHandler<GetVideosByExcludedTagIdQuery<TDto>, QResult<List<TDto>>>
+        where TDto : IVideoDto
     {
         private readonly IVideoRepository _repository;
         private readonly IMapper _mapper;

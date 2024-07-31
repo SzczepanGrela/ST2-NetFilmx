@@ -9,10 +9,13 @@ using System.Text;
 using System.Threading.Tasks;
 using NetFilmx_Storage.Entities;
 using AutoMapper;
+using MediatR;
+using NetFilmx_Service.Dtos.Series;
 
 namespace NetFilmx_Service.Query.SeriesPurchase.GetAll
 {
-    public sealed class GetAllSeriesPurchasesQueryHandler<TDto> : IQueryHandler<GetAllSeriesPurchasesQuery<TDto>, List<TDto>>
+    public sealed class GetAllSeriesPurchasesQueryHandler<TDto> : IRequestHandler<GetAllSeriesPurchasesQuery<TDto>, QResult<List<TDto>>>
+     where TDto : ISeriesDto
     {
         private readonly ISeriesPurchaseRepository _repository;
         private readonly IMapper _mapper;

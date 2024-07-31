@@ -5,10 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
+using NetFilmx_Service.Dtos.Tag;
 
 namespace NetFilmx_Service.Query.Tag.GetByVideoId
 {
-    public class GetTagsByVideoIdQueryHandler<TDto> : IQueryHandler<GetTagsByVideoIdQuery<TDto>, List<TDto>>
+    public class GetTagsByVideoIdQueryHandler<TDto> : IRequestHandler<GetTagsByVideoIdQuery<TDto>, QResult<List<TDto>>>
+        where TDto : ITagDto
     {
         private readonly ITagRepository _repository;
         private readonly IMapper _mapper;

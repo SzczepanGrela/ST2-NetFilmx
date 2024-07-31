@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Query.Tag.GetCountById
 {
-    public sealed class GetTagCountByIdQueryHandler : IQueryHandler<GetTagCountByIdQuery, int>
+    public sealed class GetTagCountByIdQueryHandler : IRequestHandler<GetTagCountByIdQuery, QResult<int>>
     {
         private readonly ITagRepository _repository;
 

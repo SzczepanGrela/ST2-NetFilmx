@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Comment.GetByUserId
 {
-    public sealed class GetCommentsByUserIdQuery<TDto> : IQuery<List<TDto>>
+    public sealed class GetCommentsByUserIdQuery<TDto> : IRequest<QResult<List<TDto>>>  
     {
         public GetCommentsByUserIdQuery(int userId)
         {

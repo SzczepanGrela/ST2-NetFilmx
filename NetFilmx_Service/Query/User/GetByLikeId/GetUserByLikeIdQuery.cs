@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.User.GetByLikeId
 {
-    public sealed class GetUserByLikeIdQuery<TDto> : IQuery<TDto>
+    public sealed class GetUserByLikeIdQuery<TDto> : IRequest<QResult<TDto>>
     {
         public GetUserByLikeIdQuery(int likeId)
         {
