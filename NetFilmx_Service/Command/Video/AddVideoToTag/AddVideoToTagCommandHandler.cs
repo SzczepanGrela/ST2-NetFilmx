@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Command.Video.AddVideoToTag
+namespace NetFilmx_Service.Command.Video
 {
     public sealed class AddVideoToTagCommandHandler : ICommandHandler<AddVideoToTagCommand>
     {

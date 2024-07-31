@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using NetFilmx_Service.Command.User.Add;
-using NetFilmx_Service.Command.User.Edit;
+using NetFilmx_Service.Command.User;
+using NetFilmx_Service.Command.User;
 using NetFilmx_Service.Dtos.User;
 using NetFilmx_Storage.Entities;
 

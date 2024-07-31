@@ -1,4 +1,4 @@
-﻿using NetFilmx_Service.Command.User.Add;
+﻿using NetFilmx_Service.Command.User;
 using NetFilmx_Storage.Repositories;
 using System;
 using System.Collections.Generic;

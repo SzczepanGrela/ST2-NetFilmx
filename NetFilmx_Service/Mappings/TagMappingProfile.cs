@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using NetFilmx_Service.Command.Tag.Add;
-using NetFilmx_Service.Command.Tag.Edit;
+using NetFilmx_Service.Command.Tag;
+using NetFilmx_Service.Command.Tag;
 using NetFilmx_Service.Dtos.Tag;
 using NetFilmx_Storage.Entities;
 

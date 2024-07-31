@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace NetFilmx_Service.Command.Video.AddVideoToCategory
+namespace NetFilmx_Service.Command.Video
 {
     public sealed class AddVideoToCategoryCommandHandler : ICommandHandler<AddVideoToCategoryCommand>
     {

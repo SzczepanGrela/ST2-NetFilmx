@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Command.Comment.Add
+namespace NetFilmx_Service.Command.Comment
 {
     public sealed class AddCommentCommandHandler : ICommandHandler<AddCommentCommand>
     {

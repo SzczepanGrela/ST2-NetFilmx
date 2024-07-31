@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Command.Series.Add
+namespace NetFilmx_Service.Command.Series
 {
     internal class AddSeriesCommandValidator : AbstractValidator<AddSeriesCommand>
     {

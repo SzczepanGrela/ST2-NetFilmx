@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Command.Video.RemoveVideoFromTag
+namespace NetFilmx_Service.Command.Video
 {
     public sealed class RemoveVideoFromTagCommandHandler : ICommandHandler<RemoveVideoFromTagCommand>
     {

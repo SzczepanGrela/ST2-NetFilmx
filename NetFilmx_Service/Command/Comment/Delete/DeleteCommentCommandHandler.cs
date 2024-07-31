@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Command.Comment.Delete
+namespace NetFilmx_Service.Command.Comment
 {
     internal class DeletecommentCommandHandler
     {

@@ -1,12 +1,12 @@
 ﻿using FluentValidation;
-using NetFilmx_Service.Command.Comment.Add;
+using NetFilmx_Service.Command.Comment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Command.Comment.Edit
+namespace NetFilmx_Service.Command.Comment
 {
     public sealed class EditCommentCommandValidator : AbstractValidator<EditCommentCommand>
     {

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Command.User.Add
+namespace NetFilmx_Service.Command.User
 {
     public sealed class AddUserCommandValidator : AbstractValidator<AddUserCommand>
     {

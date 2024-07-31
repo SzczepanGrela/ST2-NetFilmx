@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Command.Tag.Delete
+namespace NetFilmx_Service.Command.Tag
 {
     internal class DeleteTagCommandHandler : ICommandHandler<DeleteTagCommand>
     {

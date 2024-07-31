@@ -1,4 +1,4 @@
-﻿using NetFilmx_Service.Command.Category.Add;
+﻿using NetFilmx_Service.Command.Category;
 using NetFilmx_Storage.Repositories;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Command.Category.Edit
+namespace NetFilmx_Service.Command.Category
 {
     public sealed class EditCategoryCommandHandler
     {

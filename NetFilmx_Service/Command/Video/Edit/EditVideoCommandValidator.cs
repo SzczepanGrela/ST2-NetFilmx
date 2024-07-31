@@ -1,12 +1,12 @@
 ﻿using FluentValidation;
-using NetFilmx_Service.Command.Video.Add;
+using NetFilmx_Service.Command.Video;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Command.Video.Edit
+namespace NetFilmx_Service.Command.Video
 {
     public sealed class EditVideoCommandValidator : AbstractValidator<EditVideoCommand>
     {

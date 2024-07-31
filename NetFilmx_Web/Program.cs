@@ -6,9 +6,11 @@ using MediatR;
 using NetFilmx_Service.Query.Category;
 using NetFilmx_Web.Extensions;
 using NetFilmx_Storage;
+using NetFilmx_Service;
 using Autofac;
 using Microsoft.Build.Execution;
 using Autofac.Extensions.DependencyInjection;
+using NetFilmx_Service.Command.Category;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,32 +21,25 @@ builder.Services.AddControllersWithViews();
 
 
 
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
+    Assembly.GetExecutingAssembly())); 
+
+
+
 
 builder.Services.AddNetFilmxServices();
 
-builder.Services.AddGenericRequestHandlers();
+builder.Services.AddRequestHandlers();
 
+builder.Services.AddCommandHandlers();
+
+builder.Services.AddAutoMapProfiles();
 
 //builder.Services.AddAutoMapper(typeof(Program));
-
-builder.Services.AddAutoMapper(typeof(CategoryMappingProfile));
-builder.Services.AddAutoMapper(typeof(VideoMappingProfile));
-builder.Services.AddAutoMapper(typeof(TagMappingProfile));
-builder.Services.AddAutoMapper(typeof(SeriesMappingProfile));
-builder.Services.AddAutoMapper(typeof(UserMappingProfile));
-builder.Services.AddAutoMapper(typeof(CommentMappingProfile));
-
-
 
 
 builder.Services.AddDbContext<NetFilmxDbContext>();
 
-
-
-
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
-    Assembly.GetExecutingAssembly()  
-));
 
 var app = builder.Build();
 

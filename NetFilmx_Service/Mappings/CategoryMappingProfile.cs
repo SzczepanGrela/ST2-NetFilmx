@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using NetFilmx_Service.Command.Category.Add;
-using NetFilmx_Service.Command.Category.Edit;
+using NetFilmx_Service.Command.Category;
+using NetFilmx_Service.Command.Category;
 using NetFilmx_Service.Dtos.Category;
 using NetFilmx_Storage.Entities;
 

@@ -2,9 +2,9 @@
 using NetFilmx_Storage;
 using MediatR;
 using NetFilmx_Service.Dtos.Category;
-using NetFilmx_Service.Command.Category.Add;
-using NetFilmx_Service.Command.Category.Delete;
-using NetFilmx_Service.Command.Category.Edit;
+using NetFilmx_Service.Command.Category;
+using NetFilmx_Service.Command.Category;
+using NetFilmx_Service.Command.Category;
 using NetFilmx_Service.Query.Category;
 using NetFilmx_Service;
 using NetFilmx_Service.Dtos.Comment;
@@ -33,7 +33,7 @@ namespace NetFilmx_Web.Extensions
         /// <param name="serviceCollection"></param>
         /// <returns></returns>
 
-        public static IServiceCollection AddGenericRequestHandlers(this IServiceCollection serviceCollection)
+        public static IServiceCollection AddRequestHandlers(this IServiceCollection serviceCollection)
         {
             // Category Requests
             serviceCollection.AddTransient<IRequestHandler<GetAllCategoriesQuery<CategoryAddDto>, QResult<List<CategoryAddDto>>>, GetAllCategoriesQueryHandler<CategoryAddDto>>();

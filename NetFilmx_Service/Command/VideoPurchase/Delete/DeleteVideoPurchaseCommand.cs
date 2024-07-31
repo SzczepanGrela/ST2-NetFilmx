@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Command.VideoPurchase.Delete
+namespace NetFilmx_Service.Command.VideoPurchase
 {
     public class DeleteVideoPurchaseCommand : ICommand
     {

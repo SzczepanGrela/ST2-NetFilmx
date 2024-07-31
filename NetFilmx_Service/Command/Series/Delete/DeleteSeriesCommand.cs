@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Command.Series.Delete
+namespace NetFilmx_Service.Command.Series
 {
     public sealed class DeleteSeriesCommand : ICommand
     {

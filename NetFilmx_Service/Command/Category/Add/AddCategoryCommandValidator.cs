@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace NetFilmx_Service.Command.Category.Add
+namespace NetFilmx_Service.Command.Category
 {
     public  class AddCategoryCommandValidator : AbstractValidator<AddCategoryCommand>
     {

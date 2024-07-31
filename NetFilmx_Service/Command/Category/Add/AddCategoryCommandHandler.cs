@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using NetFilmx_Storage.Repositories;
 using NetFilmx_Storage.Entities;
 
-namespace NetFilmx_Service.Command.Category.Add
+namespace NetFilmx_Service.Command.Category
 {
     public sealed class AddCategoryCommandHandler : ICommandHandler<AddCategoryCommand>
     {

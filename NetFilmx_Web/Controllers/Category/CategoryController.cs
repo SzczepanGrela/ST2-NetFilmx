@@ -1,10 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NetFilmx_Service;
-using NetFilmx_Service.Command.Category.Add;
-using NetFilmx_Service.Command.Category.Delete;
-using NetFilmx_Service.Command.Category.Edit;
-using NetFilmx_Service.Command.Video.AddVideoToCategory;
+using NetFilmx_Service.Command.Category;
+using NetFilmx_Service.Command.Video;
 using NetFilmx_Service.Command.Video.RemoveVideoFromCategory;
 using NetFilmx_Service.Dtos.Category;
 using NetFilmx_Service.Dtos.Video;

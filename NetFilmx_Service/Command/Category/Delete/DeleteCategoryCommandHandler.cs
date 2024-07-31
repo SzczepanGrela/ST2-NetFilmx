@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Command.Category.Delete
+namespace NetFilmx_Service.Command.Category
 {
     public sealed class DeleteCategoryCommandHandler : ICommandHandler<DeleteCategoryCommand>
     {

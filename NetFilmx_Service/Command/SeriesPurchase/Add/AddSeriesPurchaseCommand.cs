@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Command.SeriesPurchase.Add
+namespace NetFilmx_Service.Command.SeriesPurchase
 {
     public sealed class AddSeriesPurchaseCommand : ICommand
     {

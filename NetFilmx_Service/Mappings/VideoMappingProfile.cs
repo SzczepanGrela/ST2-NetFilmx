@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using NetFilmx_Service.Command.Video.Add;
-using NetFilmx_Service.Command.Video.Edit;
+using NetFilmx_Service.Command.Video;
+using NetFilmx_Service.Command.Video;
 using NetFilmx_Service.Dtos.Video;
 using NetFilmx_Storage.Entities;
 

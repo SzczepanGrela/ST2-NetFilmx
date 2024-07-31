@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NetFilmx_Service.Command.User.Add;
+using NetFilmx_Service.Command.User;
 
-namespace NetFilmx_Service.Command.User.Edit
+namespace NetFilmx_Service.Command.User
 {
     public sealed class EditUserCommandValidator : AbstractValidator<EditUserCommand>
     {

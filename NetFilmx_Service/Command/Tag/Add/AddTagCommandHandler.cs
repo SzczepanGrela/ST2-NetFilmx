@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Command.Tag.Add
+namespace NetFilmx_Service.Command.Tag
 {
     public sealed class AddTagCommandHandler : ICommandHandler<AddTagCommand>
     {

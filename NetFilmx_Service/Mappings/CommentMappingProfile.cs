@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using NetFilmx_Service.Command.Comment.Add;
-using NetFilmx_Service.Command.Comment.Edit;
+using NetFilmx_Service.Command.Comment;
+using NetFilmx_Service.Command.Comment;
 using NetFilmx_Service.Dtos.Comment;
 using NetFilmx_Storage.Entities;
 
