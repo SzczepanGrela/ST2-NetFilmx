@@ -48,7 +48,7 @@ namespace NetFilmx_Storage.Repositories
 
         public async Task DeleteLikeAsync(int id)
         {
-            var like = await GetLikeByIdAsync(id);
+            var like = await _context.Likes.FindAsync(id);
             if (like == null)
             {
                 throw new Exception("Like not found");

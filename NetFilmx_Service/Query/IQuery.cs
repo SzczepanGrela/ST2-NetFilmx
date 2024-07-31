@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query
 {
-    public interface IQuery
+    public interface IQuery<QResult>
     {
     }
 }

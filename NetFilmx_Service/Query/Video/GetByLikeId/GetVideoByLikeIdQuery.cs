@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Video.GetByLikeId
 {
-    public sealed class GetVideoByLikeIdQuery : IQuery
+    public sealed class GetVideoByLikeIdQuery<TDto> : IQuery<QResult<TDto>>
     {
         public GetVideoByLikeIdQuery(int likeId)
         {

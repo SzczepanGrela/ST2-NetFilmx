@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Comment.GetById
 {
-    public sealed class GetCommentByIdQuery : IQuery
+    public sealed class GetCommentByIdQuery<TDto> : IQuery<QResult<TDto>>
     {
         public GetCommentByIdQuery(int commentId)
         {

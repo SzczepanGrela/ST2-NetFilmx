@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Series.GetCountById
 {
-    public sealed class GetSeriesCountByIdQuery : IQuery
+    public sealed class GetSeriesCountByIdQuery<TDto> : IQuery<QResult<TDto>>
     {
         public GetSeriesCountByIdQuery(int seriesId)
         {
