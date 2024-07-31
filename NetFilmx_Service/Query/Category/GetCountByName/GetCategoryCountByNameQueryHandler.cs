@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace NetFilmx_Service.Query.Category.GetCountByName
+namespace NetFilmx_Service.Query.Category
 {
     public sealed class GetCategoryCountByNameQueryHandler : IRequestHandler<GetCategoryCountByNameQuery, QResult<int>>
         

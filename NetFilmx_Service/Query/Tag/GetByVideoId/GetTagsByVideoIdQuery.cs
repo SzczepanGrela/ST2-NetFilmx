@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Query.Tag.GetByVideoId
+namespace NetFilmx_Service.Query.Tag
 {
     public sealed class GetTagsByVideoIdQuery<TDto> : IRequest<QResult<List<TDto>>>  
     {

@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace NetFilmx_Web.Extensions
 {
-    public static class ServiceCollectionExtensions
+    public static partial class ServiceCollectionExtension
     {
         public static IServiceCollection AddNetFilmxServices(this IServiceCollection serviceCollection)
         {
@@ -24,5 +24,8 @@ namespace NetFilmx_Web.Extensions
 
             
         }
+
+
+
     }
 }

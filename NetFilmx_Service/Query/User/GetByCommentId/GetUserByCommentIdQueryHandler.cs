@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using MediatR;
 using NetFilmx_Service.Dtos.User;
 
-namespace NetFilmx_Service.Query.User.GetByCommentId
+namespace NetFilmx_Service.Query.User
 {
     public sealed class GetUserByCommentIdQueryHandler<TDto> : IRequestHandler<GetUserByCommentIdQuery<TDto>, QResult<TDto>>
         where TDto : IUserDto

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using MediatR;
 using NetFilmx_Service.Dtos.Video;
 
-namespace NetFilmx_Service.Query.Video.GetById
+namespace NetFilmx_Service.Query.Video
 {
     public sealed class GetVideoByIdQueryHandler<TDto> : IRequestHandler<GetVideoByIdQuery<TDto>, QResult<TDto>>
         where TDto : IVideoDto

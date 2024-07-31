@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace NetFilmx_Service.Query.Series.GetCountById
+namespace NetFilmx_Service.Query.Series
 {
     public sealed class GetSeriesCountByIdQuery : IRequest<QResult<int>>
     {

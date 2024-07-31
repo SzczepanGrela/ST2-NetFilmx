@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using MediatR;
 using NetFilmx_Service.Dtos.VideoPurchase;
 
-namespace NetFilmx_Service.Query.VideoPurchase.GetByVideoId
+namespace NetFilmx_Service.Query.VideoPurchase
 {
     public class GetVideoPurchasesByVideoIdQueryHandler<TDto> : IRequestHandler<GetVideoPurchasesByVideoIdQuery<TDto>, QResult<List<TDto>>>
         where TDto : IVideoPurchaseDto

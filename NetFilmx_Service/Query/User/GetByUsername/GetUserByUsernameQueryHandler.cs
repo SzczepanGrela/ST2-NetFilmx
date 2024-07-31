@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 using NetFilmx_Service.Dtos.User;
-namespace NetFilmx_Service.Query.User.GetByUsername
+namespace NetFilmx_Service.Query.User
 {
     public sealed class GetUserByUsernameQueryHandler<TDto> : IRequestHandler<GetUserByUsernameQuery<TDto>, QResult<TDto>>
         where TDto : IUserDto

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace NetFilmx_Service.Query.Comment.GetByUserId
+namespace NetFilmx_Service.Query.Comment
 {
     public sealed class GetCommentsByUserIdQueryHandler<TDto> : IRequestHandler<GetCommentsByUserIdQuery<TDto>, QResult<List<TDto>>>
         where TDto : ICommentDto

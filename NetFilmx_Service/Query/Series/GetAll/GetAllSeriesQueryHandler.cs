@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using MediatR;
 using NetFilmx_Service.Dtos.Series;
 
-namespace NetFilmx_Service.Query.Series.GetAll
+namespace NetFilmx_Service.Query.Series
 {
     public sealed class GetAllSeriesQueryHandler<TDto> : IRequestHandler<GetAllSeriesQuery<TDto>, QResult<List<TDto>>>
         where TDto : ISeriesDto

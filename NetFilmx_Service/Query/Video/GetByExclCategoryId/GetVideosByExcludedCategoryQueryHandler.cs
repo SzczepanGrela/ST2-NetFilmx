@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using MediatR;
 using NetFilmx_Service.Dtos.Video;
 
-namespace NetFilmx_Service.Query.Video.GetByExclCategoryId
+namespace NetFilmx_Service.Query.Video
 {
     public sealed class GetVideosByExcludedCategoryQueryHandler<TDto> : IRequestHandler<GetVideosByExcludedCategoryQuery<TDto>, QResult<List<TDto>>>
             where TDto : IVideoDto

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace NetFilmx_Service.Query.Series.GetByName
+namespace NetFilmx_Service.Query.Series
 {
     public sealed class GetSeriesByNameQueryHandler<TDto> : IRequestHandler<GetSeriesByNameQuery<TDto>, QResult<TDto>>
          where TDto : ISeriesDto

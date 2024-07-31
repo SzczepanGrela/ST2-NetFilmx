@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace NetFilmx_Service.Query.Comment.GetAll
+namespace NetFilmx_Service.Query.Comment
 {
     public sealed class GetAllCommentsQueryHandler<TDto>: IRequestHandler<GetAllCommentsQuery<TDto>, QResult<List<TDto>>>
         where TDto : ICommentDto

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using MediatR;
 using NetFilmx_Service.Dtos.Series;
 
-namespace NetFilmx_Service.Query.SeriesPurchase.GetById
+namespace NetFilmx_Service.Query.SeriesPurchase
 {
     public sealed class GetSeriesPurchaseByIdQueryHandler<TDto> : IRequestHandler<GetSeriesPurchaseByIdQuery<TDto>, QResult<TDto>>
     where TDto : ISeriesDto

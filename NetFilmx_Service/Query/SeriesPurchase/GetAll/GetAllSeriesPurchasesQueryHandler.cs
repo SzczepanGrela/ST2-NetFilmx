@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using NetFilmx_Service.Query.SeriesPurchase.GetByUserId;
+using NetFilmx_Service.Query.SeriesPurchase;
 using NetFilmx_Storage.Entities;
 using NetFilmx_Storage.Repositories;
 using System;
@@ -12,7 +12,7 @@ using AutoMapper;
 using MediatR;
 using NetFilmx_Service.Dtos.Series;
 
-namespace NetFilmx_Service.Query.SeriesPurchase.GetAll
+namespace NetFilmx_Service.Query.SeriesPurchase
 {
     public sealed class GetAllSeriesPurchasesQueryHandler<TDto> : IRequestHandler<GetAllSeriesPurchasesQuery<TDto>, QResult<List<TDto>>>
      where TDto : ISeriesDto

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Query.Like.GetCountByVideoId
+namespace NetFilmx_Service.Query.Like
 {
     public sealed class GetLikesCountByVideoIdQuery: IRequest<QResult<int>>
     {

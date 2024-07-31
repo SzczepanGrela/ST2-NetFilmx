@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace NetFilmx_Service.Query.Like.GetCountByVideoId
+namespace NetFilmx_Service.Query.Like
 {
     public sealed class GetLikesCountByVideoIdQueryHandler : IRequestHandler<GetLikesCountByVideoIdQuery, QResult<int> >
       

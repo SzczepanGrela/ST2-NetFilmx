@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace NetFilmx_Service.Query.User.GetByLikeId
+namespace NetFilmx_Service.Query.User
 {
     public sealed class GetUserByLikeIdQueryHandler<TDto> : IRequestHandler<GetUserByLikeIdQuery<TDto>, QResult<TDto>>
         where TDto : IUserDto

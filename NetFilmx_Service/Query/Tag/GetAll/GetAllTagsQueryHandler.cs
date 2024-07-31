@@ -9,7 +9,7 @@ using MediatR;
 using NetFilmx_Service.Dtos.Series;
 using NetFilmx_Service.Dtos.Tag;
 
-namespace NetFilmx_Service.Query.Tag.GetAll
+namespace NetFilmx_Service.Query.Tag
 {
     public sealed class GetAllTagsQueryHandler<TDto> : IRequestHandler<GetAllTagsQuery<TDto>, QResult<List<TDto>>>
          where TDto : ITagDto

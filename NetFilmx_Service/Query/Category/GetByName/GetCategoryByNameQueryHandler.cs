@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Query.Category.GetByName
+namespace NetFilmx_Service.Query.Category
 {
     public sealed class GetCategoryByNameQueryHandler<TDto> : IRequestHandler<GetCategoryByNameQuery<TDto>, QResult<TDto>>
         where TDto : ICategoryDto

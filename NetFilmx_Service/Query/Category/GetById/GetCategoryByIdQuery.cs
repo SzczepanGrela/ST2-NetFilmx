@@ -7,7 +7,7 @@ using MediatR;
 
 
 
-namespace NetFilmx_Service.Query.Category.GetById
+namespace NetFilmx_Service.Query.Category
 {
     public sealed class GetCategoryByIdQuery<TDto> : IRequest<QResult<TDto>>
     {

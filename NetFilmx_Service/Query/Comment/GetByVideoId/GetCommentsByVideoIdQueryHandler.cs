@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using MediatR;
 using NetFilmx_Service.Dtos.Comment;
 
-namespace NetFilmx_Service.Query.Comment.GetByVideoId
+namespace NetFilmx_Service.Query.Comment
 {
     public sealed class GetCommentsByVideoIdQueryHandler<TDto> : IRequestHandler<GetCommentsByVideoIdQuery<TDto>, QResult<List<TDto>>>
     where TDto : ICommentDto

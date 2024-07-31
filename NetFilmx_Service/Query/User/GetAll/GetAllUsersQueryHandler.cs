@@ -9,7 +9,7 @@ using MediatR;
 using NetFilmx_Service.Dtos.Tag;
 using NetFilmx_Service.Dtos.User;
 
-namespace NetFilmx_Service.Query.User.GetAll
+namespace NetFilmx_Service.Query.User
 {
     public sealed class GetAllUsersQueryHandler<TDto> : IRequestHandler<GetAllUsersQuery<TDto>, QResult<List<TDto>>>
         where TDto : IUserDto

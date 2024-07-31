@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using MediatR;
 using NetFilmx_Service.Dtos.Tag;
 
-namespace NetFilmx_Service.Query.Tag.GetByVideoId
+namespace NetFilmx_Service.Query.Tag
 {
     public class GetTagsByVideoIdQueryHandler<TDto> : IRequestHandler<GetTagsByVideoIdQuery<TDto>, QResult<List<TDto>>>
         where TDto : ITagDto

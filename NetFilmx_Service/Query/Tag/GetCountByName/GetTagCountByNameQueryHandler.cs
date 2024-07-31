@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace NetFilmx_Service.Query.Tag.GetCountByName
+namespace NetFilmx_Service.Query.Tag
 {
     public sealed class GetTagCountByNameQueryHandler : IRequestHandler<GetTagCountByNameQuery, QResult<int>>
     {

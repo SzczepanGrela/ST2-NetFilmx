@@ -9,7 +9,7 @@ using MediatR;
 using NetFilmx_Service.Dtos.User;
 using NetFilmx_Service.Dtos.Video;
 
-namespace NetFilmx_Service.Query.Video.GetAll
+namespace NetFilmx_Service.Query.Video
 {
     public sealed class GetAllVideosQueryHandler<TDto> : IRequestHandler<GetAllVideosQuery<TDto>, QResult<List<TDto>>>
         where TDto : IVideoDto

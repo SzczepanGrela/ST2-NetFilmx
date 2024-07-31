@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace NetFilmx_Service.Query.Category.GetByVideoId
+namespace NetFilmx_Service.Query.Category
 {
     public sealed class GetCategoryByVideoIdQueryHandler<TDto> : IRequestHandler<GetCategoryByVideoIdQuery<TDto>, QResult<List<TDto>>>
         where TDto : ICategoryDto

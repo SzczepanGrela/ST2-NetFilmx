@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace NetFilmx_Service.Query.VideoPurchase.GetAll
+namespace NetFilmx_Service.Query.VideoPurchase
 {
     public sealed class GetAllVideoPurchasesQuery<TDto> : IRequest<QResult<List<TDto>>>  
     {

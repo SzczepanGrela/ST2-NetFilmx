@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using MediatR;
 using NetFilmx_Service.Dtos.User;
 
-namespace NetFilmx_Service.Query.User.GetByVideoPurchaseId
+namespace NetFilmx_Service.Query.User
 {
     public sealed class GetUserByVideoPurchaseIdQueryHandler<TDto> : IRequestHandler<GetUserByVideoPurchaseIdQuery<TDto>, QResult<TDto>>
         where TDto : IUserDto

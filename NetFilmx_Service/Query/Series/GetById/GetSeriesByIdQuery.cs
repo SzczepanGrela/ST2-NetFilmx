@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Query.Series.GetById
+namespace NetFilmx_Service.Query.Series
 {
     public sealed class GetSeriesByIdQuery<TDto> : IRequest<QResult<TDto>>
     {

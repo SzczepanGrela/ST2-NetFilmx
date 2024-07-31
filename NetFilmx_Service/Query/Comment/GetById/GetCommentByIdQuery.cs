@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Query.Comment.GetById
+namespace NetFilmx_Service.Query.Comment
 {
     public sealed class GetCommentByIdQuery<TDto> : IRequest<QResult<TDto>>
     {

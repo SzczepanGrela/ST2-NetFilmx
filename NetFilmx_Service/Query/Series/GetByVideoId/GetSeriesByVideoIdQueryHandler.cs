@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace NetFilmx_Service.Query.Series.GetByVideoId
+namespace NetFilmx_Service.Query.Series
 {
     public sealed class GetSeriesByVideoIdQueryHandler<TDto>: IRequestHandler<GetSeriesByVideoIdQuery<TDto>, QResult<List<TDto>>>
     {

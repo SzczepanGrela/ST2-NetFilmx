@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace NetFilmx_Service.Query.Tag.GetByName
+namespace NetFilmx_Service.Query.Tag
 {
     public class GetTagByNameQueryHandler<TDto> : IRequestHandler<GetTagByNameQuery<TDto>, QResult<TDto>>
         where TDto : ITagDto

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Query.SeriesPurchase.GetByUserId
+namespace NetFilmx_Service.Query.SeriesPurchase
 {
     public sealed class GetSeriesPurchasesByUserIdQuery<TDto> : IRequest<QResult<List<TDto>>>  
     {
