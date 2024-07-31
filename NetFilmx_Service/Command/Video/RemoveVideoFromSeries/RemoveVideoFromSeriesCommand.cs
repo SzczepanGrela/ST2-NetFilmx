@@ -8,6 +8,13 @@ namespace NetFilmx_Service.Command.Video.RemoveVideoFromSeries
 {
     public sealed class RemoveVideoFromSeriesCommand : ICommand
     {
+
+
+        public RemoveVideoFromSeriesCommand(int seriesid, int videoid)
+        {   SeriesId = seriesid;
+            VideoId = videoid;
+        }
+
         public int SeriesId { get; }
 
         public int VideoId { get; }

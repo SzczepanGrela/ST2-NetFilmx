@@ -8,6 +8,13 @@ namespace NetFilmx_Service.Command.VideoPurchase.Delete
 {
     public class DeleteVideoPurchaseCommand : ICommand
     {
+
+
+        public DeleteVideoPurchaseCommand(int id)
+        {
+            Id = id;
+        }
+
         public int Id { get; }
 
       

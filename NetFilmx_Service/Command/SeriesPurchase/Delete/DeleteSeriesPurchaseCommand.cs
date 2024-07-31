@@ -9,6 +9,11 @@ namespace NetFilmx_Service.Command.SeriesPurchase.Delete
     public sealed class DeleteSeriesPurchaseCommand : ICommand
     {
 
+        public DeleteSeriesPurchaseCommand(int id)
+        {
+            Id = id;
+        }
+
         public int Id { get;}
 
     }

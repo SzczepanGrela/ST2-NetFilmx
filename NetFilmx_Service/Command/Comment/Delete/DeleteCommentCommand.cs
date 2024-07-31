@@ -8,6 +8,11 @@ namespace NetFilmx_Service.Command.Comment.Delete
 {
     public sealed class DeleteCommentCommand : ICommand
     {
+
+        public DeleteCommentCommand(int id)
+        {
+            Id = id;
+        }
         public int Id { get;}
 
     }

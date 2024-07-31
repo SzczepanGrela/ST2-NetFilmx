@@ -8,6 +8,14 @@ namespace NetFilmx_Service.Command.Series.Add
 {
     public sealed class AddSeriesCommand : ICommand
     {
+
+        public AddSeriesCommand(string name, string? description, decimal price)
+        {
+            Name = name;
+            Description = description;
+            Price = price;
+        }
+
         public string Name { get; }
 
         public string? Description { get; }

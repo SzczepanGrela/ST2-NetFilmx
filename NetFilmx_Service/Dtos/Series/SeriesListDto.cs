@@ -6,17 +6,20 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Dtos.Series
 {
-    internal class SeriesListDto
+    public class SeriesListDto
     {
-        public SeriesListDto(string name, decimal price)
+        public SeriesListDto(string name, decimal price, int id)
         {
             Name = name;
             Price = price;
+            Id = id;
         }
 
         public string Name { get; }
 
         public decimal Price { get; }
+
+        public int Id { get; }
 
 
 

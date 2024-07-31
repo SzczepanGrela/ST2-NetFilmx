@@ -9,6 +9,11 @@ namespace NetFilmx_Service.Command.Tag.Add
     public sealed class AddTagCommand : ICommand
     {
          
+        public AddTagCommand(string name)
+        {
+            Name = name;
+        }
+
         public string Name { get; set; }
 
     }

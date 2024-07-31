@@ -9,6 +9,12 @@ namespace NetFilmx_Service.Command.User.Add
     public sealed class AddUserCommand : ICommand
     {
        
+        public AddUserCommand(string username, string email, string password)
+        {
+            Username = username;
+            Email = email;
+            Password = password;
+        }
 
         public string Username { get; }
 

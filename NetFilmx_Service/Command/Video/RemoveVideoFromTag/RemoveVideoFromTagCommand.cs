@@ -8,6 +8,13 @@ namespace NetFilmx_Service.Command.Video.RemoveVideoFromTag
 {
     public sealed class RemoveVideoFromTagCommand : ICommand
     {
+
+        public RemoveVideoFromTagCommand(int tagid, int videoid)
+        {
+            TagId = tagid;
+            VideoId = videoid;
+        }
+
         public int TagId { get; }
 
         public int VideoId { get; }

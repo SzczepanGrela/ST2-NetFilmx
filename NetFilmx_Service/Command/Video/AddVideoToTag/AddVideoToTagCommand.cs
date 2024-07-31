@@ -8,6 +8,13 @@ namespace NetFilmx_Service.Command.Video.AddVideoToTag
 {
     public sealed class AddVideoToTagCommand : ICommand
     {
+
+        public AddVideoToTagCommand(int tagid, int videoid)
+        {
+            TagId = tagid;
+            VideoId = videoid;
+        }
+
         public int TagId { get;}
 
         public int VideoId { get;}

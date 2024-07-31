@@ -1,0 +1,16 @@
+﻿@model IEnumerable<NetFilmx_Service.Dtos.Video.VideoListDto>
+
+<h1>Remove videos from category: @ViewBag.CategoryName</h1>
+
+<form asp-action="RemoveVideo" method="post">
+    <input type="hidden" name="categoryName" value="@ViewBag.CategoryName" />
+    <ul>
+        @foreach (var video in Model)
+        {
+            <li>
+                <input type="checkbox" name="videoIds" value="@video.Id" /> @video.Title
+            </li>
+        }
+    </ul>
+    <button type="submit">Zapisz</button>
+</form>

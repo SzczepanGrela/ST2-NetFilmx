@@ -1,0 +1,15 @@
+﻿@model IEnumerable<NetFilmx_Service.Dtos.Video.VideoListDto>
+
+<h1>Filmy w kategorii: @ViewBag.CategoryName</h1>
+
+<ul>
+    @foreach (var video in Model)
+    {
+        <li>
+            <a href="@Url.Action("Details", "Video", new { id = video.Id })">@video.Title</a>
+        </li>
+    }
+</ul>
+
+<a href="@Url.Action("AddVideo", new { categoryName = ViewBag.CategoryName })">Dodaj Film</a>
+<a href="@Url.Action("RemoveVideo", new { categoryName = ViewBag.CategoryName })">Usuń Film</a>

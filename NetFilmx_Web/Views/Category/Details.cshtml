@@ -1,0 +1,9 @@
+﻿@model NetFilmx_Service.Dtos.Category.CategoryDetailsDto
+
+<h1>Szczegóły Kategorii</h1>
+
+<p>Nazwa: @Model.Name</p>
+<p>Opis: @Model.Description</p>
+
+<a href="@Url.Action("Edit", new { name = Model.Id })">Edit</a>
+<a href="@Url.Action("Videos", new { categoryName = Model.Id })">Videos</a>

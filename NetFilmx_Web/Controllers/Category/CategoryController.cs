@@ -1,10 +1,17 @@
-﻿/*using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NetFilmx_Service.Command.Category.Add;
 using NetFilmx_Service.Command.Category.Delete;
 using NetFilmx_Service.Command.Category.Edit;
+using NetFilmx_Service.Command.Video.AddVideoToCategory;
+using NetFilmx_Service.Command.Video.RemoveVideoFromCategory;
+using NetFilmx_Service.Dtos.Category;
+using NetFilmx_Service.Dtos.Video;
 using NetFilmx_Service.Query.Category.GetAll;
 using NetFilmx_Service.Query.Category.GetById;
+using NetFilmx_Service.Query.Category.GetByName;
+using NetFilmx_Service.Query.Video.GetByCategoryId;
+using NetFilmx_Service.Query.Video.GetByExclCategoryId;
 
 namespace NetFilmx_Web.Controllers.Category
 {
@@ -19,76 +26,77 @@ namespace NetFilmx_Web.Controllers.Category
 
         public async Task<IActionResult> Index()
         {
-            var categories = await _mediator.Send(new GetAllCategoriesQuery());
-            return View(categories);
-        }
-
-        public IActionResult Add()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Add(AddCategoryCommand command)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(command);
-            }
-
-            await _mediator.Send(command);
-            return RedirectToAction(nameof(Index));
-        }
-
-        public async Task<IActionResult> Edit(int id)
-        {
-            var query = new GetCategoryByIdQuery(id);
+            var query = new GetAllCategoriesQuery<CategoryListDto>();
             var result = await _mediator.Send(query);
+            return View(result);
+        }
 
-            if (!result.IsSuccess)
-            {
-                return View("Error");
-            }
+        public async Task<IActionResult> Details(string name)
+        {
+            var query = new GetCategoryByNameQuery<CategoryDetailsDto>(name);
+            var result = await _mediator.Send(query);
+            return View(result);
+        }
 
-            var category = result.Value;
-
-            var model = new EditCategoryCommand
-            {
-                Id = category.Id,
-                Name = category.Name,
-                Description = category.Description
-            };
-            return View(model);
+        public async Task<IActionResult> Edit(string name)
+        {
+            var query = new GetCategoryByNameQuery<CategoryEditDto>(name);
+            var result = await _mediator.Send(query);
+            return View(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(EditCategoryCommand command)
+        public async Task<IActionResult> Edit(CategoryEditDto dto)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(command);
-            }
+            var command = new EditCategoryCommand(dto.Id, dto.Name, dto.Description);
+            var result = await _mediator.Send(command);
+            return RedirectToAction(nameof(Details), new { name = dto.Name });
+        }
 
-            await _mediator.Send(command);
-            return RedirectToAction(nameof(Index));
+        public async Task<IActionResult> Videos(int categoryId, string categoryName)
+        {
+            ViewBag.CategoryName = categoryName;
+            var query = new GetVideosByCategoryIdQuery<VideoListDto>(categoryId);
+            var result = await _mediator.Send(query);
+            return View(result);
+        }
+
+        public async Task<IActionResult> AddVideo(int categoryId)
+        {
+            ViewBag.CategoryName = categoryId;
+            var query = new GetVideosByExcludedCategoryQuery<VideoListDto>(categoryId);
+            var result = await _mediator.Send(query);
+            return View(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> AddVideo(int categoryId, List<int> videoIds)
         {
-            await _mediator.Send(new DeleteCategoryCommand { Id = id });
-            return RedirectToAction(nameof(Index));
+            foreach (var videoId in videoIds)
+            {
+                var command = new AddVideoToCategoryCommand(categoryId, videoId);
+                await _mediator.Send(command);
+            }
+            return RedirectToAction(nameof(Videos), new { categoryId });
         }
 
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> RemoveVideo(int categoryId)
         {
-            var category = await _mediator.Send(new GetCategoryByIdQuery { Id = id });
-            if (category == null)
+            ViewBag.CategoryName = categoryId;
+            var query = new GetVideosByCategoryIdQuery<VideoListDto>(categoryId);
+            var result = await _mediator.Send(query);
+            return View(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveVideo(int categoryId, List<int> videoIds)
+        {
+            foreach (var videoId in videoIds)
             {
-                return View("Error");
+                var command = new RemoveVideoFromCategoryCommand(categoryId, videoId);
+                await _mediator.Send(command);
             }
-            return View(category);
+            return RedirectToAction(nameof(Videos), new { categoryId });
         }
     }
 }
-*/

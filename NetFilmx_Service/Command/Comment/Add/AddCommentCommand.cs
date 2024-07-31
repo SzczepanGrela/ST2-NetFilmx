@@ -8,11 +8,20 @@ namespace NetFilmx_Service.Command.Comment.Add
 {
     public sealed class AddCommentCommand : ICommand
     {       
+
+        public AddCommentCommand(int userId, int videoId, string content)
+        {
+            UserId = userId;
+            VideoId = videoId;
+            Content = content;
+        }
+
+
         public int UserId { get;}
 
         public int VideoId { get; }
 
-        public string Content { get;} = "default content";
+        public string Content { get;}
        
     }
 }

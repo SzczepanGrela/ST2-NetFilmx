@@ -12,12 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Comment\" />
-    <Folder Include="Controllers\User\" />
-    <Folder Include="Controllers\Tag\" />
-    <Folder Include="Controllers\Series\" />
-    <Folder Include="Controllers\Video\" />
-    <Folder Include="Views\Category\" />
     <Folder Include="Views\Comment\" />
     <Folder Include="Views\User\" />
     <Folder Include="Views\Series\" />

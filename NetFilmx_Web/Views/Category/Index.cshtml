@@ -1,0 +1,12 @@
+﻿@model IEnumerable<NetFilmx_Service.Dtos.Category.CategoryListDto>
+
+<h1>Categories</h1>
+
+<ul>
+@foreach (var category in Model)
+{
+    <li>
+        <a href="@Url.Action("Details", new { categoryName = category.Name })">@category.Name</a>
+    </li>
+}
+</ul>

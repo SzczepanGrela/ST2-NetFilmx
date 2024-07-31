@@ -8,6 +8,13 @@ namespace NetFilmx_Service.Command.Video.AddVideoToCategory
 {
     public sealed class AddVideoToCategoryCommand : ICommand
     {
+
+        public AddVideoToCategoryCommand(int categoryId, int videoId)
+        {
+            CategoryId = categoryId;
+            VideoId = videoId;
+        }
+
         public int CategoryId { get; set; }
         public int VideoId { get; set; }
     }

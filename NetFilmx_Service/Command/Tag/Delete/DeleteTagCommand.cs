@@ -9,6 +9,12 @@ namespace NetFilmx_Service.Command.Tag.Delete
     public sealed class DeleteTagCommand : ICommand
     {
 
+        public DeleteTagCommand(int id)
+        {
+
+           Id = id;
+        }
+
         public int Id { get; set; }
 
     }

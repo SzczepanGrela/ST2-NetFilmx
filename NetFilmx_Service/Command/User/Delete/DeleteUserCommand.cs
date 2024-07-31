@@ -8,6 +8,12 @@ namespace NetFilmx_Service.Command.User.Delete
 {
     public sealed class DeleteUserCommand : ICommand
     {
+
+        public DeleteUserCommand(int id)
+        {
+            Id = id;
+        }
+
         public int Id { get; }
 
     }

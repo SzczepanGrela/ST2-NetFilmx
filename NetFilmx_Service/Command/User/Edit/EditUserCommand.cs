@@ -8,6 +8,16 @@ namespace NetFilmx_Service.Command.User.Edit
 {
     public sealed class EditUserCommand : ICommand
     {
+
+
+        public EditUserCommand(int id, string username, string email, string password)
+        {
+            Id = id;
+            Username = username;
+            Email = email;
+            Password = password;
+        }
+
         public int Id { get; }
         public string Username { get; }
 

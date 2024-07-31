@@ -1,0 +1,16 @@
+﻿@model NetFilmx_Service.Dtos.Category.CategoryEditDto
+
+<h1>Edytuj Kategorię</h1>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="Name" />
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" readonly />
+    </div>
+    <div>
+        <label asp-for="Description"></label>
+        <input asp-for="Description" />
+    </div>
+    <button type="submit">Zapisz</button>
+</form>
