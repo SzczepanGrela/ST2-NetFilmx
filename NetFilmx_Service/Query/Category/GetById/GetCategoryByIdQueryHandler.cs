@@ -22,7 +22,7 @@ namespace NetFilmx_Service.Query.Category.GetById
 
         public async Task<QResult<TDto>> Handle(GetCategoryByIdQuery<TDto> query, CancellationToken cancellationToken)
         {
-            var category = await _repository.GetCategoryByIdAsync(query.Id);
+            var category =  await _repository.GetCategoryByIdAsync(query.Id);
             if (category == null)
             {
                 return QResult<TDto>.Fail("Category not found");

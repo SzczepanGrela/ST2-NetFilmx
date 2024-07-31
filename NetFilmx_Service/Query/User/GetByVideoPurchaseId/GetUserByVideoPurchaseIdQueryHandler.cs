@@ -21,7 +21,7 @@ namespace NetFilmx_Service.Query.User.GetByVideoPurchaseId
 
         public  async Task<QResult<TDto>> Handle(GetUserByVideoPurchaseIdQuery<TDto> query, CancellationToken cancellationToken)
         {
-            var user = await  _repository.GetUserByVideoPurchaseIdAsync(query.VideoPurchaseId);
+            var user = await _repository.GetUserByVideoPurchaseIdAsync(query.VideoPurchaseId);
             if (user == null)
             {
                 return QResult<TDto>.Fail("User not found");

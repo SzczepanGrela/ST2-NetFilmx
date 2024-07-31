@@ -26,7 +26,7 @@ namespace NetFilmx_Service.Command.SeriesPurchase.Add
             var seriesPurchase = new NetFilmx_Storage.Entities.SeriesPurchase(command.SeriesId, command.UserId);
             try
             {
-                _repository.AddSeriesPurchaseAsync(seriesPurchase);
+                await _repository.AddSeriesPurchaseAsync(seriesPurchase);
 
                 return CResult.Ok();
             }

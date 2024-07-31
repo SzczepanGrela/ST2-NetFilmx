@@ -26,7 +26,7 @@ namespace NetFilmx_Service.Command.Category.Delete
 
             try
             {
-                _repository.DeleteCategoryAsync(command.Id);
+                await _repository.DeleteCategoryAsync(command.Id);
                 return CResult.Ok();
             }
             catch (Exception ex)

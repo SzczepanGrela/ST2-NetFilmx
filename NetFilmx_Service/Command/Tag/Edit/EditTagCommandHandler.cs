@@ -33,11 +33,11 @@ namespace NetFilmx_Service.Command.Tag.Edit
 
             try
             {
-                var task = _repository.GetTagByIdAsync(command.Id);
-                var tag = task.Result;
+                var tag = await _repository.GetTagByIdAsync(command.Id);
+                //var tag = task.Result;
                 tag.Name = command.Name;
 
-                _repository.UpdateTagAsync(tag);
+                await _repository.UpdateTagAsync(tag);
 
                 return CResult.Ok();
             }

@@ -33,7 +33,7 @@ namespace NetFilmx_Service.Command.User.RegisterUser.Add
             try
             {
                 var user = new NetFilmx_Storage.Entities.User(command.Username, command.Email, command.Password);
-                _repository.AddUserAsync(user);
+                await _repository.AddUserAsync(user);
 
                 return CResult.Ok();
 

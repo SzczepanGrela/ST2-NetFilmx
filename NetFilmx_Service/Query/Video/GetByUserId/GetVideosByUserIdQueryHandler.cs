@@ -25,7 +25,7 @@ namespace NetFilmx_Service.Query.Video.GetByUserId
             List<TDto> videosDto;
             try
             {
-                var videos = await  _repository.GetVideosByUserIdAsync(query.UserId);
+                var videos = await _repository.GetVideosByUserIdAsync(query.UserId);
                 videosDto = _mapper.Map<List<TDto>>(videos);
                 return QResult<List<TDto>>.Ok(videosDto);
             }

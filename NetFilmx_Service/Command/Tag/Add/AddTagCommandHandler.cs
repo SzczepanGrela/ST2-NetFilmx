@@ -33,7 +33,7 @@ namespace NetFilmx_Service.Command.Tag.Add
 
             try
             {
-                _repository.AddTagAsync(tag);
+                await _repository.AddTagAsync(tag);
                 return CResult.Ok();
             }
             catch (Exception ex)

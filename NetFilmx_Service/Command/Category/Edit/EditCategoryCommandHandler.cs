@@ -29,13 +29,11 @@ namespace NetFilmx_Service.Command.Category.Edit
 
             try
             {
-                var task = _repository.GetCategoryByIdAsync(command.Id);
-
-                var category = task.Result;
+                var category = await _repository.GetCategoryByIdAsync(command.Id);
                 category.Name = command.Name;
                 category.Description = command.Description;
 
-                _repository.UpdateCategoryAsync(category);
+                await _repository.UpdateCategoryAsync(category);
                 return CResult.Ok();
             }
             catch (Exception ex)

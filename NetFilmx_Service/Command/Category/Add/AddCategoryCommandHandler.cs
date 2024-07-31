@@ -31,7 +31,7 @@ namespace NetFilmx_Service.Command.Category.Add
 
             try
             {
-                _repository.AddCategoryAsync(category);
+                await _repository.AddCategoryAsync(category);
                 return CResult.Ok();
             }
             catch (Exception ex)

@@ -26,7 +26,7 @@ namespace NetFilmx_Service.Command.Video.Delete
             }
             try
             {
-                _repository.DeleteVideoAsync(command.Id);
+                await _repository.DeleteVideoAsync(command.Id);
                 return CResult.Ok();
             }
             catch (Exception ex)

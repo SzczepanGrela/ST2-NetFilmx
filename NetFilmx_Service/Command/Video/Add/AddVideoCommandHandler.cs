@@ -34,7 +34,7 @@ namespace NetFilmx_Service.Command.Video.Add
 
             try
             {
-                _repository.AddVideoAsync(video);
+                await _repository.AddVideoAsync(video);
                 return CResult.Ok();
             }
             catch (Exception ex)

@@ -31,16 +31,16 @@ namespace NetFilmx_Service.Command.Series.Edit
             }
             try
             {
-                var task = _repository.GetSeriesByIdAsync(command.Id);
+                var series = await _repository.GetSeriesByIdAsync(command.Id);
 
-                var series = task.Result;
+                //var series = task.Result;
 
                 series.Name = command.Name;
                 series.Price = command.Price;
                 series.UpdatedAt = DateTime.Now;
                 series.Description = command.Description;
 
-                _repository.UpdateSeriesAsync(series);
+                await _repository.UpdateSeriesAsync(series);
 
                 return CResult.Ok();
             }

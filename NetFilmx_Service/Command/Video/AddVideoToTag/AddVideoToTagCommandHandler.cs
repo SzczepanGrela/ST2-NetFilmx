@@ -24,7 +24,7 @@ namespace NetFilmx_Service.Command.Video.AddVideoToTag
             }
             try
             {
-                _repository.AddVideoToTagAsync(command.VideoId, command.TagId);
+                await _repository.AddVideoToTagAsync(command.VideoId, command.TagId);
                 return CResult.Ok();
             }
             catch (Exception ex)

@@ -27,7 +27,7 @@ namespace NetFilmx_Service.Command.Comment.Delete
            
             try
             {
-                _repository.DeleteCommentAsync(command.Id);
+                await _repository.DeleteCommentAsync(command.Id);
 
                 return CResult.Ok();
             }

@@ -33,7 +33,7 @@ namespace NetFilmx_Service.Command.Series.Add
             var series = new NetFilmx_Storage.Entities.Series(command.Name, command.Price, command.Description);
             try
             {
-                _repository.AddSeriesAsync(series);
+                await _repository.AddSeriesAsync(series);
                 return CResult.Ok();
 
             }

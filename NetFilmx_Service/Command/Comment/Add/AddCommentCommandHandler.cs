@@ -34,7 +34,7 @@ namespace NetFilmx_Service.Command.Comment.Add
 
             try
             {
-                _repository.AddCommentAsync(comment);
+                await _repository.AddCommentAsync(comment);
                 return CResult.Ok();
             }
             catch (Exception ex)
