@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Series.GetAll
 {
-    public sealed class GetAllSeriesQuery<TDto> : IQuery<QResult<TDto>>
+    public sealed class GetAllSeriesQuery<TDto> : IQuery<TDto>
     {
         public GetAllSeriesQuery() { }
 

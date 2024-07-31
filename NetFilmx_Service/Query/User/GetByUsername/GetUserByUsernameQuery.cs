@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.User.GetByUsername
 {
-    public sealed class GetUserByUsernameQuery<TDto> : IQuery<QResult<TDto>>
+    public sealed class GetUserByUsernameQuery<TDto> : IQuery<TDto>
     {
         public GetUserByUsernameQuery(string username)
         {

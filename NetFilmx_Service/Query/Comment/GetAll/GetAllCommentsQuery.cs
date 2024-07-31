@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Comment.GetAll
 {
-    public sealed class GetAllCommentsQuery<TDto> : IQuery<QResult<TDto>>
+    public sealed class GetAllCommentsQuery<TDto> : IQuery<TDto>
     {
         public GetAllCommentsQuery() { }
     }

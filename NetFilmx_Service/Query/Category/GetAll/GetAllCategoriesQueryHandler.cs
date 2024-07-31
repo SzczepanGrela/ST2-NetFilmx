@@ -11,32 +11,35 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Category.GetAll
 {
-    public sealed class GetAllCategoriesQueryHandler<TDto> : IQueryHandler<GetAllCategoriesQuery, QResult<List<TDto>>>
+    public sealed class GetCategoryByIdQueryHandler<TDto> : IQueryHandler<GetCategoryByIdQuery<TDto>, QResult<TDto>>
     {
         private readonly ICategoryRepository _repository;
         private readonly IMapper _mapper;
 
-        public GetAllCategoriesQueryHandler(ICategoryRepository repository, IMapper mapper)
+        public GetCategoryByIdQueryHandler(ICategoryRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
 
-        public QResult<List<TDto>> Handle(GetAllCategoriesQuery query)
+        public async Task<QResult<TDto>> Handle(GetCategoryByIdQuery<TDto> query, CancellationToken cancellationToken)
         {
-            var categories = _repository.GetAllCategories();
-            
-            List<TDto> categoriesDto;
+            var category = await _repository.GetCategoryByIdAsync(query.Id);
+            if (category == null)
+            {
+                return QResult<TDto>.Fail("Category not found");
+            }
+
+            TDto categoryDto;
             try
             {
-                categoriesDto = _mapper.Map<List<TDto>>(categories);
-                return QResult<List<TDto>>.Ok(categoriesDto);
+                categoryDto = _mapper.Map<TDto>(category);
+                return QResult<TDto>.Ok(categoryDto);
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
-                return QResult<List<TDto>>.Fail(ex.Message);
+                return QResult<TDto>.Fail(ex.Message);
             }
-            
         }
     }
 }

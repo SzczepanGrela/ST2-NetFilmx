@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Video.GetByExclSeriesId
 {
-    public sealed class GetVideosByExcludedSeriesQuery<TDto> : IQuery<QResult<TDto>>
+    public sealed class GetVideosByExcludedSeriesQuery<TDto> : IQuery<TDto>
     {
 
         public GetVideosByExcludedSeriesQuery(int seriesId)

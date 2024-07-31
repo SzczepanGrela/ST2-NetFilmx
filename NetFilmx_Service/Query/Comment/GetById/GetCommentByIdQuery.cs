@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Comment.GetById
 {
-    public sealed class GetCommentByIdQuery<TDto> : IQuery<QResult<TDto>>
+    public sealed class GetCommentByIdQuery<TDto> : IQuery<TDto>
     {
         public GetCommentByIdQuery(int commentId)
         {

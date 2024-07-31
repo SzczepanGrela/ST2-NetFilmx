@@ -7,7 +7,7 @@ using MediatR;
 
 namespace NetFilmx_Service.Query.Category.GetAll
 {
-    public sealed class GetAllCategoriesQuery<TDto> : IQuery<QResult<TDto>>
+    public sealed class GetAllCategoriesQuery<TDto> : IQuery<TDto>
     {
         public GetAllCategoriesQuery() { }
     }

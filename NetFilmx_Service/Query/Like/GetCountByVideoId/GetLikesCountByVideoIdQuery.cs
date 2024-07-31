@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Like.GetCountByVideoId
 {
-    public sealed class GetLikesCountByVideoIdQuery<TDto> : IQuery<QResult<TDto>>
+    public sealed class GetLikesCountByVideoIdQuery<TDto> : IQuery<TDto>
     {
         public GetLikesCountByVideoIdQuery(int videoId)
         {

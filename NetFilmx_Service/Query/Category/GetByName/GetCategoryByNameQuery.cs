@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Category.GetByName
 {
-   public sealed class GetCategoryByNameQuery<TDto> : IQuery<QResult<TDto>>
+   public sealed class GetCategoryByNameQuery<TDto> : IQuery<TDto>
     {
         public GetCategoryByNameQuery(string name)
         {

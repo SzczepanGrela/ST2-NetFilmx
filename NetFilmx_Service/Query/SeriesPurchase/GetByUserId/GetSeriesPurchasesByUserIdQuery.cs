@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.SeriesPurchase.GetByUserId
 {
-    public sealed class GetSeriesPurchasesByUserIdQuery<TDto> : IQuery<QResult<TDto>>
+    public sealed class GetSeriesPurchasesByUserIdQuery<TDto> : IQuery<TDto>
     {
         public GetSeriesPurchasesByUserIdQuery(int userId)
         {

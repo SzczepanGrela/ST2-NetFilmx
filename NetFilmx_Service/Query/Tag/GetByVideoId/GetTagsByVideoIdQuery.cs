@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Tag.GetByVideoId
 {
-    public sealed class GetTagsByVideoIdQuery<TDto> : IQuery<QResult<TDto>>
+    public sealed class GetTagsByVideoIdQuery<TDto> : IQuery<TDto>
     {
         public GetTagsByVideoIdQuery(int videoId)
         {
