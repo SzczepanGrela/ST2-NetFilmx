@@ -20,7 +20,7 @@ namespace NetFilmx_Storage.Entities
             VideoPurchases = new List<VideoPurchase>();
         }
 
-        public Video(string title, string description, decimal price, string videoUrl, string? thumbnailUrl = null) : this()
+        public Video(string title, string description, decimal price, string videoUrl, string thumbnailUrl) : this()
         {
             Title = title ?? throw new ArgumentNullException(nameof(title));
             Description = description;
@@ -32,7 +32,7 @@ namespace NetFilmx_Storage.Entities
         }
 
         [Required]
-        [MaxLength(128)]
+        [MaxLength(100)]
         public string Title { get; set; }
 
         [MaxLength(2000)]
@@ -49,7 +49,7 @@ namespace NetFilmx_Storage.Entities
 
         [MinLength(3)]
         [Required]
-        public string ThumbnailUrl { get; set; } = "www.example.img";
+        public string ThumbnailUrl { get; set; }
 
         [Required]
         public int Views { get; set; } = 0;

@@ -19,7 +19,7 @@ namespace NetFilmx_Storage.Entities
         }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(100)]
         [MinLength(1)]
         public string Name { get; set; }
 

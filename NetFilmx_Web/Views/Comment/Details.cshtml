@@ -21,10 +21,7 @@
                 <p><strong>Updated At:</strong> @Model.UpdatedAt</p>
 
                 <div class="btn-group" role="group" aria-label="Comment Actions">
-                    <form asp-action="Edit" method="get" style="display:inline;">
-                        <input type="hidden" name="commentId" value="@Model.Id" />
-                        <button type="submit" class="btn btn-primary mx-1">Edit</button>
-                    </form>
+                   
 
                     <button type="button" class="btn btn-danger mx-1" data-toggle="modal" data-target="#deleteModal">
                         Delete

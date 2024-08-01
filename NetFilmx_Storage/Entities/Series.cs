@@ -17,7 +17,7 @@ namespace NetFilmx_Storage.Entities
 
         public Series(string name, decimal price, string? description) : this()
         {
-            Name = name ?? throw new ArgumentNullException(nameof(name));
+            Name = name;
             Price = price;
             Description = description;
             CreatedAt = DateTime.Now;
@@ -25,13 +25,13 @@ namespace NetFilmx_Storage.Entities
         }
 
         [Required]
-        [MaxLength(128)]
+        [MaxLength(100)]
         public string Name { get; set; }
 
         [Required]
         [Column(TypeName = "decimal(18, 2)")]
         [Range(0, 10001)]
-        public decimal Price { get; set; } = 0;
+        public decimal Price { get; set; }
 
         [MaxLength(2000)]
         

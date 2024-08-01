@@ -15,7 +15,7 @@ namespace NetFilmx_Storage.Entities
         {
             VideoId = videoId;
             UserId = userId;
-            Content = content ?? throw new ArgumentNullException(nameof(content));
+            Content = content;
             CreatedAt = DateTime.Now;
             UpdatedAt = DateTime.Now;
         }
