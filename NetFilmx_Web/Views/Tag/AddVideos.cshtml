@@ -1,21 +1,32 @@
 ﻿@model IEnumerable<NetFilmx_Service.Dtos.Video.VideoListDto>
 
-<h1>Add Videos to Tag: @ViewBag.TagName</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Add Videos to Tag</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Add Videos to Tag: @ViewBag.TagName</h1>
 
-<form asp-action="AddVideos" method="post">
-    <input type="hidden" name="tagId" value="@ViewBag.TagId" />
-    <ul class="list-group">
-        @foreach (var video in Model)
-        {
-            <li class="list-group-item">
-                <input type="checkbox" name="videoIds" value="@video.Id" />
-                @video.Title
-            </li>
-        }
-    </ul>
-    <button type="submit" class="btn btn-primary mt-3">Add Selected Videos</button>
-</form>
+        <form asp-action="AddVideos" method="post">
+            <input type="hidden" name="tagId" value="@ViewBag.TagId" />
+            <div class="list-group">
+                @foreach (var video in Model)
+                {
+                    <label class="list-group-item">
+                        <input type="checkbox" name="videoIds" value="@video.Id" />
+                        @video.Title
+                    </label>
+                }
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Add Selected Videos</button>
+        </form>
 
 
+    </div>
 
-
+</body>
+</html>

@@ -8,21 +8,28 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>Edit Tag</h1>
-
-        <form method="post">
-            <div class="form-group">
-                <label asp-for="Id"></label>
-                <input asp-for="Id" readonly class="form-control" />
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h1>Edit Tag</h1>
             </div>
-            <div class="form-group">
-                <label asp-for="Name"></label>
-                <input asp-for="Name" class="form-control" />
-            </div>
-            <button type="submit" class="btn btn-primary">Save</button>
-        </form>
+            <div class="card-body">
+                <form method="post">
+                    <div class="form-group">
+                        <label asp-for="Id"></label>
+                        <input asp-for="Id" class="form-control" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Name"></label>
+                        <input asp-for="Name" class="form-control" required minlength="3" maxlength="50" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
 
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+                <button onclick="history.back()" class="btn btn-secondary mt-3">Back</button>
+            </div>
+        </div>
     </div>
     @section Scripts {
         @{
