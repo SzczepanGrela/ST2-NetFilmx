@@ -4,20 +4,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
-namespace NetFilmx_Service.Command.Video.RemoveVideoFromCategory
+namespace NetFilmx_Service.Command.Video
 {
-    public sealed class RemoveVideoFromCategoryCommandHandler : ICommandHandler<RemoveVideoFromCategoryCommand>
+    public sealed class DeleteVideoFromCategoryCommandHandler : IRequestHandler<DeleteVideoFromCategoryCommand, CResult>
     {
         private readonly IVideoRepository _repository;
 
-        public RemoveVideoFromCategoryCommandHandler(IVideoRepository videoRepository)
+        public DeleteVideoFromCategoryCommandHandler(IVideoRepository videoRepository)
         {
             _repository = videoRepository;
         }
 
 
-        public async Task<CResult> Handle(RemoveVideoFromCategoryCommand command, CancellationToken cancellationToken)
+        public async Task<CResult> Handle(DeleteVideoFromCategoryCommand command, CancellationToken cancellationToken)
         {
             if (command == null)
             {

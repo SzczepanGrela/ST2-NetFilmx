@@ -2,11 +2,16 @@
 
 <h1>Edytuj Kategorię</h1>
 
-<form asp-action="Edit">
-    <input type="hidden" asp-for="Name" />
+<form method="post">
+    
+    <div>
+        <label asp-for="Id"></label>
+        <input asp-for="Id" readonly />
+    </div>
+    
     <div>
         <label asp-for="Name"></label>
-        <input asp-for="Name" readonly />
+        <input asp-for="Name"  />
     </div>
     <div>
         <label asp-for="Description"></label>

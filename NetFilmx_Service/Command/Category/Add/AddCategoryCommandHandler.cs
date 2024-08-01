@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using NetFilmx_Storage.Repositories;
 using NetFilmx_Storage.Entities;
+using MediatR;
 
 namespace NetFilmx_Service.Command.Category
 {
-    public sealed class AddCategoryCommandHandler : ICommandHandler<AddCategoryCommand>
+    public sealed class AddCategoryCommandHandler : IRequestHandler<AddCategoryCommand, CResult>
     {
 
         private readonly ICategoryRepository _repository;

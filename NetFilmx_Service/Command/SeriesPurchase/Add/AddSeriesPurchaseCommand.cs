@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Command.SeriesPurchase
 {
-    public sealed class AddSeriesPurchaseCommand : ICommand
+    public sealed class AddSeriesPurchaseCommand : IRequest<CResult>
     {
 
         public AddSeriesPurchaseCommand(int seriesId, int userId, DateTime purchaseDate)

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Command.User
 {
-    public sealed class EditUserCommand : ICommand
+    public sealed class EditUserCommand : IRequest<CResult>
     {
 
 

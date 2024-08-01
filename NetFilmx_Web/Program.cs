@@ -35,6 +35,8 @@ builder.Services.AddCommandHandlers();
 
 builder.Services.AddAutoMapProfiles();
 
+
+
 //builder.Services.AddAutoMapper(typeof(Program));
 
 

@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Command.Tag
 {
-    public sealed class AddTagCommandHandler : ICommandHandler<AddTagCommand>
+    public sealed class AddTagCommandHandler : IRequestHandler<AddTagCommand, CResult>
     {
         private readonly ITagRepository _repository;
 

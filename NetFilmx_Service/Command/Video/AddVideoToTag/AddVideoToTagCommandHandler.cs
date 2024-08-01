@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Command.Video
 {
-    public sealed class AddVideoToTagCommandHandler : ICommandHandler<AddVideoToTagCommand>
+    public sealed class AddVideoToTagCommandHandler : IRequestHandler<AddVideoToTagCommand, CResult>
     {
         private readonly IVideoRepository _repository;
 

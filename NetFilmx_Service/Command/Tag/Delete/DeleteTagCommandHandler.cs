@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Command.Tag
 {
-    internal class DeleteTagCommandHandler : ICommandHandler<DeleteTagCommand>
+    public sealed class DeleteTagCommandHandler : IRequestHandler<DeleteTagCommand, CResult>
     {
 
 

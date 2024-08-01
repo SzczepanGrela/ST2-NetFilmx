@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Command.Category
 {
-    public sealed class DeleteCategoryCommandHandler : ICommandHandler<DeleteCategoryCommand>
+    public sealed class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommand, CResult>
     {
 
         private readonly ICategoryRepository _repository;

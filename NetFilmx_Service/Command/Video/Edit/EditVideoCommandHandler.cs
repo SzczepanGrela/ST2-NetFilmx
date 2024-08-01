@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Command.Video
 {
-    public sealed class EditVideoCommandHandler : ICommandHandler<EditVideoCommand>
+    public sealed class EditVideoCommandHandler : IRequestHandler<EditVideoCommand, CResult>
     {
         private readonly IVideoRepository _repository;
 

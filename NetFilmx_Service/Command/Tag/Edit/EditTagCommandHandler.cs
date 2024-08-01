@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Command.Tag
 {
-    public sealed class EditTagCommandHandler
+    public sealed class EditTagCommandHandler : IRequestHandler<EditTagCommand, CResult>
     {
         private readonly ITagRepository _repository;
 
@@ -16,7 +17,7 @@ namespace NetFilmx_Service.Command.Tag
             _repository = repository;
         }
 
-        public async Task<CResult> Handle(EditTagCommand command)
+        public async Task<CResult> Handle(EditTagCommand command, CancellationToken cancellationToken)
         {
             if (command == null)
             {

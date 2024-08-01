@@ -8,6 +8,7 @@ namespace NetFilmx_Service.Dtos.User
 {
     public class UserEditDto : IUserDto
     {
+        public UserEditDto() { }
 
         public UserEditDto (int id, string username, string email, string password)
         {
@@ -19,11 +20,11 @@ namespace NetFilmx_Service.Dtos.User
 
 
         public int Id { get; }
-        public string Username { get; }
+        public string Username { get; set; }
 
-        public string Email { get; }
+        public string Email { get; set; }
 
-        public string Password { get; }
+        public string Password { get; set; }
 
     }
 }

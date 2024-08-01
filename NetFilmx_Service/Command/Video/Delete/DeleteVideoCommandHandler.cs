@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Command.Video
 {
-    public sealed class DeleteVideoCommandHandler : ICommandHandler<DeleteVideoCommand>
+    public sealed class DeleteVideoCommandHandler : IRequestHandler<DeleteVideoCommand, CResult>
     {
 
         private readonly IVideoRepository _repository;

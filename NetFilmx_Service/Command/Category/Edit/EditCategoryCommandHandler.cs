@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Command.Category
 {
-    public sealed class EditCategoryCommandHandler
+    public sealed class EditCategoryCommandHandler : IRequestHandler<EditCategoryCommand,CResult>
     {
 
         private readonly ICategoryRepository _repository;
@@ -18,7 +19,7 @@ namespace NetFilmx_Service.Command.Category
             _repository = repository;
         }
 
-        public async Task<CResult> Handle(EditCategoryCommand command)
+        public async Task<CResult> Handle(EditCategoryCommand command, CancellationToken cancellationToken)
         {
             var validationResult = new EditCategoryCommandValidator().Validate(command);
 

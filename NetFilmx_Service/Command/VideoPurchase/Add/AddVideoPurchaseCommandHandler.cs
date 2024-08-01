@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Command.VideoPurchase
 {
-    public sealed class AddVideoPurchaseCommandHandler : ICommandHandler<AddVideoPurchaseCommand>
+    public sealed class AddVideoPurchaseCommandHandler : IRequestHandler<AddVideoPurchaseCommand, CResult>
     {
         private readonly IVideoPurchaseRepository _videoPurchaseRepository;
 

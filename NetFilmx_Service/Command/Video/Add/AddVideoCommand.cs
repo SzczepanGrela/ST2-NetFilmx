@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Command.Video
 {
-    public sealed class AddVideoCommand : ICommand
+    public sealed class AddVideoCommand : IRequest<CResult>
     {
 
         public AddVideoCommand(string title, string description, decimal price, string video_url, string? thumbnail_url)

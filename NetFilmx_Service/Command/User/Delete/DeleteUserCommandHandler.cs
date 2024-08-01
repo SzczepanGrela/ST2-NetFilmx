@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Command.User
 {
-    public sealed class DeleteUserCommandHandler : ICommandHandler<DeleteUserCommand>
+    public sealed class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, CResult>
     {
         private readonly IUserRepository _repository;
 

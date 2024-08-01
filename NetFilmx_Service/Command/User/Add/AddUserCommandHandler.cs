@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
-namespace NetFilmx_Service.Command.User.RegisterUser.Add
+namespace NetFilmx_Service.Command.User
 {
-    public sealed class AddUserCommandHandler : ICommandHandler<AddUserCommand>
+    public sealed class AddUserCommandHandler : IRequestHandler<AddUserCommand, CResult>
     {
         private readonly IUserRepository _repository;
 

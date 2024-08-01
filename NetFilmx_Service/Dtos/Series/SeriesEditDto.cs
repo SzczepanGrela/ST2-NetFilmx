@@ -8,7 +8,7 @@ namespace NetFilmx_Service.Dtos.Series
 {
     public class SeriesEditDto : ISeriesDto
     {
-
+        public SeriesEditDto() { }
         public SeriesEditDto(int id, string name, string? description, decimal price)
         {
             Name = name;
@@ -18,13 +18,13 @@ namespace NetFilmx_Service.Dtos.Series
         }
 
 
-        public string Name { get; }
+        public string Name { get; set; }
 
-        public int Id { get; }
+        public int Id { get;}
 
-        public string? Description { get; }
+        public string? Description { get; set; }
 
-        public decimal Price { get; }
+        public decimal Price { get; set; }
 
 
     }

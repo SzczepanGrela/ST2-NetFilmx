@@ -4,21 +4,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Command.Comment
 {
-    internal class DeletecommentCommandHandler
+    public sealed class DeleteCommentCommandHandler : IRequestHandler<DeleteCommentCommand, CResult>
     {
 
         private readonly ICommentRepository _repository;
 
-        public DeletecommentCommandHandler(ICommentRepository repository)
+        public DeleteCommentCommandHandler(ICommentRepository repository)
         {
             _repository = repository;
         }
 
 
-        public async Task<CResult> Handle(DeleteCommentCommand command)
+        public async Task<CResult> Handle(DeleteCommentCommand command, CancellationToken cancellationToken)
         {
             if (command == null)
             {

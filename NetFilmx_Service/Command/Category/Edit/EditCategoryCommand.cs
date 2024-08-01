@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Command.Category
 {
-    public sealed class EditCategoryCommand : ICommand
+    public sealed class EditCategoryCommand : IRequest<CResult>
     {
 
         public EditCategoryCommand(int id, string name, string? description)

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
-namespace NetFilmx_Service.Command.Video.RemoveVideoFromCategory
+namespace NetFilmx_Service.Command.Video
 {
-    public sealed class RemoveVideoFromCategoryCommand : ICommand
+    public sealed class DeleteVideoFromCategoryCommand : IRequest<CResult>
     {
 
-        public RemoveVideoFromCategoryCommand(int categoryId, int videoId)
+        public DeleteVideoFromCategoryCommand(int categoryId, int videoId)
         {
             CategoryId = categoryId;
             VideoId = videoId;

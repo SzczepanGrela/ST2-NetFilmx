@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Command.User
 {
-    public sealed class EditUserCommandHandler : ICommandHandler<EditUserCommand>
+    public sealed class EditUserCommandHandler : IRequestHandler<EditUserCommand, CResult>
     {
         private readonly IUserRepository  _repository;
 

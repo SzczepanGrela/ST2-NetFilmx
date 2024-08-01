@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using NetFilmx_Service;
 using NetFilmx_Service.Command.Category;
 using NetFilmx_Service.Command.Video;
-using NetFilmx_Service.Command.Video.RemoveVideoFromCategory;
+using NetFilmx_Service.Command.Video;
 using NetFilmx_Service.Dtos.Category;
 using NetFilmx_Service.Dtos.Video;
 using NetFilmx_Service.Query.Category;
@@ -36,9 +36,9 @@ namespace NetFilmx_Web.Controllers.Category
             return View(result.Data);
         }
 
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int categoryId)
         {
-            var query = new GetCategoryByIdQuery<CategoryDetailsDto>(id);
+            var query = new GetCategoryByIdQuery<CategoryDetailsDto>(categoryId);
             var result = await _mediator.Send(query);
             if (result.IsFailure)
             {
@@ -48,9 +48,9 @@ namespace NetFilmx_Web.Controllers.Category
             return View(result.Data);
         }
 
-        public async Task<IActionResult> Edit(string name)
+        public async Task<IActionResult> Edit(int categoryId)
         {
-            var query = new GetCategoryByNameQuery<CategoryEditDto>(name);
+            var query = new GetCategoryByIdQuery<CategoryEditDto>(categoryId);
             var result = await _mediator.Send(query);
             if (result.IsFailure)
             {
@@ -64,7 +64,7 @@ namespace NetFilmx_Web.Controllers.Category
         public async Task<IActionResult> Edit(CategoryEditDto dto)
         {
             var command = new EditCategoryCommand(dto.Id, dto.Name, dto.Description);
-            var result = (CResult)await _mediator.Send(command);
+            var result = await _mediator.Send(command);
             if (result.IsFailure)
             {
                 return RedirectToAction("Error", "Home", new { Message = result.Message });
@@ -128,7 +128,7 @@ namespace NetFilmx_Web.Controllers.Category
         {
             foreach (var videoId in videoIds)
             {
-                var command = new RemoveVideoFromCategoryCommand(categoryId, videoId);
+                var command = new DeleteVideoFromCategoryCommand(categoryId, videoId);
                 var result = (CResult)await _mediator.Send(command);
                 if (result.IsFailure)
                 {

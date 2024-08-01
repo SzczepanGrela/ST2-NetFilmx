@@ -4,30 +4,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Command.Video
 {
-    public sealed class RemoveVideoFromSeriesCommandHandler : ICommandHandler<RemoveVideoFromSeriesCommand>
+    public sealed class DeleteVideoFromTagCommandHandler : IRequestHandler<DeleteVideoFromTagCommand, CResult>
     {
-
         private readonly IVideoRepository _repository;
 
-        public RemoveVideoFromSeriesCommandHandler(IVideoRepository repository)
+        public DeleteVideoFromTagCommandHandler(IVideoRepository videoRepository)
         {
-            _repository = repository;
+            _repository = videoRepository;
         }
 
-
-        public async Task<CResult> Handle(RemoveVideoFromSeriesCommand command, CancellationToken cancellationToken)
+        public async Task<CResult> Handle(DeleteVideoFromTagCommand command, CancellationToken cancellationToken)
         {
-            if(command == null)
+            if (command == null)
             {
                 return CResult.Fail("Command is null");
             }
 
             try
             {
-                await _repository.RemoveVideoFromSeriesAsync(command.VideoId, command.SeriesId);
+                await _repository.RemoveVideoFromTagAsync(command.VideoId, command.TagId);
                 return CResult.Ok();
             }
             catch (Exception ex)
@@ -36,6 +35,7 @@ namespace NetFilmx_Service.Command.Video
             }
             
         }
+
 
     }
 }

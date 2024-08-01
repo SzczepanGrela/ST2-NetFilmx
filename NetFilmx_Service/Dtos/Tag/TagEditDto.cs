@@ -8,14 +8,15 @@ namespace NetFilmx_Service.Dtos.Tag
 {
     public class TagEditDto : ITagDto
     {
+        public TagEditDto() { }
         public TagEditDto(int id, string name)
         {
             Id = id;
             Name = name;
         }
 
-        public int Id { get; }
-        public string Name { get; }
+        public int Id { get;}
+        public string Name { get; set; }
 
     }
 }

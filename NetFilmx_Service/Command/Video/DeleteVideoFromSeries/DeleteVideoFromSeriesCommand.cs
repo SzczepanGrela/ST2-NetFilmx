@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Command.Video
 {
-    public sealed class RemoveVideoFromTagCommand : ICommand
+    public sealed class DeleteVideoFromSeriesCommand : IRequest<CResult>
     {
 
-        public RemoveVideoFromTagCommand(int tagid, int videoid)
-        {
-            TagId = tagid;
+
+        public DeleteVideoFromSeriesCommand(int seriesid, int videoid)
+        {   SeriesId = seriesid;
             VideoId = videoid;
         }
 
-        public int TagId { get; }
+        public int SeriesId { get; }
 
         public int VideoId { get; }
 

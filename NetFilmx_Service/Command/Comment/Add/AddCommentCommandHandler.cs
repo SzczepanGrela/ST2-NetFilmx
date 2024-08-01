@@ -1,4 +1,5 @@
-﻿using NetFilmx_Storage.Repositories;
+﻿using MediatR;
+using NetFilmx_Storage.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Command.Comment
 {
-    public sealed class AddCommentCommandHandler : ICommandHandler<AddCommentCommand>
+    public sealed class AddCommentCommandHandler : IRequestHandler<AddCommentCommand, CResult>  
     {
         private readonly ICommentRepository _repository;
 

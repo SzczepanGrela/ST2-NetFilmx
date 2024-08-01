@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Command.Comment
 {
-    public sealed class EditCommentCommandHandler : ICommandHandler<EditCommentCommand>
+    public sealed class EditCommentCommandHandler : IRequestHandler<EditCommentCommand, CResult>
     {
         private readonly ICommentRepository _repository;
 

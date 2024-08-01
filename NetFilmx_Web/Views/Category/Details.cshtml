@@ -5,5 +5,5 @@
 <p>Nazwa: @Model.Name</p>
 <p>Opis: @Model.Description</p>
 
-<a href="@Url.Action("Edit", new { name = Model.Id })">Edit</a>
-<a href="@Url.Action("Videos", new { categoryName = Model.Id })">Videos</a>
+<a href="@Url.Action("Edit", new { categoryId = Model.Id })">Edit</a>
+<a href="@Url.Action("Videos", new { categoryId = Model.Id, categoryName = Model.Name})">Videos</a>

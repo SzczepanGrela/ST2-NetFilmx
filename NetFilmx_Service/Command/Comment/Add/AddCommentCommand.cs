@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
 
 namespace NetFilmx_Service.Command.Comment
 {
-    public sealed class AddCommentCommand : ICommand
+    public sealed class AddCommentCommand : IRequest<CResult>
     {       
 
         public AddCommentCommand(int userId, int videoId, string content)
