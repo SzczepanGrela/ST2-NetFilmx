@@ -11,5 +11,5 @@
     }
 </ul>
 
-<a href="@Url.Action("AddVideo", new { categoryName = ViewBag.CategoryName })">Dodaj Film</a>
-<a href="@Url.Action("RemoveVideo", new { categoryName = ViewBag.CategoryName })">Usuń Film</a>
+<a href="@Url.Action("AddVideos", new { categoryId = ViewBag.CategoryId, categoryName = ViewBag.CategoryName })">Add videos to category</a>
+<a href="@Url.Action("DeleteVideos", new { categoryId = ViewBag.CategoryId, categoryName = ViewBag.CategoryName  })">Delete videos from category</a>

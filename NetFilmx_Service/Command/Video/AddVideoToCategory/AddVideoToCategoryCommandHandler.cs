@@ -26,7 +26,7 @@ namespace NetFilmx_Service.Command.Video
             }
             try
             {            
-                await _repository.AddVideoToCategoryAsync(command.CategoryId, command.VideoId);
+                await _repository.AddVideoToCategoryAsync(command.VideoId, command.CategoryId);
                 return CResult.Ok();
             }
             catch

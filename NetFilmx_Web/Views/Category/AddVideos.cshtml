@@ -2,13 +2,14 @@
 
 <h1>Add videos to category: @ViewBag.CategoryName</h1>
 
-<form asp-action="AddVideo" method="post">
-    <input type="hidden" name="categoryName" value="@ViewBag.CategoryName" />
+<form asp-action="AddVideos" method="post">
+    <input type="hidden" name="categoryId" value="@ViewBag.CategoryId" />
     <ul>
         @foreach (var video in Model)
         {
             <li>
-                <input type="checkbox" name="videoIds" value="@video.Id" /> @video.Title
+                <input type="checkbox" name="videoIds" value="@video.Id" /> 
+                @video.Title
             </li>
         }
     </ul>

@@ -2,8 +2,8 @@
 
 <h1>Remove videos from category: @ViewBag.CategoryName</h1>
 
-<form asp-action="RemoveVideo" method="post">
-    <input type="hidden" name="categoryName" value="@ViewBag.CategoryName" />
+<form asp-action="DeleteVideos" method="post">
+    <input type="hidden" name="categoryId" value="@ViewBag.CategoryId" />
     <ul>
         @foreach (var video in Model)
         {
