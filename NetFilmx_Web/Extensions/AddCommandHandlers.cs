@@ -60,9 +60,10 @@ namespace NetFilmx_Web.Extensions
             serviceCollection.AddTransient<IRequestHandler<AddVideoToCategoryCommand, CResult>, AddVideoToCategoryCommandHandler>();
             serviceCollection.AddTransient<IRequestHandler<AddVideoToSeriesCommand, CResult>, AddVideoToSeriesCommandHandler>();
             serviceCollection.AddTransient<IRequestHandler<AddVideoToTagCommand, CResult>, AddVideoToTagCommandHandler>();
-            serviceCollection.AddTransient<IRequestHandler<DeleteVideoFromCategoryCommand, CResult>, DeleteVideoFromCategoryCommandHandler>();
-            serviceCollection.AddTransient<IRequestHandler<DeleteVideoFromSeriesCommand, CResult>, DeleteVideoFromSeriesCommandHandler>();
-            serviceCollection.AddTransient<IRequestHandler<DeleteVideoFromTagCommand, CResult>, DeleteVideoFromTagCommandHandler>();
+            serviceCollection.AddTransient<IRequestHandler<RemoveVideoFromCategoryCommand, CResult>, DeleteVideoFromCategoryCommandHandler>();
+            serviceCollection.AddTransient<IRequestHandler<RemoveVideoFromSeriesCommand, CResult>, DeleteVideoFromSeriesCommandHandler>();
+            serviceCollection.AddTransient<IRequestHandler<RemoveVideoFromTagCommand, CResult>, DeleteVideoFromTagCommandHandler>();
+            
             return serviceCollection;
         }
 

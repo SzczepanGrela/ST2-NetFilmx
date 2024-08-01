@@ -27,6 +27,5 @@ namespace NetFilmx_Service.Dtos.Like
         public DateTime CreatedAt { get; }
 
 
-
     }
 }

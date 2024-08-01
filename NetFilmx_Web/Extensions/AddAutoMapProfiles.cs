@@ -16,6 +16,10 @@ namespace NetFilmx_Web.Extensions
             serviceCollection.AddAutoMapper(typeof(SeriesMappingProfile));
             serviceCollection.AddAutoMapper(typeof(UserMappingProfile));
             serviceCollection.AddAutoMapper(typeof(CommentMappingProfile));
+            serviceCollection.AddAutoMapper(typeof(LikeMappingProfile));
+            serviceCollection.AddAutoMapper(typeof(VideoPurchaseMappingProfile));
+            serviceCollection.AddAutoMapper(typeof(SeriesPurchaseMappingProfile));
+            
 
 
             return serviceCollection;

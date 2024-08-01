@@ -1,0 +1,27 @@
+﻿@model IEnumerable<NetFilmx_Service.Dtos.User.UserListDto>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Remove Users from Series</title>
+</head>
+<body>
+    <h1>Remove Users from Series: @ViewBag.SeriesName</h1>
+
+    <form asp-action="RemoveUser" method="post">
+        <input type="hidden" name="seriesId" value="@ViewBag.SeriesId" />
+        <ul>
+            @foreach (var user in Model)
+            {
+                <li>
+                    <input type="checkbox" name="userIds" value="@user.Id" />
+                    @user.Username
+                </li>
+            }
+        </ul>
+        <button type="submit" class="btn btn-danger">Remove Selected Users</button>
+    </form>
+
+</body>
+</html>

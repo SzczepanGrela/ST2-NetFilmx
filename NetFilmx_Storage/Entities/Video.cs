@@ -41,7 +41,7 @@ namespace NetFilmx_Storage.Entities
         [Required]
         [Column(TypeName = "decimal(18, 2)")]
         [Range(0, 10001)]
-        public decimal Price { get; set; } = 0;
+        public decimal Price { get; set; }
 
         [Required]
         [MinLength(3)]

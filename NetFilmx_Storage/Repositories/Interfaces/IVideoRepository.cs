@@ -14,6 +14,7 @@ namespace NetFilmx_Storage.Repositories
         Task<List<Video>> GetVideosByExcludedCategoryIdAsync(int categoryId);
         Task<List<Video>> GetVideosByExcludedSeriesIdAsync(int seriesId);
         Task<List<Video>> GetVideosByExcludedTagIdAsync(int tagId);
+        Task<List<Video>> GetVideosByExcludedUserIdAsync(int userId);
 
         Task<Video> GetVideoByIdAsync(int videoId);
         Task<Video> GetVideoByVideoPurchaseIdAsync(int videoPurchaseId);

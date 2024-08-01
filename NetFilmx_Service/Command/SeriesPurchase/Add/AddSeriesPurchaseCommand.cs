@@ -11,11 +11,10 @@ namespace NetFilmx_Service.Command.SeriesPurchase
     public sealed class AddSeriesPurchaseCommand : IRequest<CResult>
     {
 
-        public AddSeriesPurchaseCommand(int seriesId, int userId, DateTime purchaseDate)
+        public AddSeriesPurchaseCommand(int seriesId, int userId)
         {
             SeriesId = seriesId;
-            UserId = userId;
-            PurchaseDate = purchaseDate;
+            UserId = userId;          
         }
 
         public int SeriesId { get; }

@@ -29,7 +29,6 @@ namespace NetFilmx_Storage
 
             // Many-to-Many relationships
 
-
             modelBuilder.Entity<Video>()
                 .HasMany(v => v.Tags)
                 .WithMany(t => t.Videos)
@@ -134,6 +133,9 @@ namespace NetFilmx_Storage
             var optionsBuilder = new DbContextOptionsBuilder<NetFilmxDbContext>();
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
                 x => x.MigrationsHistoryTable("__EFMigrationsHistory", "NetFilmx"));
+
+
+            
 
             return new NetFilmxDbContext(optionsBuilder.Options);
         }

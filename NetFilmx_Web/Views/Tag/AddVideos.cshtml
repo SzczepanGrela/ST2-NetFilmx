@@ -1,0 +1,21 @@
+﻿@model IEnumerable<NetFilmx_Service.Dtos.Video.VideoListDto>
+
+<h1>Add Videos to Tag: @ViewBag.TagName</h1>
+
+<form asp-action="AddVideos" method="post">
+    <input type="hidden" name="tagId" value="@ViewBag.TagId" />
+    <ul class="list-group">
+        @foreach (var video in Model)
+        {
+            <li class="list-group-item">
+                <input type="checkbox" name="videoIds" value="@video.Id" />
+                @video.Title
+            </li>
+        }
+    </ul>
+    <button type="submit" class="btn btn-primary mt-3">Add Selected Videos</button>
+</form>
+
+
+
+

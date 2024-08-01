@@ -15,7 +15,7 @@ namespace NetFilmx_Service.Dtos.Comment
             Content = content;
         }
 
-        public int Id { get;}
+        public int Id { get; set; }
         public string Content { get; set; }
     }
 }

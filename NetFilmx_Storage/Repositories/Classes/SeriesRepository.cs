@@ -110,6 +110,38 @@ namespace NetFilmx_Storage.Repositories
             return await _context.Series.Include(c => c.Videos).Where(s => s.Name == seriesName).SelectMany(s => s.Videos).CountAsync();
         }
 
+        public async Task<List<Series>> GetSeriesByExcludedVideoIdAsync(int videoId)
+        {
+            var video = await _context.Videos.Include(v => v.Series).FirstOrDefaultAsync(v => v.Id == videoId);
+
+            if (video == null)
+            {
+                throw new Exception("Video not found");
+            }
+
+            var allSeries = await _context.Series.ToListAsync();
+            var excludedSeries = allSeries.Where(s => !video.Series.Any(vs => vs.Id == s.Id)).ToList();
+
+            return excludedSeries;
+        }
+
+
+        public async Task<List<Series>> GetBoughtSeriesByExcludedUserIdAsync(int userId)
+        {
+            var user = await _context.Users.Include(u => u.SeriesPurchases).ThenInclude(sp => sp.Series).FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                throw new Exception("User not found");
+            }
+
+            var allSeries = await _context.Series.ToListAsync();
+            var boughtSeriesIds = user.SeriesPurchases.Select(sp => sp.SeriesId).ToList();
+            var excludedSeries = allSeries.Where(s => !boughtSeriesIds.Contains(s.Id)).ToList();
+
+            return excludedSeries;
+        }
+
 
 
 

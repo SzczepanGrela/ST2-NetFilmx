@@ -18,8 +18,9 @@ namespace NetFilmx_Storage.Repositories
         }
 
         public async Task<List<Category>> GetAllCategoriesAsync()
-        {
+        { 
             return await _context.Categories.ToListAsync();
+        
         }
 
         public async Task<List<Category>> GetCategoriesByVideoIdAsync(int videoId)
@@ -30,6 +31,24 @@ namespace NetFilmx_Storage.Repositories
             }
             return await _context.Videos.Where(v => v.Id == videoId).SelectMany(v => v.Categories).ToListAsync();
         }
+
+
+        public async Task<List<Category>> GetCategoriesByExcludedVideoIdAsync(int videoId)
+        {
+            var video = await _context.Videos.Include(v => v.Categories).FirstOrDefaultAsync(v => v.Id == videoId);
+
+            if (video == null)
+            {
+                throw new Exception("Video not found");
+            }
+
+            var allCategories = await _context.Categories.ToListAsync();
+            var excludedCategories = allCategories.Where(c => !video.Categories.Any(vc => vc.Id == c.Id)).ToList();
+
+            return excludedCategories;
+        }
+
+
 
         public async Task<Category> GetCategoryByNameAsync(string categoryName)
         {

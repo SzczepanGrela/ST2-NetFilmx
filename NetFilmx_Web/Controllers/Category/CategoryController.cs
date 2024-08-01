@@ -12,7 +12,7 @@ using NetFilmx_Service.Query.Category;
 using NetFilmx_Service.Query.Video;
 using NetFilmx_Service.Query.Video;
 
-namespace NetFilmx_Web.Controllers.Category
+namespace NetFilmx_Web.Controllers
 {
     public class CategoryController : Controller
     {
@@ -30,10 +30,41 @@ namespace NetFilmx_Web.Controllers.Category
             if (result.IsFailure)
             {
                 return RedirectToAction("Error", "Home", new { Message = result.Message });
+            }  
+            return View(result.Data);
+        }
+
+
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Add(CategoryAddDto dto)
+        {
+            var command = new AddCategoryCommand(dto.Name, dto.Description);
+            var result = await _mediator.Send(command);
+            if (result.IsFailure)
+            {
+                return RedirectToAction("Error", "Home", new { Message = result.Message });
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int categoryId)
+        {
+            var command = new DeleteCategoryCommand(categoryId);
+            var result = await _mediator.Send(command);
+            if (result.IsFailure)
+            {
+                return RedirectToAction("Error", "Home", new { Message = result.Message });
             }
 
-           
-            return View(result.Data);
+
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Details(int categoryId)
@@ -69,10 +100,7 @@ namespace NetFilmx_Web.Controllers.Category
             {
                 return RedirectToAction("Error", "Home", new { Message = result.Message });
             }
-            if (Request.Headers.TryGetValue("Referer", out var referer))
-            {
-                return Redirect(referer.ToString());
-            }
+           
             
             return RedirectToAction(nameof(Details), new { categoryId = dto.Id });
         }
@@ -118,7 +146,7 @@ namespace NetFilmx_Web.Controllers.Category
             return RedirectToAction(nameof(Videos), new { categoryId });
         }
 
-        public async Task<IActionResult> DeleteVideos(int categoryId, string categoryName)
+        public async Task<IActionResult> RemoveVideos(int categoryId, string categoryName)
         {
             ViewBag.CategoryId = categoryId;
             ViewBag.CategoryName = categoryName;
@@ -132,11 +160,11 @@ namespace NetFilmx_Web.Controllers.Category
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteVideos(int categoryId, List<int> videoIds)
+        public async Task<IActionResult> RemoveVideos(int categoryId, List<int> videoIds)
         {
             foreach (var videoId in videoIds)
             {
-                var command = new DeleteVideoFromCategoryCommand(categoryId, videoId);
+                var command = new RemoveVideoFromCategoryCommand(categoryId, videoId);
                 var result = await _mediator.Send(command);
                 if (result.IsFailure)
                 {

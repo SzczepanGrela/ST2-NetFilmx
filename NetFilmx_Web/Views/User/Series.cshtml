@@ -1,0 +1,33 @@
+﻿@model IEnumerable<NetFilmx_Service.Dtos.Series.SeriesListDto>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Series List</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Series List</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var series in Model)
+                {
+                    <tr>
+                        <td>@series.Id</td>
+                        <td>@series.Name</td>
+                        <td>@series.Price</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

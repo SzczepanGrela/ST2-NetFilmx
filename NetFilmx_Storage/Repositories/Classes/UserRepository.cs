@@ -29,6 +29,40 @@ namespace NetFilmx_Storage.Repositories
             return await _context.Users.Include(u => u.SeriesPurchases).Where(u => u.SeriesPurchases.Any(sp => sp.SeriesId == seriesId)).ToListAsync();
         }
 
+        public async Task<List<User>> GetUsersByExcludedSeriesIdAsync(int excludedSeriesId)
+        {
+            if (!await _context.Series.AnyAsync(s => s.Id == excludedSeriesId))
+            {
+                throw new Exception("Series not found");
+            }
+
+            return await _context.Users
+                .Include(u => u.SeriesPurchases)
+                .Where(u => !u.SeriesPurchases.Any(sp => sp.SeriesId == excludedSeriesId))
+                .ToListAsync();
+        }
+
+
+
+        public async Task<List<User>> GetUsersByExcludedVideoIdAsync(int videoId)
+        {
+            if (!await _context.Videos.AnyAsync(v => v.Id == videoId))
+            {
+                throw new Exception("Video not found");
+            }
+
+            var userIdsWithVideo = await _context.VideoPurchases
+                .Where(vp => vp.VideoId == videoId)
+                .Select(vp => vp.UserId)
+                .ToListAsync();
+
+            return await _context.Users
+                .Where(u => !userIdsWithVideo.Contains(u.Id))
+                .ToListAsync();
+        }
+
+
+
         public async Task<User> GetUserByIdAsync(int userId)
         {
             var user = await _context.Users.FindAsync(userId);

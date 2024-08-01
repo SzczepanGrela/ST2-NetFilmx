@@ -22,7 +22,7 @@ namespace NetFilmx_Service.Dtos.Category
 
         public int Id { get; set; }
 
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
     }
 }

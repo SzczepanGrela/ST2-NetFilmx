@@ -26,7 +26,7 @@ namespace NetFilmx_Service.Command.VideoPurchase
 
             try
             {
-                await _repository.DeleteVideoPurchaseAsync(command.Id);
+                await _repository.DeleteVideoPurchaseAsync(command.VideoId, command.UserId);
                 return CResult.Ok();
             }
             catch (Exception ex)

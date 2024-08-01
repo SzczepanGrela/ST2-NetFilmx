@@ -11,12 +11,16 @@ namespace NetFilmx_Service.Command.VideoPurchase
     {
 
 
-        public DeleteVideoPurchaseCommand(int id)
+        public DeleteVideoPurchaseCommand(int videoId, int userId)
         {
-            Id = id;
+            VideoId = videoId;
+
+            UserId = userId;
         }
 
-        public int Id { get; }
+        public int VideoId { get; }
+
+        public int UserId { get;  }
 
       
     }

@@ -8,6 +8,9 @@ namespace NetFilmx_Service.Dtos.Tag
 {
     public class TagAddDto : ITagDto
     {
+        public TagAddDto()
+        {
+        }
 
         public TagAddDto(string name)
         {

@@ -7,11 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 using NetFilmx_Service.Dtos.Series;
+using NetFilmx_Service.Dtos.SeriesPurchase;
 
 namespace NetFilmx_Service.Query.SeriesPurchase
 {
     public sealed class GetSeriesPurchasesByUserIdQueryHandler<TDto> : IRequestHandler<GetSeriesPurchasesByUserIdQuery<TDto>, QResult<List<TDto>>>
-            where TDto : ISeriesDto
+            where TDto : ISeriesPurchaseDto
     {
         private readonly ISeriesPurchaseRepository _repository;
         private readonly IMapper _mapper;

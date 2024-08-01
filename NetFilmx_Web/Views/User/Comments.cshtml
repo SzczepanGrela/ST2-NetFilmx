@@ -1,0 +1,38 @@
+﻿@model IEnumerable<NetFilmx_Service.Dtos.Comment.CommentListDto>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comments List</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Comments List</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>User ID</th>
+                    <th>Video ID</th>
+                    <th>Content</th>
+                    <th>Updated At</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var comment in Model)
+                {
+                    <tr>
+                        <td>@comment.Id</td>
+                        <td>@comment.UserId</td>
+                        <td>@comment.VideoId</td>
+                        <td>@comment.Content</td>
+                        <td>@comment.UpdatedAt.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

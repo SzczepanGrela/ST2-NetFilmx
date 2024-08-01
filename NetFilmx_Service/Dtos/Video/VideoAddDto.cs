@@ -8,6 +8,9 @@ namespace NetFilmx_Service.Dtos.Video
 {
     public class VideoAddDto : IVideoDto
     {
+        public VideoAddDto()
+        {
+        }
 
         public VideoAddDto(string title, decimal price, string video_url, string? thumbnail_url, string? description)
         {
@@ -18,15 +21,15 @@ namespace NetFilmx_Service.Dtos.Video
             Description = description;
         }
 
-        public string Title { get; }
+        public string Title { get; set; }
 
-        public string? Description { get; }
+        public string? Description { get; set; }
 
-        public decimal? Price { get; }
+        public decimal Price { get; set; }
 
-        public string Video_url { get; }
+        public string Video_url { get; set; }
 
-        public string? Thumbnail_url { get; }
+        public string? Thumbnail_url { get; set; }
 
     }
 }

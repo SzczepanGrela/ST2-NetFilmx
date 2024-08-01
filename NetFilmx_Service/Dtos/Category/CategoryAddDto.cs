@@ -8,7 +8,9 @@ namespace NetFilmx_Service.Dtos.Category
 {
     public class CategoryAddDto : ICategoryDto
     {
-
+        public CategoryAddDto()
+        {
+        }
         public CategoryAddDto(string name, string description)
         {
             Name = name;
@@ -16,7 +18,7 @@ namespace NetFilmx_Service.Dtos.Category
         }
 
 
-        public string Name { get; }
-        public string? Description { get; } 
+        public string Name { get; set; }
+        public string? Description { get; set; } 
     }
 }

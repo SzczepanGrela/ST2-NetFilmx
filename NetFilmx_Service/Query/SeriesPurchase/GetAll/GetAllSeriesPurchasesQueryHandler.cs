@@ -11,11 +11,12 @@ using NetFilmx_Storage.Entities;
 using AutoMapper;
 using MediatR;
 using NetFilmx_Service.Dtos.Series;
+using NetFilmx_Service.Dtos.SeriesPurchase;
 
 namespace NetFilmx_Service.Query.SeriesPurchase
 {
     public sealed class GetAllSeriesPurchasesQueryHandler<TDto> : IRequestHandler<GetAllSeriesPurchasesQuery<TDto>, QResult<List<TDto>>>
-     where TDto : ISeriesDto
+     where TDto : ISeriesPurchaseDto
     {
         private readonly ISeriesPurchaseRepository _repository;
         private readonly IMapper _mapper;

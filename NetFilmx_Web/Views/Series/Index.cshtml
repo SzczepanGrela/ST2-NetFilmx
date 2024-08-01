@@ -1,0 +1,21 @@
+﻿@model IEnumerable<NetFilmx_Service.Dtos.Series.SeriesListDto>
+
+<h1>Series</h1>
+<a asp-action="Add" class="btn btn-primary">Add New Series</a>
+
+<ul class="list-group mt-3">
+    @foreach (var series in Model)
+    {
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>
+                <a asp-action="Details" asp-route-seriesId="@series.Id">@series.Name</a> - @series.Price
+            </span>
+            <span>
+                <a asp-action="Edit" asp-route-seriesId="@series.Id" class="btn btn-warning btn-sm">Edit</a>
+                <a asp-action="Videos" asp-route-seriesId="@series.Id" class="btn btn-info btn-sm">Videos</a>
+                <a asp-action="Users" asp-route-seriesId="@series.Id" class="btn btn-secondary btn-sm">Users</a>
+            </span>
+        </li>
+    }
+</ul>
+

@@ -7,10 +7,10 @@ using MediatR;
 
 namespace NetFilmx_Service.Command.Video
 {
-    public sealed class DeleteVideoFromTagCommand : IRequest<CResult>
+    public sealed class RemoveVideoFromTagCommand : IRequest<CResult>
     {
 
-        public DeleteVideoFromTagCommand(int tagid, int videoid)
+        public RemoveVideoFromTagCommand(int tagid, int videoid)
         {
             TagId = tagid;
             VideoId = videoid;

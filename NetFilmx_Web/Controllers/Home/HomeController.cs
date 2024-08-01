@@ -16,7 +16,7 @@ using NetFilmx_Web.Models;
 using System.Diagnostics;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace NetFilmx_Web.Controllers.Home
+namespace NetFilmx_Web.Controllers
 {
     public class HomeController : Controller
     {

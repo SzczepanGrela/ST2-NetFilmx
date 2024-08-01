@@ -1,0 +1,56 @@
+﻿@model NetFilmx_Service.Dtos.Video.VideoEditDto
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Edit Video</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h1>Edit Video</h1>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="form-group">
+                        <label asp-for="Id"></label>
+                        <input asp-for="Id" readonly class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Title"></label>
+                        <input asp-for="Title" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description"></label>
+                        <textarea asp-for="Description" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Price"></label>
+                        <input asp-for="Price" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Video_url"></label>
+                        <input asp-for="Video_url" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Thumbnail_url"></label>
+                        <input asp-for="Thumbnail_url" class="form-control" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+</body>
+</html>

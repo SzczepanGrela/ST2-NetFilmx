@@ -27,6 +27,9 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
 
 
 
+
+
+
 builder.Services.AddNetFilmxServices();
 
 builder.Services.AddRequestHandlers();
@@ -34,10 +37,6 @@ builder.Services.AddRequestHandlers();
 builder.Services.AddCommandHandlers();
 
 builder.Services.AddAutoMapProfiles();
-
-
-
-//builder.Services.AddAutoMapper(typeof(Program));
 
 
 builder.Services.AddDbContext<NetFilmxDbContext>();

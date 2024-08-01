@@ -1,0 +1,34 @@
+﻿@model IEnumerable<NetFilmx_Service.Dtos.Video.VideoListDto>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Videos in Series</title>
+</head>
+<body>
+    <h1>Videos in Series: @ViewBag.SeriesName</h1>
+
+    <form asp-action="AddVideos" method="get">
+        <input type="hidden" name="seriesId" value="@ViewBag.SeriesId" />
+        <input type="hidden" name="seriesName" value="@ViewBag.SeriesName" />
+        <button type="submit" class="btn btn-success">Add Videos</button>
+    </form>
+
+    <form asp-action="RemoveVideos" method="get">
+        <input type="hidden" name="seriesId" value="@ViewBag.SeriesId" />
+        <input type="hidden" name="seriesName" value="@ViewBag.SeriesName" />
+        <button type="submit" class="btn btn-danger">Remove Videos</button>
+    </form>
+
+    <ul>
+        @foreach (var video in Model)
+        {
+            <li>
+                <a href="@Url.Action("Details", "Video", new { id = video.Id })">@video.Title</a>
+            </li>
+        }
+    </ul>
+
+</body>
+</html>

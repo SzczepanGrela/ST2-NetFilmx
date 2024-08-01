@@ -16,14 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Comment\" />
-    <Folder Include="Views\User\" />
-    <Folder Include="Views\Series\" />
-    <Folder Include="Views\Tag\" />
-    <Folder Include="Views\Video\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="appsettings.json" />
   </ItemGroup>
 

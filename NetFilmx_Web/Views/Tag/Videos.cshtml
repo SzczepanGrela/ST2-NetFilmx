@@ -1,0 +1,24 @@
+﻿@model IEnumerable<NetFilmx_Service.Dtos.Video.VideoListDto>
+
+<h1>Videos with Tag: @ViewBag.TagName</h1>
+
+<form asp-action="AddVideos" method="get" style="display:inline;">
+    <input type="hidden" name="tagId" value="@ViewBag.TagId" />
+    <input type="hidden" name="tagName" value="@ViewBag.TagName" />
+    <button type="submit" class="btn btn-success">Add Videos</button>
+</form>
+
+<form asp-action="RemoveVideos" method="get" style="display:inline;">
+    <input type="hidden" name="tagId" value="@ViewBag.TagId" />
+    <input type="hidden" name="tagName" value="@ViewBag.TagName" />
+    <button type="submit" class="btn btn-danger">Remove Videos</button>
+</form>
+
+<ul class="list-group mt-3">
+    @foreach (var video in Model)
+    {
+        <li class="list-group-item">
+            <a href="@Url.Action("Details", "Video", new { id = video.Id })">@video.Title</a>
+        </li>
+    }
+</ul>

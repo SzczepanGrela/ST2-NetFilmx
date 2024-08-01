@@ -24,7 +24,7 @@ namespace NetFilmx_Service.Command.SeriesPurchase
                 return CResult.Fail("Command is null");
             }
 
-            var seriesPurchase = new NetFilmx_Storage.Entities.SeriesPurchase(command.SeriesId, command.UserId);
+            var seriesPurchase = new NetFilmx_Storage.Entities.SeriesPurchase(command.UserId, command.SeriesId);
             try
             {
                 await _repository.AddSeriesPurchaseAsync(seriesPurchase);

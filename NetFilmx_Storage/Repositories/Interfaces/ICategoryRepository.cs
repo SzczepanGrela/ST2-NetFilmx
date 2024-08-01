@@ -7,6 +7,7 @@ namespace NetFilmx_Storage.Repositories
     {
         Task<List<Category>> GetAllCategoriesAsync();
         Task<List<Category>> GetCategoriesByVideoIdAsync(int videoId);
+        Task<List<Category>> GetCategoriesByExcludedVideoIdAsync(int videoId);
 
         Task<Category> GetCategoryByIdAsync(int categoryId);
         Task<Category> GetCategoryByNameAsync(string categoryName);

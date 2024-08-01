@@ -21,6 +21,7 @@ using NetFilmx_Service.Query.Tag;
 using NetFilmx_Service.Query.User;
 using NetFilmx_Service.Query.Video;
 using NetFilmx_Service.Query.VideoPurchase;
+using NetFilmx_Service.Dtos.SeriesPurchase;
 
 namespace NetFilmx_Web.Extensions
 {
@@ -147,6 +148,11 @@ namespace NetFilmx_Web.Extensions
             serviceCollection.AddTransient<IRequestHandler<GetUserByCommentIdQuery<UserEditDto>, QResult<UserEditDto>>, GetUserByCommentIdQueryHandler<UserEditDto>>();
             serviceCollection.AddTransient<IRequestHandler<GetUserByCommentIdQuery<UserListDto>, QResult<UserListDto>>, GetUserByCommentIdQueryHandler<UserListDto>>();
 
+            serviceCollection.AddTransient<IRequestHandler<GetUsersByExcludedSeriesIdQuery<UserAddDto>, QResult<List<UserAddDto>>>, GetUsersByExcludedSeriesIdQueryHandler<UserAddDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetUsersByExcludedSeriesIdQuery<UserDetailsDto>, QResult<List<UserDetailsDto>>>, GetUsersByExcludedSeriesIdQueryHandler<UserDetailsDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetUsersByExcludedSeriesIdQuery<UserEditDto>, QResult<List<UserEditDto>>>, GetUsersByExcludedSeriesIdQueryHandler<UserEditDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetUsersByExcludedSeriesIdQuery<UserListDto>, QResult<List<UserListDto>>>, GetUsersByExcludedSeriesIdQueryHandler<UserListDto>>();
+
             serviceCollection.AddTransient<IRequestHandler<GetUserByIdQuery<UserAddDto>, QResult<UserAddDto>>, GetUserByIdQueryHandler<UserAddDto>>();
             serviceCollection.AddTransient<IRequestHandler<GetUserByIdQuery<UserDetailsDto>, QResult<UserDetailsDto>>, GetUserByIdQueryHandler<UserDetailsDto>>();
             serviceCollection.AddTransient<IRequestHandler<GetUserByIdQuery<UserEditDto>, QResult<UserEditDto>>, GetUserByIdQueryHandler<UserEditDto>>();
@@ -243,7 +249,46 @@ namespace NetFilmx_Web.Extensions
             serviceCollection.AddTransient<IRequestHandler<GetVideoByVideoPurchaseIdQuery<VideoEditDto>, QResult<VideoEditDto>>, GetVideoByVideoPurchaseIdQueryHandler<VideoEditDto>>();
             serviceCollection.AddTransient<IRequestHandler<GetVideoByVideoPurchaseIdQuery<VideoListDto>, QResult<VideoListDto>>, GetVideoByVideoPurchaseIdQueryHandler<VideoListDto>>();
 
+            // seriespurchase Requests
 
+            serviceCollection.AddTransient<IRequestHandler<GetAllSeriesPurchasesQuery<SeriesPurchaseAddDto>, QResult<List<SeriesPurchaseAddDto>>>, GetAllSeriesPurchasesQueryHandler<SeriesPurchaseAddDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetAllSeriesPurchasesQuery<SeriesPurchaseDetailsDto>, QResult<List<SeriesPurchaseDetailsDto>>>, GetAllSeriesPurchasesQueryHandler<SeriesPurchaseDetailsDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetAllSeriesPurchasesQuery<SeriesPurchaseListDto>, QResult<List<SeriesPurchaseListDto>>>, GetAllSeriesPurchasesQueryHandler<SeriesPurchaseListDto>>();
+
+            serviceCollection.AddTransient<IRequestHandler<GetSeriesPurchaseByIdQuery<SeriesPurchaseAddDto>, QResult<SeriesPurchaseAddDto>>, GetSeriesPurchaseByIdQueryHandler<SeriesPurchaseAddDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetSeriesPurchaseByIdQuery<SeriesPurchaseDetailsDto>, QResult<SeriesPurchaseDetailsDto>>, GetSeriesPurchaseByIdQueryHandler<SeriesPurchaseDetailsDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetSeriesPurchaseByIdQuery<SeriesPurchaseListDto>, QResult<SeriesPurchaseListDto>>, GetSeriesPurchaseByIdQueryHandler<SeriesPurchaseListDto>>();
+
+            serviceCollection.AddTransient<IRequestHandler<GetSeriesPurchasesBySeriesIdQuery<SeriesPurchaseAddDto>, QResult<List<SeriesPurchaseAddDto>>>, GetSeriesPurchasesBySeriesIdQueryHandler<SeriesPurchaseAddDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetSeriesPurchasesBySeriesIdQuery<SeriesPurchaseDetailsDto>, QResult<List<SeriesPurchaseDetailsDto>>>, GetSeriesPurchasesBySeriesIdQueryHandler<SeriesPurchaseDetailsDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetSeriesPurchasesBySeriesIdQuery<SeriesPurchaseListDto>,QResult<List<SeriesPurchaseListDto>>>, GetSeriesPurchasesBySeriesIdQueryHandler<SeriesPurchaseListDto>>();
+
+            serviceCollection.AddTransient<IRequestHandler<GetSeriesPurchasesByUserIdQuery<SeriesPurchaseAddDto>, QResult<List<SeriesPurchaseAddDto>>>, GetSeriesPurchasesByUserIdQueryHandler<SeriesPurchaseAddDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetSeriesPurchasesByUserIdQuery<SeriesPurchaseDetailsDto>, QResult<List<SeriesPurchaseDetailsDto>>>, GetSeriesPurchasesByUserIdQueryHandler<SeriesPurchaseDetailsDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetSeriesPurchasesByUserIdQuery<SeriesPurchaseListDto>, QResult<List<SeriesPurchaseListDto>>>, GetSeriesPurchasesByUserIdQueryHandler<SeriesPurchaseListDto>>();
+
+
+
+            // videopurchase Requests
+
+             serviceCollection.AddTransient<IRequestHandler<GetAllVideoPurchasesQuery<VideoPurchaseAddDto>, QResult<List<VideoPurchaseAddDto>>>, GetAllVideoPurchasesQueryHandler<VideoPurchaseAddDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetAllVideoPurchasesQuery<VideoPurchaseDetailsDto>, QResult<List<VideoPurchaseDetailsDto>>>, GetAllVideoPurchasesQueryHandler<VideoPurchaseDetailsDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetAllVideoPurchasesQuery<VideoPurchaseListDto>, QResult<List<VideoPurchaseListDto>>>, GetAllVideoPurchasesQueryHandler<VideoPurchaseListDto>>();
+
+            serviceCollection.AddTransient<IRequestHandler<GetVideoPurchaseByIdQuery<VideoPurchaseAddDto>, QResult<VideoPurchaseAddDto>>, GetVideoPurchaseByIdQueryHandler<VideoPurchaseAddDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetVideoPurchaseByIdQuery<VideoPurchaseDetailsDto>, QResult<VideoPurchaseDetailsDto>>, GetVideoPurchaseByIdQueryHandler<VideoPurchaseDetailsDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetVideoPurchaseByIdQuery<VideoPurchaseListDto>, QResult<VideoPurchaseListDto>>, GetVideoPurchaseByIdQueryHandler<VideoPurchaseListDto>>();
+
+            serviceCollection.AddTransient<IRequestHandler<GetVideoPurchasesByUserIdQuery<VideoPurchaseAddDto>, QResult<List<VideoPurchaseAddDto>>>, GetVideoPurchasesByUserIdQueryHandler<VideoPurchaseAddDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetVideoPurchasesByUserIdQuery<VideoPurchaseDetailsDto>, QResult<List<VideoPurchaseDetailsDto>>>, GetVideoPurchasesByUserIdQueryHandler<VideoPurchaseDetailsDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetVideoPurchasesByUserIdQuery<VideoPurchaseListDto>, QResult<List<VideoPurchaseListDto>>>, GetVideoPurchasesByUserIdQueryHandler<VideoPurchaseListDto>>();
+
+            serviceCollection.AddTransient<IRequestHandler<GetVideoPurchasesByVideoIdQuery<VideoPurchaseAddDto>, QResult<List<VideoPurchaseAddDto>>>, GetVideoPurchasesByVideoIdQueryHandler<VideoPurchaseAddDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetVideoPurchasesByVideoIdQuery<VideoPurchaseDetailsDto>, QResult<List<VideoPurchaseDetailsDto>>>, GetVideoPurchasesByVideoIdQueryHandler<VideoPurchaseDetailsDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetVideoPurchasesByVideoIdQuery<VideoPurchaseListDto>, QResult<List<VideoPurchaseListDto>>>, GetVideoPurchasesByVideoIdQueryHandler<VideoPurchaseListDto>>();
+            
+            
+            
             return serviceCollection;
         }
 

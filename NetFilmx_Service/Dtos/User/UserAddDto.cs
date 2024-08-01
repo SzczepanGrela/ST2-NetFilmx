@@ -8,6 +8,10 @@ namespace NetFilmx_Service.Dtos.User
 {
     public class UserAddDto : IUserDto
     {
+        public UserAddDto()
+        {
+        }
+
         public UserAddDto(string username, string email, string password)
         {
             Username = username;
@@ -15,11 +19,11 @@ namespace NetFilmx_Service.Dtos.User
             Password = password;
         }
 
-        public string Username { get; }
+        public string Username { get; set; }
 
-        public string Email { get; }
+        public string Email { get; set; }
 
-        public string Password { get; }
+        public string Password { get; set; }
 
     }
 }

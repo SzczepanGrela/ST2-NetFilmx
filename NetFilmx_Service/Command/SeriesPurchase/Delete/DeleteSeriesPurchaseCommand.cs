@@ -10,12 +10,17 @@ namespace NetFilmx_Service.Command.SeriesPurchase
     public sealed class DeleteSeriesPurchaseCommand : IRequest<CResult>
     {
 
-        public DeleteSeriesPurchaseCommand(int id)
+        public DeleteSeriesPurchaseCommand(int seriesId, int userId)
         {
-            Id = id;
+            SeriesId = seriesId;
+            UserId = userId;
         }
 
-        public int Id { get;}
+        public int SeriesId { get; }
+
+        public int UserId { get; }
+
+        
 
     }
 }

@@ -1,0 +1,24 @@
+﻿@model IEnumerable<NetFilmx_Service.Dtos.Video.VideoListDto>
+
+<h1>Videos</h1>
+<a asp-action="Add" class="btn btn-primary">Add New Video</a>
+
+<ul class="list-group mt-3">
+    @foreach (var video in Model)
+    {
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>
+                <a asp-action="Details" asp-route-categoryId="@video.Id">@video.Title</a>
+                
+            </span>
+            <span>
+                <a asp-action="Edit" asp-route-categoryId="@video.Id" class="btn btn-warning btn-sm">Edit</a>
+                <a asp-action="Series" asp-route-categoryId="@video.Id" class="btn btn-info btn-sm">Series</a>
+                <a asp-action="Tags" asp-route-categoryId="@video.Id" class="btn btn-info btn-sm">Tags</a>
+                <a asp-action="Comments" asp-route-categoryId="@video.Id" class="btn btn-info btn-sm">Comments</a>
+                <a asp-action="Users" asp-route-categoryId="@video.Id" class="btn btn-info btn-sm">User Who Purchased</a>
+
+            </span>
+        </li>
+    }
+</ul>

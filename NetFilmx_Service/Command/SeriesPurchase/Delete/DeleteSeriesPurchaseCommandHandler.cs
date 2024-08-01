@@ -25,7 +25,7 @@ namespace NetFilmx_Service.Command.SeriesPurchase
             }
             try
             {
-                await _repository.DeleteSeriesPurchaseAsync(command.Id);
+                await _repository.DeleteSeriesPurchaseAsync(command.SeriesId, command.UserId);
                 return CResult.Ok();
             }
             catch (Exception ex)

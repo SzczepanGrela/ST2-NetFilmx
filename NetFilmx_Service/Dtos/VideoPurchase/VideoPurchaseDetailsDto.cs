@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace NetFilmx_Service.Dtos.VideoPurchase
+{
+    public class VideoPurchaseDetailsDto : IVideoPurchaseDto
+    {
+        public VideoPurchaseDetailsDto(int userId, int videoId, DateTime purchaseDate)
+        {
+            UserId = userId;
+            VideoId = videoId;
+            PurchaseDate = purchaseDate;
+        }
+
+        public int UserId { get; }
+
+        public int VideoId { get;  }
+
+        public DateTime PurchaseDate { get; }
+
+
+    }
+}

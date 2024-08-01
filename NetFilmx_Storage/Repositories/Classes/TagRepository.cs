@@ -21,6 +21,12 @@ namespace NetFilmx_Storage.Repositories
 
         public async Task<List<Tag>> GetTagsByVideoIdAsync(int videoId)
         {
+            var video = await _context.Videos.FindAsync(videoId);
+            if(video ==null)
+            {
+                throw new Exception("Video not found");
+            }
+
             return await _context.Tags.Include(t => t.Videos).Where(t => t.Videos.Any(v => v.Id == videoId)).ToListAsync();
         }
 
@@ -64,6 +70,23 @@ namespace NetFilmx_Storage.Repositories
             _context.Entry(tag).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<Tag>> GetTagsByExcludedVideoIdAsync(int videoId)
+        {
+            var video = await _context.Videos.Include(v => v.Tags).FirstOrDefaultAsync(v => v.Id == videoId);
+
+            if (video == null)
+            {
+                throw new Exception("Video not found");
+            }
+
+            var allTags = await _context.Tags.ToListAsync();
+            var excludedTags = allTags.Where(t => !video.Tags.Any(vt => vt.Id == t.Id)).ToList();
+
+            return excludedTags;
+        }
+
+
 
         public async Task DeleteTagAsync(int tagId)
         {

@@ -1,0 +1,24 @@
+﻿@model IEnumerable<NetFilmx_Service.Dtos.Video.VideoListDto>
+
+<h1>Remove Videos from Tag: @ViewBag.TagName</h1>
+
+<form asp-action="RemoveVideos" method="post">
+    <input type="hidden" name="tagId" value="@ViewBag.TagId" />
+    <ul class="list-group">
+        @foreach (var video in Model)
+        {
+            <li class="list-group-item">
+                <input type="checkbox" name="videoIds" value="@video.Id" />
+                @video.Title
+            </li>
+        }
+    </ul>
+    <button type="submit" class="btn btn-danger mt-3">Remove Selected Videos</button>
+</form>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

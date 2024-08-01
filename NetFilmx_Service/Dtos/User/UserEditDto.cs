@@ -19,7 +19,7 @@ namespace NetFilmx_Service.Dtos.User
         }
 
 
-        public int Id { get; }
+        public int Id { get; set; }
         public string Username { get; set; }
 
         public string Email { get; set; }

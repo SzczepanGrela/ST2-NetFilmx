@@ -8,7 +8,7 @@ using MediatR;
 
 namespace NetFilmx_Service.Command.Video
 {
-    public sealed class DeleteVideoFromTagCommandHandler : IRequestHandler<DeleteVideoFromTagCommand, CResult>
+    public sealed class DeleteVideoFromTagCommandHandler : IRequestHandler<RemoveVideoFromTagCommand, CResult>
     {
         private readonly IVideoRepository _repository;
 
@@ -17,7 +17,7 @@ namespace NetFilmx_Service.Command.Video
             _repository = videoRepository;
         }
 
-        public async Task<CResult> Handle(DeleteVideoFromTagCommand command, CancellationToken cancellationToken)
+        public async Task<CResult> Handle(RemoveVideoFromTagCommand command, CancellationToken cancellationToken)
         {
             if (command == null)
             {

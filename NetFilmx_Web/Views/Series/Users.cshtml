@@ -1,0 +1,32 @@
+﻿@model IEnumerable<NetFilmx_Service.Dtos.User.UserListDto>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Users in Series</title>
+</head>
+<body>
+    <h1>Users in Series: @ViewBag.SeriesName</h1>
+
+    <form asp-action="AddUsers" method="get">
+        <input type="hidden" name="seriesId" value="@ViewBag.SeriesId" />
+        <input type="hidden" name="seriesName" value="@ViewBag.SeriesName" />
+        <button type="submit" class="btn btn-success">Add Users</button>
+    </form>
+
+    <form asp-action="RemoveUser" method="get">
+        <input type="hidden" name="seriesId" value="@ViewBag.SeriesId" />
+        <input type="hidden" name="seriesName" value="@ViewBag.SeriesName" />
+        <button type="submit" class="btn btn-danger">Remove Users</button>
+    </form>
+
+    <ul>
+        @foreach (var user in Model)
+        {
+            <li>@user.Username</li>
+        }
+    </ul>
+
+</body>
+</html>
