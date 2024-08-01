@@ -9,13 +9,16 @@ namespace NetFilmx_Service.Command.Series
 {
     internal class EditSeriesCommandValidator : AbstractValidator<EditSeriesCommand>
     {
-
+        public static int maxDescriptionLength { get; } = AddSeriesCommandValidator.maxDescriptionLength; 
       
         public EditSeriesCommandValidator()
         {
 
             RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required");
-            RuleFor(x => x.Description).NotEmpty().WithMessage("Description is required");
+
+            RuleFor(x => x.Description).MaximumLength(maxDescriptionLength).WithMessage($"Description can not be more than {maxDescriptionLength} characters");
+
+
             RuleFor(x => x.Price)
            .NotEmpty()
            .WithMessage("Price is required")

@@ -11,7 +11,7 @@ namespace NetFilmx_Service.Dtos.Video
     public class VideoEditDto : IVideoDto
     {
         public VideoEditDto() { }
-        public VideoEditDto(int id, string title, string video_url, string? thumbnail_url, string? description, decimal? price)
+        public VideoEditDto(int id, string title, string video_url, string? thumbnail_url, string? description, decimal price)
         {
             Id = id;
             Title = title;

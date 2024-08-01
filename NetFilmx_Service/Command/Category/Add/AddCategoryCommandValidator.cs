@@ -11,7 +11,7 @@ namespace NetFilmx_Service.Command.Category
     public  class AddCategoryCommandValidator : AbstractValidator<AddCategoryCommand>
     {
         public static int maxNameLength { get; } = 50;
-        public static int maxDescriptionLength { get; } = 200;
+        public static int maxDescriptionLength { get; } = 2000;
 
         public AddCategoryCommandValidator()
         {
