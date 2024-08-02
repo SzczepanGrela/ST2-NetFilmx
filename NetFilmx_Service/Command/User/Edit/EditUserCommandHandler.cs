@@ -34,8 +34,13 @@ namespace NetFilmx_Service.Command.User
             {
                 var user = await _repository.GetUserByIdAsync(command.Id);
 
-                //var user = task.Result;
-               
+                var isUsernameAvailable = await _repository.IsUsernameAvailableForUserAsync(command.Username, command.Id);
+                
+                if(!isUsernameAvailable)
+                {
+                    return CResult.Fail("Username is already taken by another user");
+                }
+                
                 user.Email = command.Email;
                 user.Username = command.Username;
                 user.UpdatedAt = DateTime.Now;

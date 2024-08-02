@@ -20,7 +20,7 @@ namespace NetFilmx_Service.Command.User
 
         public static int maxPasswordLength { get; } = 50;
 
-        public static int minPasswordLength { get; } = 5;
+        public static int minPasswordLength { get; } = 8;
 
         public AddUserCommandValidator()
         {

@@ -1,22 +1,35 @@
 ﻿@{
     ViewBag.Title = "Error";
+    var errorMessage = ViewBag.ErrorMessage ?? "An unexpected error occurred.";
+    var errors = ViewBag.Errors as List<string>;
 }
 
-<h1>Error</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Error</h1>
 
-@if (ViewBag.ErrorMessage != null)
-{
-    <p>@ViewBag.ErrorMessage</p>
-}
+        <div class="alert alert-danger" role="alert">
+            <p>@errorMessage</p>
+        </div>
 
-@if (ViewBag.Errors != null && ViewBag.Errors.Count > 0)
-{
-    <ul>
-        @foreach (var error in ViewBag.Errors)
+        @if (errors != null && errors.Count > 0)
         {
-            <li>@error</li>
+            <ul class="list-group mb-4">
+                @foreach (var error in errors)
+                {
+                    <li class="list-group-item list-group-item-danger">@error</li>
+                }
+            </ul>
         }
-    </ul>
-}
 
-<a href="@Url.Action("Index", "Home")">Back to Home</a>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Back to Home</a>
+    </div>
+</body>
+</html>

@@ -29,8 +29,10 @@ namespace NetFilmx_Web.Controllers
             var result = await _mediator.Send(query);
             if (result.IsFailure)
             {
-                return RedirectToAction("Error", "Home", new { Message = result.Message });
-            }  
+                return RedirectToAction("Error", "Home", new
+                { errorMessage = result.Message, errors = result.Errors });
+
+            }
             return View(result.Data);
         }
 
@@ -48,7 +50,7 @@ namespace NetFilmx_Web.Controllers
             var result = await _mediator.Send(command);
             if (result.IsFailure)
             {
-                return RedirectToAction("Error", "Home", new { Message = result.Message });
+                return RedirectToAction("Error", "Home", new { errorMessage = result.Message, errors = result.Errors });
             }
             ViewBag.Steps = 2;
 
@@ -62,7 +64,7 @@ namespace NetFilmx_Web.Controllers
             var result = await _mediator.Send(command);
             if (result.IsFailure)
             {
-                return RedirectToAction("Error", "Home", new { Message = result.Message });
+                return RedirectToAction("Error", "Home", new { errorMessage = result.Message, errors = result.Errors });
             }
 
 
@@ -77,9 +79,9 @@ namespace NetFilmx_Web.Controllers
             var result = await _mediator.Send(query);
             if (result.IsFailure)
             {
-                return RedirectToAction("Error", "Home", new { Message = result.Message });
+                return RedirectToAction("Error", "Home", new { errorMessage = result.Message, errors = result.Errors });
             }
-            
+
             return View(result.Data);
         }
 
@@ -89,9 +91,9 @@ namespace NetFilmx_Web.Controllers
             var result = await _mediator.Send(query);
             if (result.IsFailure)
             {
-                return RedirectToAction("Error", "Home", new { Message = result.Message });
+                return RedirectToAction("Error", "Home", new { errorMessage = result.Message, errors = result.Errors });
             }
-          
+
             return View(result.Data);
         }
 
@@ -102,7 +104,7 @@ namespace NetFilmx_Web.Controllers
             var result = await _mediator.Send(command);
             if (result.IsFailure)
             {
-                return RedirectToAction("Error", "Home", new { Message = result.Message });
+                return RedirectToAction("Error", "Home", new { errorMessage = result.Message, errors = result.Errors });
             }
 
 
@@ -119,7 +121,7 @@ namespace NetFilmx_Web.Controllers
             var result = await _mediator.Send(query);
             if (result.IsFailure)
             {
-                return RedirectToAction("Error", "Home", new { Message = result.Message });
+                return RedirectToAction("Error", "Home", new { errorMessage = result.Message, errors = result.Errors });
             }
             return View(result.Data);
         }
@@ -132,7 +134,7 @@ namespace NetFilmx_Web.Controllers
             var result = await _mediator.Send(query);
             if (result.IsFailure)
             {
-                return RedirectToAction("Error", "Home", new { Message = result.Message });
+                return RedirectToAction("Error", "Home", new { errorMessage = result.Message, errors = result.Errors });
             }
             return View(result.Data);
         }
@@ -146,7 +148,7 @@ namespace NetFilmx_Web.Controllers
                 var result = await _mediator.Send(command);
                 if (result.IsFailure)
                 {
-                    return RedirectToAction("Error", "Home", new { Message = result.Message});
+                    return RedirectToAction("Error", "Home", new { errorMessage = result.Message, errors = result.Errors });
                 }
             }
             ViewBag.Steps = 2;
@@ -162,7 +164,7 @@ namespace NetFilmx_Web.Controllers
             var result = await _mediator.Send(query);
             if (result.IsFailure)
             {
-                return RedirectToAction("Error", "Home", new { Message = result.Message });
+                return RedirectToAction("Error", "Home", new { errorMessage = result.Message, errors = result.Errors });
             }
             return View(result.Data);
         }
@@ -176,7 +178,7 @@ namespace NetFilmx_Web.Controllers
                 var result = await _mediator.Send(command);
                 if (result.IsFailure)
                 {
-                    return RedirectToAction("Error", "Home", new { Message = result.Message });
+                    return RedirectToAction("Error", "Home", new { errorMessage = result.Message, errors = result.Errors });
                 }
             }
             ViewBag.Steps = 2;

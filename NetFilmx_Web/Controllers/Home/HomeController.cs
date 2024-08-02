@@ -27,7 +27,8 @@ namespace NetFilmx_Web.Controllers
             _mediator = mediator;
         }
 
-        IActionResult Error(string errorMessage, IEnumerable<Error> errors)
+        [HttpGet]
+        public IActionResult Error(string errorMessage, List<string> errors = null)
         {
             ViewBag.ErrorMessage = errorMessage;
             ViewBag.Errors = errors;

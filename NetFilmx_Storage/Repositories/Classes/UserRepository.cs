@@ -121,7 +121,7 @@ namespace NetFilmx_Storage.Repositories
             {
                 throw new ArgumentNullException(nameof(user), "User cannot be null");
             }
-            if (await IsUserExistAsync(user.Username))
+            if (await IsUsernameTakenAsync(user.Username))
             {
                 throw new InvalidOperationException("A user with this username already exists");
             }
@@ -155,7 +155,7 @@ namespace NetFilmx_Storage.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> IsUserExistAsync(string username)
+        public async Task<bool> IsUsernameTakenAsync(string username)
         {
             return await _context.Users.AnyAsync(u => u.Username == username);
         }
@@ -164,5 +164,13 @@ namespace NetFilmx_Storage.Repositories
         {
             return await _context.Users.AnyAsync(u => u.Id == userId);
         }
+
+
+        public async Task<bool> IsUsernameAvailableForUserAsync(string username, int userId)
+        {
+            return await _context.Users.AnyAsync(u => u.Username == username && u.Id != userId);
+        }
+
+
     }
 }

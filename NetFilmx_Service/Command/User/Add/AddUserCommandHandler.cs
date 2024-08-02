@@ -33,6 +33,13 @@ namespace NetFilmx_Service.Command.User
 
             try
             {
+                var isUsernameTaken = await _repository.IsUsernameTakenAsync(command.Username);
+
+                if(isUsernameTaken)
+                {
+                    return CResult.Fail("Username is taken");
+                }
+
                 var user = new NetFilmx_Storage.Entities.User(command.Username, command.Email, command.Password);
                 await _repository.AddUserAsync(user);
 
