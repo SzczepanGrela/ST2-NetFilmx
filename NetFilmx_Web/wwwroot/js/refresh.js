@@ -1,4 +1,4 @@
-﻿// wwwroot/js/refresh.js
+﻿// refresh.js
 window.onpageshow = function (event) {
     console.log("Page show event detected");
 

@@ -14,6 +14,7 @@ using NetFilmx_Service.Command.VideoPurchase;
 using NetFilmx_Service.Dtos.Comment;
 using NetFilmx_Service.Query.Comment;
 using NetFilmx_Storage.Entities;
+using NuGet.Protocol.Core.Types;
 
 namespace NetFilmx_Web.Controllers
 {
@@ -25,6 +26,24 @@ namespace NetFilmx_Web.Controllers
         {
             _mediator = mediator;
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> IsUsernameAvailable(string username)
+        {
+            var query = new IsUsernameAvailableQuery(username);
+            var result = await _mediator.Send(query);
+            if (result.IsFailure)
+            {
+                return RedirectToAction("Error", "Home", new { errorMessage = result.Message, errors = result.Errors });
+            }
+
+            return Json(result.Data); 
+        }
+
+
+
+
 
         // User Actions
         public async Task<IActionResult> Index()

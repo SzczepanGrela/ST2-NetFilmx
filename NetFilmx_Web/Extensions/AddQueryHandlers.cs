@@ -215,6 +215,8 @@ namespace NetFilmx_Web.Extensions
             serviceCollection.AddTransient<IRequestHandler<GetUserByVideoPurchaseIdQuery<UserEditDto>, QResult<UserEditDto>>, GetUserByVideoPurchaseIdQueryHandler<UserEditDto>>();
             serviceCollection.AddTransient<IRequestHandler<GetUserByVideoPurchaseIdQuery<UserListDto>, QResult<UserListDto>>, GetUserByVideoPurchaseIdQueryHandler<UserListDto>>();
 
+            serviceCollection.AddTransient<IRequestHandler<IsUsernameAvailableQuery, QResult<bool>>, IsUsernameAvailableQueryHandler>();
+            
             // Video Requests
             serviceCollection.AddTransient<IRequestHandler<GetAllVideosQuery<VideoAddDto>, QResult<List<VideoAddDto>>>, GetAllVideosQueryHandler<VideoAddDto>>();
             serviceCollection.AddTransient<IRequestHandler<GetAllVideosQuery<VideoDetailsDto>, QResult<List<VideoDetailsDto>>>, GetAllVideosQueryHandler<VideoDetailsDto>>();
