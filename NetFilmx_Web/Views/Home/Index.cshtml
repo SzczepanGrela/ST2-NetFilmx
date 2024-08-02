@@ -2,23 +2,31 @@
     ViewData["Title"] = "Main Page";
 }
 
-<h1>Strona główna</h1>
-
-<div>
-    <a href="@Url.Action("Index", "Category")">Categories</a>
-</div>
-<div>
-    <a href="@Url.Action("Index", "User")">Users</a>
-</div>
-<div>
-    <a href="@Url.Action("Index", "Comment")">Comments</a>
-</div>
-<div>
-    <a href="@Url.Action("Index", "Series")">Series</a>
-</div>
-<div>
-    <a href="@Url.Action("Index", "Tag")">Tags</a>
-</div>
-<div>
-    <a href="@Url.Action("Index", "Video")">Videos</a>
-</div>
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - NetFilmx_Web</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h1>Main Page</h1>
+            </div>
+            <div class="card-body">
+                <div class="list-group">
+                    <a href="@Url.Action("Index", "Video")" class="list-group-item list-group-item-action bg-primary text-white">Videos</a>
+                    <a href="@Url.Action("Index", "Category")" class="list-group-item list-group-item-action bg-success text-white">Categories</a>
+                    <a href="@Url.Action("Index", "Series")" class="list-group-item list-group-item-action bg-info text-white">Series</a>
+                    <a href="@Url.Action("Index", "Tag")" class="list-group-item list-group-item-action bg-warning text-dark">Tags</a>
+                    <a href="@Url.Action("Index", "Comment")" class="list-group-item list-group-item-action bg-danger text-white">Comments</a>
+                    <a href="@Url.Action("Index", "User")" class="list-group-item list-group-item-action bg-secondary text-white">Users</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

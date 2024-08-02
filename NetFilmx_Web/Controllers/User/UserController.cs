@@ -63,7 +63,10 @@ namespace NetFilmx_Web.Controllers
             {
                 return RedirectToAction("Error", "Home", new { Message = result.Message });
             }
-            return RedirectToAction(nameof(Index));
+
+            ViewBag.Steps = 2;
+
+            return View("~/Views/Shared/RedirectBack.cshtml");
         }
 
         public async Task<IActionResult> Edit(int userId)
@@ -87,7 +90,10 @@ namespace NetFilmx_Web.Controllers
             {
                 return RedirectToAction("Error", "Home", new { Message = result.Message });
             }
-            return RedirectToAction(nameof(Details), new { userId = dto.Id });
+
+            ViewBag.Steps = 2;
+
+            return View("~/Views/Shared/RedirectBack.cshtml");
         }
 
         public IActionResult SetNewPassword(int userId, string userUsername)
@@ -107,7 +113,10 @@ namespace NetFilmx_Web.Controllers
             {
                 return RedirectToAction("Error", "Home", new { Message = result.Message });
             }
-            return RedirectToAction(nameof(Details), new { userId = dto.Id });
+
+            ViewBag.Steps = 2;
+
+            return View("~/Views/Shared/RedirectBack.cshtml");
         }
 
 
@@ -122,7 +131,11 @@ namespace NetFilmx_Web.Controllers
             }
 
 
-             return RedirectToAction(nameof(Index));
+            ViewBag.Steps = 2;
+
+            return View("~/Views/Shared/RedirectBack.cshtml");
+
+
         }
 
 
@@ -190,7 +203,10 @@ namespace NetFilmx_Web.Controllers
                     return RedirectToAction("Error", "Home", new { Message = result.Message });
                 }
             }
-            return RedirectToAction(nameof(Series), new { userId, userUsername });
+
+            ViewBag.Steps = 2;
+
+            return View("~/Views/Shared/RedirectBack.cshtml");
         }
 
 
@@ -221,7 +237,10 @@ namespace NetFilmx_Web.Controllers
                     return RedirectToAction("Error", "Home", new { Message = result.Message });
                 }
             }
-            return RedirectToAction(nameof(Series), new { userId, userUsername });
+
+            ViewBag.Steps = 2;
+
+            return View("~/Views/Shared/RedirectBack.cshtml");
         }
 
 
@@ -271,7 +290,10 @@ namespace NetFilmx_Web.Controllers
                     return RedirectToAction("Error", "Home", new { Message = result.Message });
                 }
             }
-            return RedirectToAction(nameof(Videos), new { userId, userUsername });
+
+            ViewBag.Steps = 2;
+
+            return View("~/Views/Shared/RedirectBack.cshtml");
         }
 
 
@@ -301,7 +323,10 @@ namespace NetFilmx_Web.Controllers
                     return RedirectToAction("Error", "Home", new { Message = result.Message });
                 }
             }
-            return RedirectToAction(nameof(Videos), new { userId, userUsername });
+
+            ViewBag.Steps = 2;
+
+            return View("~/Views/Shared/RedirectBack.cshtml");
         }
     }
 }

@@ -32,7 +32,7 @@ namespace NetFilmx_Service.Dtos.User
         public string Email { get; set; }
 
 
-        [MinLength(5, ErrorMessage = "The {0} must be at least {1} characters long.")]
+        [MinLength(8, ErrorMessage = "The {0} must be at least {1} characters long.")]
         [StringLength(50, ErrorMessage = "The {0} must be at most {1} characters long.")]
         public string Password { get; set; }
 

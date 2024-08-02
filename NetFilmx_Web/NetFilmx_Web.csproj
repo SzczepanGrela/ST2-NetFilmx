@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <None Include="appsettings.json" />
+    <None Include="wwwroot\js\refresh.js" />
   </ItemGroup>
 
   <ItemGroup>

@@ -35,7 +35,7 @@ namespace NetFilmx_Storage.Entities
         public virtual User User { get; set; }
 
         [Required]
-        [MaxLength(500)]
+        [MaxLength(1000)]
         public string Content { get; set; }
 
         [Required]

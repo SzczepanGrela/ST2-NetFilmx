@@ -13,14 +13,14 @@
 
         <div class="mb-3">
             <form asp-action="AddSeries" method="get" class="d-inline">
-                <input type="hidden" name="userId" value="@ViewBag.userId" />
-                <input type="hidden" name="userUsername" value="@ViewBag.userUsername" />
+                <input type="hidden" name="videoId" value="@ViewBag.VideoId" />
+                <input type="hidden" name="videoTitle" value="@ViewBag.VideoTitle" />
                 <button type="submit" class="btn btn-primary btn-sm mb-2">Add Series</button>
             </form>
 
             <form asp-action="RemoveSeries" method="get" class="d-inline">
-                <input type="hidden" name="userId" value="@ViewBag.userId" />
-                <input type="hidden" name="userUsername" value="@ViewBag.userUsername" />
+                <input type="hidden" name="videoId" value="@ViewBag.VideoId" />
+                <input type="hidden" name="videoTitle" value="@ViewBag.VideoTitle" />
                 <button type="submit" class="btn btn-danger btn-sm mb-2">Remove Series</button>
             </form>
         </div>

@@ -57,7 +57,9 @@ namespace NetFilmx_Web.Controllers
                 return RedirectToAction("Error", "Home", new { Message = result.Message });
             }
 
-            return RedirectToAction(nameof(Index));
+            ViewBag.Steps = 2;
+
+            return View("~/Views/Shared/RedirectBack.cshtml");
         }
 
         public async Task<IActionResult> Edit(int tagId)
@@ -82,7 +84,9 @@ namespace NetFilmx_Web.Controllers
                 return RedirectToAction("Error", "Home", new { Message = result.Message });
             }
 
-            return RedirectToAction(nameof(Details), new { tagId = dto.Id });
+            ViewBag.Steps = 2;
+
+            return View("~/Views/Shared/RedirectBack.cshtml");
         }
 
         public async Task<IActionResult> Videos(int tagId, string tagName)
@@ -123,7 +127,9 @@ namespace NetFilmx_Web.Controllers
                     return RedirectToAction("Error", "Home", new { Message = result.Message });
                 }
             }
-            return RedirectToAction(nameof(Videos), new { tagId });
+            ViewBag.Steps = 2;
+
+            return View("~/Views/Shared/RedirectBack.cshtml");
         }
 
         public async Task<IActionResult> RemoveVideos(int tagId, string tagName)
@@ -151,7 +157,9 @@ namespace NetFilmx_Web.Controllers
                     return RedirectToAction("Error", "Home", new { Message = result.Message });
                 }
             }
-            return RedirectToAction(nameof(Videos), new { tagId });
+            ViewBag.Steps = 2;
+
+            return View("~/Views/Shared/RedirectBack.cshtml");
         }
 
         [HttpPost]
@@ -164,7 +172,9 @@ namespace NetFilmx_Web.Controllers
                 return RedirectToAction("Error", "Home", new { Message = result.Message });
             }
 
-            return RedirectToAction(nameof(Index));
+            ViewBag.Steps = 2;
+
+            return View("~/Views/Shared/RedirectBack.cshtml");
         }
 
     }

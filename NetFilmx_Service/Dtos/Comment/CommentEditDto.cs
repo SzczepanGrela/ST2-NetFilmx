@@ -19,6 +19,7 @@ namespace NetFilmx_Service.Dtos.Comment
         public int Id { get; set; }
 
         [StringLength(1000, ErrorMessage = "The {0} must be at most {1} characters long.")]
+        [Required]
         public string Content { get; set; }
     }
 }
