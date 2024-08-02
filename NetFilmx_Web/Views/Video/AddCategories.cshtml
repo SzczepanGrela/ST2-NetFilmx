@@ -11,22 +11,26 @@
     <div class="container mt-5">
         <h1 class="mb-4">Add Categories to Video: @ViewBag.VideoName</h1>
 
-        <form asp-action="AddCategories" method="post">
-            <input type="hidden" name="videoId" value="@ViewBag.VideoId" />
-            <div class="list-group">
-                @foreach (var category in Model)
-                {
-                    <label class="list-group-item">
-                        <input type="checkbox" name="categoryIds" value="@category.Id" />
-                        @category.Name
-                    </label>
-                }
-            </div>
-            <button type="submit" class="btn btn-primary mt-3">Add Selected Categories</button>
-        </form>
-
- 
+        @if (!Model.Any())
+        {
+            <p>No Categories To Be Added</p>
+        }
+        else
+        {
+            <form asp-action="AddCategories" method="post">
+                <input type="hidden" name="videoId" value="@ViewBag.VideoId" />
+                <div class="list-group">
+                    @foreach (var category in Model)
+                    {
+                        <label class="list-group-item">
+                            <input type="checkbox" name="categoryIds" value="@category.Id" />
+                            @category.Name
+                        </label>
+                    }
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Add Selected Categories</button>
+            </form>
+        }
     </div>
-
 </body>
 </html>

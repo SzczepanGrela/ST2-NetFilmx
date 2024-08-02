@@ -9,25 +9,29 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="mb-4">Remove Series from User: @ViewBag.UserUsername 's Library'</h1>
+        <h1 class="mb-4">Remove Series from User: @ViewBag.UserUsername's Library</h1>
 
-        <form asp-action="RemoveSeries" method="post">
-            <input type="hidden" name="userId" value="@ViewBag.UserId" />
-            <input type="hidden" name="userUsername" value=" @ViewBag.UserUsername" />
-            <div class="list-group">
-                @foreach (var series in Model)
-                {
-                    <label class="list-group-item">
-                        <input type="checkbox" name="seriesIds" value="@series.Id" />
-                        @series.Name
-                    </label>
-                }
-            </div>
-            <button type="submit" class="btn btn-danger mt-3">Remove Selected Series</button>
-        </form>
-
+        @if (!Model.Any())
+        {
+            <p>No Series Found in @ViewBag.UserUsername's Library</p>
+        }
+        else
+        {
+            <form asp-action="RemoveSeries" method="post">
+                <input type="hidden" name="userId" value="@ViewBag.UserId" />
+                <input type="hidden" name="userUsername" value="@ViewBag.UserUsername" />
+                <div class="list-group">
+                    @foreach (var series in Model)
+                    {
+                        <label class="list-group-item">
+                            <input type="checkbox" name="seriesIds" value="@series.Id" />
+                            @series.Name
+                        </label>
+                    }
+                </div>
+                <button type="submit" class="btn btn-danger mt-3">Remove Selected Series</button>
+            </form>
+        }
     </div>
-
-
 </body>
 </html>

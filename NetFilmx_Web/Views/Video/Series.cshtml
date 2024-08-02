@@ -25,15 +25,21 @@
             </form>
         </div>
 
-        <ul class="list-group">
-            @foreach (var series in Model)
-            {
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <a href="@Url.Action("Details", "Series", new { seriesId = series.Id })">@series.Name</a>
-                </li>
-            }
-        </ul>
-
+        @if (!Model.Any())
+        {
+            <p>No Series Found For @ViewBag.VideoName</p>
+        }
+        else
+        {
+            <ul class="list-group">
+                @foreach (var series in Model)
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a href="@Url.Action("Details", "Series", new { seriesId = series.Id })">@series.Name</a>
+                    </li>
+                }
+            </ul>
+        }
     </div>
 </body>
 </html>

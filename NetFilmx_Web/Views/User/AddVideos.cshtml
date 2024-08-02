@@ -9,25 +9,28 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="mb-4">Add Videos to @ViewBag.UserUsername 's Library</h1>
+        <h1 class="mb-4">Add Videos to @ViewBag.UserUsername's Library</h1>
 
-        <form asp-action="AddVideos" method="post">
-            <input type="hidden" name="userId" value="@ViewBag.UserId" />
-            <input type="hidden" name="userUsername" value=" @ViewBag.UserUsername" />
-            <div class="list-group">
-                @foreach (var video in Model)
-                {
-                    <label class="list-group-item">
-                        <input type="checkbox" name="videoIds" value="@video.Id" /> @video.Title
-
-                    </label>
-                }
-            </div>
-            <button type="submit" class="btn btn-primary mt-3">Add Selected Videos</button>
-        </form>
-
-
+        @if (!Model.Any())
+        {
+            <p>No Unpurchased Videos Found for @ViewBag.UserUsername</p>
+        }
+        else
+        {
+            <form asp-action="AddVideos" method="post">
+                <input type="hidden" name="userId" value="@ViewBag.UserId" />
+                <input type="hidden" name="userUsername" value="@ViewBag.UserUsername" />
+                <div class="list-group">
+                    @foreach (var video in Model)
+                    {
+                        <label class="list-group-item">
+                            <input type="checkbox" name="videoIds" value="@video.Id" /> @video.Title
+                        </label>
+                    }
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Add Selected Videos</button>
+            </form>
+        }
     </div>
-
 </body>
 </html>

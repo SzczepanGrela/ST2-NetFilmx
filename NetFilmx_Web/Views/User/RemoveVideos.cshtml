@@ -9,25 +9,29 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="mb-4">Remove Videos from User: @ViewBag.UserUsername 's Library'</h1>
+        <h1 class="mb-4">Remove Videos from User: @ViewBag.UserUsername's Library</h1>
 
-        <form asp-action="RemoveVideos" method="post">
-            <input type="hidden" name="userId" value="@ViewBag.UserId" />
-            <input type="hidden" name="userUsername" value=" @ViewBag.UserUsername" />
-            <div class="list-group">
-                @foreach (var video in Model)
-                {
-                    <label class="list-group-item">
-                        <input type="checkbox" name="videoIds" value="@video.Id" />
-                        @video.Title
-                    </label>
-                }
-            </div>
-            <button type="submit" class="btn btn-danger mt-3">Remove Selected Videos</button>
-        </form>
-
+        @if (!Model.Any())
+        {
+            <p>No Videos Found in @ViewBag.UserUsername's Library</p>
+        }
+        else
+        {
+            <form asp-action="RemoveVideos" method="post">
+                <input type="hidden" name="userId" value="@ViewBag.UserId" />
+                <input type="hidden" name="userUsername" value="@ViewBag.UserUsername" />
+                <div class="list-group">
+                    @foreach (var video in Model)
+                    {
+                        <label class="list-group-item">
+                            <input type="checkbox" name="videoIds" value="@video.Id" />
+                            @video.Title
+                        </label>
+                    }
+                </div>
+                <button type="submit" class="btn btn-danger mt-3">Remove Selected Videos</button>
+            </form>
+        }
     </div>
-
-
 </body>
 </html>
