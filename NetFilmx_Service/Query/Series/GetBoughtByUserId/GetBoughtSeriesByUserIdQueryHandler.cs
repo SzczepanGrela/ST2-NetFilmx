@@ -10,24 +10,24 @@ using NetFilmx_Service.Dtos.Series;
 
 namespace NetFilmx_Service.Query.Series
 {
-    public sealed class GetBoughtSeriesByUserIdQueryHandler<TDto> : IRequestHandler<GetBoughtSeriesByUserIdQuery<TDto>, QResult<List<TDto>>>
+    public sealed class GetPurchasedSeriesByUserIdQueryHandler<TDto> : IRequestHandler<GetPurchasedSeriesByUserIdQuery<TDto>, QResult<List<TDto>>>
     where TDto : ISeriesDto
     {
         private readonly ISeriesRepository _repository;
         private readonly IMapper _mapper;
 
-        public GetBoughtSeriesByUserIdQueryHandler(ISeriesRepository repository, IMapper mapper)
+        public GetPurchasedSeriesByUserIdQueryHandler(ISeriesRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
 
-        public async Task<QResult<List<TDto>>> Handle(GetBoughtSeriesByUserIdQuery<TDto> query, CancellationToken cancellationToken)
+        public async Task<QResult<List<TDto>>> Handle(GetPurchasedSeriesByUserIdQuery<TDto> query, CancellationToken cancellationToken)
         {
             List<TDto> seriesDto;
             try
             {
-                var series = await _repository.GetBoughtSeriesByUserIdAsync(query.UserId);
+                var series = await _repository.GetPurchasedSeriesByUserIdAsync(query.UserId);
                 seriesDto = _mapper.Map<List<TDto>>(series);
                 return QResult<List<TDto>>.Ok(seriesDto);
             }

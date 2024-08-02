@@ -90,10 +90,10 @@ namespace NetFilmx_Web.Extensions
             serviceCollection.AddTransient<IRequestHandler<GetAllSeriesQuery<SeriesEditDto>, QResult<List<SeriesEditDto>>>, GetAllSeriesQueryHandler<SeriesEditDto>>();
             serviceCollection.AddTransient<IRequestHandler<GetAllSeriesQuery<SeriesListDto>, QResult<List<SeriesListDto>>>, GetAllSeriesQueryHandler<SeriesListDto>>();
 
-            serviceCollection.AddTransient<IRequestHandler<GetBoughtSeriesByUserIdQuery<SeriesAddDto>, QResult<List<SeriesAddDto>>>, GetBoughtSeriesByUserIdQueryHandler<SeriesAddDto>>();
-            serviceCollection.AddTransient<IRequestHandler<GetBoughtSeriesByUserIdQuery<SeriesDetailsDto>, QResult<List<SeriesDetailsDto>>>, GetBoughtSeriesByUserIdQueryHandler<SeriesDetailsDto>>();
-            serviceCollection.AddTransient<IRequestHandler<GetBoughtSeriesByUserIdQuery<SeriesEditDto>, QResult<List<SeriesEditDto>>>, GetBoughtSeriesByUserIdQueryHandler<SeriesEditDto>>();
-            serviceCollection.AddTransient<IRequestHandler<GetBoughtSeriesByUserIdQuery<SeriesListDto>, QResult<List<SeriesListDto>>>, GetBoughtSeriesByUserIdQueryHandler<SeriesListDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetPurchasedSeriesByUserIdQuery<SeriesAddDto>, QResult<List<SeriesAddDto>>>, GetPurchasedSeriesByUserIdQueryHandler<SeriesAddDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetPurchasedSeriesByUserIdQuery<SeriesDetailsDto>, QResult<List<SeriesDetailsDto>>>, GetPurchasedSeriesByUserIdQueryHandler<SeriesDetailsDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetPurchasedSeriesByUserIdQuery<SeriesEditDto>, QResult<List<SeriesEditDto>>>, GetPurchasedSeriesByUserIdQueryHandler<SeriesEditDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetPurchasedSeriesByUserIdQuery<SeriesListDto>, QResult<List<SeriesListDto>>>, GetPurchasedSeriesByUserIdQueryHandler<SeriesListDto>>();
 
             serviceCollection.AddTransient<IRequestHandler<GetSeriesByIdQuery<SeriesAddDto>, QResult<SeriesAddDto>>, GetSeriesByIdQueryHandler<SeriesAddDto>>();
             serviceCollection.AddTransient<IRequestHandler<GetSeriesByIdQuery<SeriesDetailsDto>, QResult<SeriesDetailsDto>>, GetSeriesByIdQueryHandler<SeriesDetailsDto>>();

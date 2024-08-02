@@ -1,5 +1,14 @@
 ﻿@model IEnumerable<NetFilmx_Service.Dtos.User.UserListDto>
 
+    <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Users</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+<body>
+
 <h1>Users</h1>
 <a asp-action="Add" class="btn btn-primary">Add New User</a>
 
@@ -8,15 +17,16 @@
     {
         <li class="list-group-item d-flex justify-content-between align-items-center">
             <span>
-                <a asp-action="Details" asp-route-seriesId="@user.Id">@user.Username</a> 
+                <a asp-action="Details" asp-route-userId="@user.Id">@user.Username</a>
             </span>
             <span>
-                <a asp-action="Edit" asp-route-seriesId="@user.Id" class="btn btn-warning btn-sm">Edit</a>
-                <a asp-action="Videos" asp-route-seriesId="@user.Id" class="btn btn-info btn-sm">Videos</a>
-                <a asp-action="Series" asp-route-seriesId="@user.Id" class="btn btn-info btn-sm">Series</a>
-                <a asp-action="Comments" asp-route-seriesId="@user.Id" class="btn btn-secondary btn-sm">Comments</a>
+                <a asp-action="Edit" asp-route-userId="@user.Id" class="btn btn-warning btn-sm">Edit</a>
+                <a asp-action="Videos" asp-route-userId="@user.Id" class="btn btn-info btn-sm">Purchased Videos</a>
+                <a asp-action="Series" asp-route-userId="@user.Id" class="btn btn-info btn-sm">Purchased Series</a>
+                <a asp-action="Comments" asp-route-userId="@user.Id" class="btn btn-info btn-sm">Posted Comments</a>
             </span>
         </li>
     }
 </ul>
-
+</body>
+</html>

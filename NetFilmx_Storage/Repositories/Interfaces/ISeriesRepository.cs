@@ -7,9 +7,9 @@ namespace NetFilmx_Storage.Repositories
     {
         Task<List<Series>> GetAllSeriesAsync();
         Task<List<Series>> GetSeriesByVideoIdAsync(int videoId);
-        Task<List<Series>> GetBoughtSeriesByUserIdAsync(int userId);
+        Task<List<Series>> GetPurchasedSeriesByUserIdAsync(int userId);
         Task<List<Series>> GetSeriesByExcludedVideoIdAsync(int videoId);
-        Task<List<Series>> GetBoughtSeriesByExcludedUserIdAsync(int userId);
+        Task<List<Series>> GetPurchasedSeriesByExcludedUserIdAsync(int userId);
 
 
 

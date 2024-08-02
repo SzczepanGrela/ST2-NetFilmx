@@ -3,48 +3,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Remove Videos</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="utf-8" />
+    <title>Remove Videos from Library</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 </head>
 <body>
     <div class="container mt-5">
-        <h1>Remove Videos from User's Purchased List</h1>
+        <h1 class="mb-4">Remove Videos from User: @ViewBag.UserUsername 's Library'</h1>
+
         <form asp-action="RemoveVideos" method="post">
-            <div class="form-group">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Select</th>
-                            <th>ID</th>
-                            <th>Title</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var video in Model)
-                        {
-                            <tr>
-                                <td>
-                                    <input type="checkbox" name="videoIds" value="@video.Id" />
-                                </td>
-                                <td>@video.Id</td>
-                                <td>@video.Title</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+            <input type="hidden" name="userId" value="@ViewBag.UserId" />
+            <div class="list-group">
+                @foreach (var video in Model)
+                {
+                    <label class="list-group-item">
+                        <input type="checkbox" name="videoIds" value="@video.Id" />
+                        @video.Title
+                    </label>
+                }
             </div>
-            <div class="form-group">
-                <input type="submit" value="Remove" class="btn btn-danger" />
-                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-            </div>
+            <button type="submit" class="btn btn-danger mt-3">Remove Selected Videos</button>
         </form>
+
     </div>
 
-    @section Scripts {
-        @{
-            await Html.RenderPartialAsync("_ValidationScriptsPartial");
-        }
-    }
 
 </body>
 </html>

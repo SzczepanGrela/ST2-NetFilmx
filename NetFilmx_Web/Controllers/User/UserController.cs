@@ -65,6 +65,7 @@ namespace NetFilmx_Web.Controllers
 
         public async Task<IActionResult> Edit(int userId)
         {
+            
             var query = new GetUserByIdQuery<UserEditDto>(userId);
             var result = await _mediator.Send(query);
             if (result.IsFailure)
@@ -148,7 +149,7 @@ namespace NetFilmx_Web.Controllers
         [HttpPost]
         public async Task<IActionResult> AddVideos(VideoAddDto dto)
         {
-            var command = new AddVideoCommand(dto.Title, dto.Description, dto.Price, dto.Video_url, dto.Thumbnail_url);
+            var command = new AddVideoCommand(dto.Title, dto.Description, dto.Price, dto.VideoUrl, dto.ThumbnailUrl);
             var result = await _mediator.Send(command);
             if (result.IsFailure)
             {

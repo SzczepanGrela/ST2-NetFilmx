@@ -14,12 +14,12 @@ namespace NetFilmx_Service.Dtos.Video
         {
         }
 
-        public VideoAddDto(string title, decimal price, string video_url, string? thumbnail_url, string? description)
+        public VideoAddDto(string title, decimal price, string videoUrl, string thumbnailUrl, string? description)
         {
             Title = title;
             Price = price;
-            Video_url = video_url;
-            Thumbnail_url = thumbnail_url;
+            VideoUrl = videoUrl;
+            ThumbnailUrl = thumbnailUrl;
             Description = description;
         }
 
@@ -37,11 +37,11 @@ namespace NetFilmx_Service.Dtos.Video
 
 
         [StringLength(200, ErrorMessage = "The {0} must be at most {1} characters long.")]
-        public string Video_url { get; set; }
+        public string VideoUrl { get; set; }
 
 
         [StringLength(200, ErrorMessage = "The {0} must be at most {1} characters long.")]
-        public string? Thumbnail_url { get; set; }
+        public string ThumbnailUrl { get; set; }
 
     }
 }

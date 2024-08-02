@@ -11,33 +11,41 @@
     <div class="container mt-5">
         <div class="card">
             <div class="card-header">
-                <h1>Add Video</h1>
+                <h1>Add New Video</h1>
             </div>
             <div class="card-body">
                 <form method="post">
                     <div class="form-group">
                         <label asp-for="Title"></label>
                         <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
                         <label asp-for="Price"></label>
                         <input asp-for="Price" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Video_url"></label>
-                        <input asp-for="Video_url" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Thumbnail_url"></label>
-                        <input asp-for="Thumbnail_url" class="form-control" />
-                    </div>
+
                     <div class="form-group">
                         <label asp-for="Description"></label>
                         <textarea asp-for="Description" class="form-control"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
+
+                    <div class="form-group">
+                        <label asp-for="VideoUrl"></label>
+                        <input asp-for="VideoUrl" class="form-control" />
+                        <span asp-validation-for="VideoUrl" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ThumbnailUrl"></label>
+                        <input asp-for="ThumbnailUrl" class="form-control" />
+                        <span asp-validation-for="ThumbnailUrl" class="text-danger"></span>
+                    </div>
+
                     <button type="submit" class="btn btn-primary">Add Video</button>
                 </form>
-      
             </div>
         </div>
     </div>
@@ -46,5 +54,6 @@
             await Html.RenderPartialAsync("_ValidationScriptsPartial");
         }
     }
+
 </body>
 </html>
