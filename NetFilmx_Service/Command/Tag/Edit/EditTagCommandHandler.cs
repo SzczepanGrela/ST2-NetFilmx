@@ -37,7 +37,7 @@ namespace NetFilmx_Service.Command.Tag
                 var tag = await _repository.GetTagByIdAsync(command.Id);
                 //var tag = task.Result;
                 tag.Name = command.Name;
-
+                
                 await _repository.UpdateTagAsync(tag);
 
                 return CResult.Ok();

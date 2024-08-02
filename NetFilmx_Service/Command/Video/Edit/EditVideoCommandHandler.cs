@@ -41,6 +41,7 @@ namespace NetFilmx_Service.Command.Video
                 video.Description = command.Description;
                 video.VideoUrl = command.Video_url;
                 video.ThumbnailUrl = command.Thumbnail_url;
+                video.UpdatedAt = DateTime.Now;
 
                 await _repository.UpdateVideoAsync(video);
                 return CResult.Ok();

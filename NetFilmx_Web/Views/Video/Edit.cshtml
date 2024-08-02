@@ -18,26 +18,32 @@
                     <div class="form-group">
                         <label asp-for="Id"></label>
                         <input asp-for="Id" readonly class="form-control" />
+                        
                     </div>
                     <div class="form-group">
                         <label asp-for="Title"></label>
                         <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Description"></label>
                         <textarea asp-for="Description" class="form-control"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Price"></label>
-                        <input asp-for="Price" class="form-control" />
+                        <input asp-for="Price" class="form-control" type="number" step="0.01" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Video_url"></label>
-                        <input asp-for="Video_url" class="form-control" />
+                        <label asp-for="VideoUrl"></label>
+                        <input asp-for="VideoUrl" class="form-control" />
+                        <span asp-validation-for="VideoUrl" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Thumbnail_url"></label>
-                        <input asp-for="Thumbnail_url" class="form-control" />
+                        <label asp-for="ThumbnailUrl"></label>
+                        <input asp-for="ThumbnailUrl" class="form-control" />
+                        <span asp-validation-for="ThumbnailUrl" class="text-danger"></span>
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>

@@ -10,7 +10,7 @@ namespace NetFilmx_Service.Command.Video
     public sealed class AddVideoCommand : IRequest<CResult>
     {
 
-        public AddVideoCommand(string title, string description, decimal price, string video_url, string? thumbnail_url)
+        public AddVideoCommand(string title, string? description, decimal price, string video_url, string? thumbnail_url)
         {
             Title = title;
             Description = description;

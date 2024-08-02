@@ -38,8 +38,10 @@ namespace NetFilmx_Service.Command.Series
 
                 series.Name = command.Name;
                 series.Price = command.Price;
-                series.UpdatedAt = DateTime.Now;
+                
                 series.Description = command.Description;
+
+                series.UpdatedAt = DateTime.Now;
 
                 await _repository.UpdateSeriesAsync(series);
 

@@ -5,15 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetFilmx_Service.Query.Category
+namespace NetFilmx_Service.Query.Tag
 {
-    public sealed class GetCategoryByVideoIdQuery<TDto> : IRequest<QResult<List<TDto>>>  
+    public sealed class GetTagsByExcludedVideoIdQuery<TDto> :  IRequest<QResult<List<TDto>>>
     {
-        public GetCategoryByVideoIdQuery(int videoId)
+        public GetTagsByExcludedVideoIdQuery(int videoId)
         {
             VideoId = videoId;
         }
         public int VideoId { get; }
 
     }
+   
 }

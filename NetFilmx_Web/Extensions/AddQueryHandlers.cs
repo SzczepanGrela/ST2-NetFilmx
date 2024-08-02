@@ -52,10 +52,15 @@ namespace NetFilmx_Web.Extensions
             serviceCollection.AddTransient<IRequestHandler<GetCategoryByNameQuery<CategoryEditDto>, QResult<CategoryEditDto>>, GetCategoryByNameQueryHandler<CategoryEditDto>>();
             serviceCollection.AddTransient<IRequestHandler<GetCategoryByNameQuery<CategoryListDto>, QResult<CategoryListDto>>, GetCategoryByNameQueryHandler<CategoryListDto>>();
 
-            serviceCollection.AddTransient<IRequestHandler<GetCategoryByVideoIdQuery<CategoryAddDto>, QResult<List<CategoryAddDto>>>, GetCategoryByVideoIdQueryHandler<CategoryAddDto>>();
-            serviceCollection.AddTransient<IRequestHandler<GetCategoryByVideoIdQuery<CategoryDetailsDto>, QResult<List<CategoryDetailsDto>>>, GetCategoryByVideoIdQueryHandler<CategoryDetailsDto>>();
-            serviceCollection.AddTransient<IRequestHandler<GetCategoryByVideoIdQuery<CategoryEditDto>, QResult<List<CategoryEditDto>>>, GetCategoryByVideoIdQueryHandler<CategoryEditDto>>();
-            serviceCollection.AddTransient<IRequestHandler<GetCategoryByVideoIdQuery<CategoryListDto>, QResult<List<CategoryListDto>>>, GetCategoryByVideoIdQueryHandler<CategoryListDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetCategoriesByVideoIdQuery<CategoryAddDto>, QResult<List<CategoryAddDto>>>, GetCategoriesByVideoIdQueryHandler<CategoryAddDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetCategoriesByVideoIdQuery<CategoryDetailsDto>, QResult<List<CategoryDetailsDto>>>, GetCategoriesByVideoIdQueryHandler<CategoryDetailsDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetCategoriesByVideoIdQuery<CategoryEditDto>, QResult<List<CategoryEditDto>>>, GetCategoriesByVideoIdQueryHandler<CategoryEditDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetCategoriesByVideoIdQuery<CategoryListDto>, QResult<List<CategoryListDto>>>, GetCategoriesByVideoIdQueryHandler<CategoryListDto>>();
+
+            serviceCollection.AddTransient<IRequestHandler<GetCategoriesByExcludedVideoIdQuery<CategoryAddDto>, QResult<List<CategoryAddDto>>>, GetCategoriesByExcludedVideoIdQueryHandler<CategoryAddDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetCategoriesByExcludedVideoIdQuery<CategoryDetailsDto>, QResult<List<CategoryDetailsDto>>>, GetCategoriesByExcludedVideoIdQueryHandler<CategoryDetailsDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetCategoriesByExcludedVideoIdQuery<CategoryEditDto>, QResult<List<CategoryEditDto>>>, GetCategoriesByExcludedVideoIdQueryHandler<CategoryEditDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetCategoriesByExcludedVideoIdQuery<CategoryListDto>, QResult<List<CategoryListDto>>>, GetCategoriesByExcludedVideoIdQueryHandler<CategoryListDto>>();
 
             serviceCollection.AddTransient<IRequestHandler<GetCategoryCountByIdQuery, QResult<int>>, GetCategoryCountByIdQueryHandler>();
             serviceCollection.AddTransient<IRequestHandler<GetCategoryCountByNameQuery, QResult<int>>, GetCategoryCountByNameQueryHandler>();
@@ -110,6 +115,11 @@ namespace NetFilmx_Web.Extensions
             serviceCollection.AddTransient<IRequestHandler<GetSeriesByVideoIdQuery<SeriesEditDto>, QResult<List<SeriesEditDto>>>, GetSeriesByVideoIdQueryHandler<SeriesEditDto>>();
             serviceCollection.AddTransient<IRequestHandler<GetSeriesByVideoIdQuery<SeriesListDto>, QResult<List<SeriesListDto>>>, GetSeriesByVideoIdQueryHandler<SeriesListDto>>();
 
+            serviceCollection.AddTransient<IRequestHandler<GetSeriesByExcludedVideoIdQuery<SeriesAddDto>, QResult<List<SeriesAddDto>>>, GetSeriesByExcludedVideoIdQueryHandler<SeriesAddDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetSeriesByExcludedVideoIdQuery<SeriesDetailsDto>, QResult<List<SeriesDetailsDto>>>, GetSeriesByExcludedVideoIdQueryHandler<SeriesDetailsDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetSeriesByExcludedVideoIdQuery<SeriesEditDto>, QResult<List<SeriesEditDto>>>, GetSeriesByExcludedVideoIdQueryHandler<SeriesEditDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetSeriesByExcludedVideoIdQuery<SeriesListDto>, QResult<List<SeriesListDto>>>, GetSeriesByExcludedVideoIdQueryHandler<SeriesListDto>>();
+
             serviceCollection.AddTransient<IRequestHandler<GetSeriesCountByIdQuery, QResult<int>>, GetSeriesCountByIdQueryHandler>();
             serviceCollection.AddTransient<IRequestHandler<GetSeriesCountByNameQuery, QResult<int>>, GetSeriesCountByNameQueryHandler>();
 
@@ -134,6 +144,12 @@ namespace NetFilmx_Web.Extensions
             serviceCollection.AddTransient<IRequestHandler<GetTagsByVideoIdQuery<TagEditDto>, QResult<List<TagEditDto>>>, GetTagsByVideoIdQueryHandler<TagEditDto>>();
             serviceCollection.AddTransient<IRequestHandler<GetTagsByVideoIdQuery<TagListDto>, QResult<List<TagListDto>>>, GetTagsByVideoIdQueryHandler<TagListDto>>();
 
+            serviceCollection.AddTransient<IRequestHandler<GetTagsByExcludedVideoIdQuery<TagAddDto>, QResult<List<TagAddDto>>>, GetTagsByExcludedVideoIdQueryHandler<TagAddDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetTagsByExcludedVideoIdQuery<TagDetailsDto>, QResult<List<TagDetailsDto>>>, GetTagsByExcludedVideoIdQueryHandler<TagDetailsDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetTagsByExcludedVideoIdQuery<TagEditDto>, QResult<List<TagEditDto>>>, GetTagsByExcludedVideoIdQueryHandler<TagEditDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetTagsByExcludedVideoIdQuery<TagListDto>, QResult<List<TagListDto>>>, GetTagsByExcludedVideoIdQueryHandler<TagListDto>>();
+
+
             serviceCollection.AddTransient<IRequestHandler<GetTagCountByIdQuery, QResult<int>>, GetTagCountByIdQueryHandler>();
             serviceCollection.AddTransient<IRequestHandler<GetTagCountByNameQuery, QResult<int>>, GetTagCountByNameQueryHandler>();
 
@@ -147,6 +163,11 @@ namespace NetFilmx_Web.Extensions
             serviceCollection.AddTransient<IRequestHandler<GetUserByCommentIdQuery<UserDetailsDto>, QResult<UserDetailsDto>>, GetUserByCommentIdQueryHandler<UserDetailsDto>>();
             serviceCollection.AddTransient<IRequestHandler<GetUserByCommentIdQuery<UserEditDto>, QResult<UserEditDto>>, GetUserByCommentIdQueryHandler<UserEditDto>>();
             serviceCollection.AddTransient<IRequestHandler<GetUserByCommentIdQuery<UserListDto>, QResult<UserListDto>>, GetUserByCommentIdQueryHandler<UserListDto>>();
+
+            serviceCollection.AddTransient<IRequestHandler<GetUsersByExcludedSeriesIdQuery<UserAddDto>, QResult<List<UserAddDto>>>, GetUsersByExcludedSeriesIdQueryHandler<UserAddDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetUsersByExcludedSeriesIdQuery<UserDetailsDto>, QResult<List<UserDetailsDto>>>, GetUsersByExcludedSeriesIdQueryHandler<UserDetailsDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetUsersByExcludedSeriesIdQuery<UserEditDto>, QResult<List<UserEditDto>>>, GetUsersByExcludedSeriesIdQueryHandler<UserEditDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetUsersByExcludedSeriesIdQuery<UserListDto>, QResult<List<UserListDto>>>, GetUsersByExcludedSeriesIdQueryHandler<UserListDto>>();
 
             serviceCollection.AddTransient<IRequestHandler<GetUsersByExcludedSeriesIdQuery<UserAddDto>, QResult<List<UserAddDto>>>, GetUsersByExcludedSeriesIdQueryHandler<UserAddDto>>();
             serviceCollection.AddTransient<IRequestHandler<GetUsersByExcludedSeriesIdQuery<UserDetailsDto>, QResult<List<UserDetailsDto>>>, GetUsersByExcludedSeriesIdQueryHandler<UserDetailsDto>>();

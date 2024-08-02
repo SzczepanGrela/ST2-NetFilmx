@@ -10,10 +10,10 @@ namespace NetFilmx_Service.Command.Video
     public sealed class AddVideoToTagCommand : IRequest<CResult>
     {
 
-        public AddVideoToTagCommand(int tagid, int videoid)
+        public AddVideoToTagCommand( int tagId, int videoId)
         {
-            TagId = tagid;
-            VideoId = videoid;
+            TagId = tagId;
+            VideoId = videoId;
         }
 
         public int TagId { get;}

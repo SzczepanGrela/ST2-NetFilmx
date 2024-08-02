@@ -22,15 +22,15 @@
     {
         <li class="list-group-item d-flex justify-content-between align-items-center">
             <span>
-                <a asp-action="Details" asp-route-categoryId="@video.Id">@video.Title</a>
+                    <a asp-action="Details" asp-route-videoId="@video.Id">@video.Title</a>
                 
             </span>
             <span>
-                <a asp-action="Edit" asp-route-categoryId="@video.Id" class="btn btn-warning btn-sm">Edit</a>
-                <a asp-action="Series" asp-route-categoryId="@video.Id" class="btn btn-info btn-sm">Series</a>
-                <a asp-action="Tags" asp-route-categoryId="@video.Id" class="btn btn-info btn-sm">Tags</a>
-                <a asp-action="Comments" asp-route-categoryId="@video.Id" class="btn btn-info btn-sm">Comments</a>
-                <a asp-action="Users" asp-route-categoryId="@video.Id" class="btn btn-info btn-sm">User Who Purchased</a>
+                <a asp-action="Edit" asp-route-videoId="@video.Id" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-action="Series" asp-route-videoId="@video.Id" class="btn btn-info btn-sm">Series</a>
+                    <a asp-action="Tags" asp-route-videoId="@video.Id" class="btn btn-info btn-sm">Tags</a>
+                    <a asp-action="Comments" asp-route-videoId="@video.Id" class="btn btn-info btn-sm">Comments</a>
+                <a asp-action="Users" asp-route-videoId="@video.Id" class="btn btn-info btn-sm">Users Who Purchased</a>
 
             </span>
         </li>

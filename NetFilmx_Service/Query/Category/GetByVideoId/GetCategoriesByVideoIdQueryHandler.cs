@@ -11,19 +11,19 @@ using MediatR;
 
 namespace NetFilmx_Service.Query.Category
 {
-    public sealed class GetCategoryByVideoIdQueryHandler<TDto> : IRequestHandler<GetCategoryByVideoIdQuery<TDto>, QResult<List<TDto>>>
+    public sealed class GetCategoriesByVideoIdQueryHandler<TDto> : IRequestHandler<GetCategoriesByVideoIdQuery<TDto>, QResult<List<TDto>>>
         where TDto : ICategoryDto
     {
         private readonly ICategoryRepository _repository;
         private readonly IMapper _mapper;
 
-        public GetCategoryByVideoIdQueryHandler(ICategoryRepository repository, IMapper mapper)
+        public GetCategoriesByVideoIdQueryHandler(ICategoryRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
 
-        public async Task<QResult<List<TDto>>> Handle(GetCategoryByVideoIdQuery<TDto> query, CancellationToken cancellationToken)
+        public async Task<QResult<List<TDto>>> Handle(GetCategoriesByVideoIdQuery<TDto> query, CancellationToken cancellationToken)
         {
             List<TDto> categoriesDto;
             try
