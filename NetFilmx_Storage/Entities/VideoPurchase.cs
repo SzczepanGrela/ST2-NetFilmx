@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NetFilmx_Storage.Entities
 {
-    [Table("VideoPurchases", Schema = "NetFilmx_dodaneZakupy")]
+    [Table("VideoPurchases", Schema = "NetFilmx")]
     public class VideoPurchase : BaseEntity
     {
         public VideoPurchase() { }

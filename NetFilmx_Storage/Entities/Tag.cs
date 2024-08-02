@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NetFilmx_Storage.Entities
 {
-    [Table("Tags", Schema = "NetFilmx_dodaneZakupy")]
+    [Table("Tags", Schema = "NetFilmx")]
     public class Tag : BaseEntity
     {
         internal Tag() 

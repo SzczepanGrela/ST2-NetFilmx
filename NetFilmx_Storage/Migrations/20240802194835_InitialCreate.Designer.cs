@@ -12,15 +12,15 @@ using NetFilmx_Storage;
 namespace NetFilmx_Storage.Migrations
 {
     [DbContext(typeof(NetFilmxDbContext))]
-    [Migration("20240731065840_ostatniezmiany")]
-    partial class ostatniezmiany
+    [Migration("20240802194835_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.6")
+                .HasAnnotation("ProductVersion", "8.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -39,12 +39,12 @@ namespace NetFilmx_Storage.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", "NetFilmx_dodaneZakupy");
+                    b.ToTable("Categories", "NetFilmx");
 
                     b.HasData(
                         new
@@ -77,8 +77,8 @@ namespace NetFilmx_Storage.Migrations
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -98,15 +98,15 @@ namespace NetFilmx_Storage.Migrations
 
                     b.HasIndex("VideoId");
 
-                    b.ToTable("Comments", "NetFilmx_dodaneZakupy");
+                    b.ToTable("Comments", "NetFilmx");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             Content = "This is a comment for the first video.",
-                            CreatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 891, DateTimeKind.Local).AddTicks(3931),
-                            UpdatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 891, DateTimeKind.Local).AddTicks(3933),
+                            CreatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3166),
+                            UpdatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3168),
                             UserId = 1,
                             VideoId = 1
                         },
@@ -114,8 +114,8 @@ namespace NetFilmx_Storage.Migrations
                         {
                             Id = 2,
                             Content = "This is a comment for the second video.",
-                            CreatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 891, DateTimeKind.Local).AddTicks(3937),
-                            UpdatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 891, DateTimeKind.Local).AddTicks(3939),
+                            CreatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3171),
+                            UpdatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3173),
                             UserId = 2,
                             VideoId = 2
                         });
@@ -144,20 +144,20 @@ namespace NetFilmx_Storage.Migrations
 
                     b.HasIndex("VideoId");
 
-                    b.ToTable("Likes", "NetFilmx_dodaneZakupy");
+                    b.ToTable("Likes", "NetFilmx");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 891, DateTimeKind.Local).AddTicks(3942),
+                            CreatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3177),
                             UserId = 1,
                             VideoId = 1
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 891, DateTimeKind.Local).AddTicks(3946),
+                            CreatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3180),
                             UserId = 2,
                             VideoId = 2
                         });
@@ -180,8 +180,8 @@ namespace NetFilmx_Storage.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18, 2)");
@@ -191,44 +191,44 @@ namespace NetFilmx_Storage.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Series", "NetFilmx_dodaneZakupy");
+                    b.ToTable("Series", "NetFilmx");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 541, DateTimeKind.Local).AddTicks(8820),
+                            CreatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(620),
                             Description = "Kup zestaw oryginalnych 9 filmów dostępnych na platformie",
                             Name = "Pakiet wszystkich startowych filmów",
                             Price = 149.99m,
-                            UpdatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 541, DateTimeKind.Local).AddTicks(8877)
+                            UpdatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(674)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 541, DateTimeKind.Local).AddTicks(8881),
+                            CreatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(679),
                             Description = "Zestaw zawierający 6 filmów poświęconych zwierzętom",
                             Name = "Pakiet świata zwierząt",
                             Price = 49.99m,
-                            UpdatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 541, DateTimeKind.Local).AddTicks(8884)
+                            UpdatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(681)
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 541, DateTimeKind.Local).AddTicks(8887),
+                            CreatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(684),
                             Description = "Zestaw zawierający 3 filmy edukacyjne",
                             Name = "Pakiet rozwoju",
                             Price = 59.99m,
-                            UpdatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 541, DateTimeKind.Local).AddTicks(8888)
+                            UpdatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(686)
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 541, DateTimeKind.Local).AddTicks(8897),
+                            CreatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(689),
                             Description = "Zestaw zawierający 3 filmy promocyjne, po jednym z każdej kategorii",
                             Name = "Pakiet promocyjny",
                             Price = 19.99m,
-                            UpdatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 541, DateTimeKind.Local).AddTicks(8899)
+                            UpdatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(693)
                         });
                 });
 
@@ -255,41 +255,41 @@ namespace NetFilmx_Storage.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("SeriesPurchases", "NetFilmx_dodaneZakupy");
+                    b.ToTable("SeriesPurchases", "NetFilmx");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            PurchaseDate = new DateTime(2024, 7, 31, 8, 58, 39, 891, DateTimeKind.Local).AddTicks(3971),
+                            PurchaseDate = new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3191),
                             SeriesId = 1,
                             UserId = 1
                         },
                         new
                         {
                             Id = 2,
-                            PurchaseDate = new DateTime(2024, 7, 31, 8, 58, 39, 891, DateTimeKind.Local).AddTicks(3973),
+                            PurchaseDate = new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3194),
                             SeriesId = 2,
                             UserId = 1
                         },
                         new
                         {
                             Id = 3,
-                            PurchaseDate = new DateTime(2024, 7, 31, 8, 58, 39, 891, DateTimeKind.Local).AddTicks(3976),
+                            PurchaseDate = new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3196),
                             SeriesId = 3,
                             UserId = 1
                         },
                         new
                         {
                             Id = 4,
-                            PurchaseDate = new DateTime(2024, 7, 31, 8, 58, 39, 891, DateTimeKind.Local).AddTicks(3985),
+                            PurchaseDate = new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3212),
                             SeriesId = 4,
                             UserId = 1
                         },
                         new
                         {
                             Id = 5,
-                            PurchaseDate = new DateTime(2024, 7, 31, 8, 58, 39, 891, DateTimeKind.Local).AddTicks(3988),
+                            PurchaseDate = new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3214),
                             SeriesId = 2,
                             UserId = 2
                         });
@@ -305,12 +305,12 @@ namespace NetFilmx_Storage.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags", "NetFilmx_dodaneZakupy");
+                    b.ToTable("Tags", "NetFilmx");
 
                     b.HasData(
                         new
@@ -368,8 +368,8 @@ namespace NetFilmx_Storage.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
@@ -386,34 +386,34 @@ namespace NetFilmx_Storage.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", "NetFilmx_dodaneZakupy");
+                    b.ToTable("Users", "NetFilmx");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 656, DateTimeKind.Local).AddTicks(5415),
+                            CreatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 406, DateTimeKind.Local).AddTicks(4782),
                             Email = "user1@example.com",
-                            PasswordHash = "$2a$11$h2MRaNMViwmYkVx/XJ8K4uuz9YY83DJwMLl3pvkDKNlbFynUpGwHG",
-                            UpdatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 656, DateTimeKind.Local).AddTicks(5437),
+                            PasswordHash = "$2a$11$gPYG9S5fXD7TlJBQY3d0iuq7ySLaP9Q7Hq3Fzq.Gnl0RfHoFEvNf6",
+                            UpdatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 406, DateTimeKind.Local).AddTicks(4819),
                             Username = "User1"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 774, DateTimeKind.Local).AddTicks(2067),
+                            CreatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 525, DateTimeKind.Local).AddTicks(7851),
                             Email = "user2@example.com",
-                            PasswordHash = "$2a$11$ZnApsSTmWTztxv6UiG7SF.3uEeB2vKPK58hGltuZP5shuq/qz/aQq",
-                            UpdatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 774, DateTimeKind.Local).AddTicks(2119),
+                            PasswordHash = "$2a$11$7hQQsSN.SclH.vRA6Cf.5egKuescsCXrEluhP2ZyOqOgJhIvG9sWy",
+                            UpdatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 525, DateTimeKind.Local).AddTicks(7917),
                             Username = "User2"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 891, DateTimeKind.Local).AddTicks(3882),
+                            CreatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3109),
                             Email = "user3@example.com",
-                            PasswordHash = "$2a$11$kBghREXPwnPoB61MFCc0GeKLK/RFL4e1FG.IDeCJ.sTpvsLWVl9Y2",
-                            UpdatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 891, DateTimeKind.Local).AddTicks(3921),
+                            PasswordHash = "$2a$11$3IbCQq2adzhroCZ7hdPJjOsaXCwQ/6U7ZNZr1T7Ww8/CiW1hmrFLW",
+                            UpdatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3156),
                             Username = "User3"
                         });
                 });
@@ -442,8 +442,8 @@ namespace NetFilmx_Storage.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -457,7 +457,7 @@ namespace NetFilmx_Storage.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Videos", "NetFilmx_dodaneZakupy");
+                    b.ToTable("Videos", "NetFilmx");
 
                     b.HasData(
                         new
@@ -468,7 +468,7 @@ namespace NetFilmx_Storage.Migrations
                             Price = 9.99m,
                             ThumbnailUrl = "https://i.ytimg.com/vi/5kozt0uDa4c/hqdefault.jpg",
                             Title = "Amazing Scene of Wild Animals In 4K",
-                            UpdatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 541, DateTimeKind.Local).AddTicks(8917),
+                            UpdatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(714),
                             VideoUrl = "https://www.youtube.com/watch?v=5kozt0uDa4c",
                             Views = 0
                         },
@@ -480,7 +480,7 @@ namespace NetFilmx_Storage.Migrations
                             Price = 4.99m,
                             ThumbnailUrl = "https://i.ytimg.com/vi/Zv11L-ZfrSg/hqdefault.jpg",
                             Title = "Ultimate Wild Animals Collection in 8K ULTRA HD",
-                            UpdatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 541, DateTimeKind.Local).AddTicks(8954),
+                            UpdatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(748),
                             VideoUrl = "https://www.youtube.com/watch?v=Zv11L-ZfrSg",
                             Views = 0
                         },
@@ -492,79 +492,79 @@ namespace NetFilmx_Storage.Migrations
                             Price = 6.99m,
                             ThumbnailUrl = "https://i.ytimg.com/vi/oRDRfikj2z8/hqdefault.jpg",
                             Title = "Baby Animals 4K - Amazing World Of Young Animals",
-                            UpdatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 541, DateTimeKind.Local).AddTicks(8962),
+                            UpdatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(757),
                             VideoUrl = "https://www.youtube.com/watch?v=oRDRfikj2z8",
                             Views = 0
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 541, DateTimeKind.Local).AddTicks(8969),
+                            CreatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(764),
                             Description = "Cute, cuddly, and utterly chaotic! ...",
                             Price = 14.99m,
                             ThumbnailUrl = "https://i.ytimg.com/vi/y0sF5xhGreA/hqdefault.jpg",
                             Title = "20 Minutes of Adorable Kittens",
-                            UpdatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 541, DateTimeKind.Local).AddTicks(8971),
+                            UpdatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(766),
                             VideoUrl = "https://www.youtube.com/watch?v=y0sF5xhGreA",
                             Views = 0
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 541, DateTimeKind.Local).AddTicks(8985),
+                            CreatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(773),
                             Description = "Watching funny baby cats is the hardest try not to laugh challenge.",
                             Price = 19.99m,
                             ThumbnailUrl = "https://i.ytimg.com/vi/cytJLvf-eVs/hqdefault.jpg",
                             Title = "Baby Cats - Cute and Funny Cat Videos Compilation",
-                            UpdatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 541, DateTimeKind.Local).AddTicks(8986),
+                            UpdatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(775),
                             VideoUrl = "https://www.youtube.com/watch?v=cytJLvf-eVs",
                             Views = 0
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 541, DateTimeKind.Local).AddTicks(8993),
+                            CreatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(783),
                             Description = "Hoomans! Rufus here! ...",
                             Price = 12.99m,
                             ThumbnailUrl = "https://i.ytimg.com/vi/tpiyEe_CqB4/hqdefault.jpg",
                             Title = "Cute and Funny Cat Videos to Keep You Smiling!",
-                            UpdatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 541, DateTimeKind.Local).AddTicks(8995),
+                            UpdatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(785),
                             VideoUrl = "https://www.youtube.com/watch?v=tpiyEe_CqB4",
                             Views = 0
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 541, DateTimeKind.Local).AddTicks(9002),
+                            CreatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(792),
                             Description = "Asp.net core MVC 6.0 tutorial for beginners.",
                             Price = 14.99m,
                             ThumbnailUrl = "https://i.ytimg.com/vi/fFY9nxfILJQ/hqdefault.jpg",
                             Title = "Entity Framework Core Migration",
-                            UpdatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 541, DateTimeKind.Local).AddTicks(9004),
+                            UpdatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(794),
                             VideoUrl = "https://www.youtube.com/watch?v=fFY9nxfILJQ",
                             Views = 0
                         },
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 541, DateTimeKind.Local).AddTicks(9010),
+                            CreatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(801),
                             Description = "This video explores a significant security flaw discussed by LockPickingLawyer.",
                             Price = 19.99m,
                             ThumbnailUrl = "https://i.ytimg.com/vi/U5-qy2tbDG8/hqdefault.jpg",
                             Title = "The Most Significant Security Flaw in North America",
-                            UpdatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 541, DateTimeKind.Local).AddTicks(9012),
+                            UpdatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(803),
                             VideoUrl = "https://www.youtube.com/watch?v=U5-qy2tbDG8",
                             Views = 0
                         },
                         new
                         {
                             Id = 9,
-                            CreatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 541, DateTimeKind.Local).AddTicks(9019),
+                            CreatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(810),
                             Description = "Unity is an amazingly powerful game engine - but it can be hard to learn ...",
                             Price = 12.99m,
                             ThumbnailUrl = "https://i.ytimg.com/vi/XtQMytORBmM/hqdefault.jpg",
                             Title = "The Unity Tutorial For Complete Beginners",
-                            UpdatedAt = new DateTime(2024, 7, 31, 8, 58, 39, 541, DateTimeKind.Local).AddTicks(9021),
+                            UpdatedAt = new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(812),
                             VideoUrl = "https://www.youtube.com/watch?v=XtQMytORBmM",
                             Views = 0
                         });
@@ -593,20 +593,20 @@ namespace NetFilmx_Storage.Migrations
 
                     b.HasIndex("VideoId");
 
-                    b.ToTable("VideoPurchases", "NetFilmx_dodaneZakupy");
+                    b.ToTable("VideoPurchases", "NetFilmx");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            PurchaseDate = new DateTime(2024, 7, 31, 8, 58, 39, 891, DateTimeKind.Local).AddTicks(3964),
+                            PurchaseDate = new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3184),
                             UserId = 2,
                             VideoId = 4
                         },
                         new
                         {
                             Id = 2,
-                            PurchaseDate = new DateTime(2024, 7, 31, 8, 58, 39, 891, DateTimeKind.Local).AddTicks(3967),
+                            PurchaseDate = new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3187),
                             UserId = 3,
                             VideoId = 5
                         });
@@ -624,7 +624,7 @@ namespace NetFilmx_Storage.Migrations
 
                     b.HasIndex("VideoId");
 
-                    b.ToTable("VideoCategory", "NetFilmx_dodaneZakupy");
+                    b.ToTable("VideoCategory", "NetFilmx");
 
                     b.HasData(
                         new
@@ -721,7 +721,7 @@ namespace NetFilmx_Storage.Migrations
 
                     b.HasIndex("VideoId");
 
-                    b.ToTable("VideoSeries", "NetFilmx_dodaneZakupy");
+                    b.ToTable("VideoSeries", "NetFilmx");
 
                     b.HasData(
                         new
@@ -828,7 +828,7 @@ namespace NetFilmx_Storage.Migrations
 
                     b.HasIndex("VideoId");
 
-                    b.ToTable("VideoTag", "NetFilmx_dodaneZakupy");
+                    b.ToTable("VideoTag", "NetFilmx");
 
                     b.HasData(
                         new

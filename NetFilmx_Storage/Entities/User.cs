@@ -6,7 +6,7 @@ using NetFilmx_Storage.Common;
 
 namespace NetFilmx_Storage.Entities
 {
-    [Table("Users", Schema = "NetFilmx_dodaneZakupy")]
+    [Table("Users", Schema = "NetFilmx")]
     public class User : BaseEntity
     {
         internal User()
