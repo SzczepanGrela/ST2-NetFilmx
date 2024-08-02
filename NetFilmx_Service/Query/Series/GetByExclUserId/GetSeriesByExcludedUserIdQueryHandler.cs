@@ -1,33 +1,37 @@
 ﻿using AutoMapper;
+using MediatR;
+using NetFilmx_Service.Dtos.Series;
 using NetFilmx_Storage.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using MediatR;
-using NetFilmx_Service.Dtos.Series;
 
 namespace NetFilmx_Service.Query.Series
 {
-    public sealed class GetPurchasedSeriesByUserIdQueryHandler<TDto> : IRequestHandler<GetPurchasedSeriesByUserIdQuery<TDto>, QResult<List<TDto>>>
+    public sealed class GetSeriesByExcludedUserIdQueryHandler<TDto> : IRequestHandler<GetSeriesByExcludedUserIdQuery<TDto>, QResult<List<TDto>>>
     where TDto : ISeriesDto
     {
         private readonly ISeriesRepository _repository;
         private readonly IMapper _mapper;
 
-        public GetPurchasedSeriesByUserIdQueryHandler(ISeriesRepository repository, IMapper mapper)
+        public GetSeriesByExcludedUserIdQueryHandler(ISeriesRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
 
-        public async Task<QResult<List<TDto>>> Handle(GetPurchasedSeriesByUserIdQuery<TDto> query, CancellationToken cancellationToken)
+        public async Task<QResult<List<TDto>>> Handle(GetSeriesByExcludedUserIdQuery<TDto> query, CancellationToken cancellationToken)
         {
+            var series = await _repository.GetSeriesByExcludedUserIdAsync(query.UserId);
+            if (series == null)
+            {
+                return QResult<List<TDto>>.Fail("Series not found");
+            }
+
             List<TDto> seriesDto;
             try
             {
-                var series = await _repository.GetPurchasedSeriesByUserIdAsync(query.UserId);
                 seriesDto = _mapper.Map<List<TDto>>(series);
                 return QResult<List<TDto>>.Ok(seriesDto);
             }

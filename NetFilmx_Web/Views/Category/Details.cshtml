@@ -19,10 +19,10 @@
             <p><strong>Name:</strong> @Model.Name</p>
             <p><strong>Description:</strong> @Model.Description</p>
             <div class="btn-group" role="group" aria-label="Category Actions">
-                <form asp-action="Edit" method="get" style="display:inline;">
-                    <input type="hidden" name="categoryId" value="@Model.Id" />
-                    <button type="submit" class="btn btn-primary mx-1">Edit</button>
-                </form>
+                    <form asp-action="Edit" method="get" style="display:inline;">
+                        <input type="hidden" name="categoryId" value="@Model.Id" />
+                        <button type="submit" class="btn btn-warning mx-1">Edit</button>
+                    </form>
 
 
                 <form asp-action="Videos" method="get" style="display:inline;">

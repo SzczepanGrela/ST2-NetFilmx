@@ -67,17 +67,10 @@ namespace NetFilmx_Storage.Repositories
 
         public async Task<bool> IsVideoPurchaseExistAsync(int userId, int videoId)
         {
-            if (!await _context.Users.AnyAsync(u => u.Id == userId))
-            {
-                throw new Exception("User not found");
-            }
-
-            if (!await _context.Videos.AnyAsync(v => v.Id == videoId))
-            {
-                throw new Exception("Video not found");
-            }
-
-            return await _context.VideoPurchases.AnyAsync(vp => vp.UserId == userId && vp.VideoId == videoId);
+            
+                return await _context.VideoPurchases.AnyAsync(vp => vp.UserId == userId && vp.VideoId == videoId);
+            
+           
         }
 
 

@@ -29,7 +29,7 @@ namespace NetFilmx_Storage.Repositories
             return await _context.Videos.Where(v => v.Id == videoId).SelectMany(v => v.Series).ToListAsync();
         }
 
-        public async Task<List<Series>> GetPurchasedSeriesByUserIdAsync(int userId)
+        public async Task<List<Series>> GetSeriesByUserIdAsync(int userId)
         {
             if (!await _context.Users.AnyAsync(u => u.Id == userId))
             {
@@ -126,7 +126,7 @@ namespace NetFilmx_Storage.Repositories
         }
 
 
-        public async Task<List<Series>> GetPurchasedSeriesByExcludedUserIdAsync(int userId)
+        public async Task<List<Series>> GetSeriesByExcludedUserIdAsync(int userId)
         {
             var user = await _context.Users.Include(u => u.SeriesPurchases).ThenInclude(sp => sp.Series).FirstOrDefaultAsync(u => u.Id == userId);
 
