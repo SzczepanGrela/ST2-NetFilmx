@@ -25,9 +25,21 @@ namespace NetFilmx_Storage.Repositories
             {
                 throw new InvalidOperationException("The video purchase already exists");
             }
-
-            await _context.VideoPurchases.AddAsync(videoPurchase);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.VideoPurchases.AddAsync(videoPurchase);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException dbEx)
+            {
+                Console.WriteLine($"An error occurred while updating the database: {dbEx.Message}");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+                throw;
+            }
         }
 
         public async Task UpdateVideoPurchaseAsync(VideoPurchase videoPurchase)

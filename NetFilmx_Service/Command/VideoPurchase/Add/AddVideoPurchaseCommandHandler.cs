@@ -10,11 +10,11 @@ namespace NetFilmx_Service.Command.VideoPurchase
 {
     public sealed class AddVideoPurchaseCommandHandler : IRequestHandler<AddVideoPurchaseCommand, CResult>
     {
-        private readonly IVideoPurchaseRepository _videoPurchaseRepository;
+        private readonly IVideoPurchaseRepository _repository;
 
         public AddVideoPurchaseCommandHandler(IVideoPurchaseRepository videoPurchaseRepository)
         {
-            _videoPurchaseRepository = videoPurchaseRepository;
+            _repository = videoPurchaseRepository;
         }
 
         public async Task<CResult> Handle(AddVideoPurchaseCommand command, CancellationToken cancellationToken)
@@ -27,7 +27,8 @@ namespace NetFilmx_Service.Command.VideoPurchase
             var videoPurchase = new NetFilmx_Storage.Entities.VideoPurchase(command.UserId, command.VideoId);
             try
             {
-                _videoPurchaseRepository.AddVideoPurchaseAsync(videoPurchase);
+                videoPurchase.PurchaseDate = DateTime.Now;
+                await _repository.AddVideoPurchaseAsync(videoPurchase);
                 return CResult.Ok();
             }
             catch (Exception ex)

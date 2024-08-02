@@ -7,24 +7,20 @@ using MediatR;
 
 namespace NetFilmx_Service.Command.User
 {
-    public sealed class EditUserCommand : IRequest<CResult>
+    public sealed class NewPasswordCommand : IRequest<CResult>
     {
 
 
-        public EditUserCommand(int id, string username, string email)
+        public NewPasswordCommand(int id, string password)
         {
             Id = id;
-            Username = username;
-            Email = email;
 
+            Password = password;
         }
 
         public int Id { get; }
-        public string Username { get; }
 
-        public string Email { get; }
-
-
+        public string Password { get; }
 
     }
 }

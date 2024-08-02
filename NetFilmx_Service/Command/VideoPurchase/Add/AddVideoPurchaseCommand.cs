@@ -21,5 +21,7 @@ namespace NetFilmx_Service.Command.VideoPurchase
         public int VideoId { get; }
 
 
+
+
     }
 }

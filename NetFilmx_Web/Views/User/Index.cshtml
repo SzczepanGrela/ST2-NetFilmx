@@ -25,22 +25,7 @@
                         <input type="hidden" name="userUsername" value="@user.Username" />
                         <button type="submit" class="btn btn-warning btn-sm">Edit</button>
                     </form>
-                    <form asp-action="Videos" method="get" style="display:inline;">
-                        <input type="hidden" name="userId" value="@user.Id" />
-                        <input type="hidden" name="userUsername" value="@user.Username" />
-                        <button type="submit" class="btn btn-info btn-sm">Purchased Videos</button>
-                    </form>
-                    <form asp-action="Series" method="get" style="display:inline;">
-                        <input type="hidden" name="userId" value="@user.Id" />
-                        <input type="hidden" name="userUsername" value="@user.Username" />
-                        <button type="submit" class="btn btn-info btn-sm">Purchased Series</button>
-                    </form>
-                    <form asp-action="Comments" method="get" style="display:inline;">
-                        <input type="hidden" name="userId" value="@user.Id" />
-                        <input type="hidden" name="userUsername" value="@user.Username" />
-                        <button type="submit" class="btn btn-info btn-sm">Posted Comments</button>
-                    </form>
-
+                
                 </span>
             </li>
         }

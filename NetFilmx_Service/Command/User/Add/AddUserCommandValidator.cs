@@ -12,7 +12,7 @@ namespace NetFilmx_Service.Command.User
     {
         public static int maxUsernameLength { get; } = 50;
 
-        public static int minUsernameLength { get; } = 3;
+        public static int minUsernameLength { get; } = 5;
 
         public static int maxEmailLength { get; } = 50;
 

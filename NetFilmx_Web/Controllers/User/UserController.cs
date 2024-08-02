@@ -68,7 +68,7 @@ namespace NetFilmx_Web.Controllers
 
         public async Task<IActionResult> Edit(int userId)
         {
-            
+
             var query = new GetUserByIdQuery<UserEditDto>(userId);
             var result = await _mediator.Send(query);
             if (result.IsFailure)
@@ -81,7 +81,7 @@ namespace NetFilmx_Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(UserEditDto dto)
         {
-            var command = new EditUserCommand(dto.Id, dto.Username, dto.Email, dto.Password);
+            var command = new EditUserCommand(dto.Id, dto.Username, dto.Email);
             var result = await _mediator.Send(command);
             if (result.IsFailure)
             {
@@ -89,6 +89,27 @@ namespace NetFilmx_Web.Controllers
             }
             return RedirectToAction(nameof(Details), new { userId = dto.Id });
         }
+
+        public IActionResult SetNewPassword(int userId, string userUsername)
+        {
+            ViewBag.UserUsername = userUsername;
+            var dto = new UserPasswordDto { Id = userId };
+
+            return View(dto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SetNewPassword(UserPasswordDto dto)
+        {
+            var command = new NewPasswordCommand(dto.Id, dto.Password);
+            var result = await _mediator.Send(command);
+            if (result.IsFailure)
+            {
+                return RedirectToAction("Error", "Home", new { Message = result.Message });
+            }
+            return RedirectToAction(nameof(Details), new { userId = dto.Id });
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> Delete(int userId)
@@ -99,7 +120,9 @@ namespace NetFilmx_Web.Controllers
             {
                 return RedirectToAction("Error", "Home", new { Message = result.Message });
             }
-            return RedirectToAction(nameof(Index));
+
+
+             return RedirectToAction(nameof(Index));
         }
 
 
@@ -111,8 +134,8 @@ namespace NetFilmx_Web.Controllers
         public async Task<IActionResult> Comments(int userId, string userUsername)
         {
             ViewBag.UserUsername = userUsername;
-            ViewBag.VideoId = userId;
-            var query = new GetCommentsByUserIdQuery<VideoListDto>(userId);
+            ViewBag.UserId = userId;
+            var query = new GetCommentsByUserIdQuery<CommentListDto>(userId);
             var result = await _mediator.Send(query);
             if (result.IsFailure)
             {
@@ -132,8 +155,8 @@ namespace NetFilmx_Web.Controllers
         public async Task<IActionResult> Series(int userId, string userUsername)
         {
             ViewBag.UserUsername = userUsername;
-            ViewBag.VideoId = userId;
-            var query = new GetSeriesByUserIdQuery<VideoListDto>(userId);
+            ViewBag.UserId = userId;
+            var query = new GetSeriesByUserIdQuery<SeriesListDto>(userId);
             var result = await _mediator.Send(query);
             if (result.IsFailure)
             {
@@ -146,7 +169,7 @@ namespace NetFilmx_Web.Controllers
         {
             ViewBag.UserUsername = userUsername;
             ViewBag.UserId = userId;
-            var query = new GetSeriesByExcludedUserIdQuery<VideoListDto>(userId);
+            var query = new GetSeriesByExcludedUserIdQuery<SeriesListDto>(userId);
             var result = await _mediator.Send(query);
             if (result.IsFailure)
             {
@@ -156,26 +179,28 @@ namespace NetFilmx_Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddSeries(int userId, List<int> seriesIds)
+        public async Task<IActionResult> AddSeries(int userId, List<int> seriesIds, string userUsername)
         {
-            foreach (var videoId in seriesIds)
+            foreach (var seriesId in seriesIds)
             {
-                var command = new AddSeriesPurchaseCommand(userId, videoId);
+                var command = new AddSeriesPurchaseCommand(seriesId, userId);
                 var result = await _mediator.Send(command);
                 if (result.IsFailure)
                 {
                     return RedirectToAction("Error", "Home", new { Message = result.Message });
                 }
             }
-            return RedirectToAction(nameof(Series), new { userId });
+            return RedirectToAction(nameof(Series), new { userId, userUsername });
         }
 
 
 
 
-        public async Task<IActionResult> RemoveSeries(int seriesId)
+        public async Task<IActionResult> RemoveSeries(int userId, string userUsername)
         {
-            var query = new GetSeriesByIdQuery<SeriesListDto>(seriesId);
+            ViewBag.UserId = userId;
+            ViewBag.UserUsername = userUsername;
+            var query = new GetSeriesByUserIdQuery<SeriesListDto>(userId);
             var result = await _mediator.Send(query);
             if (result.IsFailure)
             {
@@ -185,15 +210,18 @@ namespace NetFilmx_Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RemoveSeriesConfirmed(int seriesId, int userId)
+        public async Task<IActionResult> RemoveSeries(int userId, List<int> seriesIds, string userUsername)
         {
-            var command = new DeleteSeriesPurchaseCommand(seriesId, userId);
-            var result = await _mediator.Send(command);
-            if (result.IsFailure)
+            foreach (var seriesId in seriesIds)
             {
-                return RedirectToAction("Error", "Home", new { Message = result.Message });
+                var command = new DeleteSeriesPurchaseCommand(seriesId, userId);
+                var result = await _mediator.Send(command);
+                if (result.IsFailure)
+                {
+                    return RedirectToAction("Error", "Home", new { Message = result.Message });
+                }
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Series), new { userId, userUsername });
         }
 
 
@@ -232,7 +260,7 @@ namespace NetFilmx_Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddVideos(int userId, List<int> videoIds)
+        public async Task<IActionResult> AddVideos(int userId, List<int> videoIds, string userUsername)
         {
             foreach (var videoId in videoIds)
             {
@@ -243,13 +271,15 @@ namespace NetFilmx_Web.Controllers
                     return RedirectToAction("Error", "Home", new { Message = result.Message });
                 }
             }
-            return RedirectToAction(nameof(Videos), new { userId });
+            return RedirectToAction(nameof(Videos), new { userId, userUsername });
         }
 
 
-        public async Task<IActionResult> RemoveVideos(int videoId)
+        public async Task<IActionResult> RemoveVideos(int userId, string userUsername)
         {
-            var query = new GetVideoByIdQuery<VideoListDto>(videoId);
+            ViewBag.UserUsername = userUsername;
+            ViewBag.UserId = userId;
+            var query = new GetVideosByUserIdQuery<VideoListDto>(userId);
             var result = await _mediator.Send(query);
             if (result.IsFailure)
             {
@@ -258,16 +288,20 @@ namespace NetFilmx_Web.Controllers
             return View(result.Data);
         }
 
-        [HttpPost, ActionName("RemoveVideos")]
-        public async Task<IActionResult> RemoveVideosConfirmed(int videoId, int userId)
+        [HttpPost]
+        public async Task<IActionResult> RemoveVideos(int userId, List<int> videoIds, string userUsername)
         {
-            var command = new DeleteVideoPurchaseCommand(videoId, userId);
-            var result = await _mediator.Send(command);
-            if (result.IsFailure)
+
+            foreach (var videoId in videoIds)
             {
-                return RedirectToAction("Error", "Home", new { Message = result.Message });
+                var command = new DeleteVideoPurchaseCommand(videoId, userId);
+                var result = await _mediator.Send(command);
+                if (result.IsFailure)
+                {
+                    return RedirectToAction("Error", "Home", new { Message = result.Message });
+                }
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Videos), new { userId, userUsername });
         }
     }
 }

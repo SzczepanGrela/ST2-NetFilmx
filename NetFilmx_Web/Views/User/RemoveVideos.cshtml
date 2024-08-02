@@ -13,6 +13,7 @@
 
         <form asp-action="RemoveVideos" method="post">
             <input type="hidden" name="userId" value="@ViewBag.UserId" />
+            <input type="hidden" name="userUsername" value=" @ViewBag.UserUsername" />
             <div class="list-group">
                 @foreach (var video in Model)
                 {

@@ -21,8 +21,10 @@ namespace NetFilmx_Service.Mappings
             CreateMap<User, UserEditDto>();
             CreateMap<User, UserAddDto>();
             CreateMap<User, UserDetailsDto>();
+            CreateMap<User, UserPasswordDto>();
 
             CreateMap<UserEditDto, EditUserCommand>();
+            CreateMap<UserPasswordDto, NewPasswordCommand>();
             CreateMap<UserAddDto, AddUserCommand>();
         }
 

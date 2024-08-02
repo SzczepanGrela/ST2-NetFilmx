@@ -8,16 +8,16 @@ using MediatR;
 
 namespace NetFilmx_Service.Command.User
 {
-    public sealed class EditUserCommandHandler : IRequestHandler<EditUserCommand, CResult>
+    public sealed class NewPasswordCommandHandler : IRequestHandler<NewPasswordCommand, CResult>
     {
         private readonly IUserRepository  _repository;
 
-        public EditUserCommandHandler(IUserRepository repository)
+        public NewPasswordCommandHandler(IUserRepository repository)
         {
             _repository = repository;
         }
 
-        public async Task<CResult> Handle(EditUserCommand command, CancellationToken cancellationToken)
+        public async Task<CResult> Handle(NewPasswordCommand command, CancellationToken cancellationToken)
         {
 
             if (command == null)
@@ -25,7 +25,7 @@ namespace NetFilmx_Service.Command.User
                 return CResult.Fail("Command is null");
             }
 
-            var validation = new EditUserCommandValidator().Validate(command);
+            var validation = new NewPasswordCommandValidator().Validate(command);
             if(!validation.IsValid)
             {
                 return CResult.Fail(validation.Errors.ToString());
@@ -36,8 +36,7 @@ namespace NetFilmx_Service.Command.User
 
                 //var user = task.Result;
                
-                user.Email = command.Email;
-                user.Username = command.Username;
+                user.SetPassword(command.Password);
                 user.UpdatedAt = DateTime.Now;
 
                 await _repository.UpdateUserAsync(user);

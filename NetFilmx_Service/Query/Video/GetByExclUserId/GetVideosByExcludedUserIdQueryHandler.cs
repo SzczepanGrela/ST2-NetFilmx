@@ -30,7 +30,7 @@ namespace NetFilmx_Service.Query.Video
             List<TDto> videosDto;
             try
             {
-                var videos = await _repository.GetVideosByExcludedTagIdAsync(query.UserId);
+                var videos = await _repository.GetVideosByExcludedUserIdAsync(query.UserId);
                 videosDto = _mapper.Map<List<TDto>>(videos);
                 return QResult<List<TDto>>.Ok(videosDto);
             }

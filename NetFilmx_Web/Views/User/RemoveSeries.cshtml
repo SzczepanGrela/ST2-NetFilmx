@@ -13,6 +13,7 @@
 
         <form asp-action="RemoveSeries" method="post">
             <input type="hidden" name="userId" value="@ViewBag.UserId" />
+            <input type="hidden" name="userUsername" value=" @ViewBag.UserUsername" />
             <div class="list-group">
                 @foreach (var series in Model)
                 {

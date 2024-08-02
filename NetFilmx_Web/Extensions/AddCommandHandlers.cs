@@ -48,7 +48,8 @@ namespace NetFilmx_Web.Extensions
             serviceCollection.AddTransient<IRequestHandler<AddUserCommand, CResult>, AddUserCommandHandler>();
             serviceCollection.AddTransient<IRequestHandler<DeleteUserCommand, CResult>, DeleteUserCommandHandler>();
             serviceCollection.AddTransient<IRequestHandler<EditUserCommand, CResult>, EditUserCommandHandler>();
-            
+            serviceCollection.AddTransient<IRequestHandler<NewPasswordCommand, CResult>, NewPasswordCommandHandler>();
+
             // videoPurchases
             serviceCollection.AddTransient<IRequestHandler<AddVideoPurchaseCommand, CResult>, AddVideoPurchaseCommandHandler>();
             serviceCollection.AddTransient<IRequestHandler<DeleteVideoPurchaseCommand, CResult>, DeleteVideoPurchaseCommandHandler>();
