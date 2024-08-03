@@ -17,7 +17,7 @@ namespace NetFilmx_Service.Query.Category
         {
             try
             {
-                int count = await _repository.GetCategoryCountByIdAsync(query.CategoryId);
+                int count = await _repository.GetVideoCountByCategoryIdAsync(query.CategoryId);
                 return QResult<int>.Ok(count);
             }
             catch (Exception ex)

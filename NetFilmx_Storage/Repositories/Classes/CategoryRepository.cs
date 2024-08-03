@@ -23,22 +23,25 @@ namespace NetFilmx_Storage.Repositories
 
         public async Task<List<Category>> GetCategoriesByVideoIdAsync(int videoId)
         {
-            if (!await _context.Videos.AnyAsync(v => v.Id == videoId))
-            {
-                throw new ArgumentException("Video not found");
-            }
-            return await _context.Videos.Where(v => v.Id == videoId).SelectMany(v => v.Categories).ToListAsync();
+
+           var video = await _context.Videos.Include(v => v.Categories).FirstOrDefaultAsync(v => v.Id == videoId) 
+                ?? throw new ArgumentException("Video not found");
+
+           return video.Categories.ToList();
         }
 
 
         public async Task<List<Category>> GetCategoriesByExcludedVideoIdAsync(int videoId)
         {
-            var video = await _context.Videos.Include(v => v.Categories).FirstOrDefaultAsync(v => v.Id == videoId) ?? throw new ArgumentException("Video not found");
+            var video = await _context.Videos.FindAsync(videoId) 
+                ?? throw new ArgumentException("Video not found");
 
-            var allCategories = await _context.Categories.ToListAsync();
-            var excludedCategories = allCategories.Where(c => !video.Categories.Any(vc => vc.Id == c.Id)).ToList();
 
-            return excludedCategories;
+            var categories = await _context.Categories.Include(c => c.Videos).
+                Where(c => !c.Videos.Any(v => v.Id == videoId)).ToListAsync();
+
+        
+            return categories;
         }
 
 
@@ -105,12 +108,12 @@ namespace NetFilmx_Storage.Repositories
             return await _context.Categories.AnyAsync(c => c.Id == categoryId);
         }
 
-        public async Task<int> GetCategoryCountByIdAsync(int categoryId)
+        public async Task<int> GetVideoCountByCategoryIdAsync(int categoryId)
         {
             return await _context.Categories.Include(c => c.Videos).Where(c => c.Id == categoryId).SelectMany(c => c.Videos).CountAsync();
         }
 
-        public async Task<int> GetCategoryCountByNameAsync(string categoryName)
+        public async Task<int> GetVideoCountByCategoryNameAsync(string categoryName)
         {
             return await _context.Categories.Include(c => c.Videos).Where(c => c.Name == categoryName).SelectMany(c => c.Videos).CountAsync();
         }

@@ -18,7 +18,7 @@ namespace NetFilmx_Storage.Repositories
         Task<bool> IsCategoryExistAsync(string categoryName);
         Task<bool> IsCategoryExistAsync(int categoryId);
 
-        Task<int> GetCategoryCountByIdAsync(int categoryId);
-        Task<int> GetCategoryCountByNameAsync(string categoryName);
+        Task<int> GetVideoCountByCategoryIdAsync(int categoryId);
+        Task<int> GetVideoCountByCategoryNameAsync(string categoryName);
     }
 }
