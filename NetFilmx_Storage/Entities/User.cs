@@ -44,16 +44,16 @@ namespace NetFilmx_Storage.Entities
         [Required]
         public DateTime UpdatedAt { get; set; }
 
-        [InverseProperty(nameof(Comment.User))]
+
         public virtual ICollection<Comment> Comments { get; set; }
 
-        [InverseProperty(nameof(Like.User))]
+    
         public virtual ICollection<Like> Likes { get; set; }
 
-        [InverseProperty(nameof(VideoPurchase.User))]
+
         public virtual ICollection<VideoPurchase> VideoPurchases { get; set; }
 
-        [InverseProperty(nameof(SeriesPurchase.User))]
+
         public virtual ICollection<SeriesPurchase> SeriesPurchases { get; set; }
 
         [NotMapped]

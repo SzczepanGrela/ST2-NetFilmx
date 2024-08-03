@@ -9,8 +9,7 @@ namespace NetFilmx_Storage.Entities
     {
         public VideoPurchase() 
         { 
-            User = new User();
-            Video = new Video();
+
         }
 
         public VideoPurchase(int userId, int videoId) : this()
@@ -23,15 +22,12 @@ namespace NetFilmx_Storage.Entities
         [Required]
         public int UserId { get; set; }
 
-        [ForeignKey(nameof(UserId))]
-        [InverseProperty(nameof(User.VideoPurchases))]
+    
         public virtual User User { get; set; }
 
         [Required]
         public int VideoId { get; set; }
 
-        [ForeignKey(nameof(VideoId))]
-        [InverseProperty(nameof(Video.VideoPurchases))]
         public virtual Video Video { get; set; }
 
         [Required]

@@ -27,7 +27,7 @@ namespace NetFilmx_Storage.Entities
 
         public string? Description { get; set; }
 
-
+     
         public virtual ICollection<Video> Videos { get; set; }
 
 

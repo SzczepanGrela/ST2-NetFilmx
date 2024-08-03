@@ -58,27 +58,25 @@ namespace NetFilmx_Storage.Entities
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
 
-        [InverseProperty(nameof(Like.Video))]
+      
         public virtual ICollection<Like> Likes { get; set; }
 
 
-        [InverseProperty(nameof(Comment.Video))]
+   
         public virtual ICollection<Comment> Comments { get; set; }
 
 
-        [InverseProperty(nameof(Category.Videos))]
+
         public virtual ICollection<Category> Categories { get; set; }
 
 
-        [InverseProperty(nameof(Tag.Videos))]
         public virtual ICollection<Tag> Tags { get; set; }
 
 
-        [InverseProperty(nameof(Entities.Series.Videos))]
+   
         public virtual ICollection<Series> Series { get; set; }
 
 
-        [InverseProperty(nameof(VideoPurchase.Video))]
         public virtual ICollection<VideoPurchase> VideoPurchases { get; set; }
     }
 }

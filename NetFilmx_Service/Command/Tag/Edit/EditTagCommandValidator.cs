@@ -9,8 +9,9 @@ namespace NetFilmx_Service.Command.Tag
 
         public EditTagCommandValidator()
         {
-            RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required").Length(2, MaxNameLength).
-                WithMessage($"Name be between 2 and {MaxNameLength} characters");
+            RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required").MaximumLength(MaxNameLength).
+               WithMessage($"Name must be less that {MaxNameLength} characters");
+
 
 
         }

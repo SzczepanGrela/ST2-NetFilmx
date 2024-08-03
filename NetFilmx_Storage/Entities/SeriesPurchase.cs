@@ -9,8 +9,7 @@ namespace NetFilmx_Storage.Entities
     {
         public SeriesPurchase() 
         {
-            Series = new Series();
-            User = new User();
+
         
         }
 
@@ -24,15 +23,12 @@ namespace NetFilmx_Storage.Entities
         [Required]
         public int UserId { get; set; }
 
-        [ForeignKey(nameof(UserId))]
-        [InverseProperty(nameof(User.SeriesPurchases))]
+
         public virtual User User { get; set; }
 
         [Required]
         public int SeriesId { get; set; }
 
-        [ForeignKey(nameof(SeriesId))]
-        [InverseProperty(nameof(Series.SeriesPurchases))]
         public virtual Series Series { get; set; }
 
         [Required]

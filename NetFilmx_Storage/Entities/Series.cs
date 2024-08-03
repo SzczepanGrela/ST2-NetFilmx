@@ -42,11 +42,10 @@ namespace NetFilmx_Storage.Entities
         public DateTime UpdatedAt { get; set; }
 
 
-        [InverseProperty(nameof(Video.Series))]
         public virtual ICollection<Video> Videos { get; set; }
 
 
-        [InverseProperty(nameof(SeriesPurchase.Series))]
+   
         public virtual ICollection<SeriesPurchase> SeriesPurchases { get; set; }
     }
 }

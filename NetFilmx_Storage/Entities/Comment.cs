@@ -9,8 +9,7 @@ namespace NetFilmx_Storage.Entities
     {
         internal Comment() 
         { 
-            User = new User();
-            Video = new Video();
+    
         }
 
         public Comment(int videoId, int userId, string content) : this()
@@ -26,14 +25,14 @@ namespace NetFilmx_Storage.Entities
         public int VideoId { get; set; }
 
         [ForeignKey(nameof(VideoId))]
-        [InverseProperty(nameof(Video.Comments))]
+
         public virtual Video Video { get; set; }
 
         [Required]
         public int UserId { get; set; }
 
         [ForeignKey(nameof(UserId))]
-        [InverseProperty(nameof(User.Comments))]
+
         public virtual User User { get; set; }
 
         [Required]

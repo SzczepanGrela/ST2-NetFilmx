@@ -9,8 +9,7 @@ namespace NetFilmx_Storage.Entities
     {
         internal Like() 
         { 
-            User = new User();
-            Video = new Video();
+
         }
 
         public Like(int videoId, int userId) : this()
@@ -25,15 +24,11 @@ namespace NetFilmx_Storage.Entities
         public int VideoId { get; set; }
 
 
-        [ForeignKey(nameof(VideoId))]
-        [InverseProperty(nameof(Video.Likes))]
         public virtual Video Video { get; set; }
 
         [Required]
         public int UserId { get; set; }
 
-        [ForeignKey(nameof(UserId))]
-        [InverseProperty(nameof(User.Likes))]
         public virtual User User { get; set; }
 
         [Required]
