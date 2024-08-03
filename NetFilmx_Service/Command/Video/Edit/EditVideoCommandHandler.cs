@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using NetFilmx_Storage.Repositories;
+using System.Text.RegularExpressions;
 
 namespace NetFilmx_Service.Command.Video
 {
@@ -25,6 +26,11 @@ namespace NetFilmx_Service.Command.Video
             {
                 return CResult.Fail(validation);
             }
+
+
+            var ytVideoId = ExtractYouTubeVideoId(command.Video_url);
+
+
             try
             {
                 var video = await _repository.GetVideoByIdAsync(command.Id);
@@ -34,7 +40,7 @@ namespace NetFilmx_Service.Command.Video
                 video.Price = command.Price;
                 video.Title = command.Title;
                 video.Description = command.Description;
-                video.VideoUrl = command.Video_url;
+                video.VideoUrl = ytVideoId;
                 video.ThumbnailUrl = command.Thumbnail_url;
                 video.UpdatedAt = DateTime.Now;
 
@@ -46,6 +52,16 @@ namespace NetFilmx_Service.Command.Video
                 return CResult.Fail(ex.Message);
             }
 
+        }
+
+        private string ExtractYouTubeVideoId(string url)
+        {
+            if (string.IsNullOrEmpty(url))
+                return string.Empty;
+
+            var regex = new Regex(@"(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&]+)");
+            var match = regex.Match(url);
+            return match.Success ? match.Groups[1].Value : string.Empty;
         }
 
 

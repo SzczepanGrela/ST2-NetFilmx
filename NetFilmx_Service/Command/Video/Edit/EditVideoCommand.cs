@@ -24,7 +24,7 @@ namespace NetFilmx_Service.Command.Video
 
         public string Video_url { get; }
 
-        public string? Thumbnail_url { get; }
+        public string Thumbnail_url { get; }
 
 
     }

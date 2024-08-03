@@ -10,15 +10,18 @@
 <body>
     <div class="container mt-5">
         <div class="card">
-            <div class="card-header">
-                <h1>Edit Video</h1>
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <button onclick="history.back()" class="btn btn-secondary mr-3">Back</button>
+                    <h1 class="mb-0">Edit Video</h1>
+                </div>
+                <button type="submit" form="editForm" class="btn btn-primary">Save</button>
             </div>
             <div class="card-body">
-                <form method="post">
+                <form method="post" id="editForm">
                     <div class="form-group">
                         <label asp-for="Id"></label>
                         <input asp-for="Id" readonly class="form-control" />
-                        
                     </div>
                     <div class="form-group">
                         <label asp-for="Title"></label>
@@ -45,14 +48,10 @@
                         <input asp-for="ThumbnailUrl" class="form-control" />
                         <span asp-validation-for="ThumbnailUrl" class="text-danger"></span>
                     </div>
-                    <button type="submit" class="btn btn-primary">Save</button>
                 </form>
-
-
             </div>
         </div>
     </div>
-
     @section Scripts {
         @{
             await Html.RenderPartialAsync("_ValidationScriptsPartial");

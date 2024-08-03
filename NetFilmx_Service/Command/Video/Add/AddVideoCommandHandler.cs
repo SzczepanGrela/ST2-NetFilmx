@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using NetFilmx_Storage.Repositories;
+using System.Text.RegularExpressions;
 
 namespace NetFilmx_Service.Command.Video
 {
@@ -26,7 +27,15 @@ namespace NetFilmx_Service.Command.Video
             }
 
 
-            var video = new NetFilmx_Storage.Entities.Video(command.Title, command.Description, command.Price, command.Video_url, command.Thumbnail_url);
+            string ytVideoId = ExtractYouTubeVideoId(command.VideoUrl);
+            if (string.IsNullOrEmpty(ytVideoId))
+            {
+                return CResult.Fail("Invalid YouTube URL");
+            }
+
+
+
+            var video = new NetFilmx_Storage.Entities.Video(command.Title, command.Description, command.Price, ytVideoId, command.ThumbnailUrl);
 
             try
             {
@@ -40,6 +49,16 @@ namespace NetFilmx_Service.Command.Video
 
 
 
+        }
+
+        private string ExtractYouTubeVideoId(string url)
+        {
+            if (string.IsNullOrEmpty(url))
+                return string.Empty;
+
+            var regex = new Regex(@"(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&]+)");
+            var match = regex.Match(url);
+            return match.Success ? match.Groups[1].Value : string.Empty;
         }
 
     }

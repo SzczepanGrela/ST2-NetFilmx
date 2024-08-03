@@ -8,49 +8,40 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 </head>
 <body>
-
-
     <div class="container mt-5">
         <div class="card">
-            <div class="card-header">
-                <h1>User Details</h1>
-            </div>
-            <div class="card-body">
-                <p><strong>Username:</strong> @Model.Username</p>
-                <p><strong>Email:</strong> @Model.Email</p>
-                <p><strong>Registration Date:</strong></p> @Model.CreatedAt
-                <p><strong>Last Update Date:</strong></p> @Model.UpdatedAt
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h1 class="mb-0">User Details</h1>
                 <div class="btn-group" role="group" aria-label="User Actions">
                     <form asp-action="Edit" method="get" style="display:inline;">
                         <input type="hidden" name="userId" value="@Model.Id" />
                         <button type="submit" class="btn btn-warning mx-1">Edit</button>
                     </form>
-
                     <form asp-action="SetNewPassword" method="get" style="display:inline;">
                         <input type="hidden" name="userId" value="@Model.Id" />
                         <input type="hidden" name="userUsername" value="@Model.Username" />
                         <button type="submit" class="btn btn-danger mx-1">Set New Password</button>
                     </form>
-
-
                     <form asp-action="Videos" method="get" style="display:inline;">
                         <input type="hidden" name="userId" value="@Model.Id" />
                         <input type="hidden" name="userUsername" value="@Model.Username" />
                         <button type="submit" class="btn btn-info mx-1">Purchased Videos</button>
                     </form>
-
                     <form asp-action="Series" method="get" style="display:inline;">
                         <input type="hidden" name="userId" value="@Model.Id" />
                         <input type="hidden" name="userUsername" value="@Model.Username" />
                         <button type="submit" class="btn btn-info mx-1">Purchased Series</button>
                     </form>
-
-
                     <button type="button" class="btn btn-danger mx-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
                 </div>
             </div>
+            <div class="card-body">
+                <p><strong>Username:</strong> @Model.Username</p>
+                <p><strong>Email:</strong> @Model.Email</p>
+                <p><strong>Registration Date:</strong> @Model.CreatedAt</p>
+                <p><strong>Last Update Date:</strong> @Model.UpdatedAt</p>
+            </div>
         </div>
-
     </div>
 
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -75,7 +66,5 @@
             </div>
         </div>
     </div>
-
 </body>
 </html>
-

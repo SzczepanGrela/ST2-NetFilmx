@@ -18,7 +18,7 @@ namespace NetFilmx_Service.Dtos.Video
             Description = description;
         }
 
-        [StringLength(50, ErrorMessage = "The {0} must be at most {1} characters long.")]
+        [StringLength(100, ErrorMessage = "The {0} must be at most {1} characters long.")]
         public string Title { get; set; }
 
         [StringLength(2000, ErrorMessage = "The {0} must be at most {1} characters long.")]

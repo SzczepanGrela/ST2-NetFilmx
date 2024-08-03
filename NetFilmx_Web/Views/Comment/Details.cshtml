@@ -10,8 +10,13 @@
 <body>
     <div class="container mt-5">
         <div class="card">
-            <div class="card-header">
-                <h1>Comment Details</h1>
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h1 class="mb-0">Comment Details</h1>
+                <div class="btn-group" role="group" aria-label="Comment Actions">
+                    <a asp-action="Details" asp-controller="Video" asp-route-videoId="@Model.VideoId" class="btn btn-info mx-1">Video Details</a>
+                    <a asp-action="Details" asp-controller="User" asp-route-userId="@Model.UserId" class="btn btn-info mx-1">User Details</a>
+                    <button type="button" class="btn btn-danger mx-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                </div>
             </div>
             <div class="card-body">
                 <p><strong>Content:</strong> @Model.Content</p>
@@ -19,17 +24,6 @@
                 <p><strong>User ID:</strong> @Model.UserId</p>
                 <p><strong>Created At:</strong> @Model.CreatedAt</p>
                 <p><strong>Updated At:</strong> @Model.UpdatedAt</p>
-
-                <div class="btn-group" role="group" aria-label="Comment Actions">
-                   
-
-                    <button type="button" class="btn btn-danger mx-1" data-toggle="modal" data-target="#deleteModal">
-                        Delete
-                    </button>
-
-                    <a asp-action="Details" asp-controller="Video" asp-route-videoId="@Model.VideoId" class="btn btn-info mx-1">Video Details</a>
-                    <a asp-action="Details" asp-controller="User" asp-route-userId="@Model.UserId" class="btn btn-info mx-1">User Details</a>
-                </div>
             </div>
         </div>
     </div>
@@ -56,8 +50,5 @@
             </div>
         </div>
     </div>
-
-
-
 </body>
 </html>
