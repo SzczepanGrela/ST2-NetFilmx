@@ -1,12 +1,7 @@
 ﻿using AutoMapper;
-using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MediatR;
 using NetFilmx_Service.Dtos.Video;
+using NetFilmx_Storage.Repositories;
 
 namespace NetFilmx_Service.Query.Video
 {
@@ -39,7 +34,7 @@ namespace NetFilmx_Service.Query.Video
             {
                 return QResult<TDto>.Fail(ex.Message);
             }
-            
+
         }
     }
 }

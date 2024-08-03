@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using NetFilmx_Storage.Entities;
 
 namespace NetFilmx_Storage.Repositories
@@ -60,7 +58,7 @@ namespace NetFilmx_Storage.Repositories
         }
 
         public async Task DeleteVideoPurchaseAsync(int videoId, int userId)
-        {   
+        {
             var videoPurchase = await _context.VideoPurchases.FirstOrDefaultAsync(vp => vp.UserId == userId && vp.VideoId == videoId);
 
             if (videoPurchase == null)
@@ -79,10 +77,10 @@ namespace NetFilmx_Storage.Repositories
 
         public async Task<bool> IsVideoPurchaseExistAsync(int userId, int videoId)
         {
-            
-                return await _context.VideoPurchases.AnyAsync(vp => vp.UserId == userId && vp.VideoId == videoId);
-            
-           
+
+            return await _context.VideoPurchases.AnyAsync(vp => vp.UserId == userId && vp.VideoId == videoId);
+
+
         }
 
 

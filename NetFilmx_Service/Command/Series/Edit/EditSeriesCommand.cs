@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 
 namespace NetFilmx_Service.Command.Series
 {
@@ -22,7 +17,7 @@ namespace NetFilmx_Service.Command.Series
 
         public int Id { get; }
 
-        public string? Description { get;}
+        public string? Description { get; }
 
         public decimal Price { get; }
 

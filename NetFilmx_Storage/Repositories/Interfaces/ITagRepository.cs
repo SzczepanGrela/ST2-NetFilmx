@@ -1,5 +1,4 @@
 ﻿using NetFilmx_Storage.Entities;
-using System.Collections.Generic;
 
 namespace NetFilmx_Storage.Repositories
 {
@@ -8,7 +7,7 @@ namespace NetFilmx_Storage.Repositories
         Task<List<Tag>> GetAllTagsAsync();
         Task<List<Tag>> GetTagsByVideoIdAsync(int videoId);
 
-        Task<List<Tag>> GetTagsByExcludedVideoIdAsync(int videoId); 
+        Task<List<Tag>> GetTagsByExcludedVideoIdAsync(int videoId);
 
         Task<Tag> GetTagByIdAsync(int tagId);
         Task<Tag> GetTagByNameAsync(string tagName);

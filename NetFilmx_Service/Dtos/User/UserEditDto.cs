@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace NetFilmx_Service.Dtos.User
 {
@@ -11,7 +6,7 @@ namespace NetFilmx_Service.Dtos.User
     {
         public UserEditDto() { }
 
-        public UserEditDto (int id, string username, string email)
+        public UserEditDto(int id, string username, string email)
         {
             Id = id;
             Username = username;

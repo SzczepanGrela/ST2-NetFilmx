@@ -1,18 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.EntityFrameworkCore.Metadata;
 using NetFilmx_Service.Dtos.Category;
-using NetFilmx_Service.Query.Category;
 using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Category
 {
-    public sealed class GetAllCategoriesQueryHandler<TDto> : IRequestHandler<GetAllCategoriesQuery<TDto>, QResult<List<TDto>>> 
+    public sealed class GetAllCategoriesQueryHandler<TDto> : IRequestHandler<GetAllCategoriesQuery<TDto>, QResult<List<TDto>>>
         where TDto : ICategoryDto // : IRequestHandler<GetAllCategoriesQuery<TDto>, List<TDto>>
     {
         private readonly ICategoryRepository _repository;

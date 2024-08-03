@@ -1,12 +1,7 @@
 ﻿using AutoMapper;
+using MediatR;
 using NetFilmx_Service.Dtos.User;
 using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
 
 namespace NetFilmx_Service.Query.User
 {
@@ -24,7 +19,7 @@ namespace NetFilmx_Service.Query.User
 
         public async Task<QResult<List<TDto>>> Handle(GetUsersBySeriesIdQuery<TDto> query, CancellationToken cancellationToken)
         {
-          
+
             List<TDto> usersDto;
             try
             {
@@ -36,7 +31,7 @@ namespace NetFilmx_Service.Query.User
             {
                 return QResult<List<TDto>>.Fail(ex.Message);
             }
-            
+
         }
     }
 }

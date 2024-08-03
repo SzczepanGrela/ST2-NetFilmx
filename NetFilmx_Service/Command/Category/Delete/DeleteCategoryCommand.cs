@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 
 namespace NetFilmx_Service.Command.Category
 {
@@ -14,7 +9,7 @@ namespace NetFilmx_Service.Command.Category
             Id = id;
         }
 
-        public int Id { get;}
+        public int Id { get; }
 
     }
 }

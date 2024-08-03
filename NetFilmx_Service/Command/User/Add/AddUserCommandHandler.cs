@@ -1,11 +1,5 @@
-﻿using NetFilmx_Service.Command.User;
+﻿using MediatR;
 using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
 
 namespace NetFilmx_Service.Command.User
 {
@@ -20,13 +14,13 @@ namespace NetFilmx_Service.Command.User
 
         public async Task<CResult> Handle(AddUserCommand command, CancellationToken cancellationToken)
         {
-            if(command == null)
+            if (command == null)
             {
                 return CResult.Fail("Command is null");
             }
 
             var validation = new AddUserCommandValidator().Validate(command);
-            if(!validation.IsValid)
+            if (!validation.IsValid)
             {
                 return CResult.Fail(validation.Errors.ToString());
             }
@@ -35,7 +29,7 @@ namespace NetFilmx_Service.Command.User
             {
                 var isUsernameTaken = await _repository.IsUsernameTakenAsync(command.Username);
 
-                if(isUsernameTaken)
+                if (isUsernameTaken)
                 {
                     return CResult.Fail("Username is taken");
                 }
@@ -45,12 +39,13 @@ namespace NetFilmx_Service.Command.User
 
                 return CResult.Ok();
 
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
 
-            
+
         }
 
 

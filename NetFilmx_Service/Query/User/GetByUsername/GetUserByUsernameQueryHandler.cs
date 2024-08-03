@@ -1,12 +1,7 @@
 ﻿using AutoMapper;
-using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MediatR;
 using NetFilmx_Service.Dtos.User;
+using NetFilmx_Storage.Repositories;
 namespace NetFilmx_Service.Query.User
 {
     public sealed class GetUserByUsernameQueryHandler<TDto> : IRequestHandler<GetUserByUsernameQuery<TDto>, QResult<TDto>>
@@ -38,7 +33,7 @@ namespace NetFilmx_Service.Query.User
             {
                 return QResult<TDto>.Fail(ex.Message);
             }
-            
+
         }
     }
 }

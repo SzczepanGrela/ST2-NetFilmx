@@ -1,18 +1,8 @@
-using Microsoft.EntityFrameworkCore;
-using NetFilmx_Service.Mappings;
-using NetFilmx_Storage.Entities;
-using System.Reflection;
-using MediatR;
-using NetFilmx_Service.Query.Category;
-using NetFilmx_Web.Extensions;
-using NetFilmx_Storage;
-using NetFilmx_Service;
-using Autofac;
-using Microsoft.Build.Execution;
-using Autofac.Extensions.DependencyInjection;
-using NetFilmx_Service.Command.Category;
 using Microsoft.AspNetCore.Localization;
+using NetFilmx_Storage;
+using NetFilmx_Web.Extensions;
 using System.Globalization;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +14,7 @@ builder.Services.AddControllersWithViews();
 
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
-    Assembly.GetExecutingAssembly())); 
+    Assembly.GetExecutingAssembly()));
 
 
 

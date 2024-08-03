@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 
 namespace NetFilmx_Service.Query.Video
 {
-    public sealed class GetVideosByCategoryIdQuery<TDto> : IRequest<QResult<List<TDto>>>  
+    public sealed class GetVideosByCategoryIdQuery<TDto> : IRequest<QResult<List<TDto>>>
     {
         public GetVideosByCategoryIdQuery(int categoryId)
         {
@@ -15,6 +10,6 @@ namespace NetFilmx_Service.Query.Video
         }
         public int CategoryId { get; }
 
-      
+
     }
 }

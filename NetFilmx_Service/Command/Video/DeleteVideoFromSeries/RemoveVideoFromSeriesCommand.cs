@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 
 namespace NetFilmx_Service.Command.Video
 {
@@ -12,7 +7,8 @@ namespace NetFilmx_Service.Command.Video
 
 
         public RemoveVideoFromSeriesCommand(int seriesid, int videoid)
-        {   SeriesId = seriesid;
+        {
+            SeriesId = seriesid;
             VideoId = videoid;
         }
 

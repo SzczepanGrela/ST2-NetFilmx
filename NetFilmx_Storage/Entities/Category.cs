@@ -1,5 +1,4 @@
 ﻿using NetFilmx_Storage.Common;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,7 +9,7 @@ namespace NetFilmx_Storage.Entities
     {
         internal Category()
         {
-            Videos= new List<Video>();
+            Videos = new List<Video>();
         }
 
         public Category(string name, string? description) : this()
@@ -25,13 +24,13 @@ namespace NetFilmx_Storage.Entities
         public string Name { get; set; }
 
         [MaxLength(2000)]
-        
+
         public string? Description { get; set; }
 
-         
+
         public virtual ICollection<Video> Videos { get; set; }
 
-       
+
 
     }
 }

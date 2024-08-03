@@ -2,10 +2,6 @@
 using MediatR;
 using NetFilmx_Service.Dtos.User;
 using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.User
 {

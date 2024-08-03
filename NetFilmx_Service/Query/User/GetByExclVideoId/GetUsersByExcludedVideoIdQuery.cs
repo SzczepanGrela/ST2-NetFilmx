@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using NetFilmx_Service.Dtos.User;
-using System.Collections.Generic;
 
 namespace NetFilmx_Service.Query.User
 {

@@ -1,6 +1,4 @@
 ﻿using NetFilmx_Storage.Common;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -34,8 +32,8 @@ namespace NetFilmx_Storage.Entities
         public decimal Price { get; set; }
 
         [MaxLength(2000)]
-        
-        public string? Description { get; set; } 
+
+        public string? Description { get; set; }
 
         [Required]
         public DateTime CreatedAt { get; set; }
@@ -43,7 +41,7 @@ namespace NetFilmx_Storage.Entities
         [Required]
         public DateTime UpdatedAt { get; set; }
 
-        
+
         [InverseProperty(nameof(Video.Series))]
         public virtual ICollection<Video> Videos { get; set; }
 

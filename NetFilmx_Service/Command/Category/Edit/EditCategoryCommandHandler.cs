@@ -1,15 +1,9 @@
-﻿using NetFilmx_Service.Command.Category;
+﻿using MediatR;
 using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
 
 namespace NetFilmx_Service.Command.Category
 {
-    public sealed class EditCategoryCommandHandler : IRequestHandler<EditCategoryCommand,CResult>
+    public sealed class EditCategoryCommandHandler : IRequestHandler<EditCategoryCommand, CResult>
     {
 
         private readonly ICategoryRepository _repository;
@@ -33,7 +27,7 @@ namespace NetFilmx_Service.Command.Category
                 var category = await _repository.GetCategoryByIdAsync(command.Id);
                 category.Name = command.Name;
                 category.Description = command.Description;
-               
+
 
                 await _repository.UpdateCategoryAsync(category);
                 return CResult.Ok();

@@ -1,10 +1,4 @@
-﻿using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 
 namespace NetFilmx_Service.Command.SeriesPurchase
 {
@@ -14,11 +8,11 @@ namespace NetFilmx_Service.Command.SeriesPurchase
         public AddSeriesPurchaseCommand(int seriesId, int userId)
         {
             SeriesId = seriesId;
-            UserId = userId;          
+            UserId = userId;
         }
 
         public int SeriesId { get; }
-        public int UserId { get;}
+        public int UserId { get; }
         public DateTime PurchaseDate { get; }
     }
 }

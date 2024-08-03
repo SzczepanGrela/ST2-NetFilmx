@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using NetFilmx_Service.Command.Category;
+﻿using AutoMapper;
 using NetFilmx_Service.Command.Category;
 using NetFilmx_Service.Dtos.Category;
 using NetFilmx_Storage.Entities;
@@ -22,7 +16,7 @@ namespace NetFilmx_Service.Mappings
 
             CreateMap<CategoryEditDto, EditCategoryCommand>();
             CreateMap<CategoryAddDto, AddCategoryCommand>();
-        
+
         }
 
     }

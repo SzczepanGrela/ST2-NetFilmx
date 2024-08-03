@@ -2,15 +2,10 @@
 using MediatR;
 using NetFilmx_Service.Dtos.User;
 using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.User
 {
-    public class GetUsersByExcludedSeriesIdQueryHandler<TDto> : IRequestHandler<GetUsersByExcludedSeriesIdQuery<TDto> ,QResult<List<TDto>>>
+    public class GetUsersByExcludedSeriesIdQueryHandler<TDto> : IRequestHandler<GetUsersByExcludedSeriesIdQuery<TDto>, QResult<List<TDto>>>
     where TDto : IUserDto
 
     {

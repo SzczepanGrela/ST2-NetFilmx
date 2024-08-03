@@ -1,10 +1,4 @@
 ﻿using FluentValidation;
-using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Command.Video
 {
@@ -20,7 +14,7 @@ namespace NetFilmx_Service.Command.Video
             RuleFor(x => x.Description).MaximumLength(maxDescriptionLength).WithMessage($"Description can not be more than {maxDescriptionLength} characters");
             RuleFor(x => x.Price).NotEmpty().WithMessage("Price cannot be empty").GreaterThanOrEqualTo(0).WithMessage("Price cannot be lower than 0");
             RuleFor(x => x.Video_url).NotEmpty().WithMessage("Url cannot be empty").MinimumLength(3).WithMessage("Url must be at least 3 chaacters");
-            
+
         }
 
 

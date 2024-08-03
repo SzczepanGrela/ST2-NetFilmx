@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using NetFilmx_Storage.Entities;
-using System.IO;
 
 namespace NetFilmx_Storage
 {
@@ -10,7 +9,7 @@ namespace NetFilmx_Storage
     {
         public NetFilmxDbContext(DbContextOptions<NetFilmxDbContext> options) : base(options)
         {
-            
+
         }
 
         public DbSet<Video> Videos { get; set; }
@@ -100,7 +99,7 @@ namespace NetFilmx_Storage
 
 
 
-          //  DataSeeder.SeedData(modelBuilder);
+            //  DataSeeder.SeedData(modelBuilder);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -135,7 +134,7 @@ namespace NetFilmx_Storage
                 x => x.MigrationsHistoryTable("__EFMigrationsHistory", "NetFilmx"));
 
 
-            
+
 
             return new NetFilmxDbContext(optionsBuilder.Options);
         }

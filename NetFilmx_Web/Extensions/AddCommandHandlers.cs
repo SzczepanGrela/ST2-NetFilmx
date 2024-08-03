@@ -1,16 +1,13 @@
 ﻿using MediatR;
-using NetFilmx_Service.Command.Category;
 using NetFilmx_Service;
-using NetFilmx_Storage;
-using NetFilmx_Storage.Repositories;
-using System.Reflection;
+using NetFilmx_Service.Command.Category;
 using NetFilmx_Service.Command.Comment;
 using NetFilmx_Service.Command.Series;
 using NetFilmx_Service.Command.SeriesPurchase;
 using NetFilmx_Service.Command.Tag;
 using NetFilmx_Service.Command.User;
-using NetFilmx_Service.Command.VideoPurchase;
 using NetFilmx_Service.Command.Video;
+using NetFilmx_Service.Command.VideoPurchase;
 
 namespace NetFilmx_Web.Extensions
 {
@@ -42,7 +39,7 @@ namespace NetFilmx_Web.Extensions
             serviceCollection.AddTransient<IRequestHandler<AddTagCommand, CResult>, AddTagCommandHandler>();
             serviceCollection.AddTransient<IRequestHandler<DeleteTagCommand, CResult>, DeleteTagCommandHandler>();
             serviceCollection.AddTransient<IRequestHandler<EditTagCommand, CResult>, EditTagCommandHandler>();
-            
+
             // users
 
             serviceCollection.AddTransient<IRequestHandler<AddUserCommand, CResult>, AddUserCommandHandler>();
@@ -64,7 +61,7 @@ namespace NetFilmx_Web.Extensions
             serviceCollection.AddTransient<IRequestHandler<RemoveVideoFromCategoryCommand, CResult>, DeleteVideoFromCategoryCommandHandler>();
             serviceCollection.AddTransient<IRequestHandler<RemoveVideoFromSeriesCommand, CResult>, DeleteVideoFromSeriesCommandHandler>();
             serviceCollection.AddTransient<IRequestHandler<RemoveVideoFromTagCommand, CResult>, DeleteVideoFromTagCommandHandler>();
-            
+
             return serviceCollection;
         }
 

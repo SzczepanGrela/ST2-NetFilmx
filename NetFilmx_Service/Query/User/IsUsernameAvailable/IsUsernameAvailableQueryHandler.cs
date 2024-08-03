@@ -1,11 +1,5 @@
 ﻿using MediatR;
-using NetFilmx_Service.Query.Like;
 using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.User
 {
@@ -28,7 +22,7 @@ namespace NetFilmx_Service.Query.User
             var isEdit = query.Id.HasValue;
             try
             {
-                
+
                 if (isEdit)
                 {
                     var isUsernameTaken = await _repository.IsUsernameAvailableForUserAsync(query.Username, query.Id.Value);

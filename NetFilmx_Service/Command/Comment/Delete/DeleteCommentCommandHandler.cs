@@ -1,10 +1,5 @@
-﻿using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
+using NetFilmx_Storage.Repositories;
 
 namespace NetFilmx_Service.Command.Comment
 {
@@ -24,8 +19,8 @@ namespace NetFilmx_Service.Command.Comment
             if (command == null)
             {
                 return CResult.Fail("Command is null");
-            }        
-           
+            }
+
             try
             {
                 await _repository.DeleteCommentAsync(command.Id);
@@ -36,7 +31,7 @@ namespace NetFilmx_Service.Command.Comment
             {
                 return CResult.Fail(ex.Message);
             }
-            
+
 
         }
 

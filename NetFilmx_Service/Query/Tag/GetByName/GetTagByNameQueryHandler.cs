@@ -1,12 +1,7 @@
 ﻿using AutoMapper;
+using MediatR;
 using NetFilmx_Service.Dtos.Tag;
 using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
 
 namespace NetFilmx_Service.Query.Tag
 {
@@ -39,7 +34,7 @@ namespace NetFilmx_Service.Query.Tag
             {
                 return QResult<TDto>.Fail(ex.Message);
             }
-            
+
         }
     }
 }

@@ -1,9 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Command.Tag
 {
@@ -16,9 +11,9 @@ namespace NetFilmx_Service.Command.Tag
         {
             RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required").Length(2, MaxNameLength).
                 WithMessage($"Name must be between 2 and {MaxNameLength} characters");
-            
-        
-        }   
+
+
+        }
 
 
     }

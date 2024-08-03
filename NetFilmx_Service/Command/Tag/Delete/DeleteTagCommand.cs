@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 
 namespace NetFilmx_Service.Command.Tag
 {
@@ -13,7 +8,7 @@ namespace NetFilmx_Service.Command.Tag
         public DeleteTagCommand(int id)
         {
 
-           Id = id;
+            Id = id;
         }
 
         public int Id { get; set; }

@@ -1,13 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
-using NetFilmx_Service.Dtos.Tag;
 using NetFilmx_Service.Dtos.Video;
 using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Video
 {

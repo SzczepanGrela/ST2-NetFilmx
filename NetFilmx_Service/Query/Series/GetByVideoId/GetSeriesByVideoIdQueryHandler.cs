@@ -1,15 +1,10 @@
 ﻿using AutoMapper;
-using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MediatR;
+using NetFilmx_Storage.Repositories;
 
 namespace NetFilmx_Service.Query.Series
 {
-    public sealed class GetSeriesByVideoIdQueryHandler<TDto>: IRequestHandler<GetSeriesByVideoIdQuery<TDto>, QResult<List<TDto>>>
+    public sealed class GetSeriesByVideoIdQueryHandler<TDto> : IRequestHandler<GetSeriesByVideoIdQuery<TDto>, QResult<List<TDto>>>
     {
         private readonly ISeriesRepository _repository;
         private readonly IMapper _mapper;
@@ -22,7 +17,7 @@ namespace NetFilmx_Service.Query.Series
 
         public async Task<QResult<List<TDto>>> Handle(GetSeriesByVideoIdQuery<TDto> query, CancellationToken cancellationToken)
         {
-            
+
             List<TDto> seriesDto;
             try
             {
@@ -34,7 +29,7 @@ namespace NetFilmx_Service.Query.Series
             {
                 return QResult<List<TDto>>.Fail(ex.Message);
             }
-            
+
         }
     }
 }

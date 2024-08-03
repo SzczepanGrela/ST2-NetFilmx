@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NetFilmx_Service.Dtos.Like
+﻿namespace NetFilmx_Service.Dtos.Like
 {
     public class LikeAddDto
     {
@@ -12,10 +6,10 @@ namespace NetFilmx_Service.Dtos.Like
 
         public LikeAddDto(int videoId, int userId)
         {
-            
+
             VideoId = videoId;
             UserId = userId;
-           
+
         }
 
 

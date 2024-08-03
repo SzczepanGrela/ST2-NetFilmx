@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NetFilmx_Storage.Entities;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace NetFilmx_Storage.Repositories
 {
@@ -22,7 +20,7 @@ namespace NetFilmx_Storage.Repositories
         public async Task<List<Tag>> GetTagsByVideoIdAsync(int videoId)
         {
             var video = await _context.Videos.FindAsync(videoId);
-            if(video ==null)
+            if (video == null)
             {
                 throw new Exception("Video not found");
             }

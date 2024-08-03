@@ -1,10 +1,4 @@
-﻿using NetFilmx_Service.Command.Video;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 
 namespace NetFilmx_Service.Command.Video
 {

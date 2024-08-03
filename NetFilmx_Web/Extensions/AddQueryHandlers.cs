@@ -1,18 +1,14 @@
-﻿using NetFilmx_Storage.Repositories;
-using NetFilmx_Storage;
-using MediatR;
-using NetFilmx_Service.Dtos.Category;
-using NetFilmx_Service.Command.Category;
-using NetFilmx_Service.Command.Category;
-using NetFilmx_Service.Command.Category;
-using NetFilmx_Service.Query.Category;
+﻿using MediatR;
 using NetFilmx_Service;
+using NetFilmx_Service.Dtos.Category;
 using NetFilmx_Service.Dtos.Comment;
 using NetFilmx_Service.Dtos.Series;
+using NetFilmx_Service.Dtos.SeriesPurchase;
 using NetFilmx_Service.Dtos.Tag;
 using NetFilmx_Service.Dtos.User;
 using NetFilmx_Service.Dtos.Video;
 using NetFilmx_Service.Dtos.VideoPurchase;
+using NetFilmx_Service.Query.Category;
 using NetFilmx_Service.Query.Comment;
 using NetFilmx_Service.Query.Like;
 using NetFilmx_Service.Query.Series;
@@ -21,7 +17,6 @@ using NetFilmx_Service.Query.Tag;
 using NetFilmx_Service.Query.User;
 using NetFilmx_Service.Query.Video;
 using NetFilmx_Service.Query.VideoPurchase;
-using NetFilmx_Service.Dtos.SeriesPurchase;
 
 namespace NetFilmx_Web.Extensions
 {
@@ -216,7 +211,7 @@ namespace NetFilmx_Web.Extensions
             serviceCollection.AddTransient<IRequestHandler<GetUserByVideoPurchaseIdQuery<UserListDto>, QResult<UserListDto>>, GetUserByVideoPurchaseIdQueryHandler<UserListDto>>();
 
             serviceCollection.AddTransient<IRequestHandler<IsUsernameAvailableQuery, QResult<bool>>, IsUsernameAvailableQueryHandler>();
-            
+
             // Video Requests
             serviceCollection.AddTransient<IRequestHandler<GetAllVideosQuery<VideoAddDto>, QResult<List<VideoAddDto>>>, GetAllVideosQueryHandler<VideoAddDto>>();
             serviceCollection.AddTransient<IRequestHandler<GetAllVideosQuery<VideoDetailsDto>, QResult<List<VideoDetailsDto>>>, GetAllVideosQueryHandler<VideoDetailsDto>>();
@@ -298,7 +293,7 @@ namespace NetFilmx_Web.Extensions
 
             serviceCollection.AddTransient<IRequestHandler<GetSeriesPurchasesBySeriesIdQuery<SeriesPurchaseAddDto>, QResult<List<SeriesPurchaseAddDto>>>, GetSeriesPurchasesBySeriesIdQueryHandler<SeriesPurchaseAddDto>>();
             serviceCollection.AddTransient<IRequestHandler<GetSeriesPurchasesBySeriesIdQuery<SeriesPurchaseDetailsDto>, QResult<List<SeriesPurchaseDetailsDto>>>, GetSeriesPurchasesBySeriesIdQueryHandler<SeriesPurchaseDetailsDto>>();
-            serviceCollection.AddTransient<IRequestHandler<GetSeriesPurchasesBySeriesIdQuery<SeriesPurchaseListDto>,QResult<List<SeriesPurchaseListDto>>>, GetSeriesPurchasesBySeriesIdQueryHandler<SeriesPurchaseListDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetSeriesPurchasesBySeriesIdQuery<SeriesPurchaseListDto>, QResult<List<SeriesPurchaseListDto>>>, GetSeriesPurchasesBySeriesIdQueryHandler<SeriesPurchaseListDto>>();
 
             serviceCollection.AddTransient<IRequestHandler<GetSeriesPurchasesByUserIdQuery<SeriesPurchaseAddDto>, QResult<List<SeriesPurchaseAddDto>>>, GetSeriesPurchasesByUserIdQueryHandler<SeriesPurchaseAddDto>>();
             serviceCollection.AddTransient<IRequestHandler<GetSeriesPurchasesByUserIdQuery<SeriesPurchaseDetailsDto>, QResult<List<SeriesPurchaseDetailsDto>>>, GetSeriesPurchasesByUserIdQueryHandler<SeriesPurchaseDetailsDto>>();
@@ -308,7 +303,7 @@ namespace NetFilmx_Web.Extensions
 
             // videopurchase Requests
 
-             serviceCollection.AddTransient<IRequestHandler<GetAllVideoPurchasesQuery<VideoPurchaseAddDto>, QResult<List<VideoPurchaseAddDto>>>, GetAllVideoPurchasesQueryHandler<VideoPurchaseAddDto>>();
+            serviceCollection.AddTransient<IRequestHandler<GetAllVideoPurchasesQuery<VideoPurchaseAddDto>, QResult<List<VideoPurchaseAddDto>>>, GetAllVideoPurchasesQueryHandler<VideoPurchaseAddDto>>();
             serviceCollection.AddTransient<IRequestHandler<GetAllVideoPurchasesQuery<VideoPurchaseDetailsDto>, QResult<List<VideoPurchaseDetailsDto>>>, GetAllVideoPurchasesQueryHandler<VideoPurchaseDetailsDto>>();
             serviceCollection.AddTransient<IRequestHandler<GetAllVideoPurchasesQuery<VideoPurchaseListDto>, QResult<List<VideoPurchaseListDto>>>, GetAllVideoPurchasesQueryHandler<VideoPurchaseListDto>>();
 
@@ -323,9 +318,9 @@ namespace NetFilmx_Web.Extensions
             serviceCollection.AddTransient<IRequestHandler<GetVideoPurchasesByVideoIdQuery<VideoPurchaseAddDto>, QResult<List<VideoPurchaseAddDto>>>, GetVideoPurchasesByVideoIdQueryHandler<VideoPurchaseAddDto>>();
             serviceCollection.AddTransient<IRequestHandler<GetVideoPurchasesByVideoIdQuery<VideoPurchaseDetailsDto>, QResult<List<VideoPurchaseDetailsDto>>>, GetVideoPurchasesByVideoIdQueryHandler<VideoPurchaseDetailsDto>>();
             serviceCollection.AddTransient<IRequestHandler<GetVideoPurchasesByVideoIdQuery<VideoPurchaseListDto>, QResult<List<VideoPurchaseListDto>>>, GetVideoPurchasesByVideoIdQueryHandler<VideoPurchaseListDto>>();
-            
-            
-            
+
+
+
             return serviceCollection;
         }
 

@@ -1,12 +1,7 @@
 ﻿using AutoMapper;
-using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MediatR;
 using NetFilmx_Service.Dtos.VideoPurchase;
+using NetFilmx_Storage.Repositories;
 
 namespace NetFilmx_Service.Query.VideoPurchase
 {
@@ -24,7 +19,7 @@ namespace NetFilmx_Service.Query.VideoPurchase
 
         public async Task<QResult<List<TDto>>> Handle(GetVideoPurchasesByUserIdQuery<TDto> query, CancellationToken cancellationToken)
         {
-          
+
             List<TDto> videoPurchasesDto;
             try
             {
@@ -37,7 +32,7 @@ namespace NetFilmx_Service.Query.VideoPurchase
             {
                 return QResult<List<TDto>>.Fail(ex.Message);
             }
-            
+
         }
     }
 }

@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 
 namespace NetFilmx_Service.Command.User
 {
     public sealed class AddUserCommand : IRequest<CResult>
     {
-       
+
         public AddUserCommand(string username, string email, string password)
         {
             Username = username;

@@ -1,26 +1,24 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NetFilmx_Storage.Entities;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 
 namespace NetFilmx_Storage.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
         private readonly NetFilmxDbContext _context;
-        
+
 
         public CategoryRepository(NetFilmxDbContext context)
         {
             _context = context;
-           
+
         }
 
         public async Task<List<Category>> GetAllCategoriesAsync()
-        { 
+        {
             return await _context.Categories.ToListAsync();
-        
+
         }
 
         public async Task<List<Category>> GetCategoriesByVideoIdAsync(int videoId)

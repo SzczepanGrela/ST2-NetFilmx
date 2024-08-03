@@ -2,11 +2,6 @@
 using MediatR;
 using NetFilmx_Service.Dtos.Category;
 using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Category
 {
@@ -24,7 +19,7 @@ namespace NetFilmx_Service.Query.Category
 
         public async Task<QResult<TDto>> Handle(GetCategoryByIdQuery<TDto> query, CancellationToken cancellationToken)
         {
-            var category =  await _repository.GetCategoryByIdAsync(query.Id);
+            var category = await _repository.GetCategoryByIdAsync(query.Id);
             if (category == null)
             {
                 return QResult<TDto>.Fail("Category not found");

@@ -2,11 +2,6 @@
 using MediatR;
 using NetFilmx_Service.Dtos.Category;
 using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Query.Category
 {
@@ -39,7 +34,7 @@ namespace NetFilmx_Service.Query.Category
             {
                 return QResult<TDto>.Fail(ex.Message);
             }
-            
+
         }
     }
 }

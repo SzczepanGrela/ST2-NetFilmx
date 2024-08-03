@@ -1,10 +1,5 @@
-﻿using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
+using NetFilmx_Storage.Repositories;
 
 namespace NetFilmx_Service.Command.SeriesPurchase
 {
@@ -31,7 +26,7 @@ namespace NetFilmx_Service.Command.SeriesPurchase
 
                 return CResult.Ok();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }

@@ -1,5 +1,4 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using NetFilmx_Service.Mappings;
+﻿using NetFilmx_Service.Mappings;
 
 namespace NetFilmx_Web.Extensions
 {
@@ -7,7 +6,7 @@ namespace NetFilmx_Web.Extensions
     {
 
 
-        public static IServiceCollection AddAutoMapProfiles (this IServiceCollection serviceCollection)
+        public static IServiceCollection AddAutoMapProfiles(this IServiceCollection serviceCollection)
         {
 
             serviceCollection.AddAutoMapper(typeof(CategoryMappingProfile));
@@ -19,7 +18,7 @@ namespace NetFilmx_Web.Extensions
             serviceCollection.AddAutoMapper(typeof(LikeMappingProfile));
             serviceCollection.AddAutoMapper(typeof(VideoPurchaseMappingProfile));
             serviceCollection.AddAutoMapper(typeof(SeriesPurchaseMappingProfile));
-            
+
 
 
             return serviceCollection;

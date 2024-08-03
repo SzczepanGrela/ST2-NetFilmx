@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NetFilmx_Service.Dtos.Comment
+﻿namespace NetFilmx_Service.Dtos.Comment
 {
     public class CommentDetailsDto : ICommentDto
     {
@@ -24,7 +18,7 @@ namespace NetFilmx_Service.Dtos.Comment
 
         public int UserId { get; }
 
-        public string Content { get; } 
+        public string Content { get; }
 
         public DateTime CreatedAt { get; }
 

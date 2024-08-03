@@ -1,10 +1,5 @@
-﻿using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
+using NetFilmx_Storage.Repositories;
 
 namespace NetFilmx_Service.Command.Category
 {
@@ -34,7 +29,7 @@ namespace NetFilmx_Service.Command.Category
             {
                 return CResult.Fail(ex.Message);
             }
-            
+
         }
 
 

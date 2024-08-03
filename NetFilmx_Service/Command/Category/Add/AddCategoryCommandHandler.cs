@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
 using NetFilmx_Storage.Repositories;
-using NetFilmx_Storage.Entities;
-using MediatR;
 
 namespace NetFilmx_Service.Command.Category
 {
@@ -27,7 +21,7 @@ namespace NetFilmx_Service.Command.Category
                 return CResult.Fail(validationResult);
             }
 
-        
+
             var category = new NetFilmx_Storage.Entities.Category(command.Name, command.Description);
 
             try

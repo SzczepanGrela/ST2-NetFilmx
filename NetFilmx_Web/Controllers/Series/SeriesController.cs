@@ -1,16 +1,14 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using NetFilmx_Service;
 using NetFilmx_Service.Command.Series;
-using NetFilmx_Service.Dtos.Series;
-using NetFilmx_Service.Dtos.Video;
-using NetFilmx_Service.Dtos.User;
-using NetFilmx_Service.Query.Series;
-using NetFilmx_Service.Query.Video;
-using NetFilmx_Service.Query.User;
-using NetFilmx_Service.Command.Video;
-using NetFilmx_Service.Query.User;
 using NetFilmx_Service.Command.SeriesPurchase;
+using NetFilmx_Service.Command.Video;
+using NetFilmx_Service.Dtos.Series;
+using NetFilmx_Service.Dtos.User;
+using NetFilmx_Service.Dtos.Video;
+using NetFilmx_Service.Query.Series;
+using NetFilmx_Service.Query.User;
+using NetFilmx_Service.Query.Video;
 
 namespace NetFilmx_Web.Controllers
 {

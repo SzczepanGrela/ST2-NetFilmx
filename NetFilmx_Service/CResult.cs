@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using FluentValidation.Results;
-
-namespace NetFilmx_Service
+﻿namespace NetFilmx_Service
 {
     public class Error
     {

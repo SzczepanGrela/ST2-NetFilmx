@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using NetFilmx_Service.Command.Series;
+﻿using AutoMapper;
 using NetFilmx_Service.Command.Series;
 using NetFilmx_Service.Dtos.Series;
 using NetFilmx_Storage.Entities;

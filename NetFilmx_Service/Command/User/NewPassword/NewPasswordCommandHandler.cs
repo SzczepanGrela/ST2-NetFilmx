@@ -1,16 +1,11 @@
-﻿using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
+using NetFilmx_Storage.Repositories;
 
 namespace NetFilmx_Service.Command.User
 {
     public sealed class NewPasswordCommandHandler : IRequestHandler<NewPasswordCommand, CResult>
     {
-        private readonly IUserRepository  _repository;
+        private readonly IUserRepository _repository;
 
         public NewPasswordCommandHandler(IUserRepository repository)
         {
@@ -26,7 +21,7 @@ namespace NetFilmx_Service.Command.User
             }
 
             var validation = new NewPasswordCommandValidator().Validate(command);
-            if(!validation.IsValid)
+            if (!validation.IsValid)
             {
                 return CResult.Fail(validation.Errors.ToString());
             }
@@ -35,7 +30,7 @@ namespace NetFilmx_Service.Command.User
                 var user = await _repository.GetUserByIdAsync(command.Id);
 
                 //var user = task.Result;
-               
+
                 user.SetPassword(command.Password);
                 user.UpdatedAt = DateTime.Now;
 
@@ -43,12 +38,12 @@ namespace NetFilmx_Service.Command.User
 
                 return CResult.Ok();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return CResult.Fail(ex.Message);
             }
 
-            
+
         }
 
     }

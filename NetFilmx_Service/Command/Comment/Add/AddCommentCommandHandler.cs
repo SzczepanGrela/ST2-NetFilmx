@@ -1,14 +1,9 @@
 ﻿using MediatR;
 using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Command.Comment
 {
-    public sealed class AddCommentCommandHandler : IRequestHandler<AddCommentCommand, CResult>  
+    public sealed class AddCommentCommandHandler : IRequestHandler<AddCommentCommand, CResult>
     {
         private readonly ICommentRepository _repository;
 
@@ -42,7 +37,7 @@ namespace NetFilmx_Service.Command.Comment
             {
                 return CResult.Fail(ex.Message);
             }
-            
+
         }
     }
 }

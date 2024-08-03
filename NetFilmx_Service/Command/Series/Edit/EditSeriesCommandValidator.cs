@@ -1,16 +1,11 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NetFilmx_Service.Command.Series
 {
     internal class EditSeriesCommandValidator : AbstractValidator<EditSeriesCommand>
     {
-        public static int maxDescriptionLength { get; } = AddSeriesCommandValidator.maxDescriptionLength; 
-      
+        public static int maxDescriptionLength { get; } = AddSeriesCommandValidator.maxDescriptionLength;
+
         public EditSeriesCommandValidator()
         {
 

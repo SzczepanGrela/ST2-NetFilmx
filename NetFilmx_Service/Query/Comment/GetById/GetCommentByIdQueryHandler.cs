@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
-using NetFilmx_Storage.Repositories;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using MediatR;
 using NetFilmx_Service.Dtos.Comment;
+using NetFilmx_Storage.Repositories;
 
 namespace NetFilmx_Service.Query.Comment
 {
@@ -24,7 +21,7 @@ namespace NetFilmx_Service.Query.Comment
         {
             try
             {
-                var comment = await _repository.GetCommentByIdAsync(query.CommentId); 
+                var comment = await _repository.GetCommentByIdAsync(query.CommentId);
                 if (comment == null)
                 {
                     return QResult<TDto>.Fail("Comment not found");

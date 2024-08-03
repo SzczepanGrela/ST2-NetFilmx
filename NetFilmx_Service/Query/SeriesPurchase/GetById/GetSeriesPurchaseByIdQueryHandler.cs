@@ -1,13 +1,7 @@
 ﻿using AutoMapper;
-using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MediatR;
-using NetFilmx_Service.Dtos.Series;
 using NetFilmx_Service.Dtos.SeriesPurchase;
+using NetFilmx_Storage.Repositories;
 
 namespace NetFilmx_Service.Query.SeriesPurchase
 {
@@ -40,7 +34,7 @@ namespace NetFilmx_Service.Query.SeriesPurchase
             {
                 return QResult<TDto>.Fail(ex.Message);
             }
-            
+
         }
     }
 }

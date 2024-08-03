@@ -1,12 +1,7 @@
 ﻿using AutoMapper;
+using MediatR;
 using NetFilmx_Service.Dtos.Tag;
 using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
 
 namespace NetFilmx_Service.Query.Tag
 {
@@ -24,7 +19,7 @@ namespace NetFilmx_Service.Query.Tag
 
         public async Task<QResult<TDto>> Handle(GetTagByIdQuery<TDto> query, CancellationToken cancellationToken)
         {
-            var tag =  await _repository.GetTagByIdAsync(query.TagId);
+            var tag = await _repository.GetTagByIdAsync(query.TagId);
             if (tag == null)
             {
                 return QResult<TDto>.Fail("Tag not found");
@@ -39,7 +34,7 @@ namespace NetFilmx_Service.Query.Tag
             {
                 return QResult<TDto>.Fail(ex.Message);
             }
-            
+
         }
     }
 }

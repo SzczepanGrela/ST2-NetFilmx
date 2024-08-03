@@ -1,15 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using NetFilmx_Service;
 using NetFilmx_Service.Command.Category;
-using NetFilmx_Service.Command.Video;
 using NetFilmx_Service.Command.Video;
 using NetFilmx_Service.Dtos.Category;
 using NetFilmx_Service.Dtos.Video;
 using NetFilmx_Service.Query.Category;
-using NetFilmx_Service.Query.Category;
-using NetFilmx_Service.Query.Category;
-using NetFilmx_Service.Query.Video;
 using NetFilmx_Service.Query.Video;
 
 namespace NetFilmx_Web.Controllers

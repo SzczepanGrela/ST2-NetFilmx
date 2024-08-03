@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NetFilmx_Storage.Entities;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace NetFilmx_Storage.Repositories
 {

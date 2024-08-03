@@ -1,10 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NetFilmx_Service.Command.User;
 
 namespace NetFilmx_Service.Command.User
 {
@@ -28,7 +22,7 @@ namespace NetFilmx_Service.Command.User
             RuleFor(x => x.Email).NotEmpty().WithMessage("Email is required").MaximumLength(maxEmailLength).WithMessage($"Email must be less than {maxEmailLength} characters").
                 MinimumLength(minEmailLength).WithMessage($"Email must be more than {minEmailLength} characters");
 
-           
+
         }
     }
 }

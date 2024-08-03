@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 
 namespace NetFilmx_Service.Query.Video
 {
-    public sealed class GetVideosBySeriesIdQuery<TDto> : IRequest<QResult<List<TDto>>>  
+    public sealed class GetVideosBySeriesIdQuery<TDto> : IRequest<QResult<List<TDto>>>
     {
 
         public GetVideosBySeriesIdQuery(int seriesId)

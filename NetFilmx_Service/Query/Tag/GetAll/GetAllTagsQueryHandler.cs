@@ -1,13 +1,7 @@
 ﻿using AutoMapper;
-using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MediatR;
-using NetFilmx_Service.Dtos.Series;
 using NetFilmx_Service.Dtos.Tag;
+using NetFilmx_Storage.Repositories;
 
 namespace NetFilmx_Service.Query.Tag
 {
@@ -25,7 +19,7 @@ namespace NetFilmx_Service.Query.Tag
 
         public async Task<QResult<List<TDto>>> Handle(GetAllTagsQuery<TDto> query, CancellationToken cancellationToken)
         {
-            
+
             List<TDto> tagsDto;
             try
             {
@@ -37,7 +31,7 @@ namespace NetFilmx_Service.Query.Tag
             {
                 return QResult<List<TDto>>.Fail(ex.Message);
             }
-            
+
         }
     }
 }

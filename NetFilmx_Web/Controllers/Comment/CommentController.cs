@@ -25,7 +25,7 @@ namespace NetFilmx_Web.Controllers
         {
             var query = new GetAllUsersQuery<UserListDto>();
             var result = await _mediator.Send(query);
-            if(result.IsFailure)
+            if (result.IsFailure)
             {
                 return new List<UserListDto>();
             }

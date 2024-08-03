@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NetFilmx_Service.Dtos.Tag
+﻿namespace NetFilmx_Service.Dtos.Tag
 {
     public class TagListDto : ITagDto
     {
-        TagListDto( string name, int id)
+        TagListDto(string name, int id)
         {
             Name = name;
             Id = id;

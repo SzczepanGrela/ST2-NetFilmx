@@ -1,20 +1,16 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using NetFilmx_Service.Command.User;
-using NetFilmx_Service.Command.Series;
-using NetFilmx_Service.Command.Video;
-using NetFilmx_Service.Dtos.User;
-using NetFilmx_Service.Dtos.Series;
-using NetFilmx_Service.Dtos.Video;
-using NetFilmx_Service.Query.User;
-using NetFilmx_Service.Query.Series;
-using NetFilmx_Service.Query.Video;
 using NetFilmx_Service.Command.SeriesPurchase;
+using NetFilmx_Service.Command.User;
 using NetFilmx_Service.Command.VideoPurchase;
 using NetFilmx_Service.Dtos.Comment;
+using NetFilmx_Service.Dtos.Series;
+using NetFilmx_Service.Dtos.User;
+using NetFilmx_Service.Dtos.Video;
 using NetFilmx_Service.Query.Comment;
-using NetFilmx_Storage.Entities;
-using NuGet.Protocol.Core.Types;
+using NetFilmx_Service.Query.Series;
+using NetFilmx_Service.Query.User;
+using NetFilmx_Service.Query.Video;
 
 namespace NetFilmx_Web.Controllers
 {
@@ -38,7 +34,7 @@ namespace NetFilmx_Web.Controllers
                 return RedirectToAction("Error", "Home", new { errorMessage = result.Message, errors = result.Errors });
             }
 
-            return Json(result.Data); 
+            return Json(result.Data);
         }
 
 
@@ -76,7 +72,7 @@ namespace NetFilmx_Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(UserAddDto dto)
         {
-            
+
 
             var command = new AddUserCommand(dto.Username, dto.Email, dto.Password);
             var result = await _mediator.Send(command);

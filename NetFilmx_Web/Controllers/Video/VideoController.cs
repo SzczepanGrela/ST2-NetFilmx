@@ -38,7 +38,7 @@ namespace NetFilmx_Web.Controllers
             return View(result.Data);
         }
 
-       
+
         public async Task<IActionResult> Details(int videoId)
         {
             var query = new GetVideoByIdQuery<VideoDetailsDto>(videoId);
@@ -55,7 +55,7 @@ namespace NetFilmx_Web.Controllers
             return View();
         }
 
-    
+
         [HttpPost]
         public async Task<IActionResult> Add(VideoAddDto dto)
         {
@@ -81,7 +81,7 @@ namespace NetFilmx_Web.Controllers
             return View(result.Data);
         }
 
-     
+
         [HttpPost]
         public async Task<IActionResult> Edit(VideoEditDto dto)
         {
@@ -114,7 +114,7 @@ namespace NetFilmx_Web.Controllers
         {
             ViewBag.VideoName = videoName;
             ViewBag.VideoId = videoId;
-           
+
             var query = new GetCategoriesByVideoIdQuery<CategoryListDto>(videoId);
             var result = await _mediator.Send(query);
             if (result.IsFailure)
@@ -184,7 +184,7 @@ namespace NetFilmx_Web.Controllers
             return View("~/Views/Shared/RedirectBack.cshtml");
         }
 
-     
+
         public async Task<IActionResult> Series(int videoId, string videoName)
         {
             ViewBag.VideoName = videoName;
@@ -258,7 +258,7 @@ namespace NetFilmx_Web.Controllers
             return View("~/Views/Shared/RedirectBack.cshtml");
         }
 
-     
+
         public async Task<IActionResult> Tags(int videoId, string videoName)
         {
             ViewBag.VideoName = videoName;
@@ -291,7 +291,7 @@ namespace NetFilmx_Web.Controllers
             foreach (var tagId in tagIds)
             {
                 var command = new AddVideoToTagCommand(tagId, videoId);
-                
+
                 var result = await _mediator.Send(command);
                 if (result.IsFailure)
                 {
@@ -333,7 +333,7 @@ namespace NetFilmx_Web.Controllers
             return View("~/Views/Shared/RedirectBack.cshtml");
         }
 
-   
+
         public async Task<IActionResult> Comments(int videoId, string videoName)
         {
             ViewBag.VideoName = videoName;
@@ -347,7 +347,7 @@ namespace NetFilmx_Web.Controllers
             return View(result.Data);
         }
 
-        public  IActionResult AddComment(int videoId)
+        public IActionResult AddComment(int videoId)
         {
             ViewBag.VideoId = videoId;
             return View();
@@ -381,7 +381,7 @@ namespace NetFilmx_Web.Controllers
             return View("~/Views/Shared/RedirectBack.cshtml");
         }
 
-     
+
         public async Task<IActionResult> Users(int videoId, string videoName)
         {
             ViewBag.VideoName = videoName;

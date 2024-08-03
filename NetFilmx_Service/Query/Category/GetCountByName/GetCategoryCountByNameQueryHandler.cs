@@ -1,13 +1,10 @@
-﻿using NetFilmx_Storage.Repositories;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
+using NetFilmx_Storage.Repositories;
 
 namespace NetFilmx_Service.Query.Category
 {
     public sealed class GetCategoryCountByNameQueryHandler : IRequestHandler<GetCategoryCountByNameQuery, QResult<int>>
-        
+
     {
         private readonly ICategoryRepository _repository;
 

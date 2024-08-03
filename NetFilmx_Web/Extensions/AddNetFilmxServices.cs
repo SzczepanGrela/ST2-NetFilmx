@@ -1,8 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using NetFilmx_Storage;
+﻿using NetFilmx_Storage;
 using NetFilmx_Storage.Repositories;
-using System.Configuration;
-using System.Reflection;
 
 namespace NetFilmx_Web.Extensions
 {
@@ -24,11 +21,11 @@ namespace NetFilmx_Web.Extensions
 
             serviceCollection.AddDbContext<NetFilmxDbContext>();
 
-          /*  serviceCollection.AddDbContext<NetFilmxDbContext>(options =>
-        options.UseSqlServer("Server=ACER_NITRO_5;Database=NetFilmxDb_projekt_test;Trusted_Connection=True;TrustServerCertificate=True",
-            x => x.MigrationsHistoryTable("__EFMigrationsHistory", "NetFilmx")).UseLazyLoadingProxies(), ServiceLifetime.Scoped);
-           */
-            
+            /*  serviceCollection.AddDbContext<NetFilmxDbContext>(options =>
+          options.UseSqlServer("Server=ACER_NITRO_5;Database=NetFilmxDb_projekt_test;Trusted_Connection=True;TrustServerCertificate=True",
+              x => x.MigrationsHistoryTable("__EFMigrationsHistory", "NetFilmx")).UseLazyLoadingProxies(), ServiceLifetime.Scoped);
+             */
+
             return serviceCollection;
 
 

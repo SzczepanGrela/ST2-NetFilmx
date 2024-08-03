@@ -2,18 +2,13 @@
 using MediatR;
 using NetFilmx_Service.Dtos.Category;
 using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace NetFilmx_Service.Query.Category
 {
     public sealed class GetCategoriesByExcludedVideoIdQueryHandler<TDto> : IRequestHandler<GetCategoriesByExcludedVideoIdQuery<TDto>, QResult<List<TDto>>>
     where TDto : ICategoryDto
-        
+
     {
 
         private readonly ICategoryRepository _repository;

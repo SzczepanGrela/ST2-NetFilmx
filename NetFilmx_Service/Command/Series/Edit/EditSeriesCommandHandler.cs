@@ -1,10 +1,5 @@
-﻿using NetFilmx_Storage.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
+using NetFilmx_Storage.Repositories;
 
 namespace NetFilmx_Service.Command.Series
 {
@@ -38,7 +33,7 @@ namespace NetFilmx_Service.Command.Series
 
                 series.Name = command.Name;
                 series.Price = command.Price;
-                
+
                 series.Description = command.Description;
 
                 series.UpdatedAt = DateTime.Now;
@@ -51,7 +46,7 @@ namespace NetFilmx_Service.Command.Series
             {
                 return CResult.Fail(ex.Message);
             }
- 
+
         }
 
     }
