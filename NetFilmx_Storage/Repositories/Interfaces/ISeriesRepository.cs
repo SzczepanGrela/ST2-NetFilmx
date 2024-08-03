@@ -22,8 +22,8 @@ namespace NetFilmx_Storage.Repositories
         Task<bool> IsSeriesExistAsync(string seriesName);
         Task<bool> IsSeriesExistAsync(int seriesId);
 
-        Task<int> GetSeriesCountByIdAsync(int seriesId);
-        Task<int> GetSeriesCountByNameAsync(string seriesName);
+        Task<int> GetVideosCountBySeriesIdAsync(int seriesId);
+        Task<int> GetVideosCountBySeriesNameAsync(string seriesName);
 
 
     }

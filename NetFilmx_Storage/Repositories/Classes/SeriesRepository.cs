@@ -21,7 +21,7 @@ namespace NetFilmx_Storage.Repositories
         {
             if (!await _context.Videos.AnyAsync(v => v.Id == videoId))
             {
-                throw new Exception("Video not found");
+                throw new ArgumentException("Video not found");
             }
 
             return await _context.Videos.Where(v => v.Id == videoId).SelectMany(v => v.Series).ToListAsync();
@@ -31,7 +31,7 @@ namespace NetFilmx_Storage.Repositories
         {
             if (!await _context.Users.AnyAsync(u => u.Id == userId))
             {
-                throw new Exception("User not found");
+                throw new ArgumentException("User not found");
             }
             return await _context.Series.Include(s => s.SeriesPurchases).Where(s => s.SeriesPurchases.Any(p => p.UserId == userId)).ToListAsync();
         }
@@ -39,13 +39,13 @@ namespace NetFilmx_Storage.Repositories
         public async Task<Series> GetSeriesByIdAsync(int seriesId)
         {
             var series = await _context.Series.FindAsync(seriesId);
-            return series ?? throw new Exception("Series not found");
+            return series ?? throw new ArgumentException("Series not found");
         }
 
         public async Task<Series> GetSeriesByNameAsync(string seriesName)
         {
             var series = await _context.Series.FirstOrDefaultAsync(c => c.Name == seriesName);
-            return series ?? throw new Exception("Series not found");
+            return series ?? throw new ArgumentException("Series not found");
         }
 
         public async Task AddSeriesAsync(Series series)
@@ -70,7 +70,7 @@ namespace NetFilmx_Storage.Repositories
             }
             if (!await IsSeriesExistAsync(series.Id))
             {
-                throw new Exception("Series not found");
+                throw new ArgumentException("Series not found");
             }
             _context.Series.Attach(series);
             _context.Entry(series).State = EntityState.Modified;
@@ -82,7 +82,7 @@ namespace NetFilmx_Storage.Repositories
             var series = await _context.Series.FindAsync(seriesId);
             if (series == null)
             {
-                throw new Exception("Series not found");
+                throw new ArgumentException("Series not found");
             }
             _context.Series.Remove(series);
             await _context.SaveChangesAsync();
@@ -98,25 +98,22 @@ namespace NetFilmx_Storage.Repositories
             return await _context.Series.AnyAsync(c => c.Id == seriesId);
         }
 
-        public async Task<int> GetSeriesCountByIdAsync(int seriesId)
+        public async Task<int> GetVideosCountBySeriesIdAsync(int seriesId)
         {
+            var series = await _context.Series.FindAsync(seriesId) ?? throw new ArgumentException("Series not found");
             return await _context.Series.Include(c => c.Videos).Where(s => s.Id == seriesId).SelectMany(s => s.Videos).CountAsync();
         }
 
-        public async Task<int> GetSeriesCountByNameAsync(string seriesName)
+        public async Task<int> GetVideosCountBySeriesNameAsync(string seriesName)
         {
+            var series = await _context.Series.FirstOrDefaultAsync(c => c.Name == seriesName) ?? throw new ArgumentException("Series not found");
             return await _context.Series.Include(c => c.Videos).Where(s => s.Name == seriesName).SelectMany(s => s.Videos).CountAsync();
         }
 
         public async Task<List<Series>> GetSeriesByExcludedVideoIdAsync(int videoId)
         {
-            var video = await _context.Videos.Include(v => v.Series).FirstOrDefaultAsync(v => v.Id == videoId);
-
-            if (video == null)
-            {
-                throw new Exception("Video not found");
-            }
-
+            var video = await _context.Videos.Include(v => v.Series).FirstOrDefaultAsync(v => v.Id == videoId)
+                ?? throw new ArgumentException("Video not found");
             var allSeries = await _context.Series.ToListAsync();
             var excludedSeries = allSeries.Where(s => !video.Series.Any(vs => vs.Id == s.Id)).ToList();
 
@@ -126,13 +123,8 @@ namespace NetFilmx_Storage.Repositories
 
         public async Task<List<Series>> GetSeriesByExcludedUserIdAsync(int userId)
         {
-            var user = await _context.Users.Include(u => u.SeriesPurchases).ThenInclude(sp => sp.Series).FirstOrDefaultAsync(u => u.Id == userId);
-
-            if (user == null)
-            {
-                throw new Exception("User not found");
-            }
-
+            var user = await _context.Users.Include(u => u.SeriesPurchases).ThenInclude(sp => sp.Series).FirstOrDefaultAsync(u => u.Id == userId) 
+                ?? throw new ArgumentException("User not found");
             var allSeries = await _context.Series.ToListAsync();
             var purchasedSeriesIds = user.SeriesPurchases.Select(sp => sp.SeriesId).ToList();
             var excludedSeries = allSeries.Where(s => !purchasedSeriesIds.Contains(s.Id)).ToList();

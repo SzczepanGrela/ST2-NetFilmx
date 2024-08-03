@@ -31,7 +31,7 @@ namespace NetFilmx_Storage.Repositories
         {
             if (!await _context.Series.AnyAsync(s => s.Id == excludedSeriesId))
             {
-                throw new Exception("Series not found");
+                throw new ArgumentException("Series not found");
             }
 
             return await _context.Users
@@ -46,7 +46,7 @@ namespace NetFilmx_Storage.Repositories
         {
             if (!await _context.Videos.AnyAsync(v => v.Id == videoId))
             {
-                throw new Exception("Video not found");
+                throw new ArgumentException("Video not found");
             }
 
             var userIdsWithVideo = await _context.VideoPurchases
@@ -63,53 +63,43 @@ namespace NetFilmx_Storage.Repositories
 
         public async Task<User> GetUserByIdAsync(int userId)
         {
-            var user = await _context.Users.FindAsync(userId);
-            return user ?? throw new Exception("User not found");
+            var user = await _context.Users.FindAsync(userId)
+                ?? throw new ArgumentException("User not found");
+            return user ;
         }
 
         public async Task<User> GetUserByUsernameAsync(string username)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
-            return user ?? throw new Exception("User not found");
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username)
+                ?? throw new ArgumentException("User not found");
+            return user ;
         }
 
         public async Task<User> GetUserByCommentIdAsync(int commentId)
         {
-            var comment = await _context.Comments.FindAsync(commentId);
-            if (comment == null)
-            {
-                throw new Exception("Comment not found");
-            }
+            var comment = await _context.Comments.FindAsync(commentId) 
+                ?? throw new ArgumentException("Comment not found");
             return await GetUserByIdAsync(comment.UserId);
         }
 
         public async Task<User> GetUserByLikeIdAsync(int likeId)
         {
-            var like = await _context.Likes.FindAsync(likeId);
-            if (like == null)
-            {
-                throw new Exception("Like not found");
-            }
+            var like = await _context.Likes.FindAsync(likeId) 
+                ?? throw new ArgumentException("Like not found");
             return await GetUserByIdAsync(like.UserId);
         }
 
         public async Task<User> GetUserByVideoPurchaseIdAsync(int videoPurchaseId)
         {
-            var videoPurchase = await _context.VideoPurchases.FindAsync(videoPurchaseId);
-            if (videoPurchase == null)
-            {
-                throw new Exception("Video purchase not found");
-            }
+            var videoPurchase = await _context.VideoPurchases.FindAsync(videoPurchaseId)
+                ?? throw new ArgumentException("Video purchase not found");
             return await GetUserByIdAsync(videoPurchase.UserId);
         }
 
         public async Task<User> GetUserBySeriesPurchaseIdAsync(int seriesPurchaseId)
         {
-            var seriesPurchase = await _context.SeriesPurchases.FindAsync(seriesPurchaseId);
-            if (seriesPurchase == null)
-            {
-                throw new Exception("Series purchase not found");
-            }
+            var seriesPurchase = await _context.SeriesPurchases.FindAsync(seriesPurchaseId)
+                ?? throw new ArgumentException("Series purchase not found");
             return await GetUserByIdAsync(seriesPurchase.UserId);
         }
 
@@ -135,7 +125,7 @@ namespace NetFilmx_Storage.Repositories
             }
             if (!await IsUserExistAsync(user.Id))
             {
-                throw new Exception("User not found");
+                throw new ArgumentException("User not found");
             }
             _context.Users.Attach(user);
             _context.Entry(user).State = EntityState.Modified;
@@ -147,7 +137,7 @@ namespace NetFilmx_Storage.Repositories
             var user = await _context.Users.FindAsync(userId);
             if (user == null)
             {
-                throw new Exception("User not found");
+                throw new ArgumentException("User not found");
             }
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();

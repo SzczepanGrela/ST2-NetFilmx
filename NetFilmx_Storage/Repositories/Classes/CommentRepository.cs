@@ -21,7 +21,7 @@ namespace NetFilmx_Storage.Repositories
         {
             if (!await _context.Videos.AnyAsync(v => v.Id == videoId))
             {
-                throw new Exception("Video not found");
+                throw new ArgumentException("Video not found");
             }
             return await _context.Comments.Where(c => c.VideoId == videoId).ToListAsync();
         }
@@ -30,7 +30,7 @@ namespace NetFilmx_Storage.Repositories
         {
             if (!await _context.Users.AnyAsync(u => u.Id == userId))
             {
-                throw new Exception("User not found");
+                throw new ArgumentException("User not found");
             }
             return await _context.Comments.Where(c => c.UserId == userId).ToListAsync();
         }
@@ -38,7 +38,7 @@ namespace NetFilmx_Storage.Repositories
         public async Task<Comment> GetCommentByIdAsync(int id)
         {
             var comment = await _context.Comments.FindAsync(id);
-            return comment ?? throw new Exception("Comment not found");
+            return comment ?? throw new ArgumentException("Comment not found");
         }
 
         public async Task AddCommentAsync(Comment comment)
@@ -59,7 +59,7 @@ namespace NetFilmx_Storage.Repositories
             }
             if (!await IsCommentExistAsync(comment.Id))
             {
-                throw new Exception("Comment not found");
+                throw new ArgumentException("Comment not found");
             }
             _context.Comments.Attach(comment);
             _context.Entry(comment).State = EntityState.Modified;
@@ -68,11 +68,8 @@ namespace NetFilmx_Storage.Repositories
 
         public async Task DeleteCommentAsync(int id)
         {
-            var comment = await GetCommentByIdAsync(id);
-            if (comment == null)
-            {
-                throw new Exception("Comment not found");
-            }
+            var comment = await GetCommentByIdAsync(id) ?? throw new ArgumentException("Comment not found");
+
             _context.Comments.Remove(comment);
             await _context.SaveChangesAsync();
         }

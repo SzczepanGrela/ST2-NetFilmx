@@ -25,7 +25,7 @@ namespace NetFilmx_Storage.Repositories
 
             if (category == null)
             {
-                throw new Exception("Category not found");
+                throw new ArgumentException("Category not found");
             }
 
             return category.Videos.ToList();
@@ -35,13 +35,9 @@ namespace NetFilmx_Storage.Repositories
         {
             var tag = await _context.Tags
                                     .Include(t => t.Videos)
-                                    .FirstOrDefaultAsync(t => t.Id == tagId);
-
-            if (tag == null)
-            {
-                throw new Exception("Tag not found");
-            }
-
+                                    .FirstOrDefaultAsync(t => t.Id == tagId) 
+            ?? throw new ArgumentException("Tag not found");
+           
             return tag.Videos.ToList();
         }
 
@@ -49,12 +45,8 @@ namespace NetFilmx_Storage.Repositories
         {
             var series = await _context.Series
                                        .Include(s => s.Videos)
-                                       .FirstOrDefaultAsync(s => s.Id == seriesId);
-
-            if (series == null)
-            {
-                throw new Exception("Series not found");
-            }
+                                       .FirstOrDefaultAsync(s => s.Id == seriesId)
+            ?? throw new ArgumentException("Series not found");
 
             return series.Videos.ToList();
         }
@@ -64,12 +56,8 @@ namespace NetFilmx_Storage.Repositories
             var user = await _context.Users
                                      .Include(u => u.VideoPurchases)
                                      .ThenInclude(vp => vp.Video)
-                                     .FirstOrDefaultAsync(u => u.Id == userId);
-
-            if (user == null)
-            {
-                throw new Exception("User not found");
-            }
+                                     .FirstOrDefaultAsync(u => u.Id == userId) 
+            ?? throw new ArgumentException("User not found");
 
             return user.VideoPurchases.Select(vp => vp.Video).ToList();
         }
@@ -78,12 +66,8 @@ namespace NetFilmx_Storage.Repositories
         {
             var videoPurchase = await _context.VideoPurchases
                                               .Include(vp => vp.Video)
-                                              .FirstOrDefaultAsync(vp => vp.Id == videoPurchaseId);
-
-            if (videoPurchase == null)
-            {
-                throw new Exception("Video purchase not found");
-            }
+                                              .FirstOrDefaultAsync(vp => vp.Id == videoPurchaseId) 
+            ?? throw new ArgumentException("Video purchase not found");
 
             return videoPurchase.Video;
         }
@@ -92,13 +76,9 @@ namespace NetFilmx_Storage.Repositories
         {
             var comment = await _context.Comments
                                         .Include(c => c.Video)
-                                        .FirstOrDefaultAsync(c => c.Id == commentId);
-
-            if (comment == null)
-            {
-                throw new Exception("Comment not found");
-            }
-
+                                        .FirstOrDefaultAsync(c => c.Id == commentId) 
+            ?? throw new ArgumentException("Comment not found");
+            
             return comment.Video;
         }
 
@@ -106,20 +86,17 @@ namespace NetFilmx_Storage.Repositories
         {
             var like = await _context.Likes
                                      .Include(l => l.Video)
-                                     .FirstOrDefaultAsync(l => l.Id == likeId);
-
-            if (like == null)
-            {
-                throw new Exception("Like not found");
-            }
+                                     .FirstOrDefaultAsync(l => l.Id == likeId) 
+            ?? throw new ArgumentException("Like not found");
 
             return like.Video;
         }
 
         public async Task<Video> GetVideoByIdAsync(int videoId)
         {
-            var video = await _context.Videos.FindAsync(videoId);
-            return video ?? throw new Exception("Video not found");
+            var video = await _context.Videos.FindAsync(videoId)
+                ?? throw new ArgumentException("Video not found");
+            return video ;
         }
 
         public async Task AddVideoAsync(Video video)
@@ -140,7 +117,7 @@ namespace NetFilmx_Storage.Repositories
             }
             if (!await IsVideoExistAsync(video.Id))
             {
-                throw new Exception("Video not found");
+                throw new ArgumentException("Video not found");
             }
 
             _context.Videos.Update(video);
@@ -149,11 +126,8 @@ namespace NetFilmx_Storage.Repositories
 
         public async Task DeleteVideoAsync(int videoId)
         {
-            var video = await _context.Videos.FindAsync(videoId);
-            if (video == null)
-            {
-                throw new Exception("Video not found");
-            }
+            var video = await _context.Videos.FindAsync(videoId) 
+                ?? throw new ArgumentException("Video not found");
             _context.Videos.Remove(video);
             await _context.SaveChangesAsync();
         }
@@ -165,17 +139,17 @@ namespace NetFilmx_Storage.Repositories
 
             if (video == null)
             {
-                throw new Exception("Video not found");
+                throw new ArgumentException("Video not found");
             }
 
             if (series == null)
             {
-                throw new Exception("Series not found");
+                throw new ArgumentException("Series not found");
             }
 
             if (video.Series.Contains(series))
             {
-                throw new Exception("The video is already part of the series");
+                throw new InvalidOperationException("The video is already part of the series");
             }
 
             video.Series.Add(series);
@@ -189,17 +163,17 @@ namespace NetFilmx_Storage.Repositories
 
             if (video == null)
             {
-                throw new Exception("Video not found");
+                throw new ArgumentException("Video not found");
             }
 
             if (category == null)
             {
-                throw new Exception("Category not found");
+                throw new ArgumentException("Category not found");
             }
 
             if (video.Categories.Contains(category))
             {
-                throw new Exception("The video is already part of the category");
+                throw new InvalidOperationException("The video is already part of the category");
             }
 
             video.Categories.Add(category);
@@ -213,17 +187,17 @@ namespace NetFilmx_Storage.Repositories
 
             if (video == null)
             {
-                throw new Exception("Video not found");
+                throw new ArgumentException("Video not found");
             }
 
             if (tag == null)
             {
-                throw new Exception("Tag not found");
+                throw new ArgumentException("Tag not found");
             }
 
             if (video.Tags.Contains(tag))
             {
-                throw new Exception("The video is already part of the tag");
+                throw new InvalidOperationException("The video is already part of the tag");
             }
 
             video.Tags.Add(tag);
@@ -237,17 +211,17 @@ namespace NetFilmx_Storage.Repositories
 
             if (video == null)
             {
-                throw new Exception("Video not found");
+                throw new ArgumentException("Video not found");
             }
 
             if (series == null)
             {
-                throw new Exception("Series not found");
+                throw new ArgumentException("Series not found");
             }
 
             if (!video.Series.Contains(series))
             {
-                throw new Exception("The video is not part of the series");
+                throw new InvalidOperationException("The video is not part of the series");
             }
 
             video.Series.Remove(series);
@@ -256,22 +230,17 @@ namespace NetFilmx_Storage.Repositories
 
         public async Task RemoveVideoFromCategoryAsync(int videoId, int categoryId)
         {
-            var video = await _context.Videos.Include(v => v.Categories).FirstOrDefaultAsync(v => v.Id == videoId);
-            var category = await _context.Categories.FindAsync(categoryId);
+            var video = await _context.Videos.Include(v => v.Categories).FirstOrDefaultAsync(v => v.Id == videoId)
+                ?? throw new ArgumentException("Video not found");
 
-            if (video == null)
-            {
-                throw new Exception("Video not found");
-            }
+            var category = await _context.Categories.FindAsync(categoryId)
+                ?? throw new ArgumentException("Category not found");
 
-            if (category == null)
-            {
-                throw new Exception("Category not found");
-            }
+           
 
             if (!video.Categories.Contains(category))
             {
-                throw new Exception("The video is not part of the category");
+                throw new InvalidOperationException("The video is not part of the category");
             }
 
             video.Categories.Remove(category);
@@ -280,22 +249,16 @@ namespace NetFilmx_Storage.Repositories
 
         public async Task RemoveVideoFromTagAsync(int videoId, int tagId)
         {
-            var video = await _context.Videos.Include(v => v.Tags).FirstOrDefaultAsync(v => v.Id == videoId);
-            var tag = await _context.Tags.FindAsync(tagId);
+            var video = await _context.Videos.Include(v => v.Tags).FirstOrDefaultAsync(v => v.Id == videoId)
+                ?? throw new ArgumentException("Video not found");
 
-            if (video == null)
-            {
-                throw new Exception("Video not found");
-            }
+            var tag = await _context.Tags.FindAsync(tagId)
+                ?? throw new ArgumentException("Tag not found");
 
-            if (tag == null)
-            {
-                throw new Exception("Tag not found");
-            }
 
             if (!video.Tags.Contains(tag))
             {
-                throw new Exception("The video is not part of the tag");
+                throw new InvalidOperationException("The video is not part of the tag");
             }
 
             video.Tags.Remove(tag);
@@ -311,16 +274,13 @@ namespace NetFilmx_Storage.Repositories
         {
             var tag = await _context.Tags
                                     .Include(t => t.Videos)
-                                    .FirstOrDefaultAsync(t => t.Id == tagId);
+                                    .FirstOrDefaultAsync(t => t.Id == tagId)
+            ?? throw new ArgumentException("Tag not found");
 
-            if (tag == null)
-            {
-                throw new Exception("Tag not found");
-            }
-
+      
             if (!tag.Videos.Any(v => v.Id == videoId))
             {
-                throw new Exception("Video not found in this tag");
+                throw new InvalidOperationException("Video not found in this tag");
             }
 
             return true;
@@ -330,16 +290,13 @@ namespace NetFilmx_Storage.Repositories
         {
             var series = await _context.Series
                                        .Include(s => s.Videos)
-                                       .FirstOrDefaultAsync(s => s.Id == seriesId);
+                                       .FirstOrDefaultAsync(s => s.Id == seriesId)
+            ?? throw new ArgumentException("Series not found");
 
-            if (series == null)
-            {
-                throw new Exception("Series not found");
-            }
 
             if (!series.Videos.Any(v => v.Id == videoId))
             {
-                throw new Exception("Video not found in this series");
+                throw new InvalidOperationException("Video not found in this series");
             }
 
             return true;
@@ -349,16 +306,13 @@ namespace NetFilmx_Storage.Repositories
         {
             var category = await _context.Categories
                                         .Include(c => c.Videos)
-                                        .FirstOrDefaultAsync(c => c.Id == categoryId);
+                                        .FirstOrDefaultAsync(c => c.Id == categoryId)
+            ?? throw new ArgumentException("Category not found");
 
-            if (category == null)
-            {
-                throw new Exception("Category not found");
-            }
 
             if (!category.Videos.Any(v => v.Id == videoId))
             {
-                throw new Exception("Video not found in this category");
+                throw new InvalidOperationException("Video not found in this category");
             }
 
             return true;
@@ -368,7 +322,7 @@ namespace NetFilmx_Storage.Repositories
         {
             if (!await _context.Series.AnyAsync(s => s.Id == excludedSeriesId))
             {
-                throw new Exception("Series not found");
+                throw new ArgumentException("Series not found");
             }
             return await _context.Videos.Include(v => v.Series).Where(v => !v.Series.Any(s => s.Id == excludedSeriesId)).ToListAsync();
         }
@@ -377,7 +331,7 @@ namespace NetFilmx_Storage.Repositories
         {
             if (!await _context.Categories.AnyAsync(c => c.Id == excludedCategoryId))
             {
-                throw new Exception("Category not found");
+                throw new ArgumentException("Category not found");
             }
             return await _context.Videos.Include(v => v.Categories).Where(v => !v.Categories.Any(c => c.Id == excludedCategoryId)).ToListAsync();
         }
@@ -386,7 +340,7 @@ namespace NetFilmx_Storage.Repositories
         {
             if (!await _context.Tags.AnyAsync(t => t.Id == excludedTagId))
             {
-                throw new Exception("Tag not found");
+                throw new ArgumentException("Tag not found");
             }
             return await _context.Videos.Include(v => v.Tags).Where(v => !v.Tags.Any(t => t.Id == excludedTagId)).ToListAsync();
         }
@@ -395,7 +349,7 @@ namespace NetFilmx_Storage.Repositories
         {
             if (!await _context.Users.AnyAsync(u => u.Id == userId))
             {
-                throw new Exception("User not found");
+                throw new ArgumentException("User not found");
             }
 
             var purchasedVideoIds = await _context.VideoPurchases

@@ -16,7 +16,7 @@ namespace NetFilmx_Service.Query.Series
         {
             try
             {
-                int count = await _repository.GetSeriesCountByNameAsync(query.SeriesName);
+                int count = await _repository.GetVideosCountBySeriesNameAsync(query.SeriesName);
                 return QResult<int>.Ok(count);
             }
             catch (Exception ex)

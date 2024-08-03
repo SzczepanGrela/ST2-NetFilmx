@@ -25,7 +25,7 @@ namespace NetFilmx_Storage.Repositories
         {
             if (!await _context.Videos.AnyAsync(v => v.Id == videoId))
             {
-                throw new DataException("Video not found");
+                throw new ArgumentException("Video not found");
             }
             return await _context.Videos.Where(v => v.Id == videoId).SelectMany(v => v.Categories).ToListAsync();
         }
@@ -33,12 +33,7 @@ namespace NetFilmx_Storage.Repositories
 
         public async Task<List<Category>> GetCategoriesByExcludedVideoIdAsync(int videoId)
         {
-            var video = await _context.Videos.Include(v => v.Categories).FirstOrDefaultAsync(v => v.Id == videoId);
-
-            if (video == null)
-            {
-                throw new Exception("Video not found");
-            }
+            var video = await _context.Videos.Include(v => v.Categories).FirstOrDefaultAsync(v => v.Id == videoId) ?? throw new ArgumentException("Video not found");
 
             var allCategories = await _context.Categories.ToListAsync();
             var excludedCategories = allCategories.Where(c => !video.Categories.Any(vc => vc.Id == c.Id)).ToList();

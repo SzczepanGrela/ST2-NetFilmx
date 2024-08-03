@@ -19,7 +19,7 @@ namespace NetFilmx_Storage.Repositories
         Task<bool> IsTagExistAsync(int tagId);
         Task<bool> IsTagExistAsync(string tagName);
 
-        Task<int> GetTagCountByIdAsync(int tagId);
-        Task<int> GetTagCountByNameAsync(string tagName);
+        Task<int> GetVideosCountByTagIdAsync(int tagId);
+        Task<int> GetVideosCountByTagNameAsync(string tagName);
     }
 }

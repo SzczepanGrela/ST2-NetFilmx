@@ -16,7 +16,7 @@ namespace NetFilmx_Service.Query.Tag
         {
             try
             {
-                int count = await _repository.GetTagCountByNameAsync(query.TagName);
+                int count = await _repository.GetVideosCountByTagNameAsync(query.TagName);
                 return QResult<int>.Ok(count);
             }
             catch (Exception ex)

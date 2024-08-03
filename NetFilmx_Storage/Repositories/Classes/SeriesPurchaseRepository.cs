@@ -37,7 +37,7 @@ namespace NetFilmx_Storage.Repositories
 
             if (!await IsSeriesPurchaseExistAsync(seriesPurchase.Id))
             {
-                throw new Exception("Series purchase not found");
+                throw new ArgumentException("Series purchase not found");
             }
 
             _context.SeriesPurchases.Attach(seriesPurchase);
@@ -52,7 +52,7 @@ namespace NetFilmx_Storage.Repositories
 
             if (seriesPurchase == null)
             {
-                throw new Exception("Series purchase not found");
+                throw new ArgumentException("Series purchase not found");
             }
 
             _context.SeriesPurchases.Remove(seriesPurchase);
@@ -68,12 +68,12 @@ namespace NetFilmx_Storage.Repositories
         {
             if (!await _context.Users.AnyAsync(u => u.Id == userId))
             {
-                throw new Exception("User not found");
+                throw new ArgumentException("User not found");
             }
 
             if (!await _context.Series.AnyAsync(s => s.Id == seriesId))
             {
-                throw new Exception("Series not found");
+                throw new ArgumentException("Series not found");
             }
 
             return await _context.SeriesPurchases.AnyAsync(sp => sp.UserId == userId && sp.SeriesId == seriesId);
@@ -89,14 +89,14 @@ namespace NetFilmx_Storage.Repositories
         public async Task<SeriesPurchase> GetSeriesPurchaseByIdAsync(int seriesPurchaseId)
         {
             var seriesPurchase = await _context.SeriesPurchases.FindAsync(seriesPurchaseId);
-            return seriesPurchase ?? throw new Exception("Series purchase not found");
+            return seriesPurchase ?? throw new ArgumentException("Series purchase not found");
         }
 
 
         public async Task<SeriesPurchase> GetSeriesPurchaseByUserIdSeriesIdAsync(int userId, int seriesId)
         {
             var seriesPurchase = await _context.SeriesPurchases.FirstOrDefaultAsync(sp => sp.UserId == userId && sp.SeriesId == seriesId);
-            return seriesPurchase ?? throw new Exception("Series purchase not found");
+            return seriesPurchase ?? throw new ArgumentException("Series purchase not found");
         }
 
 
@@ -104,7 +104,7 @@ namespace NetFilmx_Storage.Repositories
         {
             if (!await _context.Users.AnyAsync(u => u.Id == userId))
             {
-                throw new Exception("User not found");
+                throw new ArgumentException("User not found");
             }
 
             return await _context.SeriesPurchases.Where(sp => sp.UserId == userId).ToListAsync();
@@ -114,7 +114,7 @@ namespace NetFilmx_Storage.Repositories
         {
             if (!await _context.Series.AnyAsync(s => s.Id == seriesId))
             {
-                throw new Exception("Series not found");
+                throw new ArgumentException("Series not found");
             }
 
             return await _context.SeriesPurchases.Where(sp => sp.SeriesId == seriesId).ToListAsync();

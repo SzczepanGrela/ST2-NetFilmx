@@ -23,21 +23,11 @@ namespace NetFilmx_Storage.Repositories
             {
                 throw new InvalidOperationException("The video purchase already exists");
             }
-            try
-            {
-                await _context.VideoPurchases.AddAsync(videoPurchase);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException dbEx)
-            {
-                Console.WriteLine($"An error occurred while updating the database: {dbEx.Message}");
-                throw;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An unexpected error occurred: {ex.Message}");
-                throw;
-            }
+
+            await _context.VideoPurchases.AddAsync(videoPurchase);
+            await _context.SaveChangesAsync();
+
+
         }
 
         public async Task UpdateVideoPurchaseAsync(VideoPurchase videoPurchase)
@@ -49,7 +39,7 @@ namespace NetFilmx_Storage.Repositories
 
             if (!await IsVideoPurchaseExistAsync(videoPurchase.Id))
             {
-                throw new Exception("Video purchase not found");
+                throw new ArgumentException("Video purchase not found");
             }
 
             _context.VideoPurchases.Attach(videoPurchase);
@@ -63,7 +53,7 @@ namespace NetFilmx_Storage.Repositories
 
             if (videoPurchase == null)
             {
-                throw new Exception("Video purchase not found");
+                throw new ArgumentException("Video purchase not found");
             }
 
             _context.VideoPurchases.Remove(videoPurchase);
@@ -92,23 +82,25 @@ namespace NetFilmx_Storage.Repositories
 
         public async Task<VideoPurchase> GetVideoPurchaseByIdAsync(int videoPurchaseId)
         {
-            var videoPurchase = await _context.VideoPurchases.FindAsync(videoPurchaseId);
-            return videoPurchase ?? throw new Exception("Video purchase not found");
+            var videoPurchase = await _context.VideoPurchases.FindAsync(videoPurchaseId)
+                ?? throw new ArgumentException("Video purchase not found");
+            return videoPurchase ;
 
         }
 
 
         public async Task<VideoPurchase> GetVideoPurchaseByUserAndVideoIdAsync(int userId, int videoId)
         {
-            var videoPurchase = await _context.VideoPurchases.FirstOrDefaultAsync(vp => vp.UserId == userId && vp.VideoId == videoId);
-            return videoPurchase ?? throw new Exception("Video purchase not found");
+            var videoPurchase = await _context.VideoPurchases.FirstOrDefaultAsync(vp => vp.UserId == userId && vp.VideoId == videoId)
+                ?? throw new ArgumentException("Video purchase not found");
+            return videoPurchase ;
         }
 
         public async Task<List<VideoPurchase>> GetVideoPurchasesByUserIdAsync(int userId)
         {
             if (!await _context.Users.AnyAsync(u => u.Id == userId))
             {
-                throw new Exception("User not found");
+                throw new ArgumentException("User not found");
             }
 
             return await _context.VideoPurchases.Where(vp => vp.UserId == userId).ToListAsync();
@@ -118,7 +110,7 @@ namespace NetFilmx_Storage.Repositories
         {
             if (!await _context.Videos.AnyAsync(v => v.Id == videoId))
             {
-                throw new Exception("Video not found");
+                throw new ArgumentException("Video not found");
             }
 
             return await _context.VideoPurchases.Where(vp => vp.VideoId == videoId).ToListAsync();
@@ -126,8 +118,9 @@ namespace NetFilmx_Storage.Repositories
 
         public async Task<VideoPurchase> GetVideoPurchaseByUserIdVideoIdAsync(int userId, int videoId)
         {
-            var videoPurchase = await _context.VideoPurchases.FirstOrDefaultAsync(vp => vp.UserId == userId && vp.VideoId == videoId);
-            return videoPurchase ?? throw new Exception("Video purchase not found");
+            var videoPurchase = await _context.VideoPurchases.FirstOrDefaultAsync(vp => vp.UserId == userId && vp.VideoId == videoId)
+                ?? throw new Exception("Video purchase not found");
+            return videoPurchase ;
         }
 
 
