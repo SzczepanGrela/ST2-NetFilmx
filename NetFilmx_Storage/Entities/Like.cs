@@ -7,9 +7,13 @@ namespace NetFilmx_Storage.Entities
     [Table("Likes", Schema = "NetFilmx")]
     public class Like : BaseEntity
     {
-        internal Like() { }
+        internal Like() 
+        { 
+            User = new User();
+            Video = new Video();
+        }
 
-        public Like(int videoId, int userId)
+        public Like(int videoId, int userId) : this()
         {
             VideoId = videoId;
             UserId = userId;

@@ -232,7 +232,7 @@ namespace NetFilmx_Web.Controllers
             return View("~/Views/Shared/RedirectBack.cshtml");
         }
 
-        public async Task<IActionResult> Add()
+        public IActionResult Add()
         {
             return View();
         }

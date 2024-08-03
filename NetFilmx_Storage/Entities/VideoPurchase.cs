@@ -7,9 +7,13 @@ namespace NetFilmx_Storage.Entities
     [Table("VideoPurchases", Schema = "NetFilmx")]
     public class VideoPurchase : BaseEntity
     {
-        public VideoPurchase() { }
+        public VideoPurchase() 
+        { 
+            User = new User();
+            Video = new Video();
+        }
 
-        public VideoPurchase(int userId, int videoId)
+        public VideoPurchase(int userId, int videoId) : this()
         {
             UserId = userId;
             VideoId = videoId;

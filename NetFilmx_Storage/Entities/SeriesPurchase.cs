@@ -7,9 +7,14 @@ namespace NetFilmx_Storage.Entities
     [Table("SeriesPurchases", Schema = "NetFilmx")]
     public class SeriesPurchase : BaseEntity
     {
-        public SeriesPurchase() { }
+        public SeriesPurchase() 
+        {
+            Series = new Series();
+            User = new User();
+        
+        }
 
-        public SeriesPurchase(int userId, int seriesId)
+        public SeriesPurchase(int userId, int seriesId) : this()
         {
             UserId = userId;
             SeriesId = seriesId;

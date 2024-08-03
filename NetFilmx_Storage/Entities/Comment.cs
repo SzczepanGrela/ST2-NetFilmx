@@ -7,9 +7,13 @@ namespace NetFilmx_Storage.Entities
     [Table("Comments", Schema = "NetFilmx")]
     public class Comment : BaseEntity
     {
-        internal Comment() { }
+        internal Comment() 
+        { 
+            User = new User();
+            Video = new Video();
+        }
 
-        public Comment(int videoId, int userId, string content)
+        public Comment(int videoId, int userId, string content) : this()
         {
             VideoId = videoId;
             UserId = userId;

@@ -46,13 +46,13 @@ namespace NetFilmx_Storage.Repositories
         public async Task<Category> GetCategoryByNameAsync(string categoryName)
         {
             var category = await _context.Categories.FirstOrDefaultAsync(c => c.Name == categoryName);
-            return category ?? throw new DataException("Category not found");
+            return category ?? throw new ArgumentException("Category not found");
         }
 
         public async Task<Category> GetCategoryByIdAsync(int categoryId)
         {
             var category = await _context.Categories.FindAsync(categoryId);
-            return category ?? throw new DataException("Category not found");
+            return category ?? throw new ArgumentException("Category not found");
         }
 
         public async Task AddCategoryAsync(Category category)
