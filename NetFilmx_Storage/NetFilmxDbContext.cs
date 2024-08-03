@@ -99,7 +99,7 @@ namespace NetFilmx_Storage
 
 
 
-            //  DataSeeder.SeedData(modelBuilder);
+             DataSeeder.SeedData(modelBuilder);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

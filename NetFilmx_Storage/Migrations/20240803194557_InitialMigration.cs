@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -7,7 +8,7 @@
 namespace NetFilmx_Storage.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -321,10 +322,10 @@ namespace NetFilmx_Storage.Migrations
                 columns: new[] { "Id", "CreatedAt", "Description", "Name", "Price", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(620), "Kup zestaw oryginalnych 9 filmów dostępnych na platformie", "Pakiet wszystkich startowych filmów", 149.99m, new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(674) },
-                    { 2, new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(679), "Zestaw zawierający 6 filmów poświęconych zwierzętom", "Pakiet świata zwierząt", 49.99m, new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(681) },
-                    { 3, new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(684), "Zestaw zawierający 3 filmy edukacyjne", "Pakiet rozwoju", 59.99m, new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(686) },
-                    { 4, new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(689), "Zestaw zawierający 3 filmy promocyjne, po jednym z każdej kategorii", "Pakiet promocyjny", 19.99m, new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(693) }
+                    { 1, new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6602), "Kup zestaw oryginalnych 9 filmów dostępnych na platformie", "Pakiet wszystkich startowych filmów", 149.99m, new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6649) },
+                    { 2, new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6653), "Zestaw zawierający 6 filmów poświęconych zwierzętom", "Pakiet świata zwierząt", 49.99m, new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6655) },
+                    { 3, new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6658), "Zestaw zawierający 3 filmy edukacyjne", "Pakiet rozwoju", 59.99m, new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6660) },
+                    { 4, new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6669), "Zestaw zawierający 3 filmy promocyjne, po jednym z każdej kategorii", "Pakiet promocyjny", 19.99m, new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6671) }
                 });
 
             migrationBuilder.InsertData(
@@ -349,9 +350,9 @@ namespace NetFilmx_Storage.Migrations
                 columns: new[] { "Id", "CreatedAt", "Email", "PasswordHash", "UpdatedAt", "Username" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 8, 2, 21, 48, 34, 406, DateTimeKind.Local).AddTicks(4782), "user1@example.com", "$2a$11$gPYG9S5fXD7TlJBQY3d0iuq7ySLaP9Q7Hq3Fzq.Gnl0RfHoFEvNf6", new DateTime(2024, 8, 2, 21, 48, 34, 406, DateTimeKind.Local).AddTicks(4819), "User1" },
-                    { 2, new DateTime(2024, 8, 2, 21, 48, 34, 525, DateTimeKind.Local).AddTicks(7851), "user2@example.com", "$2a$11$7hQQsSN.SclH.vRA6Cf.5egKuescsCXrEluhP2ZyOqOgJhIvG9sWy", new DateTime(2024, 8, 2, 21, 48, 34, 525, DateTimeKind.Local).AddTicks(7917), "User2" },
-                    { 3, new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3109), "user3@example.com", "$2a$11$3IbCQq2adzhroCZ7hdPJjOsaXCwQ/6U7ZNZr1T7Ww8/CiW1hmrFLW", new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3156), "User3" }
+                    { 1, new DateTime(2024, 8, 3, 21, 45, 56, 809, DateTimeKind.Local).AddTicks(1400), "user1@example.com", "$2a$11$rReehj4aoeAoHc4VEOM86epohmfvppTZ58i9WwZjKUw9L67B11W4m", new DateTime(2024, 8, 3, 21, 45, 56, 809, DateTimeKind.Local).AddTicks(1451), "User1" },
+                    { 2, new DateTime(2024, 8, 3, 21, 45, 56, 929, DateTimeKind.Local).AddTicks(9754), "user2@example.com", "$2a$11$zYqNtTzAr/nK9U1utUnXCOen/ptIUaGQ0JbeVCIzmFpldWbvFOz/i", new DateTime(2024, 8, 3, 21, 45, 56, 929, DateTimeKind.Local).AddTicks(9796), "User2" },
+                    { 3, new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(954), "user3@example.com", "$2a$11$yjlPbtdMP4SglfZzTMXWp.c6ezunVY05tuIw93YIstv1JRX8cPlPu", new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(989), "User3" }
                 });
 
             migrationBuilder.InsertData(
@@ -360,15 +361,15 @@ namespace NetFilmx_Storage.Migrations
                 columns: new[] { "Id", "CreatedAt", "Description", "Price", "ThumbnailUrl", "Title", "UpdatedAt", "VideoUrl", "Views" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2021, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Discover amazing wildlife and relax! ...", 9.99m, "https://i.ytimg.com/vi/5kozt0uDa4c/hqdefault.jpg", "Amazing Scene of Wild Animals In 4K", new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(714), "https://www.youtube.com/watch?v=5kozt0uDa4c", 0 },
-                    { 2, new DateTime(2021, 1, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "Ultimate Wild Animals Collection in 8K ULTRA HD ...", 4.99m, "https://i.ytimg.com/vi/Zv11L-ZfrSg/hqdefault.jpg", "Ultimate Wild Animals Collection in 8K ULTRA HD", new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(748), "https://www.youtube.com/watch?v=Zv11L-ZfrSg", 0 },
-                    { 3, new DateTime(2022, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sit back and relax while enjoying this scenic film ...", 6.99m, "https://i.ytimg.com/vi/oRDRfikj2z8/hqdefault.jpg", "Baby Animals 4K - Amazing World Of Young Animals", new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(757), "https://www.youtube.com/watch?v=oRDRfikj2z8", 0 },
-                    { 4, new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(764), "Cute, cuddly, and utterly chaotic! ...", 14.99m, "https://i.ytimg.com/vi/y0sF5xhGreA/hqdefault.jpg", "20 Minutes of Adorable Kittens", new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(766), "https://www.youtube.com/watch?v=y0sF5xhGreA", 0 },
-                    { 5, new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(773), "Watching funny baby cats is the hardest try not to laugh challenge.", 19.99m, "https://i.ytimg.com/vi/cytJLvf-eVs/hqdefault.jpg", "Baby Cats - Cute and Funny Cat Videos Compilation", new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(775), "https://www.youtube.com/watch?v=cytJLvf-eVs", 0 },
-                    { 6, new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(783), "Hoomans! Rufus here! ...", 12.99m, "https://i.ytimg.com/vi/tpiyEe_CqB4/hqdefault.jpg", "Cute and Funny Cat Videos to Keep You Smiling!", new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(785), "https://www.youtube.com/watch?v=tpiyEe_CqB4", 0 },
-                    { 7, new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(792), "Asp.net core MVC 6.0 tutorial for beginners.", 14.99m, "https://i.ytimg.com/vi/fFY9nxfILJQ/hqdefault.jpg", "Entity Framework Core Migration", new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(794), "https://www.youtube.com/watch?v=fFY9nxfILJQ", 0 },
-                    { 8, new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(801), "This video explores a significant security flaw discussed by LockPickingLawyer.", 19.99m, "https://i.ytimg.com/vi/U5-qy2tbDG8/hqdefault.jpg", "The Most Significant Security Flaw in North America", new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(803), "https://www.youtube.com/watch?v=U5-qy2tbDG8", 0 },
-                    { 9, new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(810), "Unity is an amazingly powerful game engine - but it can be hard to learn ...", 12.99m, "https://i.ytimg.com/vi/XtQMytORBmM/hqdefault.jpg", "The Unity Tutorial For Complete Beginners", new DateTime(2024, 8, 2, 21, 48, 34, 292, DateTimeKind.Local).AddTicks(812), "https://www.youtube.com/watch?v=XtQMytORBmM", 0 }
+                    { 1, new DateTime(2021, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Discover amazing wildlife and relax! ...", 9.99m, "https://i.ytimg.com/vi/5kozt0uDa4c/hqdefault.jpg", "Amazing Scene of Wild Animals In 4K", new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6698), "5kozt0uDa4c", 0 },
+                    { 2, new DateTime(2021, 1, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "Ultimate Wild Animals Collection in 8K ULTRA HD ...", 4.99m, "https://i.ytimg.com/vi/Zv11L-ZfrSg/hqdefault.jpg", "Ultimate Wild Animals Collection in 8K ULTRA HD", new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6734), "Zv11L-ZfrSg", 0 },
+                    { 3, new DateTime(2022, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sit back and relax while enjoying this scenic film ...", 6.99m, "https://i.ytimg.com/vi/oRDRfikj2z8/hqdefault.jpg", "Baby Animals 4K - Amazing World Of Young Animals", new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6742), "oRDRfikj2z8", 0 },
+                    { 4, new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6750), "Cute, cuddly, and utterly chaotic! ...", 14.99m, "https://i.ytimg.com/vi/y0sF5xhGreA/hqdefault.jpg", "20 Minutes of Adorable Kittens", new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6752), "y0sF5xhGreA", 0 },
+                    { 5, new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6759), "Watching funny baby cats is the hardest try not to laugh challenge.", 19.99m, "https://i.ytimg.com/vi/cytJLvf-eVs/hqdefault.jpg", "Baby Cats - Cute and Funny Cat Videos Compilation", new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6761), "cytJLvf-eVs", 0 },
+                    { 6, new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6769), "Hoomans! Rufus here! ...", 12.99m, "https://i.ytimg.com/vi/tpiyEe_CqB4/hqdefault.jpg", "Cute and Funny Cat Videos to Keep You Smiling!", new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6771), "tpiyEe_CqB4", 0 },
+                    { 7, new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6778), "Asp.net core MVC 6.0 tutorial for beginners.", 14.99m, "https://i.ytimg.com/vi/fFY9nxfILJQ/hqdefault.jpg", "Entity Framework Core Migration", new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6781), "fFY9nxfILJQ", 0 },
+                    { 8, new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6788), "This video explores a significant security flaw discussed by LockPickingLawyer.", 19.99m, "https://i.ytimg.com/vi/U5-qy2tbDG8/hqdefault.jpg", "The Most Significant Security Flaw in North America", new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6790), "U5-qy2tbDG8", 0 },
+                    { 9, new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6797), "Unity is an amazingly powerful game engine - but it can be hard to learn ...", 12.99m, "https://i.ytimg.com/vi/XtQMytORBmM/hqdefault.jpg", "The Unity Tutorial For Complete Beginners", new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6799), "XtQMytORBmM", 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -377,8 +378,8 @@ namespace NetFilmx_Storage.Migrations
                 columns: new[] { "Id", "Content", "CreatedAt", "UpdatedAt", "UserId", "VideoId" },
                 values: new object[,]
                 {
-                    { 1, "This is a comment for the first video.", new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3166), new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3168), 1, 1 },
-                    { 2, "This is a comment for the second video.", new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3171), new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3173), 2, 2 }
+                    { 1, "This is a comment for the first video.", new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1001), new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1003), 1, 1 },
+                    { 2, "This is a comment for the second video.", new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1006), new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1008), 2, 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -387,8 +388,8 @@ namespace NetFilmx_Storage.Migrations
                 columns: new[] { "Id", "CreatedAt", "UserId", "VideoId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3177), 1, 1 },
-                    { 2, new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3180), 2, 2 }
+                    { 1, new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1014), 1, 1 },
+                    { 2, new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1017), 2, 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -397,11 +398,11 @@ namespace NetFilmx_Storage.Migrations
                 columns: new[] { "Id", "PurchaseDate", "SeriesId", "UserId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3191), 1, 1 },
-                    { 2, new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3194), 2, 1 },
-                    { 3, new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3196), 3, 1 },
-                    { 4, new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3212), 4, 1 },
-                    { 5, new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3214), 2, 2 }
+                    { 1, new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1032), 1, 1 },
+                    { 2, new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1055), 2, 1 },
+                    { 3, new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1057), 3, 1 },
+                    { 4, new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1060), 4, 1 },
+                    { 5, new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1062), 2, 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -434,8 +435,8 @@ namespace NetFilmx_Storage.Migrations
                 columns: new[] { "Id", "PurchaseDate", "UserId", "VideoId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3184), 2, 4 },
-                    { 2, new DateTime(2024, 8, 2, 21, 48, 34, 653, DateTimeKind.Local).AddTicks(3187), 3, 5 }
+                    { 1, new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1023), 2, 4 },
+                    { 2, new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1025), 3, 5 }
                 });
 
             migrationBuilder.InsertData(

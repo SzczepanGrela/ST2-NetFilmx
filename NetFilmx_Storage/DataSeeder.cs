@@ -42,7 +42,7 @@ namespace NetFilmx_Storage
                     Title = "Amazing Scene of Wild Animals In 4K",
                     Description = "Discover amazing wildlife and relax! ...",
                     Price = 9.99m,
-                    VideoUrl = "https://www.youtube.com/watch?v=5kozt0uDa4c",
+                    VideoUrl = "5kozt0uDa4c",
                     ThumbnailUrl = "https://i.ytimg.com/vi/5kozt0uDa4c/hqdefault.jpg",
                     CreatedAt = new DateTime(2021, 8, 15),
                     UpdatedAt = DateTime.Now
@@ -53,7 +53,7 @@ namespace NetFilmx_Storage
                     Title = "Ultimate Wild Animals Collection in 8K ULTRA HD",
                     Description = "Ultimate Wild Animals Collection in 8K ULTRA HD ...",
                     Price = 4.99m,
-                    VideoUrl = "https://www.youtube.com/watch?v=Zv11L-ZfrSg",
+                    VideoUrl = "Zv11L-ZfrSg",
                     ThumbnailUrl = "https://i.ytimg.com/vi/Zv11L-ZfrSg/hqdefault.jpg",
                     CreatedAt = new DateTime(2021, 1, 24),
                     UpdatedAt = DateTime.Now
@@ -64,7 +64,7 @@ namespace NetFilmx_Storage
                     Title = "Baby Animals 4K - Amazing World Of Young Animals",
                     Description = "Sit back and relax while enjoying this scenic film ...",
                     Price = 6.99m,
-                    VideoUrl = "https://www.youtube.com/watch?v=oRDRfikj2z8",
+                    VideoUrl = "oRDRfikj2z8",
                     ThumbnailUrl = "https://i.ytimg.com/vi/oRDRfikj2z8/hqdefault.jpg",
                     CreatedAt = new DateTime(2022, 9, 16),
                     UpdatedAt = DateTime.Now
@@ -75,7 +75,7 @@ namespace NetFilmx_Storage
                     Title = "20 Minutes of Adorable Kittens",
                     Description = "Cute, cuddly, and utterly chaotic! ...",
                     Price = 14.99m,
-                    VideoUrl = "https://www.youtube.com/watch?v=y0sF5xhGreA",
+                    VideoUrl = "y0sF5xhGreA",
                     ThumbnailUrl = "https://i.ytimg.com/vi/y0sF5xhGreA/hqdefault.jpg",
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now
@@ -86,7 +86,7 @@ namespace NetFilmx_Storage
                     Title = "Baby Cats - Cute and Funny Cat Videos Compilation",
                     Description = "Watching funny baby cats is the hardest try not to laugh challenge.",
                     Price = 19.99m,
-                    VideoUrl = "https://www.youtube.com/watch?v=cytJLvf-eVs",
+                    VideoUrl = "cytJLvf-eVs",
                     ThumbnailUrl = "https://i.ytimg.com/vi/cytJLvf-eVs/hqdefault.jpg",
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now
@@ -97,7 +97,7 @@ namespace NetFilmx_Storage
                     Title = "Cute and Funny Cat Videos to Keep You Smiling!",
                     Description = "Hoomans! Rufus here! ...",
                     Price = 12.99m,
-                    VideoUrl = "https://www.youtube.com/watch?v=tpiyEe_CqB4",
+                    VideoUrl = "tpiyEe_CqB4",
                     ThumbnailUrl = "https://i.ytimg.com/vi/tpiyEe_CqB4/hqdefault.jpg",
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now
@@ -108,7 +108,7 @@ namespace NetFilmx_Storage
                     Title = "Entity Framework Core Migration",
                     Description = "Asp.net core MVC 6.0 tutorial for beginners.",
                     Price = 14.99m,
-                    VideoUrl = "https://www.youtube.com/watch?v=fFY9nxfILJQ",
+                    VideoUrl = "fFY9nxfILJQ",
                     ThumbnailUrl = "https://i.ytimg.com/vi/fFY9nxfILJQ/hqdefault.jpg",
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now
@@ -119,7 +119,7 @@ namespace NetFilmx_Storage
                     Title = "The Most Significant Security Flaw in North America",
                     Description = "This video explores a significant security flaw discussed by LockPickingLawyer.",
                     Price = 19.99m,
-                    VideoUrl = "https://www.youtube.com/watch?v=U5-qy2tbDG8",
+                    VideoUrl = "U5-qy2tbDG8",
                     ThumbnailUrl = "https://i.ytimg.com/vi/U5-qy2tbDG8/hqdefault.jpg",
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now
@@ -130,7 +130,7 @@ namespace NetFilmx_Storage
                     Title = "The Unity Tutorial For Complete Beginners",
                     Description = "Unity is an amazingly powerful game engine - but it can be hard to learn ...",
                     Price = 12.99m,
-                    VideoUrl = "https://www.youtube.com/watch?v=XtQMytORBmM",
+                    VideoUrl = "XtQMytORBmM",
                     ThumbnailUrl = "https://i.ytimg.com/vi/XtQMytORBmM/hqdefault.jpg",
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now
