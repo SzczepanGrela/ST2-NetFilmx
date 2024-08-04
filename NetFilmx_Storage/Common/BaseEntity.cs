@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace NetFilmx_Storage.Common
+namespace NetFilmx_Storage.Entities
 {
     public class BaseEntity
     {

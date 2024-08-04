@@ -8,6 +8,8 @@ namespace NetFilmx_Service.Command.Category
 
         private readonly ICategoryRepository _repository;
 
+
+
         public AddCategoryCommandHandler(ICategoryRepository repository)
         {
             _repository = repository;
