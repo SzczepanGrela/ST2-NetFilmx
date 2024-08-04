@@ -25,9 +25,9 @@ namespace NetFilmx_Web.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> IsUsernameAvailable(string username)
+        public async Task<IActionResult> IsUsernameAvailable(string username, int? userId)
         {
-            var query = new IsUsernameAvailableQuery(username);
+            var query = new IsUsernameAvailableQuery(username, userId);
             var result = await _mediator.Send(query);
             if (result.IsFailure)
             {

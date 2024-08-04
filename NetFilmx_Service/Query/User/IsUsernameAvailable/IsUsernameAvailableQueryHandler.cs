@@ -22,16 +22,15 @@ namespace NetFilmx_Service.Query.User
             var isEdit = query.Id.HasValue;
             try
             {
-
-                if (isEdit)
+                var isUsernameAvailable = await _repository.IsUsernameAvailableAsync(query.Username);
+                if (isEdit && !isUsernameAvailable)
                 {
-                    var isUsernameTaken = await _repository.IsUsernameAvailableForUserAsync(query.Username, query.Id.Value);
-                    return QResult<bool>.Ok(!isUsernameTaken);
+                    var isUsernameAvailableForUser = await _repository.IsUsernameAvailableForUserAsync(query.Username, query.Id.Value);
+                    return QResult<bool>.Ok(isUsernameAvailableForUser);
                 }
                 else
-                {
-                    var isUsernameTaken = await _repository.IsUsernameTakenAsync(query.Username);
-                    return QResult<bool>.Ok(!isUsernameTaken);
+                {             
+                    return QResult<bool>.Ok(isUsernameAvailable);
                 }
 
 

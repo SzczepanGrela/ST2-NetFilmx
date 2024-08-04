@@ -27,7 +27,7 @@ namespace NetFilmx_Service.Command.User
 
             try
             {
-                var isUsernameTaken = await _repository.IsUsernameTakenAsync(command.Username);
+                var isUsernameTaken = await _repository.IsUsernameAvailableAsync(command.Username);
 
                 if (isUsernameTaken)
                 {

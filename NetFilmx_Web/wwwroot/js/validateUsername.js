@@ -1,12 +1,9 @@
-﻿// validateUsername.js
+﻿var isUsernameValid = false;
 
-var isUsernameValid = false;
-
-function validateUsername() {
+function validateUsername(userId) {
     var username = $('#Username').val();
     var error = '';
 
-    
     if (username.length < 5) {
         error = 'Username must be at least 5 characters long.';
     } else if (username.length > 50) {
@@ -19,7 +16,12 @@ function validateUsername() {
         return;
     }
 
-    $.get('/User/IsUsernameAvailable', { username: username }, function (isAvailable) {
+    var requestData = { username: username };
+    if (userId) {
+        requestData.userId = userId;
+    }
+
+    $.get('/User/IsUsernameAvailable', requestData, function (isAvailable) {
         if (isAvailable) {
             $('#username-error').text('');
             isUsernameValid = true;

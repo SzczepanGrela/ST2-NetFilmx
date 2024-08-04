@@ -29,7 +29,7 @@ namespace NetFilmx_Service.Command.User
             {
                 var user = await _repository.GetUserByIdAsync(command.Id);
 
-                var isUsernameAvailable = await _repository.IsUsernameAvailableForUserAsync(command.Username, command.Id);
+                var isUsernameAvailable = await _repository.IsUsernameAvailableAsync(command.Username);
 
                 if (!isUsernameAvailable)
                 {

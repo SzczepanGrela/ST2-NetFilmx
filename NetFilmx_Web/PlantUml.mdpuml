@@ -1,0 +1,20 @@
+﻿@startuml
+scale 1000 height
+scale 1000 width
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Administrator" as Admin
+
+package "NetFilmx" {
+    
+    Admin --> (Zarządzanie użytkownikami)
+    Admin --> (Zarządzanie filmami)
+    Admin --> (Zarządzanie komentarzami)
+    Admin --> (Zarządzanie kategoriami)
+    Admin --> (Zarządzanie seriami)
+    Admin --> (Zarządzanie tagami)
+    Admin --> (Zarządzanie zakupami filmów lub serii)
+}
+
+@enduml

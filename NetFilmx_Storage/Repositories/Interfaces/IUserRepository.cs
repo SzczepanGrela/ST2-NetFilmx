@@ -23,7 +23,7 @@ namespace NetFilmx_Storage.Repositories
         Task UpdateUserAsync(User user);
         Task DeleteUserAsync(int userId);
 
-        Task<bool> IsUsernameTakenAsync(string username);
+        Task<bool> IsUsernameAvailableAsync(string username);
         Task<bool> IsUserExistAsync(int userId);
 
         Task<bool> IsUsernameAvailableForUserAsync(string username, int uderId);
