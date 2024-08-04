@@ -51,14 +51,25 @@ namespace NetFilmx_Service.Command.Video
 
         }
 
-        private string ExtractYouTubeVideoId(string url)
+        public string ExtractYouTubeVideoId(string url)
         {
             if (string.IsNullOrEmpty(url))
                 return string.Empty;
 
-            var regex = new Regex(@"(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&]+)");
-            var match = regex.Match(url);
-            return match.Success ? match.Groups[1].Value : string.Empty;
+            var ytRegex = new Regex(@"(?:https?:\/\/)?(?:www\.)?(youtube\.com|youtu\.be)(\/watch\?v=|\/)([^&]+)?");
+            var isYtLink = ytRegex.Match(url);
+
+            if (isYtLink.Success)
+            {
+                return isYtLink.Groups[3].Value;
+            }
+            else
+            {
+                var linkRegex = new Regex(@"(www|http|https|\.com|\.net|\.org)");
+                var isLink = linkRegex.IsMatch(url);
+
+                return isLink ? string.Empty : url;
+            }
         }
 
     }

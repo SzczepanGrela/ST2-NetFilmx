@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using NetFilmx_Storage.Entities;
 
-namespace NetFilmx_Storage
+namespace NetFilmx_Storage.Context
 {
     public class NetFilmxDbContext : DbContext
     {
@@ -99,7 +99,7 @@ namespace NetFilmx_Storage
 
 
 
-             DataSeeder.SeedData(modelBuilder);
+            DataSeeder.SeedData(modelBuilder);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Localization;
-using NetFilmx_Storage;
+using NetFilmx_Storage.Context;
 using NetFilmx_Web.Extensions;
 using System.Globalization;
 using System.Reflection;
@@ -15,11 +15,6 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
     Assembly.GetExecutingAssembly()));
-
-
-
-
-
 
 
 builder.Services.AddNetFilmxServices();

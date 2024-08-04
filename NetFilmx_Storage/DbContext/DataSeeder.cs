@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NetFilmx_Storage.Entities;
 
-namespace NetFilmx_Storage
+namespace NetFilmx_Storage.Context
 {
     public static class DataSeeder
     {
