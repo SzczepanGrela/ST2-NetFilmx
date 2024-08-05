@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using NetFilmx_Service;
 using NetFilmx_Service.Dtos.Category;
 using NetFilmx_Service.Dtos.Comment;
 using NetFilmx_Service.Dtos.Series;
@@ -17,6 +16,7 @@ using NetFilmx_Service.Query.Tag;
 using NetFilmx_Service.Query.User;
 using NetFilmx_Service.Query.Video;
 using NetFilmx_Service.Query.VideoPurchase;
+using NetFilmx_Service.Result;
 
 namespace NetFilmx_Web.Extensions
 {
