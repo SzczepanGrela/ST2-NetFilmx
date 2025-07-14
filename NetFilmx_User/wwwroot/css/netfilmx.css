@@ -1,0 +1,382 @@
+/* Netflix-like Styling for NetFilmx */
+
+/* Global Styles */
+body {
+    background-color: #141414 !important;
+    color: #ffffff !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navigation */
+.netfilmx-nav {
+    background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(20,20,20,0.4) 100%) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #333;
+    padding: 0.5rem 0;
+}
+
+.navbar-brand {
+    font-weight: 700 !important;
+    font-size: 1.8rem !important;
+}
+
+.nav-link {
+    color: #e5e5e5 !important;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ffffff !important;
+}
+
+/* Main Content */
+.main-content {
+    padding-top: 80px;
+    min-height: calc(100vh - 200px);
+}
+
+/* Hero Section */
+.hero-section {
+    height: 70vh;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.4) 50%,
+        rgba(0, 0, 0, 0.1) 100%
+    );
+    z-index: 2;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    padding: 2rem 0;
+}
+
+.hero-title {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    margin-bottom: 1rem;
+}
+
+.hero-description {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+.hero-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.hero-actions .btn {
+    margin-bottom: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Content Sections */
+.content-sections {
+    padding: 0 1rem;
+}
+
+.content-row {
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+
+/* Video Cards and Carousels */
+.video-carousel {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding: 1rem 0;
+    scroll-behavior: smooth;
+}
+
+.video-carousel::-webkit-scrollbar {
+    height: 8px;
+}
+
+.video-carousel::-webkit-scrollbar-track {
+    background: #333;
+    border-radius: 4px;
+}
+
+.video-carousel::-webkit-scrollbar-thumb {
+    background: #e50914;
+    border-radius: 4px;
+}
+
+.video-card {
+    min-width: 280px;
+    flex-shrink: 0;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.video-card:hover {
+    transform: scale(1.05);
+    z-index: 10;
+}
+
+.video-thumbnail {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    background: #333;
+}
+
+.video-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.1) 0%,
+        rgba(0, 0, 0, 0.7) 100%
+    );
+    display: none;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.video-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+.video-info {
+    margin-top: auto;
+}
+
+.video-title {
+    color: #ffffff;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.video-price {
+    margin: 0;
+    font-size: 0.8rem;
+}
+
+/* Category Cards */
+.category-card {
+    transition: transform 0.3s ease;
+    display: block;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+}
+
+.category-card .card {
+    border: 1px solid #444;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover .card {
+    border-color: #e50914;
+    box-shadow: 0 8px 16px rgba(229, 9, 20, 0.3);
+}
+
+/* Series Cards */
+.series-card {
+    transition: transform 0.3s ease;
+}
+
+.series-card:hover {
+    transform: translateY(-5px);
+}
+
+.series-card .card {
+    border: 1px solid #444;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.series-card:hover .card {
+    border-color: #007bff;
+    box-shadow: 0 8px 16px rgba(0, 123, 255, 0.3);
+}
+
+/* Cart Dropdown */
+.cart-count {
+    font-size: 0.7rem;
+}
+
+#cartDropdownMenu {
+    min-width: 300px;
+    max-width: 400px;
+}
+
+#cartItems {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Buttons */
+.btn-danger {
+    background-color: #e50914;
+    border-color: #e50914;
+}
+
+.btn-danger:hover {
+    background-color: #f40612;
+    border-color: #f40612;
+}
+
+.btn-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section {
+        height: 50vh;
+        min-height: 400px;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-actions .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .video-card {
+        min-width: 200px;
+    }
+    
+    .content-sections {
+        padding: 0 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-section {
+        height: 40vh;
+        min-height: 300px;
+    }
+    
+    .hero-title {
+        font-size: 1.5rem;
+    }
+    
+    .hero-description {
+        font-size: 0.9rem;
+    }
+    
+    .video-card {
+        min-width: 150px;
+    }
+}
+
+/* Loading States */
+.loading-placeholder {
+    background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%);
+    background-size: 200% 100%;
+    animation: loading 2s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Error States */
+.error-message {
+    background-color: rgba(229, 9, 20, 0.1);
+    border: 1px solid #e50914;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    color: #ffffff;
+}
+
+/* Success States */
+.success-message {
+    background-color: rgba(40, 167, 69, 0.1);
+    border: 1px solid #28a745;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    color: #ffffff;
+}
+
+/* Footer */
+footer {
+    border-top: 1px solid #333;
+    margin-top: 3rem;
+}
+
+/* Custom Scrollbar for all elements */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #333;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}

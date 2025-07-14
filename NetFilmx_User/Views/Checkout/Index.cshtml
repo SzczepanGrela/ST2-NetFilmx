@@ -1,0 +1,360 @@
+@model NetFilmx_User.Models.ViewModels.CheckoutViewModel
+
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<!-- Checkout Header -->
+<div class="checkout-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="checkout-title">💳 Checkout</h1>
+                <p class="checkout-subtitle">Complete your purchase</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Checkout Content -->
+<div class="container">
+    <form asp-action="ProcessPayment" method="post" id="checkoutForm">
+        <div class="row">
+            <!-- Order Summary -->
+            <div class="col-lg-4 order-lg-2">
+                <div class="order-summary">
+                    <h3>📋 Order Summary</h3>
+                    
+                    <!-- Cart Items -->
+                    <div class="order-items">
+                        @if (Model.CartItems?.Any() == true)
+                        {
+                            @foreach (var item in Model.CartItems)
+                            {
+                                <div class="order-item">
+                                    <div class="item-thumbnail">
+                                        <img src="@item.ThumbnailUrl" alt="@item.Title" class="img-fluid">
+                                    </div>
+                                    <div class="item-details">
+                                        <h6>@item.Title</h6>
+                                        <span class="item-type">@item.ItemType</span>
+                                        <span class="item-price">$@item.Price.ToString("F2")</span>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                    
+                    <!-- Order Totals -->
+                    <div class="order-totals">
+                        <div class="total-line">
+                            <span>Subtotal:</span>
+                            <span>$@Model.Subtotal.ToString("F2")</span>
+                        </div>
+                        <div class="total-line">
+                            <span>Tax (23%):</span>
+                            <span>$@Model.Tax.ToString("F2")</span>
+                        </div>
+                        @if (Model.Discount > 0)
+                        {
+                            <div class="total-line discount">
+                                <span>Discount:</span>
+                                <span>-$@Model.Discount.ToString("F2")</span>
+                            </div>
+                        }
+                        <div class="total-line total">
+                            <strong>
+                                <span>Total:</span>
+                                <span>$@Model.Total.ToString("F2")</span>
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Billing & Payment Information -->
+            <div class="col-lg-8">
+                <div class="checkout-forms">
+                    
+                    <!-- Billing Information -->
+                    <div class="billing-section">
+                        <h3>📧 Billing Information</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="FirstName" class="form-label"></label>
+                                    <input asp-for="FirstName" class="form-control" />
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="LastName" class="form-label"></label>
+                                    <input asp-for="LastName" class="form-control" />
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label asp-for="Email" class="form-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label asp-for="Address" class="form-label"></label>
+                            <input asp-for="Address" class="form-control" />
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="City" class="form-label"></label>
+                                    <input asp-for="City" class="form-control" />
+                                    <span asp-validation-for="City" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label asp-for="PostalCode" class="form-label"></label>
+                                    <input asp-for="PostalCode" class="form-control" />
+                                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label asp-for="Country" class="form-label"></label>
+                                    <select asp-for="Country" class="form-control">
+                                        <option value="Poland">Poland</option>
+                                        <option value="Germany">Germany</option>
+                                        <option value="France">France</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <span asp-validation-for="Country" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Payment Information -->
+                    <div class="payment-section">
+                        <h3>💳 Payment Information</h3>
+                        
+                        <div class="form-group">
+                            <label asp-for="CardNumber" class="form-label"></label>
+                            <input asp-for="CardNumber" class="form-control" placeholder="1234 5678 9012 3456" />
+                            <span asp-validation-for="CardNumber" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label asp-for="CardholderName" class="form-label"></label>
+                            <input asp-for="CardholderName" class="form-control" placeholder="Name on card" />
+                            <span asp-validation-for="CardholderName" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="ExpiryMonth" class="form-label"></label>
+                                    <select asp-for="ExpiryMonth" class="form-control">
+                                        <option value="">Month</option>
+                                        @for (int i = 1; i <= 12; i++)
+                                        {
+                                            <option value="@i">@i.ToString("00")</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="ExpiryMonth" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="ExpiryYear" class="form-label"></label>
+                                    <select asp-for="ExpiryYear" class="form-control">
+                                        <option value="">Year</option>
+                                        @for (int i = DateTime.Now.Year; i <= DateTime.Now.Year + 10; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="ExpiryYear" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="CVV" class="form-label"></label>
+                                    <input asp-for="CVV" class="form-control" placeholder="123" maxlength="4" />
+                                    <span asp-validation-for="CVV" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="checkout-actions">
+                        <a href="@Url.Action("Index", "Cart")" class="btn btn-outline-secondary">
+                            ← Back to Cart
+                        </a>
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            Complete Purchase 💳
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<style>
+.checkout-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+}
+
+.checkout-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.checkout-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+.order-summary {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 10px;
+    position: sticky;
+    top: 2rem;
+}
+
+.order-summary h3 {
+    margin-bottom: 1rem;
+}
+
+.order-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
+.order-item .item-thumbnail {
+    width: 60px;
+    height: 45px;
+    margin-right: 1rem;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.order-item .item-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.order-item .item-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.order-item .item-details h6 {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.order-item .item-type {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+.order-item .item-price {
+    font-weight: 600;
+    color: #28a745;
+    margin-left: auto;
+}
+
+.order-totals {
+    border-top: 2px solid #dee2e6;
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.total-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.total-line.total {
+    font-size: 1.1rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid #dee2e6;
+}
+
+.total-line.discount {
+    color: #28a745;
+}
+
+.checkout-forms {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.billing-section, .payment-section {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.billing-section:last-child, .payment-section:last-child {
+    border-bottom: none;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #495057;
+}
+
+.checkout-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    border-top: 1px solid #e9ecef;
+}
+
+@@media (max-width: 768px) {
+    .checkout-actions {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .checkout-actions .btn {
+        width: 100%;
+    }
+}
+</style>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

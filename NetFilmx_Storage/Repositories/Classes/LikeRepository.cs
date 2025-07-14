@@ -62,5 +62,28 @@ namespace NetFilmx_Storage.Repositories
             }
             return await _context.Likes.AnyAsync(l => l.VideoId == videoId && l.UserId == userId);
         }
+
+        public async Task<Like> AddAsync(Like like)
+        {
+            _context.Likes.Add(like);
+            await _context.SaveChangesAsync();
+            return like;
+        }
+
+        public async Task DeleteAsync(int likeId)
+        {
+            var like = await _context.Likes.FindAsync(likeId);
+            if (like != null)
+            {
+                _context.Likes.Remove(like);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<Like?> GetByUserAndVideoAsync(int userId, int videoId)
+        {
+            return await _context.Likes
+                .FirstOrDefaultAsync(l => l.UserId == userId && l.VideoId == videoId);
+        }
     }
 }

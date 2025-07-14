@@ -1,0 +1,582 @@
+@model IEnumerable<NetFilmx_Service.Dtos.Series.SeriesListDto>
+
+@{
+    ViewData["Title"] = "Series";
+}
+
+<!-- Series Header -->
+<div class="series-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="series-title">🎭 Browse Series</h1>
+                <p class="series-subtitle">Discover complete series collections</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Series Content -->
+<div class="container">
+    <div class="row">
+        <!-- Filter Bar -->
+        <div class="col-12">
+            <div class="filter-bar">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div class="search-box">
+                            <input type="text" class="form-control" placeholder="Search series..." 
+                                   id="seriesSearch" onkeyup="filterSeries()">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="sort-options">
+                            <label for="sortBy">Sort by:</label>
+                            <select class="form-select" id="sortBy" onchange="sortSeries()">
+                                <option value="name">Name A-Z</option>
+                                <option value="popular">Most Popular</option>
+                                <option value="newest">Newest</option>
+                                <option value="price">Price</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Series Grid -->
+    <div class="row">
+        <div class="col-12">
+            <div class="series-grid" id="seriesGrid">
+                @if (Model?.Any() == true)
+                {
+                    @foreach (var series in Model)
+                    {
+                        <div class="series-card" data-series-name="@series.Name.ToLower()">
+                            <div class="series-poster">
+                                <img src="/images/series-placeholder.jpg" alt="@series.Name" 
+                                     class="series-thumbnail">
+                                <div class="series-overlay">
+                                    <div class="series-actions">
+                                        <button class="btn btn-danger btn-sm" onclick="addToCart('series', @series.Id)">
+                                            🛒 Buy Series
+                                        </button>
+                                        <a href="/Series/Details/@series.Id" class="btn btn-outline-light btn-sm">
+                                            ℹ️ Details
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <!-- Progress Bar (for purchased series) -->
+                                <div class="series-progress">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="series-info">
+                                <h4 class="series-name">@series.Name</h4>
+                                <div class="series-meta">
+                                    <span class="series-price">$@series.Price</span>
+                                    <span class="series-episodes">📺 Episodes available</span>
+                                </div>
+                                <p class="series-description">
+                                    Complete series with all episodes included
+                                </p>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="no-series">
+                        <div class="text-center">
+                            <div class="empty-icon">🎭</div>
+                            <h3>No series found</h3>
+                            <p>Series will appear here when they are added to the catalog.</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    
+    <!-- Featured Series Section -->
+    @if (Model?.Any() == true)
+    {
+        <div class="row">
+            <div class="col-12">
+                <div class="featured-series">
+                    <h2 class="section-title">⭐ Featured Series</h2>
+                    <div class="featured-grid">
+                        @foreach (var series in Model.Take(3))
+                        {
+                            <div class="featured-series-item">
+                                <div class="featured-poster">
+                                    <img src="/images/series-placeholder.jpg" alt="@series.Name">
+                                    <div class="featured-overlay">
+                                        <div class="featured-content">
+                                            <h3>@series.Name</h3>
+                                            <p class="featured-price">$@series.Price</p>
+                                            <div class="featured-actions">
+                                                <button class="btn btn-danger" onclick="addToCart('series', @series.Id)">
+                                                    🛒 Buy Now
+                                                </button>
+                                                <a href="/Series/Details/@series.Id" class="btn btn-outline-light">
+                                                    📖 Learn More
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    
+    <!-- Continue Watching Section (for authenticated users) -->
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="row">
+            <div class="col-12">
+                <div class="continue-watching">
+                    <h2 class="section-title">📺 Continue Watching</h2>
+                    <div class="continue-grid">
+                        <div class="continue-placeholder">
+                            <div class="text-center">
+                                <div class="placeholder-icon">▶️</div>
+                                <h4>Ready to watch?</h4>
+                                <p>Your watching progress will appear here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+/* Series Page Styles */
+.series-header {
+    background: linear-gradient(135deg, #007bff 0%, #000000 100%);
+    color: white;
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+}
+
+.series-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.series-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.filter-bar {
+    background: #2a2a2a;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.search-box .form-control {
+    background: #333;
+    border: 1px solid #555;
+    color: #ffffff;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+}
+
+.search-box .form-control:focus {
+    background: #444;
+    border-color: #007bff;
+    color: #ffffff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.sort-options {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.sort-options label {
+    color: #ffffff;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.sort-options .form-select {
+    background: #333;
+    border: 1px solid #555;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    min-width: 150px;
+}
+
+.sort-options .form-select:focus {
+    background: #444;
+    border-color: #007bff;
+    color: #ffffff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.series-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.series-card {
+    background: #2a2a2a;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.series-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.series-poster {
+    position: relative;
+    aspect-ratio: 2/3;
+    overflow: hidden;
+}
+
+.series-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.series-card:hover .series-thumbnail {
+    transform: scale(1.05);
+}
+
+.series-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.series-card:hover .series-overlay {
+    opacity: 1;
+}
+
+.series-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.series-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.series-progress .progress {
+    height: 100%;
+    background: transparent;
+}
+
+.series-progress .progress-bar {
+    background: #007bff;
+}
+
+.series-info {
+    padding: 1.5rem;
+}
+
+.series-name {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.series-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.series-price {
+    color: #007bff;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.series-episodes {
+    color: #aaa;
+    font-size: 0.8rem;
+}
+
+.series-description {
+    color: #aaa;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.no-series {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #aaa;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.no-series h3 {
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.featured-series,
+.continue-watching {
+    background: #2a2a2a;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    color: #ffffff;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.featured-series-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.featured-poster {
+    position: relative;
+    aspect-ratio: 16/9;
+}
+
+.featured-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.featured-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.4) 100%
+    );
+    display: flex;
+    align-items: flex-end;
+    padding: 2rem;
+}
+
+.featured-content {
+    color: white;
+}
+
+.featured-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.featured-price {
+    font-size: 1.2rem;
+    color: #007bff;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.featured-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.continue-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.continue-placeholder {
+    background: #333;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    color: #aaa;
+}
+
+.placeholder-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+@@media (max-width: 768px) {
+    .series-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    
+    .filter-bar .row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .sort-options {
+        justify-content: flex-start;
+    }
+    
+    .featured-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .featured-actions {
+        flex-direction: column;
+    }
+}
+</style>
+
+<script>
+function filterSeries() {
+    const searchTerm = document.getElementById('seriesSearch').value.toLowerCase();
+    const seriesCards = document.querySelectorAll('.series-card');
+    
+    seriesCards.forEach(card => {
+        const seriesName = card.getAttribute('data-series-name');
+        if (seriesName.includes(searchTerm)) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+function sortSeries() {
+    const sortBy = document.getElementById('sortBy').value;
+    const grid = document.getElementById('seriesGrid');
+    const cards = Array.from(grid.querySelectorAll('.series-card'));
+    
+    cards.sort((a, b) => {
+        const nameA = a.getAttribute('data-series-name');
+        const nameB = b.getAttribute('data-series-name');
+        
+        switch (sortBy) {
+            case 'name':
+                return nameA.localeCompare(nameB);
+            case 'popular':
+                return nameB.localeCompare(nameA);
+            case 'newest':
+                return nameA.localeCompare(nameB);
+            case 'price':
+                return nameA.localeCompare(nameB);
+            default:
+                return 0;
+        }
+    });
+    
+    cards.forEach(card => grid.appendChild(card));
+}
+
+function addToCart(type, id) {
+    const url = '/Cart/AddSeries';
+    const data = { seriesId: id };
+    
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            updateCartCount();
+            showMessage(data.message, 'success');
+        } else {
+            showMessage('Error adding to cart', 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showMessage('Error adding to cart', 'error');
+    });
+}
+
+function updateCartCount() {
+    fetch('/Cart/GetCartCount')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('cartCount').textContent = data.count;
+        });
+}
+
+function showMessage(message, type) {
+    const alertClass = type === 'success' ? 'alert-success' : 
+                     type === 'info' ? 'alert-info' : 'alert-danger';
+    
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert ${alertClass} alert-dismissible fade show`;
+    alertDiv.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    
+    document.querySelector('.container').prepend(alertDiv);
+    
+    setTimeout(() => {
+        alertDiv.remove();
+    }, 3000);
+}
+
+// Update cart count on page load
+document.addEventListener('DOMContentLoaded', function() {
+    updateCartCount();
+});
+</script>

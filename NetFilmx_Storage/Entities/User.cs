@@ -13,6 +13,8 @@ namespace NetFilmx_Storage.Entities
             Likes = new List<Like>();
             VideoPurchases = new List<VideoPurchase>();
             SeriesPurchases = new List<SeriesPurchase>();
+            Favorites = new List<Favorite>();
+            ViewHistory = new List<ViewHistory>();
         }
 
         public User(string username, string email, string password) : this()
@@ -56,11 +58,27 @@ namespace NetFilmx_Storage.Entities
 
         public virtual ICollection<SeriesPurchase> SeriesPurchases { get; set; }
 
+        public virtual ICollection<Favorite> Favorites { get; set; }
+
+        public virtual ICollection<ViewHistory> ViewHistory { get; set; }
+
+        public virtual UserSettings? Settings { get; set; }
+
+        public virtual UserProfile? Profile { get; set; }
+
+        public virtual Cart? Cart { get; set; }
+
         [NotMapped]
         public IEnumerable<Video> CommentedVideos => Comments.Select(c => c.Video);
 
         [NotMapped]
         public IEnumerable<Video> LikedVideos => Likes.Select(l => l.Video);
+
+        [NotMapped]
+        public IEnumerable<Video> FavoriteVideos => Favorites.Where(f => f.Video != null).Select(f => f.Video!);
+
+        [NotMapped]
+        public IEnumerable<Series> FavoriteSeries => Favorites.Where(f => f.Series != null).Select(f => f.Series!);
 
         public void SetPassword(string password)
         {

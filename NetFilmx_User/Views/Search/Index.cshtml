@@ -1,0 +1,498 @@
+@model NetFilmx_User.Models.ViewModels.SearchViewModel
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+<!-- Search Header -->
+<div class="search-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="search-title">🔍 Search NetFilmx</h1>
+                <p class="search-subtitle">Find your favorite movies and series</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Search Form -->
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <form method="get" class="search-form">
+                <div class="search-input-group">
+                    <input type="text" name="query" value="@Model.SearchQuery" class="form-control search-input" 
+                           placeholder="Search for movies, series..." autocomplete="off" id="searchInput">
+                    <button type="submit" class="btn btn-danger search-btn">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Search Results -->
+<div class="container">
+    <div class="row">
+        <!-- Filters Sidebar -->
+        <div class="col-lg-3 col-md-4">
+            <div class="filters-sidebar">
+                <h3>🎛️ Filters</h3>
+                
+                <form method="get" id="filterForm">
+                    <input type="hidden" name="query" value="@Model.SearchQuery">
+                    
+                    <!-- Categories Filter -->
+                    @if (Model.AvailableCategories?.Any() == true)
+                    {
+                        <div class="filter-group">
+                            <h4>🎭 Categories</h4>
+                            @foreach (var category in Model.AvailableCategories.Take(10))
+                            {
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="categoryIds" 
+                                           value="@category.Id" id="cat@(category.Id)"
+                                           @(Model.SelectedCategoryIds.Contains(category.Id) ? "checked" : "")>
+                                    <label class="form-check-label" for="cat@(category.Id)">
+                                        @category.Name
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    }
+                    
+                    <!-- Sort Options -->
+                    <div class="filter-group">
+                        <h4>📊 Sort By</h4>
+                        <select name="sortBy" class="form-control" onchange="document.getElementById('filterForm').submit()">
+                            <option value="popular" selected="@(Model.SortBy == "popular")">📈 Most Popular</option>
+                            <option value="newest" selected="@(Model.SortBy == "newest")">🆕 Newest</option>
+                            <option value="price-asc" selected="@(Model.SortBy == "price-asc")">💰 Price: Low to High</option>
+                            <option value="price-desc" selected="@(Model.SortBy == "price-desc")">💰 Price: High to Low</option>
+                            <option value="title" selected="@(Model.SortBy == "title")">🔤 Title A-Z</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-sm">Apply Filters</button>
+                    <a href="/Search" class="btn btn-outline-secondary btn-sm">Clear All</a>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Results Content -->
+        <div class="col-lg-9 col-md-8">
+            @if (!string.IsNullOrEmpty(Model.SearchQuery))
+            {
+                <div class="search-results-header">
+                    <h2>Search Results for "@Model.SearchQuery"</h2>
+                    <p class="results-count">
+                        @{
+                            var totalResults = (Model.VideoResults?.Count ?? 0) + (Model.SeriesResults?.Count ?? 0);
+                        }
+                        @totalResults result(s) found
+                    </p>
+                </div>
+                
+                <!-- Video Results -->
+                @if (Model.VideoResults?.Any() == true)
+                {
+                    <div class="results-section">
+                        <h3 class="section-title">🎬 Videos (@Model.VideoResults.Count)</h3>
+                        <div class="row">
+                            @foreach (var video in Model.VideoResults)
+                            {
+                                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                                    <div class="video-card">
+                                        <div class="video-thumbnail">
+                                            <img src="@video.ThumbnailUrl" alt="@video.Title" onerror="this.src='/images/video-placeholder.jpg'">
+                                            <div class="video-overlay">
+                                                <div class="video-actions">
+                                                    <button class="btn btn-sm btn-outline-light" onclick="addToCart('video', @video.Id)">
+                                                        🛒 Add to Cart
+                                                    </button>
+                                                </div>
+                                                <div class="video-info">
+                                                    <h5 class="video-title">@video.Title</h5>
+                                                    <p class="video-price">$@video.Price</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="video-details">
+                                            <h5><a href="/Video/Details/@video.Id">@video.Title</a></h5>
+                                            <p class="price">$@video.Price</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+                
+                <!-- Series Results -->
+                @if (Model.SeriesResults?.Any() == true)
+                {
+                    <div class="results-section">
+                        <h3 class="section-title">📺 Series (@Model.SeriesResults.Count)</h3>
+                        <div class="row">
+                            @foreach (var series in Model.SeriesResults)
+                            {
+                                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                                    <div class="series-card">
+                                        <div class="series-thumbnail">
+                                            <img src="/images/series-placeholder.jpg" alt="@series.Name">
+                                            <div class="series-overlay">
+                                                <div class="series-actions">
+                                                    <button class="btn btn-sm btn-outline-light" onclick="addToCart('series', @series.Id)">
+                                                        🛒 Add to Cart
+                                                    </button>
+                                                </div>
+                                                <div class="series-info">
+                                                    <h5 class="series-title">@series.Name</h5>
+                                                    <p class="series-price">$@series.Price</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="series-details">
+                                            <h5><a href="/Series/Details/@series.Id">@series.Name</a></h5>
+                                            <p class="price">$@series.Price</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+                
+                @if (totalResults == 0)
+                {
+                    <div class="no-results">
+                        <div class="text-center">
+                            <h3>😔 No results found</h3>
+                            <p>Try adjusting your search terms or filters.</p>
+                            <a href="/Search" class="btn btn-primary">Clear Search</a>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="search-suggestions">
+                    <h3>🔍 Start searching</h3>
+                    <p>Enter a search term to find movies and series.</p>
+                    
+                    <div class="popular-searches">
+                        <h4>Popular searches:</h4>
+                        <div class="search-tags">
+                            <a href="/Search?query=action" class="search-tag">Action</a>
+                            <a href="/Search?query=drama" class="search-tag">Drama</a>
+                            <a href="/Search?query=comedy" class="search-tag">Comedy</a>
+                            <a href="/Search?query=horror" class="search-tag">Horror</a>
+                            <a href="/Search?query=thriller" class="search-tag">Thriller</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+/* Search Styles */
+.search-header {
+    background: linear-gradient(135deg, #e50914 0%, #000000 100%);
+    color: white;
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+}
+
+.search-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.search-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.search-form {
+    margin-bottom: 2rem;
+}
+
+.search-input-group {
+    display: flex;
+    gap: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-input {
+    flex: 1;
+    padding: 1rem;
+    font-size: 1.1rem;
+    border: 2px solid #444;
+    background: #2a2a2a;
+    color: white;
+    border-radius: 8px;
+}
+
+.search-input:focus {
+    border-color: #e50914;
+    background: #333;
+    color: white;
+    box-shadow: 0 0 0 0.2rem rgba(229, 9, 20, 0.25);
+}
+
+.search-btn {
+    padding: 1rem 2rem;
+    font-weight: 600;
+    border-radius: 8px;
+}
+
+.filters-sidebar {
+    background: #2a2a2a;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.filters-sidebar h3 {
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+}
+
+.filter-group {
+    margin-bottom: 2rem;
+}
+
+.filter-group h4 {
+    color: #ffffff;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.form-check {
+    margin-bottom: 0.5rem;
+}
+
+.form-check-label {
+    color: #e5e5e5;
+    font-size: 0.9rem;
+}
+
+.search-results-header {
+    margin-bottom: 2rem;
+}
+
+.search-results-header h2 {
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.results-count {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+.results-section {
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.video-card, .series-card {
+    background: #2a2a2a;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.video-card:hover, .series-card:hover {
+    transform: translateY(-5px);
+}
+
+.video-thumbnail, .series-thumbnail {
+    position: relative;
+    overflow: hidden;
+    height: 200px;
+}
+
+.video-thumbnail img, .series-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-overlay, .series-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.video-card:hover .video-overlay,
+.series-card:hover .series-overlay {
+    opacity: 1;
+}
+
+.video-details, .series-details {
+    padding: 1rem;
+}
+
+.video-details h5, .series-details h5 {
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.video-details h5 a, .series-details h5 a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.video-details h5 a:hover, .series-details h5 a:hover {
+    color: #e50914;
+}
+
+.price {
+    color: #e50914;
+    font-weight: 600;
+}
+
+.no-results {
+    text-align: center;
+    padding: 3rem;
+    color: #aaa;
+}
+
+.search-suggestions {
+    color: #ffffff;
+    padding: 2rem;
+}
+
+.search-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.search-tag {
+    background: #444;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.3s ease;
+}
+
+.search-tag:hover {
+    background: #e50914;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+@@media (max-width: 768px) {
+    .search-input-group {
+        flex-direction: column;
+    }
+    
+    .search-btn {
+        width: 100%;
+    }
+}
+</style>
+
+<script>
+// Search autocomplete
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    
+    searchInput.addEventListener('input', function() {
+        const term = this.value;
+        if (term.length >= 2) {
+            fetch(`/Search/Autocomplete?term=${encodeURIComponent(term)}`)
+                .then(response => response.json())
+                .then(data => {
+                    // TODO: Implement autocomplete dropdown
+                    console.log('Autocomplete suggestions:', data);
+                });
+        }
+    });
+});
+
+// Add to cart functionality
+function addToCart(type, id) {
+    const url = type === 'video' ? '/Cart/AddVideo' : '/Cart/AddSeries';
+    const data = type === 'video' ? { videoId: id } : { seriesId: id };
+    
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Update cart count
+            updateCartCount();
+            // Show success message
+            showMessage(data.message, 'success');
+        } else {
+            showMessage('Error adding to cart', 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showMessage('Error adding to cart', 'error');
+    });
+}
+
+function updateCartCount() {
+    fetch('/Cart/GetCartCount')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('cartCount').textContent = data.count;
+        });
+}
+
+function showMessage(message, type) {
+    // Simple message display - could be enhanced with a proper notification system
+    const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert ${alertClass} alert-dismissible fade show`;
+    alertDiv.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    
+    document.querySelector('.container').prepend(alertDiv);
+    
+    // Auto-dismiss after 3 seconds
+    setTimeout(() => {
+        alertDiv.remove();
+    }, 3000);
+}
+
+// Update cart count on page load
+document.addEventListener('DOMContentLoaded', function() {
+    updateCartCount();
+});
+</script>

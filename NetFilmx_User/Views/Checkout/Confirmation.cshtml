@@ -1,0 +1,251 @@
+@{
+    ViewData["Title"] = "Order Confirmation";
+}
+
+<!-- Confirmation Header -->
+<div class="confirmation-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="success-icon">
+                    ✅
+                </div>
+                <h1 class="confirmation-title">Thank You!</h1>
+                <p class="confirmation-subtitle">Your order has been successfully processed</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Confirmation Content -->
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="confirmation-card">
+                <div class="card-body text-center">
+                    <h3 class="mb-4">🎉 Purchase Complete!</h3>
+                    
+                    <p class="lead mb-4">
+                        Your videos and series have been added to your library and are now available for streaming.
+                    </p>
+                    
+                    <div class="confirmation-details">
+                        <div class="detail-item">
+                            <strong>📧 Confirmation Email:</strong>
+                            <span>A receipt has been sent to your email address</span>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <strong>📱 Access Your Content:</strong>
+                            <span>Your purchased content is now available in your library</span>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <strong>🕒 Order Date:</strong>
+                            <span>@DateTime.Now.ToString("MMMM dd, yyyy 'at' h:mm tt")</span>
+                        </div>
+                    </div>
+                    
+                    <div class="confirmation-actions">
+                        <a href="@Url.Action("Purchases", "Profile")" class="btn btn-primary btn-lg">
+                            📚 View My Purchases
+                        </a>
+                        
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-outline-secondary btn-lg">
+                            🏠 Back to Home
+                        </a>
+                        
+                        <a href="@Url.Action("Index", "Video")" class="btn btn-outline-primary btn-lg">
+                            🎬 Browse More Videos
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- What's Next Section -->
+            <div class="whats-next">
+                <h4>📋 What's Next?</h4>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="next-step">
+                            <div class="step-icon">🎬</div>
+                            <h6>Start Watching</h6>
+                            <p>Access your purchased content immediately from your library</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="next-step">
+                            <div class="step-icon">⭐</div>
+                            <h6>Rate & Review</h6>
+                            <p>Share your thoughts and help other users discover great content</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="next-step">
+                            <div class="step-icon">💫</div>
+                            <h6>Discover More</h6>
+                            <p>Browse our extensive library for your next favorite series or movie</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Support Section -->
+            <div class="support-section">
+                <div class="alert alert-info">
+                    <h6><strong>💬 Need Help?</strong></h6>
+                    <p class="mb-0">
+                        If you have any questions about your purchase or need technical support, 
+                        please don't hesitate to contact our customer service team.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.confirmation-header {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+}
+
+.success-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: bounceIn 1s ease-out;
+}
+
+.confirmation-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.confirmation-subtitle {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+.confirmation-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.confirmation-details {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    text-align: left;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-item strong {
+    color: #495057;
+    min-width: 180px;
+}
+
+.confirmation-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.whats-next {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.whats-next h4 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #495057;
+}
+
+.next-step {
+    text-align: center;
+    padding: 1rem;
+}
+
+.step-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.next-step h6 {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #495057;
+}
+
+.next-step p {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin: 0;
+}
+
+.support-section {
+    margin-top: 2rem;
+}
+
+@@keyframes bounceIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@@media (max-width: 768px) {
+    .confirmation-title {
+        font-size: 2rem;
+    }
+    
+    .confirmation-actions {
+        flex-direction: column;
+    }
+    
+    .confirmation-actions .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .detail-item {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    
+    .detail-item strong {
+        min-width: auto;
+    }
+}
+</style>

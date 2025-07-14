@@ -1,0 +1,221 @@
+@model NetFilmx_User.Models.ViewModels.HomeViewModel
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- Hero Section -->
+<div class="hero-section position-relative">
+    <div class="hero-background">
+        <!-- Background image or video can go here -->
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="hero-content">
+                    <h1 class="hero-title">Unlimited movies, TV shows, and more.</h1>
+                    <p class="hero-subtitle">Watch anywhere. Cancel anytime.</p>
+                    <div class="hero-buttons">
+                        <a href="/Category" class="btn btn-primary btn-lg hero-btn">Browse Categories</a>
+                        <a href="/Series" class="btn btn-outline-light btn-lg hero-btn">View Series</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Content Sections -->
+<div class="container">
+    <!-- Trending Now -->
+    @if (Model?.TrendingVideos?.Any() == true)
+    {
+        <div class="content-row">
+            <h2 class="row-title">Trending Now</h2>
+            <div class="content-slider">
+                <div class="row">
+                    @foreach (var video in Model.TrendingVideos.Take(6))
+                    {
+                        <div class="col-md-2 col-sm-4 col-6">
+                            <div class="content-card">
+                                <img src="@video.ThumbnailUrl" alt="@video.Title" class="content-thumbnail">
+                                <div class="content-info">
+                                    <h5>@video.Title</h5>
+                                    <p class="price">$@video.Price</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Categories -->
+    @if (Model?.PopularCategories?.Any() == true)
+    {
+        <div class="content-row">
+            <h2 class="row-title">Popular Categories</h2>
+            <div class="row">
+                @foreach (var category in Model.PopularCategories.Take(6))
+                {
+                    <div class="col-md-2 col-sm-4 col-6">
+                        <a href="/Category/Details/@category.Id" class="category-card">
+                            <div class="category-content">
+                                <h5>@category.Name</h5>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    <!-- Popular Series -->
+    @if (Model?.PopularSeries?.Any() == true)
+    {
+        <div class="content-row">
+            <h2 class="row-title">Popular Series</h2>
+            <div class="row">
+                @foreach (var series in Model.PopularSeries.Take(6))
+                {
+                    <div class="col-md-2 col-sm-4 col-6">
+                        <a href="/Series/Details/@series.Id" class="series-card">
+                            <div class="series-content">
+                                <h5>@series.Name</h5>
+                                <p class="price">$@series.Price</p>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    <!-- New Releases -->
+    @if (Model?.NewReleases?.Any() == true)
+    {
+        <div class="content-row">
+            <h2 class="row-title">New Releases</h2>
+            <div class="row">
+                @foreach (var video in Model.NewReleases.Take(6))
+                {
+                    <div class="col-md-2 col-sm-4 col-6">
+                        <div class="content-card">
+                            <img src="@video.ThumbnailUrl" alt="@video.Title" class="content-thumbnail">
+                            <div class="content-info">
+                                <h5>@video.Title</h5>
+                                <p class="price">$@video.Price</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+/* Netflix-style enhancements */
+.hero-section {
+    background: linear-gradient(135deg, #e50914 0%, #000000 100%);
+    color: white;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+.hero-btn {
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    padding: 12px 24px;
+    font-weight: 600;
+}
+
+.content-row {
+    margin-bottom: 3rem;
+}
+
+.row-title {
+    color: #ffffff;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.content-card, .category-card, .series-card {
+    background: #2a2a2a;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 1rem;
+    text-decoration: none;
+    color: inherit;
+}
+
+.content-card:hover, .category-card:hover, .series-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    text-decoration: none;
+    color: inherit;
+}
+
+.content-thumbnail {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.content-info, .category-content, .series-content {
+    padding: 1rem;
+}
+
+.content-info h5, .category-content h5, .series-content h5 {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.price {
+    color: #e50914;
+    font-weight: 600;
+    margin: 0;
+}
+
+.category-content, .series-content {
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, #e50914 0%, #b20710 100%);
+}
+</style>

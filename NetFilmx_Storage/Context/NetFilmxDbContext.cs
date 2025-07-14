@@ -21,6 +21,12 @@ namespace NetFilmx_Storage.Context
         public DbSet<Series> Series { get; set; }
         public DbSet<VideoPurchase> VideoPurchases { get; set; }
         public DbSet<SeriesPurchase> SeriesPurchases { get; set; }
+        public DbSet<UserSettings> UserSettings { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<Favorite> Favorites { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<ViewHistory> ViewHistory { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -97,7 +103,73 @@ namespace NetFilmx_Storage.Context
                 .WithMany(s => s.SeriesPurchases)
                 .HasForeignKey(usp => usp.SeriesId);
 
+            // New entity relationships
+            modelBuilder.Entity<UserSettings>()
+                .HasOne(us => us.User)
+                .WithOne(u => u.Settings)
+                .HasForeignKey<UserSettings>(us => us.UserId);
 
+            modelBuilder.Entity<UserProfile>()
+                .HasOne(up => up.User)
+                .WithOne(u => u.Profile)
+                .HasForeignKey<UserProfile>(up => up.UserId);
+
+            modelBuilder.Entity<Favorite>()
+                .HasOne(f => f.User)
+                .WithMany(u => u.Favorites)
+                .HasForeignKey(f => f.UserId);
+
+            modelBuilder.Entity<Favorite>()
+                .HasOne(f => f.Video)
+                .WithMany()
+                .HasForeignKey(f => f.VideoId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Favorite>()
+                .HasOne(f => f.Series)
+                .WithMany()
+                .HasForeignKey(f => f.SeriesId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Cart>()
+                .HasOne(c => c.User)
+                .WithOne(u => u.Cart)
+                .HasForeignKey<Cart>(c => c.UserId);
+
+            modelBuilder.Entity<CartItem>()
+                .HasOne(ci => ci.Cart)
+                .WithMany(c => c.CartItems)
+                .HasForeignKey(ci => ci.CartId);
+
+            modelBuilder.Entity<CartItem>()
+                .HasOne(ci => ci.Video)
+                .WithMany()
+                .HasForeignKey(ci => ci.VideoId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<CartItem>()
+                .HasOne(ci => ci.Series)
+                .WithMany()
+                .HasForeignKey(ci => ci.SeriesId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ViewHistory>()
+                .HasOne(vh => vh.User)
+                .WithMany(u => u.ViewHistory)
+                .HasForeignKey(vh => vh.UserId);
+
+            modelBuilder.Entity<ViewHistory>()
+                .HasOne(vh => vh.Video)
+                .WithMany()
+                .HasForeignKey(vh => vh.VideoId);
+
+            // Indexes for performance
+            modelBuilder.Entity<Favorite>()
+                .HasIndex(f => new { f.UserId, f.VideoId, f.SeriesId })
+                .IsUnique();
+
+            modelBuilder.Entity<ViewHistory>()
+                .HasIndex(vh => new { vh.UserId, vh.VideoId });
 
            // DataSeeder.SeedData(modelBuilder);
         }

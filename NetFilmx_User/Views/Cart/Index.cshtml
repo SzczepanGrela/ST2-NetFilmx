@@ -1,0 +1,535 @@
+@model NetFilmx_User.Models.ViewModels.CartViewModel
+
+@{
+    ViewData["Title"] = "Shopping Cart";
+}
+
+<!-- Cart Header -->
+<div class="cart-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="cart-title">🛒 Shopping Cart</h1>
+                <p class="cart-subtitle">Review your selected items</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cart Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Cart Items -->
+            <div class="cart-items">
+                @if (Model.Items?.Any() == true)
+                {
+                    @foreach (var item in Model.Items)
+                    {
+                        <div class="cart-item" data-item-id="@item.Id">
+                            <div class="item-thumbnail">
+                                <img src="@item.ThumbnailUrl" alt="@item.Title" onerror="this.src='/images/placeholder.jpg'">
+                                <div class="item-type-badge">
+                                    @if (item.ItemType == "Video")
+                                    {
+                                        <span class="badge bg-primary">🎬 Video</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-info">📺 Series</span>
+                                    }
+                                </div>
+                            </div>
+                            
+                            <div class="item-details">
+                                <h5 class="item-title">@item.Title</h5>
+                                <p class="item-description">
+                                    @if (item.ItemType == "Video")
+                                    {
+                                        <span>High-quality video content</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Complete series with all episodes</span>
+                                    }
+                                </p>
+                                <div class="item-actions">
+                                    <button class="btn btn-sm btn-outline-danger" onclick="removeFromCart('@item.Id')">
+                                        🗑️ Remove
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-secondary" onclick="moveToWishlist('@item.Id')">
+                                        ❤️ Move to Wishlist
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="item-price">
+                                <span class="price">$@item.Price</span>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="empty-cart">
+                        <div class="text-center">
+                            <div class="empty-icon">🛒</div>
+                            <h3>Your cart is empty</h3>
+                            <p>Looks like you haven't added anything to your cart yet.</p>
+                            <div class="empty-actions">
+                                <a href="/Category" class="btn btn-primary">Browse Categories</a>
+                                <a href="/Series" class="btn btn-outline-primary">View Series</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        
+        @if (Model.Items?.Any() == true)
+        {
+            <div class="col-lg-4">
+                <!-- Order Summary -->
+                <div class="order-summary">
+                    <h3>Order Summary</h3>
+                    
+                    <div class="summary-details">
+                        <div class="summary-line">
+                            <span>Items (@Model.Items.Count)</span>
+                            <span>$@Model.Subtotal.ToString("F2")</span>
+                        </div>
+                        
+                        <div class="summary-line">
+                            <span>Discount</span>
+                            <span class="discount">-$@Model.Discount.ToString("F2")</span>
+                        </div>
+                        
+                        <div class="summary-line">
+                            <span>Tax</span>
+                            <span>$@Model.Tax.ToString("F2")</span>
+                        </div>
+                        
+                        <hr class="summary-divider">
+                        
+                        <div class="summary-total">
+                            <span>Total</span>
+                            <span>$@Model.Total.ToString("F2")</span>
+                        </div>
+                    </div>
+                    
+                    <div class="checkout-actions">
+                        <a href="/Checkout" class="btn btn-danger btn-lg checkout-btn">
+                            💳 Proceed to Checkout
+                        </a>
+                        <button class="btn btn-outline-secondary" onclick="clearCart()">
+                            🗑️ Clear Cart
+                        </button>
+                    </div>
+                    
+                    <!-- Promo Code -->
+                    <div class="promo-code">
+                        <h4>Have a promo code?</h4>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter promo code" id="promoCode">
+                            <button class="btn btn-outline-primary" onclick="applyPromoCode()">Apply</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recommendations -->
+                <div class="cart-recommendations">
+                    <h4>🎯 You might also like</h4>
+                    <div class="recommendation-item">
+                        <img src="/images/placeholder.jpg" alt="Recommendation" class="recommendation-thumb">
+                        <div class="recommendation-details">
+                            <h6>Similar Content</h6>
+                            <p class="recommendation-price">$9.99</p>
+                            <button class="btn btn-sm btn-outline-primary">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+/* Cart Styles */
+.cart-header {
+    background: linear-gradient(135deg, #e50914 0%, #000000 100%);
+    color: white;
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+}
+
+.cart-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.cart-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.cart-items {
+    background: #2a2a2a;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    border-bottom: 1px solid #444;
+    transition: background 0.3s ease;
+}
+
+.cart-item:hover {
+    background: #333;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.item-thumbnail {
+    position: relative;
+    width: 120px;
+    height: 80px;
+    flex-shrink: 0;
+}
+
+.item-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.item-type-badge {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.item-details {
+    flex: 1;
+}
+
+.item-title {
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.item-description {
+    color: #aaa;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.item-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.item-price {
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.price {
+    color: #e50914;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.empty-cart {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #aaa;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.empty-cart h3 {
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.empty-actions {
+    margin-top: 2rem;
+}
+
+.empty-actions .btn {
+    margin: 0 0.5rem;
+}
+
+.order-summary {
+    background: #2a2a2a;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    position: sticky;
+    top: 100px;
+}
+
+.order-summary h3 {
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+}
+
+.summary-details {
+    margin-bottom: 2rem;
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    color: #ffffff;
+}
+
+.discount {
+    color: #28a745;
+}
+
+.summary-divider {
+    border-color: #444;
+    margin: 1.5rem 0;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.checkout-actions {
+    margin-bottom: 2rem;
+}
+
+.checkout-btn {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.promo-code {
+    padding-top: 1.5rem;
+    border-top: 1px solid #444;
+}
+
+.promo-code h4 {
+    color: #ffffff;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.promo-code .form-control {
+    background: #333;
+    border: 1px solid #555;
+    color: #ffffff;
+}
+
+.promo-code .form-control:focus {
+    background: #444;
+    border-color: #e50914;
+    color: #ffffff;
+    box-shadow: 0 0 0 0.2rem rgba(229, 9, 20, 0.25);
+}
+
+.cart-recommendations {
+    background: #2a2a2a;
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.cart-recommendations h4 {
+    color: #ffffff;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.recommendation-item {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    background: #333;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+.recommendation-thumb {
+    width: 60px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.recommendation-details {
+    flex: 1;
+}
+
+.recommendation-details h6 {
+    color: #ffffff;
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+}
+
+.recommendation-price {
+    color: #e50914;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+}
+
+@@media (max-width: 768px) {
+    .cart-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .item-thumbnail {
+        width: 100%;
+        height: 150px;
+    }
+    
+    .item-actions {
+        justify-content: center;
+    }
+    
+    .order-summary {
+        position: static;
+        margin-top: 2rem;
+    }
+}
+</style>
+
+<script>
+function removeFromCart(itemId) {
+    if (confirm('Are you sure you want to remove this item from your cart?')) {
+        fetch('/Cart/RemoveItem', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value
+            },
+            body: JSON.stringify({ itemId: itemId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Remove item from DOM
+                const itemElement = document.querySelector(`[data-item-id="${itemId}"]`);
+                if (itemElement) {
+                    itemElement.remove();
+                }
+                
+                // Update cart count
+                updateCartCount();
+                
+                // Refresh page if cart is empty
+                if (document.querySelectorAll('.cart-item').length === 0) {
+                    location.reload();
+                }
+                
+                showMessage(data.message, 'success');
+            } else {
+                showMessage('Error removing item from cart', 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showMessage('Error removing item from cart', 'error');
+        });
+    }
+}
+
+function clearCart() {
+    if (confirm('Are you sure you want to clear your entire cart?')) {
+        fetch('/Cart/Clear', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                showMessage('Error clearing cart', 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showMessage('Error clearing cart', 'error');
+        });
+    }
+}
+
+function moveToWishlist(itemId) {
+    // TODO: Implement wishlist functionality
+    showMessage('Wishlist functionality coming soon!', 'info');
+}
+
+function applyPromoCode() {
+    const promoCode = document.getElementById('promoCode').value;
+    
+    if (!promoCode.trim()) {
+        showMessage('Please enter a promo code', 'error');
+        return;
+    }
+    
+    // TODO: Implement promo code validation
+    showMessage('Promo code functionality coming soon!', 'info');
+}
+
+function updateCartCount() {
+    fetch('/Cart/GetCartCount')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('cartCount').textContent = data.count;
+        });
+}
+
+function showMessage(message, type) {
+    const alertClass = type === 'success' ? 'alert-success' : 
+                     type === 'info' ? 'alert-info' : 'alert-danger';
+    
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert ${alertClass} alert-dismissible fade show`;
+    alertDiv.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    
+    document.querySelector('.container').prepend(alertDiv);
+    
+    // Auto-dismiss after 3 seconds
+    setTimeout(() => {
+        alertDiv.remove();
+    }, 3000);
+}
+
+// Update cart count on page load
+document.addEventListener('DOMContentLoaded', function() {
+    updateCartCount();
+});
+</script>

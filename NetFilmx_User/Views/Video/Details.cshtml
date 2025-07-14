@@ -1,0 +1,542 @@
+@model NetFilmx_User.Models.ViewModels.VideoDetailViewModel
+
+@{
+    ViewData["Title"] = Model.Video.Title;
+}
+
+<!-- Video Player Section -->
+<div class="video-player-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="video-player-container">
+                    @if (!string.IsNullOrEmpty(Model.Video.VideoUrl))
+                    {
+                        <iframe class="video-player" 
+                                src="https://www.youtube.com/embed/@Model.Video.VideoUrl" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    }
+                    else
+                    {
+                        <div class="video-placeholder">
+                            <div class="placeholder-content">
+                                <h3>📹 Video Preview Coming Soon</h3>
+                                <p>This video will be available after purchase</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Video Information Section -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="video-info-section">
+                <!-- Video Title and Actions -->
+                <div class="video-header">
+                    <h1 class="video-title">@Model.Video.Title</h1>
+                    <div class="video-meta">
+                        <span class="video-price">$@Model.Video.Price</span>
+                        <span class="video-date">@Model.Video.CreatedAt.ToString("MMM dd, yyyy")</span>
+                        <span class="video-likes">❤️ @Model.LikesCount</span>
+                    </div>
+                </div>
+                
+                <!-- Video Actions -->
+                <div class="video-actions">
+                    <button class="btn btn-danger btn-lg" onclick="addToCart('video', @Model.Video.Id)">
+                        🛒 Buy Now - $@Model.Video.Price
+                    </button>
+                    <button class="btn btn-outline-light" onclick="addToCart('video', @Model.Video.Id)">
+                        🛍️ Add to Cart
+                    </button>
+                    <button class="btn btn-outline-light" onclick="toggleLike(@Model.Video.Id)">
+                        ❤️ Like
+                    </button>
+                    <button class="btn btn-outline-light" onclick="shareVideo(@Model.Video.Id)">
+                        📤 Share
+                    </button>
+                </div>
+                
+                <!-- Video Description -->
+                <div class="video-description">
+                    <h3>📝 Description</h3>
+                    <p>@Model.Video.Description</p>
+                </div>
+                
+                <!-- Comments Section -->
+                <div class="comments-section">
+                    <h3>💬 Comments (@Model.Comments.Count)</h3>
+                    
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="comment-form">
+                            <form id="commentForm" onsubmit="submitComment(event)">
+                                <div class="form-group">
+                                    <textarea class="form-control" id="commentText" 
+                                              placeholder="Add a comment..." rows="3" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">💬 Post Comment</button>
+                            </form>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="login-prompt">
+                            <p>Please <a href="/Identity/Account/Login">log in</a> to leave a comment.</p>
+                        </div>
+                    }
+                    
+                    <div class="comments-list">
+                        @if (Model.Comments?.Any() == true)
+                        {
+                            @foreach (var comment in Model.Comments.Take(10))
+                            {
+                                <div class="comment">
+                                    <div class="comment-header">
+                                        <span class="comment-author">👤 User</span>
+                                        <span class="comment-date">Recently</span>
+                                    </div>
+                                    <div class="comment-content">
+                                        @comment.Content
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="no-comments">
+                                <p>No comments yet. Be the first to share your thoughts!</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Related Videos Sidebar -->
+        <div class="col-lg-4">
+            <div class="related-videos-section">
+                <h3>🎬 Related Videos</h3>
+                <div class="related-videos-list">
+                    @if (Model.RelatedVideos?.Any() == true)
+                    {
+                        @foreach (var relatedVideo in Model.RelatedVideos)
+                        {
+                            <div class="related-video-item">
+                                <a href="/Video/Details/@relatedVideo.Id" class="related-video-link">
+                                    <img src="@relatedVideo.ThumbnailUrl" alt="@relatedVideo.Title" 
+                                         class="related-video-thumbnail" 
+                                         onerror="this.src='/images/video-placeholder.jpg'">
+                                    <div class="related-video-info">
+                                        <h5>@relatedVideo.Title</h5>
+                                        <p class="related-video-price">$@relatedVideo.Price</p>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="no-related">
+                            <p>No related videos found.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Video Player Styles */
+.video-player-section {
+    background: #000;
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+.video-player-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    overflow: hidden;
+    border-radius: 0;
+}
+
+.video-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #333 0%, #000 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.placeholder-content h3 {
+    margin-bottom: 1rem;
+}
+
+/* Video Information Styles */
+.video-info-section {
+    background: #2a2a2a;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.video-header {
+    margin-bottom: 1.5rem;
+}
+
+.video-title {
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.video-meta {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.video-price {
+    color: #e50914;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.video-date,
+.video-likes {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+.video-actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.video-description {
+    margin-bottom: 3rem;
+}
+
+.video-description h3 {
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.video-description p {
+    color: #e5e5e5;
+    line-height: 1.6;
+}
+
+/* Comments Styles */
+.comments-section {
+    border-top: 1px solid #444;
+    padding-top: 2rem;
+}
+
+.comments-section h3 {
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+}
+
+.comment-form {
+    background: #333;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.comment-form .form-control {
+    background: #444;
+    border: 1px solid #555;
+    color: #ffffff;
+    resize: vertical;
+}
+
+.comment-form .form-control:focus {
+    background: #555;
+    border-color: #e50914;
+    color: #ffffff;
+    box-shadow: 0 0 0 0.2rem rgba(229, 9, 20, 0.25);
+}
+
+.login-prompt {
+    text-align: center;
+    padding: 2rem;
+    color: #aaa;
+}
+
+.login-prompt a {
+    color: #e50914;
+    text-decoration: none;
+}
+
+.login-prompt a:hover {
+    text-decoration: underline;
+}
+
+.comments-list {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.comment {
+    background: #333;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.comment-author {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.comment-date {
+    color: #aaa;
+    font-size: 0.8rem;
+}
+
+.comment-content {
+    color: #e5e5e5;
+    line-height: 1.5;
+}
+
+.no-comments {
+    text-align: center;
+    padding: 2rem;
+    color: #aaa;
+}
+
+/* Related Videos Styles */
+.related-videos-section {
+    background: #2a2a2a;
+    border-radius: 8px;
+    padding: 1.5rem;
+    position: sticky;
+    top: 100px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.related-videos-section h3 {
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.related-videos-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.related-video-item {
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.related-video-item:hover {
+    transform: translateY(-2px);
+}
+
+.related-video-link {
+    display: flex;
+    gap: 1rem;
+    padding: 0.5rem;
+    background: #333;
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.3s ease;
+}
+
+.related-video-link:hover {
+    background: #444;
+    text-decoration: none;
+    color: inherit;
+}
+
+.related-video-thumbnail {
+    width: 80px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.related-video-info {
+    flex: 1;
+}
+
+.related-video-info h5 {
+    color: #ffffff;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+    line-height: 1.3;
+}
+
+.related-video-price {
+    color: #e50914;
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+.no-related {
+    text-align: center;
+    padding: 2rem;
+    color: #aaa;
+}
+
+@@media (max-width: 768px) {
+    .video-actions {
+        flex-direction: column;
+    }
+    
+    .video-actions .btn {
+        width: 100%;
+    }
+    
+    .video-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .related-videos-section {
+        position: static;
+        max-height: none;
+    }
+}
+</style>
+
+<script>
+function addToCart(type, id) {
+    const url = type === 'video' ? '/Cart/AddVideo' : '/Cart/AddSeries';
+    const data = type === 'video' ? { videoId: id } : { seriesId: id };
+    
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            updateCartCount();
+            showMessage(data.message, 'success');
+        } else {
+            showMessage('Error adding to cart', 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showMessage('Error adding to cart', 'error');
+    });
+}
+
+function toggleLike(videoId) {
+    // TODO: Implement like functionality
+    showMessage('Like functionality coming soon!', 'info');
+}
+
+function shareVideo(videoId) {
+    if (navigator.share) {
+        navigator.share({
+            title: document.title,
+            text: 'Check out this video on NetFilmx!',
+            url: window.location.href,
+        });
+    } else {
+        // Fallback - copy to clipboard
+        navigator.clipboard.writeText(window.location.href).then(() => {
+            showMessage('Link copied to clipboard!', 'success');
+        });
+    }
+}
+
+function submitComment(event) {
+    event.preventDefault();
+    
+    const commentText = document.getElementById('commentText').value;
+    if (!commentText.trim()) {
+        showMessage('Please enter a comment', 'error');
+        return;
+    }
+    
+    // TODO: Implement comment submission
+    showMessage('Comment functionality coming soon!', 'info');
+}
+
+function updateCartCount() {
+    fetch('/Cart/GetCartCount')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('cartCount').textContent = data.count;
+        });
+}
+
+function showMessage(message, type) {
+    const alertClass = type === 'success' ? 'alert-success' : 
+                     type === 'info' ? 'alert-info' : 'alert-danger';
+    
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert ${alertClass} alert-dismissible fade show`;
+    alertDiv.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    
+    document.querySelector('.container').prepend(alertDiv);
+    
+    // Auto-dismiss after 3 seconds
+    setTimeout(() => {
+        alertDiv.remove();
+    }, 3000);
+}
+
+// Update cart count on page load
+document.addEventListener('DOMContentLoaded', function() {
+    updateCartCount();
+});
+</script>

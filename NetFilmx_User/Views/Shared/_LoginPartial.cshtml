@@ -1,0 +1,49 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<ul class="navbar-nav">
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" data-bs-toggle="dropdown">
+            <i class="fas fa-user-circle me-1"></i>@User.Identity?.Name
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end bg-dark border-secondary">
+            <li><a class="dropdown-item text-light" asp-controller="Profile" asp-action="Index">
+                <i class="fas fa-user me-2"></i>Profile
+            </a></li>
+            <li><a class="dropdown-item text-light" asp-controller="Profile" asp-action="Purchases">
+                <i class="fas fa-receipt me-2"></i>My Purchases
+            </a></li>
+            <li><a class="dropdown-item text-light" asp-controller="Profile" asp-action="Favorites">
+                <i class="fas fa-heart me-2"></i>Favorites
+            </a></li>
+            <li><a class="dropdown-item text-light" asp-controller="Profile" asp-action="Settings">
+                <i class="fas fa-cog me-2"></i>Settings
+            </a></li>
+            <li><hr class="dropdown-divider border-secondary"></li>
+            <li>
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="dropdown-item text-light">
+                        <i class="fas fa-sign-out-alt me-2"></i>Logout
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">
+            <i class="fas fa-user-plus me-1"></i>Register
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">
+            <i class="fas fa-sign-in-alt me-1"></i>Login
+        </a>
+    </li>
+}
+</ul>

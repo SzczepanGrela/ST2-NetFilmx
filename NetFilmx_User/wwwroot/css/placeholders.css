@@ -1,0 +1,221 @@
+/* NetFilmx Placeholder Images using CSS */
+
+/* Default avatar placeholder */
+.avatar-placeholder {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #e50914 0%, #b20710 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Video thumbnail placeholder */
+.video-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.video-placeholder::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    animation: shimmer 1.5s infinite;
+}
+
+/* Series poster placeholder */
+.series-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.series-placeholder::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    animation: shimmer 1.5s infinite;
+}
+
+/* Category placeholder */
+.category-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.category-placeholder::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    animation: shimmer 1.5s infinite;
+}
+
+/* General placeholder */
+.placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.placeholder::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    animation: shimmer 1.5s infinite;
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* Image fallback styling */
+img[src="/images/video-placeholder.jpg"],
+img[src*="video-placeholder"] {
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    position: relative;
+}
+
+img[src="/images/series-placeholder.jpg"],
+img[src*="series-placeholder"] {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    position: relative;
+}
+
+img[src="/images/category-placeholder.jpg"],
+img[src*="category-placeholder"] {
+    background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+    position: relative;
+}
+
+img[src="/images/default-avatar.png"],
+img[src*="default-avatar"] {
+    background: linear-gradient(135deg, #e50914 0%, #b20710 100%);
+    position: relative;
+}
+
+img[src="/images/placeholder.jpg"],
+img[src*="placeholder.jpg"] {
+    background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
+    position: relative;
+}
+
+/* Error handling for missing images */
+img {
+    background-color: #2a2a2a;
+}
+
+/* Add icon overlay for missing images */
+img::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Arial', sans-serif;
+    font-size: 2rem;
+    color: #666;
+    pointer-events: none;
+}
+
+/* Specific icons for different placeholder types */
+img[src*="video-placeholder"]::after {
+    content: '🎬';
+}
+
+img[src*="series-placeholder"]::after {
+    content: '📺';
+}
+
+img[src*="category-placeholder"]::after {
+    content: '📁';
+}
+
+img[src*="default-avatar"]::after {
+    content: '👤';
+}
+
+/* Loading placeholder for dynamic content */
+.loading-placeholder {
+    background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%);
+    background-size: 200% 100%;
+    animation: loading 2s infinite;
+    border-radius: 4px;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Responsive placeholder text */
+@media (max-width: 768px) {
+    .video-placeholder,
+    .series-placeholder,
+    .category-placeholder {
+        font-size: 2rem;
+    }
+    
+    .placeholder {
+        font-size: 1.5rem;
+    }
+}

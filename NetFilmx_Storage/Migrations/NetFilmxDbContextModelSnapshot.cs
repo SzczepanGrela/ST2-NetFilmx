@@ -22,6 +22,65 @@ namespace NetFilmx_Storage.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("NetFilmx_Storage.Entities.Cart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Carts", "NetFilmx");
+                });
+
+            modelBuilder.Entity("NetFilmx_Storage.Entities.CartItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("AddedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SeriesId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("VideoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("SeriesId");
+
+                    b.HasIndex("VideoId");
+
+                    b.ToTable("CartItems", "NetFilmx");
+                });
+
             modelBuilder.Entity("NetFilmx_Storage.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -42,26 +101,6 @@ namespace NetFilmx_Storage.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories", "NetFilmx");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Podziwiaj niesamowity świat natury",
-                            Name = "Zwierzęta"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Filmy edukacyjne",
-                            Name = "Rozwój"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Zabawne i edukacyjne filmy",
-                            Name = "Rozrywka"
-                        });
                 });
 
             modelBuilder.Entity("NetFilmx_Storage.Entities.Comment", b =>
@@ -96,26 +135,39 @@ namespace NetFilmx_Storage.Migrations
                     b.HasIndex("VideoId");
 
                     b.ToTable("Comments", "NetFilmx");
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Content = "This is a comment for the first video.",
-                            CreatedAt = new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1001),
-                            UpdatedAt = new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1003),
-                            UserId = 1,
-                            VideoId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Content = "This is a comment for the second video.",
-                            CreatedAt = new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1006),
-                            UpdatedAt = new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1008),
-                            UserId = 2,
-                            VideoId = 2
-                        });
+            modelBuilder.Entity("NetFilmx_Storage.Entities.Favorite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("SeriesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("VideoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SeriesId");
+
+                    b.HasIndex("VideoId");
+
+                    b.HasIndex("UserId", "VideoId", "SeriesId")
+                        .IsUnique()
+                        .HasFilter("[VideoId] IS NOT NULL AND [SeriesId] IS NOT NULL");
+
+                    b.ToTable("Favorites", "NetFilmx");
                 });
 
             modelBuilder.Entity("NetFilmx_Storage.Entities.Like", b =>
@@ -142,22 +194,6 @@ namespace NetFilmx_Storage.Migrations
                     b.HasIndex("VideoId");
 
                     b.ToTable("Likes", "NetFilmx");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1014),
-                            UserId = 1,
-                            VideoId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedAt = new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1017),
-                            UserId = 2,
-                            VideoId = 2
-                        });
                 });
 
             modelBuilder.Entity("NetFilmx_Storage.Entities.Series", b =>
@@ -189,44 +225,6 @@ namespace NetFilmx_Storage.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Series", "NetFilmx");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6602),
-                            Description = "Kup zestaw oryginalnych 9 filmów dostępnych na platformie",
-                            Name = "Pakiet wszystkich startowych filmów",
-                            Price = 149.99m,
-                            UpdatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6649)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6653),
-                            Description = "Zestaw zawierający 6 filmów poświęconych zwierzętom",
-                            Name = "Pakiet świata zwierząt",
-                            Price = 49.99m,
-                            UpdatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6655)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6658),
-                            Description = "Zestaw zawierający 3 filmy edukacyjne",
-                            Name = "Pakiet rozwoju",
-                            Price = 59.99m,
-                            UpdatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6660)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6669),
-                            Description = "Zestaw zawierający 3 filmy promocyjne, po jednym z każdej kategorii",
-                            Name = "Pakiet promocyjny",
-                            Price = 19.99m,
-                            UpdatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6671)
-                        });
                 });
 
             modelBuilder.Entity("NetFilmx_Storage.Entities.SeriesPurchase", b =>
@@ -253,43 +251,6 @@ namespace NetFilmx_Storage.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("SeriesPurchases", "NetFilmx");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            PurchaseDate = new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1032),
-                            SeriesId = 1,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            PurchaseDate = new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1055),
-                            SeriesId = 2,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            PurchaseDate = new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1057),
-                            SeriesId = 3,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            PurchaseDate = new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1060),
-                            SeriesId = 4,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 5,
-                            PurchaseDate = new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1062),
-                            SeriesId = 2,
-                            UserId = 2
-                        });
                 });
 
             modelBuilder.Entity("NetFilmx_Storage.Entities.Tag", b =>
@@ -308,48 +269,6 @@ namespace NetFilmx_Storage.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tags", "NetFilmx");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Zwierzęta"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Koty"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Rozrywka"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Zabawne"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Edukacyjne"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Rozwój"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Programowanie"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "Lockpicking"
-                        });
                 });
 
             modelBuilder.Entity("NetFilmx_Storage.Entities.User", b =>
@@ -384,35 +303,103 @@ namespace NetFilmx_Storage.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users", "NetFilmx");
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 809, DateTimeKind.Local).AddTicks(1400),
-                            Email = "user1@example.com",
-                            PasswordHash = "$2a$11$rReehj4aoeAoHc4VEOM86epohmfvppTZ58i9WwZjKUw9L67B11W4m",
-                            UpdatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 809, DateTimeKind.Local).AddTicks(1451),
-                            Username = "User1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 929, DateTimeKind.Local).AddTicks(9754),
-                            Email = "user2@example.com",
-                            PasswordHash = "$2a$11$zYqNtTzAr/nK9U1utUnXCOen/ptIUaGQ0JbeVCIzmFpldWbvFOz/i",
-                            UpdatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 929, DateTimeKind.Local).AddTicks(9796),
-                            Username = "User2"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedAt = new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(954),
-                            Email = "user3@example.com",
-                            PasswordHash = "$2a$11$yjlPbtdMP4SglfZzTMXWp.c6ezunVY05tuIw93YIstv1JRX8cPlPu",
-                            UpdatedAt = new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(989),
-                            Username = "User3"
-                        });
+            modelBuilder.Entity("NetFilmx_Storage.Entities.UserProfile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Bio")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Country")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DisplayName")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("LastLoginDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LoginCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProfileImageUrl")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("UserProfiles", "NetFilmx");
+                });
+
+            modelBuilder.Entity("NetFilmx_Storage.Entities.UserSettings", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("AutoplayEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("EmailNotifications")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HighQualityDefault")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Language")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<bool>("ShowAdultContent")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Theme")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("UserSettings", "NetFilmx");
                 });
 
             modelBuilder.Entity("NetFilmx_Storage.Entities.Video", b =>
@@ -455,116 +442,6 @@ namespace NetFilmx_Storage.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Videos", "NetFilmx");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(2021, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Discover amazing wildlife and relax! ...",
-                            Price = 9.99m,
-                            ThumbnailUrl = "https://i.ytimg.com/vi/5kozt0uDa4c/hqdefault.jpg",
-                            Title = "Amazing Scene of Wild Animals In 4K",
-                            UpdatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6698),
-                            VideoUrl = "5kozt0uDa4c",
-                            Views = 0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedAt = new DateTime(2021, 1, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Ultimate Wild Animals Collection in 8K ULTRA HD ...",
-                            Price = 4.99m,
-                            ThumbnailUrl = "https://i.ytimg.com/vi/Zv11L-ZfrSg/hqdefault.jpg",
-                            Title = "Ultimate Wild Animals Collection in 8K ULTRA HD",
-                            UpdatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6734),
-                            VideoUrl = "Zv11L-ZfrSg",
-                            Views = 0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedAt = new DateTime(2022, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Sit back and relax while enjoying this scenic film ...",
-                            Price = 6.99m,
-                            ThumbnailUrl = "https://i.ytimg.com/vi/oRDRfikj2z8/hqdefault.jpg",
-                            Title = "Baby Animals 4K - Amazing World Of Young Animals",
-                            UpdatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6742),
-                            VideoUrl = "oRDRfikj2z8",
-                            Views = 0
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6750),
-                            Description = "Cute, cuddly, and utterly chaotic! ...",
-                            Price = 14.99m,
-                            ThumbnailUrl = "https://i.ytimg.com/vi/y0sF5xhGreA/hqdefault.jpg",
-                            Title = "20 Minutes of Adorable Kittens",
-                            UpdatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6752),
-                            VideoUrl = "y0sF5xhGreA",
-                            Views = 0
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CreatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6759),
-                            Description = "Watching funny baby cats is the hardest try not to laugh challenge.",
-                            Price = 19.99m,
-                            ThumbnailUrl = "https://i.ytimg.com/vi/cytJLvf-eVs/hqdefault.jpg",
-                            Title = "Baby Cats - Cute and Funny Cat Videos Compilation",
-                            UpdatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6761),
-                            VideoUrl = "cytJLvf-eVs",
-                            Views = 0
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CreatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6769),
-                            Description = "Hoomans! Rufus here! ...",
-                            Price = 12.99m,
-                            ThumbnailUrl = "https://i.ytimg.com/vi/tpiyEe_CqB4/hqdefault.jpg",
-                            Title = "Cute and Funny Cat Videos to Keep You Smiling!",
-                            UpdatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6771),
-                            VideoUrl = "tpiyEe_CqB4",
-                            Views = 0
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CreatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6778),
-                            Description = "Asp.net core MVC 6.0 tutorial for beginners.",
-                            Price = 14.99m,
-                            ThumbnailUrl = "https://i.ytimg.com/vi/fFY9nxfILJQ/hqdefault.jpg",
-                            Title = "Entity Framework Core Migration",
-                            UpdatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6781),
-                            VideoUrl = "fFY9nxfILJQ",
-                            Views = 0
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CreatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6788),
-                            Description = "This video explores a significant security flaw discussed by LockPickingLawyer.",
-                            Price = 19.99m,
-                            ThumbnailUrl = "https://i.ytimg.com/vi/U5-qy2tbDG8/hqdefault.jpg",
-                            Title = "The Most Significant Security Flaw in North America",
-                            UpdatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6790),
-                            VideoUrl = "U5-qy2tbDG8",
-                            Views = 0
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CreatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6797),
-                            Description = "Unity is an amazingly powerful game engine - but it can be hard to learn ...",
-                            Price = 12.99m,
-                            ThumbnailUrl = "https://i.ytimg.com/vi/XtQMytORBmM/hqdefault.jpg",
-                            Title = "The Unity Tutorial For Complete Beginners",
-                            UpdatedAt = new DateTime(2024, 8, 3, 21, 45, 56, 686, DateTimeKind.Local).AddTicks(6799),
-                            VideoUrl = "XtQMytORBmM",
-                            Views = 0
-                        });
                 });
 
             modelBuilder.Entity("NetFilmx_Storage.Entities.VideoPurchase", b =>
@@ -591,22 +468,44 @@ namespace NetFilmx_Storage.Migrations
                     b.HasIndex("VideoId");
 
                     b.ToTable("VideoPurchases", "NetFilmx");
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            PurchaseDate = new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1023),
-                            UserId = 2,
-                            VideoId = 4
-                        },
-                        new
-                        {
-                            Id = 2,
-                            PurchaseDate = new DateTime(2024, 8, 3, 21, 45, 57, 50, DateTimeKind.Local).AddTicks(1025),
-                            UserId = 3,
-                            VideoId = 5
-                        });
+            modelBuilder.Entity("NetFilmx_Storage.Entities.ViewHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("VideoDurationSeconds")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VideoId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ViewedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("WatchTimeSeconds")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VideoId");
+
+                    b.HasIndex("UserId", "VideoId");
+
+                    b.ToTable("ViewHistory", "NetFilmx");
                 });
 
             modelBuilder.Entity("VideoCategory", b =>
@@ -622,88 +521,6 @@ namespace NetFilmx_Storage.Migrations
                     b.HasIndex("VideoId");
 
                     b.ToTable("VideoCategory", "NetFilmx");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = 1,
-                            VideoId = 1
-                        },
-                        new
-                        {
-                            CategoryId = 3,
-                            VideoId = 1
-                        },
-                        new
-                        {
-                            CategoryId = 1,
-                            VideoId = 2
-                        },
-                        new
-                        {
-                            CategoryId = 3,
-                            VideoId = 2
-                        },
-                        new
-                        {
-                            CategoryId = 1,
-                            VideoId = 3
-                        },
-                        new
-                        {
-                            CategoryId = 3,
-                            VideoId = 3
-                        },
-                        new
-                        {
-                            CategoryId = 1,
-                            VideoId = 4
-                        },
-                        new
-                        {
-                            CategoryId = 3,
-                            VideoId = 4
-                        },
-                        new
-                        {
-                            CategoryId = 1,
-                            VideoId = 5
-                        },
-                        new
-                        {
-                            CategoryId = 3,
-                            VideoId = 5
-                        },
-                        new
-                        {
-                            CategoryId = 1,
-                            VideoId = 6
-                        },
-                        new
-                        {
-                            CategoryId = 3,
-                            VideoId = 6
-                        },
-                        new
-                        {
-                            CategoryId = 2,
-                            VideoId = 7
-                        },
-                        new
-                        {
-                            CategoryId = 2,
-                            VideoId = 8
-                        },
-                        new
-                        {
-                            CategoryId = 3,
-                            VideoId = 8
-                        },
-                        new
-                        {
-                            CategoryId = 2,
-                            VideoId = 9
-                        });
                 });
 
             modelBuilder.Entity("VideoSeries", b =>
@@ -719,98 +536,6 @@ namespace NetFilmx_Storage.Migrations
                     b.HasIndex("VideoId");
 
                     b.ToTable("VideoSeries", "NetFilmx");
-
-                    b.HasData(
-                        new
-                        {
-                            SeriesId = 1,
-                            VideoId = 1
-                        },
-                        new
-                        {
-                            SeriesId = 1,
-                            VideoId = 2
-                        },
-                        new
-                        {
-                            SeriesId = 1,
-                            VideoId = 3
-                        },
-                        new
-                        {
-                            SeriesId = 1,
-                            VideoId = 4
-                        },
-                        new
-                        {
-                            SeriesId = 1,
-                            VideoId = 5
-                        },
-                        new
-                        {
-                            SeriesId = 1,
-                            VideoId = 6
-                        },
-                        new
-                        {
-                            SeriesId = 2,
-                            VideoId = 1
-                        },
-                        new
-                        {
-                            SeriesId = 2,
-                            VideoId = 2
-                        },
-                        new
-                        {
-                            SeriesId = 2,
-                            VideoId = 3
-                        },
-                        new
-                        {
-                            SeriesId = 2,
-                            VideoId = 4
-                        },
-                        new
-                        {
-                            SeriesId = 2,
-                            VideoId = 5
-                        },
-                        new
-                        {
-                            SeriesId = 2,
-                            VideoId = 6
-                        },
-                        new
-                        {
-                            SeriesId = 3,
-                            VideoId = 7
-                        },
-                        new
-                        {
-                            SeriesId = 3,
-                            VideoId = 8
-                        },
-                        new
-                        {
-                            SeriesId = 3,
-                            VideoId = 9
-                        },
-                        new
-                        {
-                            SeriesId = 4,
-                            VideoId = 7
-                        },
-                        new
-                        {
-                            SeriesId = 4,
-                            VideoId = 8
-                        },
-                        new
-                        {
-                            SeriesId = 4,
-                            VideoId = 9
-                        });
                 });
 
             modelBuilder.Entity("VideoTag", b =>
@@ -826,108 +551,42 @@ namespace NetFilmx_Storage.Migrations
                     b.HasIndex("VideoId");
 
                     b.ToTable("VideoTag", "NetFilmx");
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            TagId = 1,
-                            VideoId = 1
-                        },
-                        new
-                        {
-                            TagId = 5,
-                            VideoId = 1
-                        },
-                        new
-                        {
-                            TagId = 1,
-                            VideoId = 2
-                        },
-                        new
-                        {
-                            TagId = 5,
-                            VideoId = 2
-                        },
-                        new
-                        {
-                            TagId = 1,
-                            VideoId = 3
-                        },
-                        new
-                        {
-                            TagId = 5,
-                            VideoId = 3
-                        },
-                        new
-                        {
-                            TagId = 2,
-                            VideoId = 4
-                        },
-                        new
-                        {
-                            TagId = 4,
-                            VideoId = 4
-                        },
-                        new
-                        {
-                            TagId = 2,
-                            VideoId = 5
-                        },
-                        new
-                        {
-                            TagId = 4,
-                            VideoId = 5
-                        },
-                        new
-                        {
-                            TagId = 2,
-                            VideoId = 6
-                        },
-                        new
-                        {
-                            TagId = 4,
-                            VideoId = 6
-                        },
-                        new
-                        {
-                            TagId = 1,
-                            VideoId = 6
-                        },
-                        new
-                        {
-                            TagId = 1,
-                            VideoId = 5
-                        },
-                        new
-                        {
-                            TagId = 1,
-                            VideoId = 4
-                        },
-                        new
-                        {
-                            TagId = 7,
-                            VideoId = 7
-                        },
-                        new
-                        {
-                            TagId = 8,
-                            VideoId = 8
-                        },
-                        new
-                        {
-                            TagId = 6,
-                            VideoId = 9
-                        },
-                        new
-                        {
-                            TagId = 7,
-                            VideoId = 9
-                        },
-                        new
-                        {
-                            TagId = 6,
-                            VideoId = 7
-                        });
+            modelBuilder.Entity("NetFilmx_Storage.Entities.Cart", b =>
+                {
+                    b.HasOne("NetFilmx_Storage.Entities.User", "User")
+                        .WithOne("Cart")
+                        .HasForeignKey("NetFilmx_Storage.Entities.Cart", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("NetFilmx_Storage.Entities.CartItem", b =>
+                {
+                    b.HasOne("NetFilmx_Storage.Entities.Cart", "Cart")
+                        .WithMany("CartItems")
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NetFilmx_Storage.Entities.Series", "Series")
+                        .WithMany()
+                        .HasForeignKey("SeriesId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("NetFilmx_Storage.Entities.Video", "Video")
+                        .WithMany()
+                        .HasForeignKey("VideoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Cart");
+
+                    b.Navigation("Series");
+
+                    b.Navigation("Video");
                 });
 
             modelBuilder.Entity("NetFilmx_Storage.Entities.Comment", b =>
@@ -943,6 +602,31 @@ namespace NetFilmx_Storage.Migrations
                         .HasForeignKey("VideoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
+
+                    b.Navigation("Video");
+                });
+
+            modelBuilder.Entity("NetFilmx_Storage.Entities.Favorite", b =>
+                {
+                    b.HasOne("NetFilmx_Storage.Entities.Series", "Series")
+                        .WithMany()
+                        .HasForeignKey("SeriesId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("NetFilmx_Storage.Entities.User", "User")
+                        .WithMany("Favorites")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NetFilmx_Storage.Entities.Video", "Video")
+                        .WithMany()
+                        .HasForeignKey("VideoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Series");
 
                     b.Navigation("User");
 
@@ -987,6 +671,28 @@ namespace NetFilmx_Storage.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("NetFilmx_Storage.Entities.UserProfile", b =>
+                {
+                    b.HasOne("NetFilmx_Storage.Entities.User", "User")
+                        .WithOne("Profile")
+                        .HasForeignKey("NetFilmx_Storage.Entities.UserProfile", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("NetFilmx_Storage.Entities.UserSettings", b =>
+                {
+                    b.HasOne("NetFilmx_Storage.Entities.User", "User")
+                        .WithOne("Settings")
+                        .HasForeignKey("NetFilmx_Storage.Entities.UserSettings", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("NetFilmx_Storage.Entities.VideoPurchase", b =>
                 {
                     b.HasOne("NetFilmx_Storage.Entities.User", "User")
@@ -997,6 +703,25 @@ namespace NetFilmx_Storage.Migrations
 
                     b.HasOne("NetFilmx_Storage.Entities.Video", "Video")
                         .WithMany("VideoPurchases")
+                        .HasForeignKey("VideoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+
+                    b.Navigation("Video");
+                });
+
+            modelBuilder.Entity("NetFilmx_Storage.Entities.ViewHistory", b =>
+                {
+                    b.HasOne("NetFilmx_Storage.Entities.User", "User")
+                        .WithMany("ViewHistory")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NetFilmx_Storage.Entities.Video", "Video")
+                        .WithMany()
                         .HasForeignKey("VideoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1051,6 +776,11 @@ namespace NetFilmx_Storage.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("NetFilmx_Storage.Entities.Cart", b =>
+                {
+                    b.Navigation("CartItems");
+                });
+
             modelBuilder.Entity("NetFilmx_Storage.Entities.Series", b =>
                 {
                     b.Navigation("SeriesPurchases");
@@ -1058,13 +788,23 @@ namespace NetFilmx_Storage.Migrations
 
             modelBuilder.Entity("NetFilmx_Storage.Entities.User", b =>
                 {
+                    b.Navigation("Cart");
+
                     b.Navigation("Comments");
+
+                    b.Navigation("Favorites");
 
                     b.Navigation("Likes");
 
+                    b.Navigation("Profile");
+
                     b.Navigation("SeriesPurchases");
 
+                    b.Navigation("Settings");
+
                     b.Navigation("VideoPurchases");
+
+                    b.Navigation("ViewHistory");
                 });
 
             modelBuilder.Entity("NetFilmx_Storage.Entities.Video", b =>

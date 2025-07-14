@@ -1,0 +1,438 @@
+@model NetFilmx_User.Models.ViewModels.CategoryBrowseViewModel
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<!-- Categories Header -->
+<div class="categories-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="categories-title">📚 Browse Categories</h1>
+                <p class="categories-subtitle">Discover movies and series by genre</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Categories Content -->
+<div class="container">
+    <div class="row">
+        <!-- Filter Bar -->
+        <div class="col-12">
+            <div class="filter-bar">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div class="search-box">
+                            <input type="text" class="form-control" placeholder="Search categories..." 
+                                   id="categorySearch" onkeyup="filterCategories()">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="sort-options">
+                            <label for="sortBy">Sort by:</label>
+                            <select class="form-select" id="sortBy" onchange="sortCategories()">
+                                <option value="name">Name A-Z</option>
+                                <option value="popular">Most Popular</option>
+                                <option value="newest">Newest</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Categories Grid -->
+    <div class="row">
+        <div class="col-12">
+            <div class="categories-grid" id="categoriesGrid">
+                @if (Model.Categories?.Any() == true)
+                {
+                    @foreach (var category in Model.Categories)
+                    {
+                        <div class="category-card" data-category-name="@category.Name.ToLower()">
+                            <a href="/Category/Details/@category.Id" class="category-link">
+                                <div class="category-image">
+                                    <img src="/images/category-placeholder.jpg" alt="@category.Name" 
+                                         class="category-thumbnail">
+                                    <div class="category-overlay">
+                                        <div class="category-info">
+                                            <h3 class="category-name">@category.Name</h3>
+                                            <p class="category-description">
+                                                Explore @category.Name movies and series
+                                            </p>
+                                            <div class="category-stats">
+                                                <span class="video-count">📹 Videos available</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="no-categories">
+                        <div class="text-center">
+                            <div class="empty-icon">📚</div>
+                            <h3>No categories found</h3>
+                            <p>Categories will appear here when they are added to the system.</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    
+    <!-- Popular Categories Spotlight -->
+    @if (Model.Categories?.Any() == true)
+    {
+        <div class="row">
+            <div class="col-12">
+                <div class="popular-categories">
+                    <h2 class="section-title">🔥 Popular Categories</h2>
+                    <div class="popular-grid">
+                        @foreach (var category in Model.Categories.Take(6))
+                        {
+                            <div class="popular-category-item">
+                                <a href="/Category/Details/@category.Id" class="popular-category-link">
+                                    <div class="popular-category-icon">
+                                        @{
+                                            var categoryEmoji = category.Name.ToLower() switch
+                                            {
+                                                "action" => "🎬",
+                                                "drama" => "🎭",
+                                                "comedy" => "😂",
+                                                "horror" => "😱",
+                                                "thriller" => "🔪",
+                                                "romance" => "💕",
+                                                "sci-fi" => "🚀",
+                                                "fantasy" => "🧙",
+                                                "documentary" => "📹",
+                                                "animation" => "🎨",
+                                                _ => "🎬"
+                                            };
+                                        }
+                                        @categoryEmoji
+                                    </div>
+                                    <span class="popular-category-name">@category.Name</span>
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+/* Categories Page Styles */
+.categories-header {
+    background: linear-gradient(135deg, #e50914 0%, #000000 100%);
+    color: white;
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+}
+
+.categories-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.categories-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.filter-bar {
+    background: #2a2a2a;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.search-box .form-control {
+    background: #333;
+    border: 1px solid #555;
+    color: #ffffff;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+}
+
+.search-box .form-control:focus {
+    background: #444;
+    border-color: #e50914;
+    color: #ffffff;
+    box-shadow: 0 0 0 0.2rem rgba(229, 9, 20, 0.25);
+}
+
+.sort-options {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.sort-options label {
+    color: #ffffff;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.sort-options .form-select {
+    background: #333;
+    border: 1px solid #555;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    min-width: 150px;
+}
+
+.sort-options .form-select:focus {
+    background: #444;
+    border-color: #e50914;
+    color: #ffffff;
+    box-shadow: 0 0 0 0.2rem rgba(229, 9, 20, 0.25);
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.category-card {
+    background: #2a2a2a;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    height: 200px;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.category-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+}
+
+.category-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.category-image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.category-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.category-card:hover .category-thumbnail {
+    transform: scale(1.05);
+}
+
+.category-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.6) 50%,
+        rgba(0, 0, 0, 0.3) 100%
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.category-info {
+    color: white;
+}
+
+.category-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.category-description {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.category-stats {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.no-categories {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #aaa;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.no-categories h3 {
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.popular-categories {
+    background: #2a2a2a;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    color: #ffffff;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.popular-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.popular-category-item {
+    background: #333;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.popular-category-item:hover {
+    background: #e50914;
+    transform: translateY(-2px);
+}
+
+.popular-category-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    text-decoration: none;
+    color: #ffffff;
+    transition: color 0.3s ease;
+}
+
+.popular-category-link:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.popular-category-icon {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.popular-category-name {
+    font-weight: 600;
+}
+
+@@media (max-width: 768px) {
+    .categories-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .filter-bar .row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .sort-options {
+        justify-content: flex-start;
+    }
+    
+    .popular-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<script>
+function filterCategories() {
+    const searchTerm = document.getElementById('categorySearch').value.toLowerCase();
+    const categoryCards = document.querySelectorAll('.category-card');
+    
+    categoryCards.forEach(card => {
+        const categoryName = card.getAttribute('data-category-name');
+        if (categoryName.includes(searchTerm)) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+function sortCategories() {
+    const sortBy = document.getElementById('sortBy').value;
+    const grid = document.getElementById('categoriesGrid');
+    const cards = Array.from(grid.querySelectorAll('.category-card'));
+    
+    cards.sort((a, b) => {
+        const nameA = a.getAttribute('data-category-name');
+        const nameB = b.getAttribute('data-category-name');
+        
+        switch (sortBy) {
+            case 'name':
+                return nameA.localeCompare(nameB);
+            case 'popular':
+                // For now, just reverse alphabetical - in real app this would be based on view count
+                return nameB.localeCompare(nameA);
+            case 'newest':
+                // For now, just alphabetical - in real app this would be based on creation date
+                return nameA.localeCompare(nameB);
+            default:
+                return 0;
+        }
+    });
+    
+    cards.forEach(card => grid.appendChild(card));
+}
+</script>

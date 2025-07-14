@@ -1,0 +1,487 @@
+@{
+    ViewData["Title"] = "Settings";
+}
+
+<!-- Profile Header -->
+<div class="profile-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="profile-title">⚙️ Settings</h1>
+                <p class="profile-subtitle">Manage your account preferences</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Profile Content -->
+<div class="container">
+    <div class="row">
+        <!-- Profile Sidebar -->
+        <div class="col-lg-3 col-md-4">
+            <div class="profile-sidebar">
+                <div class="profile-avatar">
+                    <img src="/images/default-avatar.png" alt="Profile Avatar" class="avatar-img">
+                    <h4>@User.Identity.Name</h4>
+                </div>
+                
+                <nav class="profile-nav">
+                    <a href="/Profile" class="nav-item">
+                        <i class="fas fa-user"></i> Profile Info
+                    </a>
+                    <a href="/Profile/Purchases" class="nav-item">
+                        <i class="fas fa-shopping-bag"></i> Purchase History
+                    </a>
+                    <a href="/Profile/Favorites" class="nav-item">
+                        <i class="fas fa-heart"></i> My Favorites
+                    </a>
+                    <a href="/Profile/Settings" class="nav-item active">
+                        <i class="fas fa-cog"></i> Settings
+                    </a>
+                </nav>
+            </div>
+        </div>
+        
+        <!-- Settings Content -->
+        <div class="col-lg-9 col-md-8">
+            <div class="profile-content">
+                <div class="content-header">
+                    <h2>Account Settings</h2>
+                </div>
+                
+                <!-- Account Preferences -->
+                <div class="settings-section">
+                    <h3>📧 Email Preferences</h3>
+                    <div class="settings-form">
+                        <div class="form-group">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
+                                <label class="form-check-label" for="emailNotifications">
+                                    Email notifications for new releases
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="promotionalEmails" checked>
+                                <label class="form-check-label" for="promotionalEmails">
+                                    Promotional emails and special offers
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="purchaseConfirmations" checked>
+                                <label class="form-check-label" for="purchaseConfirmations">
+                                    Purchase confirmations and receipts
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Player Settings -->
+                <div class="settings-section">
+                    <h3>🎬 Player Preferences</h3>
+                    <div class="settings-form">
+                        <div class="form-group">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="autoplay" checked>
+                                <label class="form-check-label" for="autoplay">
+                                    Auto-play videos
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="defaultQuality" class="form-label">Default Video Quality</label>
+                            <select class="form-select" id="defaultQuality">
+                                <option value="auto">Auto (Recommended)</option>
+                                <option value="1080p">1080p HD</option>
+                                <option value="720p">720p HD</option>
+                                <option value="480p">480p</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="subtitles">
+                                <label class="form-check-label" for="subtitles">
+                                    Enable subtitles by default
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Language & Region -->
+                <div class="settings-section">
+                    <h3>🌍 Language & Region</h3>
+                    <div class="settings-form">
+                        <div class="form-group">
+                            <label for="language" class="form-label">Language</label>
+                            <select class="form-select" id="language">
+                                <option value="en">English</option>
+                                <option value="pl" selected>Polski</option>
+                                <option value="de">Deutsch</option>
+                                <option value="fr">Français</option>
+                                <option value="es">Español</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="region" class="form-label">Region</label>
+                            <select class="form-select" id="region">
+                                <option value="us">United States</option>
+                                <option value="pl" selected>Poland</option>
+                                <option value="de">Germany</option>
+                                <option value="fr">France</option>
+                                <option value="es">Spain</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Privacy Settings -->
+                <div class="settings-section">
+                    <h3>🔒 Privacy Settings</h3>
+                    <div class="settings-form">
+                        <div class="form-group">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="trackingHistory" checked>
+                                <label class="form-check-label" for="trackingHistory">
+                                    Track viewing history for recommendations
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="shareActivity">
+                                <label class="form-check-label" for="shareActivity">
+                                    Share activity with friends (when feature is available)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="personalizedAds">
+                                <label class="form-check-label" for="personalizedAds">
+                                    Personalized advertisements
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Account Actions -->
+                <div class="settings-section">
+                    <h3>🔧 Account Actions</h3>
+                    <div class="settings-form">
+                        <div class="action-buttons">
+                            <button class="btn btn-primary" onclick="saveSettings()">
+                                💾 Save Settings
+                            </button>
+                            <button class="btn btn-secondary" onclick="resetSettings()">
+                                🔄 Reset to Default
+                            </button>
+                            <button class="btn btn-warning" onclick="clearHistory()">
+                                🗑️ Clear Watch History
+                            </button>
+                        </div>
+                        
+                        <div class="danger-zone">
+                            <h4>🚨 Danger Zone</h4>
+                            <p>These actions cannot be undone.</p>
+                            <button class="btn btn-outline-danger" onclick="confirmDeleteAccount()">
+                                Delete Account
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Settings Styles */
+.profile-header {
+    background: linear-gradient(135deg, #e50914 0%, #000000 100%);
+    color: white;
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+}
+
+.profile-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.profile-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.profile-sidebar {
+    background: #2a2a2a;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.profile-avatar {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.avatar-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #e50914;
+    margin-bottom: 1rem;
+}
+
+.profile-avatar h4 {
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.profile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    color: #e5e5e5;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+    background: #444;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.nav-item.active {
+    background: #e50914;
+    color: #ffffff;
+}
+
+.profile-content {
+    background: #2a2a2a;
+    border-radius: 8px;
+    padding: 2rem;
+}
+
+.content-header {
+    margin-bottom: 2rem;
+}
+
+.content-header h2 {
+    color: #ffffff;
+    margin: 0;
+}
+
+.settings-section {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #444;
+}
+
+.settings-section:last-child {
+    border-bottom: none;
+}
+
+.settings-section h3 {
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.settings-form {
+    max-width: 600px;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    color: #ffffff;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.form-control,
+.form-select {
+    background: #333;
+    border: 1px solid #555;
+    color: #ffffff;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background: #444;
+    border-color: #e50914;
+    color: #ffffff;
+    box-shadow: 0 0 0 0.2rem rgba(229, 9, 20, 0.25);
+}
+
+.form-check-input {
+    background-color: #333;
+    border-color: #555;
+}
+
+.form-check-input:checked {
+    background-color: #e50914;
+    border-color: #e50914;
+}
+
+.form-check-input:focus {
+    border-color: #e50914;
+    box-shadow: 0 0 0 0.2rem rgba(229, 9, 20, 0.25);
+}
+
+.form-check-label {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+}
+
+.danger-zone {
+    background: rgba(220, 53, 69, 0.1);
+    border: 1px solid #dc3545;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+.danger-zone h4 {
+    color: #dc3545;
+    margin-bottom: 0.5rem;
+}
+
+.danger-zone p {
+    color: #aaa;
+    margin-bottom: 1rem;
+}
+
+@@media (max-width: 768px) {
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .action-buttons .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .profile-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 1rem;
+        padding-bottom: 1rem;
+    }
+    
+    .nav-item {
+        white-space: nowrap;
+        min-width: fit-content;
+    }
+}
+</style>
+
+<script>
+function saveSettings() {
+    // Collect all form data
+    const settings = {
+        emailNotifications: document.getElementById('emailNotifications').checked,
+        promotionalEmails: document.getElementById('promotionalEmails').checked,
+        purchaseConfirmations: document.getElementById('purchaseConfirmations').checked,
+        autoplay: document.getElementById('autoplay').checked,
+        defaultQuality: document.getElementById('defaultQuality').value,
+        subtitles: document.getElementById('subtitles').checked,
+        language: document.getElementById('language').value,
+        region: document.getElementById('region').value,
+        trackingHistory: document.getElementById('trackingHistory').checked,
+        shareActivity: document.getElementById('shareActivity').checked,
+        personalizedAds: document.getElementById('personalizedAds').checked
+    };
+    
+    // TODO: Send settings to server
+    console.log('Saving settings:', settings);
+    
+    // Show success message
+    showMessage('Settings saved successfully!', 'success');
+}
+
+function resetSettings() {
+    if (confirm('Are you sure you want to reset all settings to default values?')) {
+        // Reset all form fields to defaults
+        document.getElementById('emailNotifications').checked = true;
+        document.getElementById('promotionalEmails').checked = true;
+        document.getElementById('purchaseConfirmations').checked = true;
+        document.getElementById('autoplay').checked = true;
+        document.getElementById('defaultQuality').value = 'auto';
+        document.getElementById('subtitles').checked = false;
+        document.getElementById('language').value = 'pl';
+        document.getElementById('region').value = 'pl';
+        document.getElementById('trackingHistory').checked = true;
+        document.getElementById('shareActivity').checked = false;
+        document.getElementById('personalizedAds').checked = false;
+        
+        showMessage('Settings reset to default values.', 'info');
+    }
+}
+
+function clearHistory() {
+    if (confirm('Are you sure you want to clear your watch history? This action cannot be undone.')) {
+        // TODO: Clear watch history on server
+        console.log('Clearing watch history...');
+        showMessage('Watch history cleared successfully.', 'success');
+    }
+}
+
+function confirmDeleteAccount() {
+    if (confirm('Are you sure you want to delete your account? This action cannot be undone and you will lose all your purchases and data.')) {
+        if (confirm('This is your final warning. Are you absolutely sure you want to delete your account permanently?')) {
+            // TODO: Implement account deletion
+            console.log('Deleting account...');
+            alert('Account deletion is not yet implemented. Please contact support if you need to delete your account.');
+        }
+    }
+}
+
+function showMessage(message, type) {
+    const alertClass = type === 'success' ? 'alert-success' : 
+                     type === 'info' ? 'alert-info' : 'alert-danger';
+    
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert ${alertClass} alert-dismissible fade show`;
+    alertDiv.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    
+    document.querySelector('.profile-content').prepend(alertDiv);
+    
+    // Auto-dismiss after 3 seconds
+    setTimeout(() => {
+        alertDiv.remove();
+    }, 3000);
+}
+</script>
